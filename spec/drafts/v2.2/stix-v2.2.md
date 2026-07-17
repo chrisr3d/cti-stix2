@@ -6823,7 +6823,7 @@ The File object represents the properties of a file. A File object **MUST** cont
     <th><span class='stixtr'>File Object Specific Properties</span></th>
   </tr>
   <tr>
-    <td><strong>hashes</strong>, <strong>size</strong>, <strong>name</strong>, <strong>name_enc</strong>, <strong>magic_number_hex</strong>, <strong>mime_type</strong>, <strong>ctime</strong>, <strong>mtime</strong>, <strong>atime</strong>, <strong>parent_directory_ref</strong>, <strong>contains_refs</strong>, <strong>content_ref</strong></td>
+    <td><strong>hashes</strong>, <strong>size</strong>, <strong>entropy</strong>, <strong>name</strong>, <strong>name_enc</strong>, <strong>magic_number_hex</strong>, <strong>mime_type</strong>, <strong>ctime</strong>, <strong>mtime</strong>, <strong>atime</strong>, <strong>parent_directory_ref</strong>, <strong>contains_refs</strong>, <strong>content_ref</strong></td>
   </tr>
   <tr>
     <th><span class='stixtr'>ID Contributing Properties</span></th>
@@ -6858,6 +6858,11 @@ The File object represents the properties of a file. A File object **MUST** cont
     <td><strong>size</strong> (optional)</td>
     <td><span class="stixtype">integer</span></td>
     <td>Specifies the size of the file, in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
+  </tr>
+  <tr>
+    <td><strong>entropy</strong> (optional)</td>
+    <td><span class="stixtype">float</span></td>
+    <td>Specifies the calculated entropy for the contents of the file, as calculated using the Shannon algorithm [<a href="#shannon-entropy">Shannon Entropy</a>]. The size of each input character is defined as a byte, resulting in a possible range of 0 through 8.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (optional)</td>
