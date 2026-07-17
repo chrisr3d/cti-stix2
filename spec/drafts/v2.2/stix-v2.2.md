@@ -6206,7 +6206,7 @@ The Directory object represents the properties common to a file system directory
     <th><span class='stixtr'>Directory Object Specific Properties</span></th>
   </tr>
   <tr>
-    <td><strong>path</strong>, <strong>path_enc</strong>, <strong>ctime</strong>, <strong>mtime</strong>, <strong>atime</strong>, <strong>contains_refs</strong></td>
+    <td><strong>path</strong>, <strong>path_enc</strong>, <strong>ctime</strong>, <strong>mtime</strong>, <strong>atime</strong>, <strong>parent_directory_ref</strong>, <strong>contains_refs</strong></td>
   </tr>
   <tr>
     <th><span class='stixtr'>ID Contributing Properties</span></th>
@@ -6253,13 +6253,18 @@ The Directory object represents the properties common to a file system directory
     <td>Specifies the date/time the directory was last accessed.</td>
   </tr>
   <tr>
+    <td><strong>parent_directory_ref</strong> (optional)</td>
+    <td><span class="stixtype">identifier</span></td>
+    <td>Specifies the parent directory of the directory, as a reference to a Directory object.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">directory</span>.</td>
+  </tr>
+  <tr>
     <td><strong>contains_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
     <td>Specifies a list of references to other File and/or Directory objects contained within the directory.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">file</span> or <span class="stixtype">directory</span>.</td>
   </tr>
 </table>
 
-**Example**
+**Examples**
 
 *Basic directory*
 
@@ -6270,6 +6275,26 @@ The Directory object represents the properties common to a file system directory
   "id": "directory--0a58d0c1-59e6-5afd-8252-dcd3f13e5622",
   "path": "C:\\Windows\\System32"
 }
+```
+\
+*Directory with parent directory*
+
+```JSON
+[
+  {
+    "type": "directory",
+    "spec_version": "2.2",
+    "id": "directory--30b6c25d-82f4-51af-a3c8-51cb692dfd0a",
+    "path": "C:\\Windows"
+  },
+  {
+    "type": "directory",
+    "spec_version": "2.2",
+    "id": "directory--168f4813-8b44-5c5f-b3c2-3218a609d68a",
+    "path": "System32",
+    "parent_directory_ref": "directory--30b6c25d-82f4-51af-a3c8-51cb692dfd0a"
+  }
+]
 ```
 
 ## 6.4 Domain Name Object <a id="domain-name-object"></a>
