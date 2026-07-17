@@ -1082,7 +1082,7 @@ The JSON MTI serialization uses the JSON String type \[[RFC8259](#rfc8259)\] whe
 
 **Type Name:** <span class="stixtype">integer</span>
 
-The integer data type represents a whole number. Unless otherwise specified, all integers **MUST** be capable of being represented as a signed 54-bit value (\[-(2\*\*53)+1, (2\*\*53)-1\]) as defined in \[[RFC7493](#rfc7493)\]. Additional restrictions **MAY** be placed on the type as described where it is used. The integer size is limited to a 54-bit value not a 64-bit value as per the RFC.
+The integer data type represents a whole number. Unless otherwise specified, all integer values **MUST** be in the range \[-(2\*\*53)+1, (2\*\*53)-1\] (i.e. -9,007,199,254,740,991 through 9,007,199,254,740,991). This is the range of integers that can be interchanged exactly and unambiguously as IEEE 754 \[[IEEE 754-2008](#ieee-754-2008)\] double-precision floating-point values, consistent with the interoperability guidance in \[[RFC7493](#rfc7493)\]. Additional restrictions **MAY** be placed on the type as described where it is used. Note that this range is smaller than the range of a signed 64-bit integer: a value that fits in a 64-bit integer is not necessarily a valid STIX integer.
 
 In the JSON MTI serialization, integers are represented by the JSON Number type \[[RFC7493](#rfc7493)\].
 
