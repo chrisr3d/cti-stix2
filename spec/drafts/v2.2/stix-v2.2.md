@@ -6376,7 +6376,7 @@ These are the relationships explicitly defined between the Domain Name object an
 
 **Type Name:** <span class="stixtype">email-addr</span>
 
-The Email Address object represents a single email address.
+The Email Address object represents a single email address. To allow for use cases where the email address itself may be unknown or too sensitive to share, such as the intended target of a spear-phishing campaign being identified only by the name displayed in the email, the **value** property is defined as optional in the properties table below. However, an Email Address object **MUST** contain at least one of the **value** or **display_name** properties.
 
 ### 6.5.1 Properties <a id="email-address-object-properties"></a>
 
@@ -6425,7 +6425,7 @@ The Email Address object represents a single email address.
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">email-addr</span>.</td>
   </tr>
   <tr>
-    <td><strong>value</strong> (required)</td>
+    <td><strong>value</strong> (optional)</td>
     <td><span class="stixtype">string</span></td>
     <td>Specifies the value of the email address. This <strong>MUST NOT</strong> include the display name.<br><br>This property corresponds to the addr-spec construction in section 3.4 of [<a href="#rfc5322">RFC5322</a>], for example, <span class="stixliteral">jane.smith@example.com</span>.</td>
   </tr>
@@ -6451,6 +6451,17 @@ The Email Address object represents a single email address.
   "spec_version": "2.1",
   "id": "email-addr--7165e2a9-671f-585d-b1e1-ca59c671d934",
   "value": "john@example.com",
+  "display_name": "John Doe"
+}
+```
+
+*Email Address with only a Display Name*
+
+```JSON
+{
+  "type": "email-addr",
+  "spec_version": "2.2",
+  "id": "email-addr--b4be24e4-c986-4624-a3a8-1cc7a2f10b09",
   "display_name": "John Doe"
 }
 ```
