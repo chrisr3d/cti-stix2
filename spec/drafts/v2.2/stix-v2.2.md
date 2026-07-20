@@ -6011,7 +6011,7 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>hashes</strong>, <strong>payload_bin</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].</td>
+    <td><strong>hashes</strong>, <strong>payload_bin</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].<br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -6535,7 +6535,7 @@ Header field values that have been encoded as described in section 2 of \[[RFC20
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>from_ref</strong>, <strong>subject</strong>, <strong>body</strong></td>
+    <td><strong>from_ref</strong>, <strong>subject</strong>, <strong>body</strong><br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -6859,7 +6859,7 @@ The File object represents the properties of a file. A File object **MUST** cont
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>hashes</strong>, <strong>name</strong>, <strong>extensions</strong>, <strong>parent_directory_ref</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].</td>
+    <td><strong>hashes</strong>, <strong>name</strong>, <strong>extensions</strong>, <strong>parent_directory_ref</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].<br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -8728,7 +8728,7 @@ The Process object represents common properties of an instance of a computer pro
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><em>Since all properties on this object are optional, please use a UUIDv4 for the ID of this object.</em></td>
+    <td>Since all properties on this object are optional, no ID contributing properties are defined; a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -9209,7 +9209,7 @@ As all properties of this object are optional, at least one of the properties de
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>account_type</strong>, <strong>user_id</strong>, <strong>account_login</strong></td>
+    <td><strong>account_type</strong>, <strong>user_id</strong>, <strong>account_login</strong><br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -9440,7 +9440,7 @@ The Registry Key object represents the properties of a Windows registry key. As 
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>key</strong>, <strong>values</strong> <em>(all items defined in the <strong>values</strong> property <strong>MUST</strong> be included)</em></td>
+    <td><strong>key</strong>, <strong>values</strong> <em>(all items defined in the <strong>values</strong> property <strong>MUST</strong> be included)</em><br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -9586,7 +9586,7 @@ The X.509 Certificate object represents the properties of an X.509 certificate, 
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>hashes</strong>, <strong>serial_number</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].</td>
+    <td><strong>hashes</strong>, <strong>serial_number</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].<br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
