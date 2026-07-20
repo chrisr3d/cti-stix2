@@ -6439,7 +6439,7 @@ The Email Address object represents a single email address. To allow for use cas
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>value</strong></td>
+    <td><strong>value</strong><br><br>If the <strong>value</strong> property is not present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -6457,12 +6457,12 @@ The Email Address object represents a single email address. To allow for use cas
   <tr>
     <td><strong>value</strong> (optional)</td>
     <td><span class="stixtype">string</span></td>
-    <td>Specifies the value of the email address. This <strong>MUST NOT</strong> include the display name.<br><br>This property corresponds to the addr-spec construction in section 3.4 of [<a href="#rfc5322">RFC5322</a>], for example, <span class="stixliteral">jane.smith@example.com</span>.</td>
+    <td>Specifies the value of the email address. This <strong>MUST NOT</strong> include the display name.<br><br>This property corresponds to the addr-spec construction in section 3.4 of [<a href="#rfc5322">RFC5322</a>], for example, <span class="stixliteral">jane.smith@example.com</span>.<br><br>If the <strong>display_name</strong> property is not present, this property <strong>MUST</strong> be present.</td>
   </tr>
   <tr>
     <td><strong>display_name</strong> (optional)</td>
     <td><span class="stixtype">string</span></td>
-    <td>Specifies a single email display name, i.e., the name that is displayed to the human user of a mail application.<br><br>This property corresponds to the display-name construction in section 3.4 of [<a href="#rfc5322">RFC5322</a>], for example, <span class="stixliteral">Jane Smith.</span></td>
+    <td>Specifies a single email display name, i.e., the name that is displayed to the human user of a mail application.<br><br>This property corresponds to the display-name construction in section 3.4 of [<a href="#rfc5322">RFC5322</a>], for example, <span class="stixliteral">Jane Smith.</span><br><br>If the <strong>value</strong> property is not present, this property <strong>MUST</strong> be present.</td>
   </tr>
   <tr>
     <td><strong>belongs_to_ref</strong> (optional)</td>
