@@ -2,23 +2,19 @@
 
 ---
 
-# STIX Version 2.1 Errata 01
+# STIX Version 2.2 GitHub Draft
 
-## Oasis Standard incorporating Draft 01 of Errata 01
-
-### 02 April 2025
+### See Commit for Date
 
 #### This stage:
+
+TBD
+
+#### Previous stage:
 
 https://docs.oasis-open.org/cti/stix/v2.1/errata01/csd01/stix-v2.1-errata01-csd01-complete.md (Authoritative) \
 https://docs.oasis-open.org/cti/stix/v2.1/errata01/csd01/stix-v2.1-errata01-csd01-complete.html \
 https://docs.oasis-open.org/cti/stix/v2.1/errata01/csd01/stix-v2.1-errata01-csd01-complete.pdf
-
-#### Previous stage:
-
-https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.docx (Authoritative) \
-https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html \
-https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.pdf
 
 #### Latest stage:
 
@@ -50,7 +46,7 @@ This specification replaces or supersedes:
 
 This specification is related to:
 
-- *TAXII Version 2.1.* Edited by Bret Jordan and Drew Varner. Latest stage: <https://docs.oasis-open.org/cti/taxii/v2.1/taxii-v2.1.html>.
+- *TAXII Version 2.2.* Edited by Bret Jordan and Drew Varner. Latest stage: <https://docs.oasis-open.org/cti/taxii/v2.1/taxii-v2.1.html>.
 - *STIX/TAXII 2.0 Interoperability Test Document: Part 1 Version 1.1.* Edited by Allan Thomson and Jason Keirstead. Latest stage: <https://docs.oasis-open.org/cti/stix-taxii-2-interop-p1/v1.1/stix-taxii-2-interop-p1-v1.1.html>.
 - *STIX/TAXII 2.0 Interoperability Test Document: Part 2 Version 1.0.* Edited by Allan Thomson and Jason Keirstead. Latest stage: <https://docs.oasis-open.org/cti/stix-taxii-2-interop-p2/v1.0/stix-taxii-2-interop-p2-v1.0.html>.
 
@@ -170,54 +166,77 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
   - 4.3 [Course of Action](#course-of-action)
     - 4.3.1 [Properties](#course-of-action-properties)
     - 4.3.2 [Relationships](#course-of-action-relationships)
-  - 4.4 [Grouping](#grouping)
-    - 4.4.1 [Properties](#grouping-properties)
-    - 4.4.2 [Relationships](#grouping-relationships)
-  - 4.5 [Identity](#identity)
-    - 4.5.1 [Properties](#identity-properties)
-    - 4.5.2 [Relationships](#identity-relationships)
-  - 4.6 [Incident](#incident)
-    - 4.6.1 [Properties](#incident-properties)
-    - 4.6.2 [Relationships](#incident-relationships)
-  - 4.7 [Indicator](#indicator)
-    - 4.7.1 [Properties](#indicator-properties)
-    - 4.7.2 [Relationships](#indicator-relationships)
-  - 4.8 [Infrastructure](#infrastructure)
-    - 4.8.1 [Properties](#infrastructure-properties)
-    - 4.8.2 [Relationships](#infrastructure-relationships)
-  - 4.9 [Intrusion Set](#intrusion-set)
-    - 4.9.1 [Properties](#intrusion-set-properties)
-    - 4.9.2 [Relationships](#intrusion-set-relationships)
-  - 4.10 [Location](#location)
-    - 4.10.1 [Properties](#location-properties)
-    - 4.10.2 [Relationships](#location-relationships)
-  - 4.11 [Malware](#malware)
-    - 4.11.1 [Properties](#malware-properties)
-    - 4.11.2 [Relationships](#malware-relationships)
-  - 4.12 [Malware Analysis](#malware-analysis)
-    - 4.12.1 [Properties](#malware-analysis-properties)
-    - 4.12.2 [Relationships](#malware-analysis-relationships)
-  - 4.13 [Note](#note)
-    - 4.13.1 [Properties](#note-properties)
-    - 4.13.2 [Relationships](#note-relationships)
-  - 4.14 [Observed Data](#observed-data)
-    - 4.14.1 [Properties](#observed-data-properties)
-    - 4.14.2 [Relationships](#observed-data-relationships)
-  - 4.15 [Opinion](#opinion)
-    - 4.15.1 [Properties](#opinion-properties)
-    - 4.15.2 [Relationships](#opinion-relationships)
-  - 4.16 [Report](#report)
-    - 4.16.1 [Properties](#report-properties)
-    - 4.16.2 [Relationships](#report-relationships)
-  - 4.17 [Threat Actor](#threat-actor)
-    - 4.17.1 [Properties](#threat-actor-properties)
-    - 4.17.2 [Relationships](#threat-actor-relationships)
-  - 4.18 [Tool](#tool)
-    - 4.18.1 [Properties](#tool-properties)
-    - 4.18.2 [Relationships](#tool-relationships)
-  - 4.19 [Vulnerability](#vulnerability)
-    - 4.19.1 [Properties](#vulnerability-properties)
-    - 4.19.2 [Relationships](#vulnerability-relationships)
+  - 4.4 [Event](#event)
+    - 4.4.1 [Properties](#event-properties)
+    - 4.4.2 [Relationships](#event-relationships)
+  - 4.5 [Grouping](#grouping)
+    - 4.5.1 [Properties](#grouping-properties)
+    - 4.5.2 [Relationships](#grouping-relationships)
+  - 4.6 [Identity](#identity)
+    - 4.6.1 [Properties](#identity-properties)
+    - 4.6.2 [Relationships](#identity-relationships)
+  - 4.7 [Impact](#impact)
+    - 4.7.1 [Properties](#impact-properties)
+    - 4.7.2 [Availability Impact Extension](#availability-impact-extension)
+      - 4.7.2.1 [Properties](#availability-impact-extension-properties)
+    - 4.7.3 [Confidentiality Impact Extension](#confidentiality-impact-extension)
+      - 4.7.3.1 [Properties](#confidentiality-impact-extension-properties)
+    - 4.7.4 [External Impact Extension](#external-impact-extension)
+      - 4.7.4.1 [Properties](#external-impact-extension-properties)
+    - 4.7.5 [Integrity Impact Extension](#integrity-impact-extension)
+      - 4.7.5.1 [Properties](#integrity-impact-extension-properties)
+    - 4.7.6 [Economic Impact Extension](#economic-impact-extension)
+      - 4.7.6.1 [Properties](#economic-impact-extension-properties)
+    - 4.7.7 [Physical Impact Extension](#physical-impact-extension)
+      - 4.7.7.1 [Properties](#physical-impact-extension-properties)
+    - 4.7.8 [Traceability Impact Extension](#traceability-impact-extension)
+      - 4.7.8.1 [Properties](#traceability-impact-extension-properties)
+    - 4.7.9 [Relationships](#impact-relationships)
+  - 4.8 [Incident](#incident)
+    - 4.8.1 [Properties](#incident-properties)
+    - 4.8.2 [Relationships](#incident-relationships)
+  - 4.9 [Indicator](#indicator)
+    - 4.9.1 [Properties](#indicator-properties)
+    - 4.9.2 [Relationships](#indicator-relationships)
+  - 4.10 [Infrastructure](#infrastructure)
+    - 4.10.1 [Properties](#infrastructure-properties)
+    - 4.10.2 [Relationships](#infrastructure-relationships)
+  - 4.11 [Intrusion Set](#intrusion-set)
+    - 4.11.1 [Properties](#intrusion-set-properties)
+    - 4.11.2 [Relationships](#intrusion-set-relationships)
+  - 4.12 [Location](#location)
+    - 4.12.1 [Properties](#location-properties)
+    - 4.12.2 [Relationships](#location-relationships)
+  - 4.13 [Malware](#malware)
+    - 4.13.1 [Properties](#malware-properties)
+    - 4.13.2 [Relationships](#malware-relationships)
+  - 4.14 [Malware Analysis](#malware-analysis)
+    - 4.14.1 [Properties](#malware-analysis-properties)
+    - 4.14.2 [Relationships](#malware-analysis-relationships)
+  - 4.15 [Note](#note)
+    - 4.15.1 [Properties](#note-properties)
+    - 4.15.2 [Relationships](#note-relationships)
+  - 4.16 [Observed Data](#observed-data)
+    - 4.16.1 [Properties](#observed-data-properties)
+    - 4.16.2 [Relationships](#observed-data-relationships)
+  - 4.17 [Opinion](#opinion)
+    - 4.17.1 [Properties](#opinion-properties)
+    - 4.17.2 [Relationships](#opinion-relationships)
+  - 4.18 [Report](#report)
+    - 4.18.1 [Properties](#report-properties)
+    - 4.18.2 [Relationships](#report-relationships)
+  - 4.19 [Task](#task)
+    - 4.19.1 [Properties](#task-properties)
+    - 4.19.2 [Relationships](#task-relationships)
+  - 4.19 [Threat Actor](#threat-actor)
+    - 4.19.1 [Properties](#threat-actor-properties)
+    - 4.19.2 [Relationships](#threat-actor-relationships)
+  - 4.20 [Tool](#tool)
+    - 4.20.1 [Properties](#tool-properties)
+    - 4.20.2 [Relationships](#tool-relationships)
+  - 4.21 [Vulnerability](#vulnerability)
+    - 4.21.1 [Properties](#vulnerability-properties)
+    - 4.21.2 [Relationships](#vulnerability-relationships)
 - 5. [STIX Relationship Objects](#stix-relationship-objects)
   - 5.1 [Relationship](#relationship)
     - 5.1.1 [Specification-Defined Relationships Summary](#specification-defined-relationships-summary)
@@ -342,37 +361,56 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
   - 9.8 [Examples](#examples)
 - 10. [STIX Vocabularies](#stix-vocabularies)
   - 10.1 [Account Type Vocabulary](#account-type-vocabulary)
-  - 10.2 [Attack Motivation Vocabulary](#attack-motivation-vocabulary)
-  - 10.3 [Attack Resource Level Vocabulary](#attack-resource-level-vocabulary)
-  - 10.4 [Encryption Algorithm Enumeration](#encryption-algorithm-enumeration)
-  - 10.5 [Extension Type Enumeration](#extension-type-enumeration)
-  - 10.6 [Grouping Context Vocabulary](#grouping-context-vocabulary)
-  - 10.7 [Hashing Algorithm Vocabulary](#hashing-algorithm-vocabulary)
-  - 10.8 [Identity Class Vocabulary](#identity-class-vocabulary)
-  - 10.9 [Implementation Language Vocabulary](#implementation-language-vocabulary)
-  - 10.10 [Indicator Type Vocabulary](#indicator-type-vocabulary)
-  - 10.11 [Industry Sector Vocabulary](#industry-sector-vocabulary)
-  - 10.12 [Infrastructure Type Vocabulary](#infrastructure-type-vocabulary)
-  - 10.13 [Malware Capabilities Vocabulary](#malware-capabilities-vocabulary)
-  - 10.14 [Malware Result Vocabulary](#malware-result-vocabulary)
-  - 10.15 [Malware Type Vocabulary](#malware-type-vocabulary)
-  - 10.16 [Network Socket Address Family Enumeration](#network-socket-address-family-enumeration)
-  - 10.17 [Network Socket Type Enumeration](#network-socket-type-enumeration)
-  - 10.18 [Opinion Enumeration](#opinion-enumeration)
-  - 10.19 [Pattern Type Vocabulary](#pattern-type-vocabulary)
-  - 10.20 [Processor Architecture Vocabulary](#processor-architecture-vocabulary)
-  - 10.21 [Region Vocabulary](#region-vocabulary)
-  - 10.22 [Report Type Vocabulary](#report-type-vocabulary)
-  - 10.23 [Threat Actor Type Vocabulary](#threat-actor-type-vocabulary)
-  - 10.24 [Threat Actor Role Vocabulary](#threat-actor-role-vocabulary)
-  - 10.25 [Threat Actor Sophistication Vocabulary](#threat-actor-sophistication-vocabulary)
-  - 10.26 [Tool Type Vocabulary](#tool-type-vocabulary)
-  - 10.27 [Windows™ Integrity Level Enumeration](#windows-integrity-level-enumeration)
-  - 10.28 [Windows™ PE Binary Vocabulary](#windows-pe-binary-vocabulary)
-  - 10.29 [Windows™ Registry Datatype Enumeration](#windows-registry-datatype-enumeration)
-  - 10.30 [Windows™ Service Start Type Enumeration](#windows-service-start-type-enumeration)
-  - 10.31 [Windows™ Service Type Enumeration](#windows-service-type-enumeration)
-  - 10.32 [Windows™ Service Status Enumeration](#windows-service-status-enumeration)
+  - 10.2 [Asset Type Vocabulary](#asset-type-vocabulary)
+  - 10.3 [Attack Motivation Vocabulary](#attack-motivation-vocabulary)
+  - 10.4 [Attack Resource Level Vocabulary](#attack-resource-level-vocabulary)
+  - 10.5 [Detection Method Vocabulary](#detection-method-vocabulary)
+  - 10.6 [Economic Impact Type Vocabulary](#economic-impact-type-vocabulary)
+  - 10.7 [Encryption Algorithm Enumeration](#encryption-algorithm-enumeration)
+  - 10.8 [Entity Type Vocabulary](#entity-type-vocabulary)
+  - 10.9 [Event Status Enumeration](#event-status-enumeration)
+  - 10.10 [Event Type Vocabulary](#event-type-vocabulary)
+  - 10.11 [Extension Type Enumeration](#extension-type-enumeration)
+  - 10.12 [External Impact Vocabulary](#external-impact-vocabulary)
+  - 10.13 [Grouping Context Vocabulary](#grouping-context-vocabulary)
+  - 10.14 [Hashing Algorithm Vocabulary](#hashing-algorithm-vocabulary)
+  - 10.15 [Identity Class Vocabulary](#identity-class-vocabulary)
+  - 10.16 [Implementation Language Vocabulary](#implementation-language-vocabulary)
+  - 10.17 [Incident Confidentiality Loss Enumeration](#incident-confidentiality-loss-enumeration)
+  - 10.18 [Incident Determination Enumeration](#incident-determination-enumeration)
+  - 10.19 [Incident Investigation Open Vocabulary](#incident-investigation-vocabulary)
+  - 10.20 [Indicator Type Vocabulary](#indicator-type-vocabulary)
+  - 10.21 [Integrity Alteration Enumeration](#integrity-alteration-enumeration)
+  - 10.22 [Industry Sector Vocabulary](#industry-sector-vocabulary)
+  - 10.23 [Information Type Vocabulary](#information-type-vocabulary)
+  - 10.24 [Infrastructure Type Vocabulary](#infrastructure-type-vocabulary)
+  - 10.25 [Malware Capabilities Vocabulary](#malware-capabilities-vocabulary)
+  - 10.26 [Malware Result Vocabulary](#malware-result-vocabulary)
+  - 10.27 [Malware Type Vocabulary](#malware-type-vocabulary)
+  - 10.28 [Network Socket Address Family Enumeration](#network-socket-address-family-enumeration)
+  - 10.29 [Network Socket Type Enumeration](#network-socket-type-enumeration)
+  - 10.30 [Opinion Enumeration](#opinion-enumeration)
+  - 10.31 [Pattern Type Vocabulary](#pattern-type-vocabulary)
+  - 10.32 [Physical Impact Enumeration](#physical-impact-enumeration)
+  - 10.33 [Processor Architecture Vocabulary](#processor-architecture-vocabulary)
+  - 10.34 [Recoverability Enumeration](#recoverability-enumeration)
+  - 10.35 [Region Vocabulary](#region-vocabulary)
+  - 10.36 [Report Type Vocabulary](#report-type-vocabulary)
+  - 10.37 [State Change Type Vocabulary](#state-change-type-vocabulary)
+  - 10.38 [Task Outcome Enumeration](#task-outcome-enumeration)
+  - 10.39 [Task Type Vocabulary](#task-type-vocabulary)
+  - 10.40 [Threat Actor Type Vocabulary](#threat-actor-type-vocabulary)
+  - 10.41 [Threat Actor Role Vocabulary](#threat-actor-role-vocabulary)
+  - 10.42 [Threat Actor Sophistication Vocabulary](#threat-actor-sophistication-vocabulary)
+  - 10.43 [Timestamp Fidelity Enumeration](#timestamp-fidelity-enumeration)
+  - 10.44 [Tool Type Vocabulary](#tool-type-vocabulary)
+  - 10.45 [Traceability Enumeration](#traceability-enumeration)
+  - 10.46 [Windows™ Integrity Level Enumeration](#windows-integrity-level-enumeration)
+  - 10.47 [Windows™ PE Binary Vocabulary](#windows-pe-binary-vocabulary)
+  - 10.48 [Windows™ Registry Datatype Enumeration](#windows-registry-datatype-enumeration)
+  - 10.49 [Windows™ Service Start Type Enumeration](#windows-service-start-type-enumeration)
+  - 10.50 [Windows™ Service Type Enumeration](#windows-service-type-enumeration)
+  - 10.51 [Windows™ Service Status Enumeration](#windows-service-status-enumeration)
 - 11. [Customizing STIX (Deprecated)](#customizing-stix)
   - 11.1 [Custom Properties (Deprecated)](#custom-properties)
     - 11.1.1 [Requirements (Deprecated)](#custom-properties-requirements)
@@ -1878,7 +1916,7 @@ Each Predefined Object Extension can be defined at most once on a given STIX Obj
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--1b40e321-ae73-5637-bd97-33c35a86b80d",
   "hashes": {
     "MD5": "3773a88f65a5e780c8dff9cdc3a056f3"
@@ -2063,7 +2101,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "attack-pattern",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "attack-pattern--0c7b5b88-8ff7-4a4d-aa9d-feb398cd0061",
   "created": "2016-05-12T08:17:27.000Z",
   "modified": "2016-05-12T08:17:27.000Z",
@@ -2084,7 +2122,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 [
   {
     "type": "attack-pattern",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "attack-pattern--7e33a43e-e34b-40ec-89da-36c9bb2cacd5",
     "created": "2016-05-12T08:17:27.000Z",
     "modified": "2016-05-12T08:17:27.000Z",
@@ -2099,7 +2137,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--57b56a43-b8b0-4cba-9deb-34e3e1faed9e",
     "created": "2016-05-12T08:17:27.000Z",
     "modified": "2016-05-12T08:17:27.000Z",
@@ -2109,7 +2147,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "intrusion-set",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "intrusion-set--0c7e22ad-b099-4dc3-b0df-2ea3f49ae2e6",
     "created": "2016-05-12T08:17:27.000Z",
     "modified": "2016-05-12T08:17:27.000Z",
@@ -2287,7 +2325,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "campaign",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "campaign--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:00.000Z",
@@ -2438,7 +2476,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 [
   {
     "type": "course-of-action",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "course-of-action--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:03:48.000Z",
@@ -2448,7 +2486,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--44298a74-ba52-4f0c-87a3-1824e67d7fad",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:07:10.000Z",
@@ -2459,7 +2497,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--31b940d4-6f7f-459a-80ea-9c1f17b5891b",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:07:09.000Z",
@@ -2470,7 +2508,108 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ]
 ```
 
-## 4.4 Grouping <a id="grouping"></a>
+## 4.4 Event <a id="event"></a>
+
+An Event is an activity that has a harmful effect or which will be investigated or already has been investigated as potentially having a harmful effect. The activity is not necessarily performed by an attacker. For example, an event could result from a user or system administrator’s mistake. Events can be used to further enrich and explain Sightings by allowing analysts to indicate if these sightings are part of a potential threat, and if so how they connects to a larger incident. Some activity, described in an Event, will be found to be not harmful when investigated.
+
+### 4.4.1 Properties <a id="event-properties"></a>
+
+| **Required Common Properties** |
+| --- |
+| **created**, **id**, **modified**, **spec_version**, **type** |
+| **Optional Common Properties** |
+| **created_by_ref**, **revoked**, **labels**, **confidence**, **lang**, **external_references**, **object_marking_refs**, **granular_markings**, **extensions** |
+| **Not Applicable Common Properties** |
+| **defanged** |
+| **Event Object Specific Properties** |
+| **changed_objects**, **description**, **end_time**, **end_time_fidelity**, **event_types**, **goal**, **name**, **next_events_refs**, **status**, **sighting_refs**, **start_time**, **start_time_fidelity** |
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **status** (required) | [event-status-enum](#event-status-enum) | The current status of the event. The values of this property **MUST** come from the [event-status-enum](#event-status-enum) enumeration. |
+| **type** (required) | [string](#string) | The value of this property **MUST** be set to event. |
+| **changed_objects** (optional) | [list](#list) of type [state-change](#state-change) | A list of changes that this event has caused. This is typically used to indicate how an event has affected impacts. |
+| **description** (optional) | [string](#string) | A description of event that occurred. |
+| **end_time** (optional) | [timestamp](#timestamp) | The date and time the event was last recorded. If this is not present it is assumed to be unknown. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
+| **end_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **end_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+| **event_types** (optional) | [list](#list) of type [open-vocab](#open-vocab) | High level types for the event to enable aggregation and summarization. The values of this property **SHOULD** come from the [event-type-ov](#event-type-ov) open vocabulary. |
+| **goal** (optional) | [string](#string) | The assumed goal, objective, desired outcome, or intended effect of this event. Not all events have goals. |
+| **name** (optional) | [string](#string) | A name for the event. |
+| **next_event_refs** (optional) | [list](#list) of type [identifier](#identifier) | The [event](#event) objects to follow. They **MUST** be of type [event](#event). There can be more than one if they take place in parallel. |
+| **sighting_refs** (optional) | [list](#list) of type [identifier](#identifier) | A list of [sighting](#sighting) objects that were related to this event. Sightings referenced in this **SHOULD** be based on [attack-pattern](#attack-pattern), [indicator](#indicator), or [malware](#malware) SDOs. The **sighting_refs** property **SHOULD** be used to relate an [event](#event) to an SDO, instead of using right an SRO. In some cases observed data may be present, but no [indicator](#indicator) can be created. In these cases it is recommended to use an [attack-pattern](#attack-pattern) using the name or description of the behavior or rule that triggered the sighting. |
+| **start_time** (optional) | [timestamp](#timestamp) | The date and time the event was first recorded. If this is not present it is assumed to be unknown. This property **SHOULD** be populated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
+| **start_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+
+### 4.4.2 Relationships  <a id="event-relationships"></a>
+
+These are the relationships explicitly defined between the Event object and other STIX Objects. The table identifies the relationships that can be made from this object type to another object type by way of the Relationship object.
+
+The reverse relationships section illustrates the relationships targeting this object type from another object type.
+
+Relationships are not restricted to those listed below. Relationships can be created between any objects using the related-to relationship type or, as with open vocabularies, user-defined names.
+
+To relate [events](#event) to an [incident](#incident) the **event_refs** property **SHOULD** be used. Using these embedded relationships ensures that an incomplete sequence cannot be shared accidentally (avoiding potential confusion or misunderstandings when processing STIX data.)
+
+| **Common Relationships** |
+| --- | --- | --- | --- |
+| derived-from, duplicate-of, related-to |
+| **Source** | **Type** | **Target** | **Description** |
+| [event](#event) | causes | [impact](#impact) | The event caused the impact. |
+| [event](#event) | affects | [identity](#identity) | The identity is affected by this event. |
+| [event](#event) | led-to | [task](#task) | The event led to performing the task. |
+| [event](#event) | impacts | [infrastructure](#infrastructure), [<All STIX Cyber-observable Objects>](#stix-cyber-observable-objects) | An event has an impact on specific infrastructure. While not all SCO types will make sense in this relationship, allowing any type of SCO prevents artificially restricting what could be used. |
+| [event](#event) | located-at | [location](#location) | The event occurred at a specific location. |
+
+| **Reverse Relationships** |
+| --- | --- | --- | --- |
+| **Source** | **Type** | **Target** | **Description** |
+| [identity](#identity) | performed | [event](#event) | An identity performed a specific event. |
+| [indicator](#indicator) | based-on | [event](#event) | An indicator is based on an event. |
+| [malware](#malware) | performed | [event](#event) | Malware performed a specific event. |
+| [tool](#tool) | performed | [event](#event) | A tool performed a specific event. |
+| [task](#task) | blocks | [event](#event) | A task was performed to block a potential event. |
+| [task](#task) | causes | [event](#event) | A task was performed that caused an event, usually due to an error. |
+
+**Example**
+
+```
+{
+    "type": "event",
+    "id": "event--68e1e976-7e3b-4233-8bde-1a5dbb17a9a6",
+    "created": "2023-11-22T15:30:00.000Z",
+    "modified": "2023-11-22T15:30:00.000Z",
+    "spec_version": "2.2",
+    "status": "ongoing",
+    "changed_objects": [
+        {
+            "state_change_type": "escalation",
+            "initial_ref": "impact--d1e4f6c7-3b1a-4b5c-8a5a-9e7b8a9a5b6c",
+            "result_ref": "impact--c1f2d3e4-5b6c-4a8d-9e0a-1b2c3d4e5f6d"
+        }
+    ],
+    "description": "Phishing attack on company email accounts.",
+    "end_time": "2023-11-22T15:30:00Z",
+    "end_time_fidelity": "minute",
+    "event_types": [
+        "phishing"
+    ],
+    "goal": "Gain unauthorized access to sensitive information.",
+    "name": "Phishing Attack",
+    "next_events_refs": [
+        "event--193a3ea2-32ae-4bfd-b353-16836ab70788",
+        "event--d263f0f6-4c6c-4f77-a7fd-10368f0cb50a"
+    ],
+    "start_time": "2023-11-22T14:30:00Z",
+    "start_time_fidelity": "minute",
+    "extensions": {
+        "extension-definition--4ca6de00-5b0d-45ef-a1dc-ea7279ea910e": {
+            "extension_type": "new-sdo"
+        }
+    }
+}
+```
+
+## 4.5 Grouping <a id="grouping"></a>
 
 **Type Name:** <span class="stixtype">grouping</span>
 
@@ -2478,7 +2617,7 @@ A Grouping object explicitly asserts that the referenced STIX Objects have a sha
 
 A STIX Grouping object might represent a set of data that, in time, given sufficient analysis, would mature to convey an incident or threat report as a STIX Report object. For example, a Grouping could be used to characterize an ongoing investigation into a security event or incident. A Grouping object could also be used to assert that the referenced STIX Objects are related to an ongoing analysis process, such as when a threat analyst is collaborating with others in their trust community to examine a series of Campaigns and Indicators. The Grouping SDO contains a list of references to SDOs, SCOs, SROs, and SMOs, along with an explicit statement of the context shared by the content, a textual description, and the name of the grouping.
 
-### 4.4.1 Properties <a id="grouping-properties"></a>
+### 4.5.1 Properties <a id="grouping-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -2540,7 +2679,7 @@ A STIX Grouping object might represent a set of data that, in time, given suffic
   </tr>
 </table>
 
-### 4.4.2 Relationships <a id="grouping-relationships"></a>
+### 4.5.2 Relationships <a id="grouping-relationships"></a>
 
 There are no relationships explicitly defined between the Grouping object and other STIX Objects, other than those defined as common relationships. The first section lists the embedded relationships by property name along with their corresponding target.
 
@@ -2595,7 +2734,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "grouping",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "grouping--84e4d88f-44ea-4bcd-bbf3-b2c1c320bcb3",
   "created_by_ref": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
   "created": "2015-12-21T19:59:11.000Z",
@@ -2612,7 +2751,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.5 Identity <a id="identity"></a>
+## 4.6 Identity <a id="identity"></a>
 
 **Type Name:** <span class="stixtype">identity</span>
 
@@ -2620,7 +2759,7 @@ Identities can represent actual individuals, organizations, or groups (e.g., ACM
 
 The Identity SDO can capture basic identifying information, contact information, and the sectors that the Identity belongs to. Identity is used in STIX to represent, among other things, targets of attacks, information sources, object creators, and threat actor identities.
 
-### 4.5.1 Properties <a id="identity-properties"></a>
+### 4.6.1 Properties <a id="identity-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -2692,7 +2831,7 @@ The Identity SDO can capture basic identifying information, contact information,
   </tr>
 </table>
 
-### 4.5.2 Relationships <a id="identity-relationships"></a>
+### 4.6.2 Relationships <a id="identity-relationships"></a>
 
 These are the relationships explicitly defined between the Identity object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -2761,7 +2900,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "identity",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "identity--023d105b-752e-4e3c-941c-7d3f3cb15e9e",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:00.000Z",
@@ -2776,7 +2915,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "identity",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "identity--e5f1b90a-d9b6-40ab-81a9-8a29df4b6b65",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:00.000Z",
@@ -2786,7 +2925,310 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.6 Incident <a id="incident"></a>
+## 4.7 Impact <a id="impact"></a>
+
+An Impact is the result of the Incident on the victim, captured in the **impact_ref** property of the Incident object. Impacts can have many categories: availability of resources, confidentiality of data, integrity of data or resources, economic, physical damage, damage to others and traceability (auditing).
+
+There are many categories of impacts, each with its own unique properties, therefore the Impact SDO emulates the File SCO through the use of STIX (sub-types) Extensions to provide the granular details of specific categories of impacts. Seven extensions are available to further define the impact on a related Incident. If there is insufficient information about the impact that is related to one of these categories, then no extension will be specified. If one of the defined extensions is used it **MUST** correspond to the value of the **impact_category** property. This allows consumers to quickly validate their ability to process this category of impact and then load all of its specific details.
+
+Because these extensions are used to specify very different types of impacts, producers **SHOULD** use one and only one of these extensions per Impact object. However, additional extensions might be proposed in the future and might be used in conjunction with one of these.
+
+### 4.7.1 Properites <a id="impact-properties"></a>
+
+| **Required Common Properties** |
+| --- |
+| **created**, **id**, **modified**, **spec_version**, **type** |
+| **Optional Common Properties** |
+| **created_by_ref**, **revoked**, **labels**, **confidence**, **lang**, **external_references**, **object_marking_refs**, **granular_markings**, **extensions** |
+| **Not Applicable Common Properties** |
+| **defanged** |
+| **Impact Object Specific Properties** |
+| **impact_category**, **criticality**, **description**, **end_time**, **end_time_fidelity**, **impacted_entity_counts**, **impacted_refs**, **recoverability**, **start_time**, **start_time_fidelity**, **superseded_by_ref** |
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **type** (required) | [string](#string) | The value of this property **MUST** be set to impact. |
+| **criticality** (optional) | [integer](#integer) | The criticality of this impact. If present, this value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix B](#appendix-b). |
+| **description** (optional) | [string](#string) | Additional details about this impact |
+| **end_time** (optional) | [timestamp](#timestamp) | The date and time the impact was last recorded. This property **SHOULD** be populated if this impact is resolved or mitigated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. If the **superseded_by_ref** property is included this **MUST** be included. |
+| **end_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **end_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+| **impact_category** (optional) | [string](#string) | The category to which the impact belongs. If one of the defined extensions (see section 2.3.2) is used it **MUST** correspond to the value of this property. If there is insufficient information about the category, this property is not populated and no extension will be specified. The value **MUST** be specified without the "-ext" suffix which is used to indicate the extension used. |
+| **impacted_entity_counts** (optional) | [entity-count](#entity-count) | A list of the entity types, along with the number of each type impacted. If this property is not present it should be assumed that this information is not being shared, not that there were no impacted entities. To affirmatively state no entities of a given class were impacted they should be included in the list with the number of entities impacted set to 0. |
+| **impacted_refs** (optional) | [list](#list) of type [identifier](#identifier) | A list of all impacted entities or infrastructure. The values of this property MUST be the identifier for an SDO or SCO. |
+| **recoverability** (optional) | [recoverability-enum](#recoverability-enum) | The recoverability of this particular impact with respect to feasibility and required time and resources. The value of this property **MUST** come from the [recoverability-enum](#recoverability-enum) enumeration. |
+| **start_time** (optional) | [timestamp](#timestamp) | The date and time this impact was first recorded. This property **SHOULD** be populated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
+| **start_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+| **sub_impact_refs** (optional) | [list](#list) of type [identifier](#identifier) | The [impact](#impact) objects to that are part of this impact. They **MUST** be of type [impact](#impact). |
+| **superseded_by_ref** (optional) | [identifier](#identifier) | The referenced [impact](#impact) supersedes the **end_time** for the current impact. This allows capturing how the severity of this impact changes over time. When this property is populated this impact **MUST** have an **end_time** and and the **superseded_by_ref** value **MUST** reference an [impact](#impact) of the same as the category specified in the **impact_category** property. |
+
+
+### 4.7.2 Availability Impact Extension
+
+**Type Name:** availability-ext
+
+#### 4.7.2.1 Properties
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **availability_impact** (required) | [integer](#integer) | The availability / functional impact of the related incident on the objects referenced in **impacted_refs**. If no objects are referenced, the impact should be treated as the overall availability impact for the related [incident](#incident). This value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix A](#appendix-a). |
+
+**Example**
+
+```
+{
+    "type": "impact",
+    "id": "impact--de425325-5ac8-4f4b-ace7-054301b80863",
+    "created": "2023-11-22T15:30:00.000Z",
+    "modified": "2023-11-22T15:30:00.000Z",
+    "spec_version": "2.2",
+    "impact_category": "availability",
+    "criticality": 70,
+    "description": "Loss of availability for a critical service.",
+    "end_time": "2023-11-22T16:00:00Z",
+    "end_time_fidelity": "minute",
+    "impacted_entity_counts": {
+        "system": 1
+    },
+    "impacted_refs": [
+        "infrastructure--11c25d0e-48f5-4491-960a-0da71c4e0d16"
+    ],
+    "start_time": "2023-11-22T15:30:00Z",
+    "start_time_fidelity": "minute",
+    "extensions": {
+        "availability-ext": {
+            "availability_impact": 90
+        }
+    }
+}
+```
+
+### 4.7.3 Confidentiality Impact Extension
+
+**Type Name:** confidentiality-ext
+
+#### 4.7.3.1 Properties
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **loss_type** (required) | [incident-confidentiality-loss-enum](#incident-confidentiality-loss-enum) | The type of loss that occurred with respect to the relevant information. The values of this property **MUST** come from the [incident-confidentiality-loss-enum](#incident-confidentiality-loss-enum) enumeration. |
+| **information_type** (optional) | [open-vocab](#open-vocab) | The type of information that had its confidentiality compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-ov) open vocabulary. This value **MUST** be included if the loss_type is not none. Otherwise, including an entry with loss_type of none and no information_type indicates that no information had its confidentiality impacted by the related incident. |
+| **record_count** (optional) | [integer](#integer) | The number of records of this information type that were compromised. The value of this property **MUST NOT** be negative. |
+| **record_size** (optional) | [integer](#integer) | The amount of data that was compromised in bytes. The value of this property **MUST NOT** be negative. |
+
+**Example**
+
+```
+{
+    "type": "impact",
+    "id": "impact--c08d9e5a-ba7e-465c-96d5-659683aa9395",
+    "created": "2023-11-22T15:30:00.000Z",
+    "modified": "2023-11-22T15:30:00.000Z",
+    "spec_version": "2.2",
+    "impact_category": "confidentiality-ext",
+    "criticality": 80,
+    "description": "Confidential customer data was leaked.",
+    "start_time": "2023-11-22T15:30:00Z",
+    "start_time_fidelity": "minute",
+    "extensions": {
+        "confidentiality-ext": {
+            "information_type": "customer-data",
+            "loss_type": "confirmed-loss",
+            "record_count": 1000
+        }
+    }
+}
+```
+
+### 4.7.4 External Impact Extension
+
+**Type Name:** external-ext
+
+#### 4.7.4.1 Properties
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **impact_type** (required) | [open-vocab](#open-vocab) | The type of impact outside of the targeted organization. The value of this property **SHOULD** come from the [external-impact-ov](#external-impact-ov) open vocabulary. |
+
+**Example**
+
+```
+{
+    "type": "impact",
+    "id": "impact--765719be-0e65-4c40-8024-a7295c90da35",
+    "created": "2023-11-22T15:30:00.000Z",
+    "modified": "2023-11-22T15:30:00.000Z",
+    "spec_version": "2.2",
+    "impact_category": "external-ext",
+    "criticality": 60,
+    "description": "Negative impact on the company's reputation.",
+    "start_time": "2023-11-22T15:30:00Z",
+    "start_time_fidelity": "minute",
+    "extensions": {
+        "external-ext": {
+            "impact_type": "reputation"
+        }
+    }
+}
+```
+
+### 4.7.5 Integrity Impact Extension
+
+**Type Name:** integrity-ext
+
+#### 4.7.5.1 Properties
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **alteration** (required) | [integrity-alteration-enum](#integrity-alteration-enum) | The type of alteration affecting integrity of the information. The value of this property **MUST** come from the [integrity-alteration-enum](#integrity-alteration-enum) enumeration. |
+| **information_type** (optional) | [open-vocab](#open-vocab) | The type of information that had its integrity compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-ov) open vocabulary. This value **MUST** be included if the alternation is not none. Otherwise, including an entry that with an alteration of none and no information_type provided indicates that no information had its integrity impacted by the related incident. |
+| **record_count** (optional) | [integer](#integer) | The number of records of this type that were compromised. The value of this property **MUST NOT** be negative. |
+| **record_size** (optional) | [integer](#integer) | The amount of data that was compromised in bytes. The value of this property **MUST NOT** be negative. |
+
+**Example**
+
+```
+{
+    "type": "impact",
+    "id": "impact--72047fc7-1b34-4cc2-aea7-61b90cdb832d",
+    "created": "2023-11-22T15:30:00.000Z",
+    "modified": "2023-11-22T15:30:00.000Z",
+    "spec_version": "2.2",
+    "impact_category": "integrity-ext",
+    "criticality": 75,
+    "description": "Unauthorized modification of financial records.",
+    "start_time": "2023-11-22T15:30:00Z",
+    "start_time_fidelity": "minute",
+    "extensions": {
+        "integrity-ext": {
+            "alteration": "full-modification",
+            "information_type": "financial-records",
+            "record_count": 500
+        }
+    }
+}
+```
+
+### 4.7.6 Economic Impact Extension
+
+**Type Name:** economic-ext
+
+#### 4.7.6.1 Properties
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **variety** (required) | [open-vocab](#open-vocab) | The variety of this economic impact. The value of this property **SHOULD** come from the [economic-impact-type-ov](#economic-impact-type-ov) open vocabulary. |
+| **conversion_rate** (optional) | [number](#number) | The conversion rate between the **currency** and **currency_actual** properties. This **MUST NOT** be included if the **currency_actual** property is not included. This **MUST** be included if the **currency_actual** property is included. This value **MUST** be greater than zero. If this property is provided, the **conversion_time** property must also be provided. |
+| **conversion_time** (optional) | [timestamp](#timestamp) | The timestamp corresponding to the conversion rate from the **currency** property to the **currency_actual** property. This **MUST** be included if a **conversion_rate** property is included. |
+| **currency** (optional) | [string](#string) | The currency used for reporting the **max_amount** and **min_amount** properties values. This **SHOULD** be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency. This **SHOULD** match the currency of the organization or the government producing the report. This value **MUST** be included if the **min_amount** property is included. |
+| **currency_actual** (optional) | [string](#string) | The currency that the impact actually used. For ransom demands this should be the currency of the demand. If this is not included it should be assumed to be the same value as the **currency** property. If this is included then the **currency** property **MUST** be included. This **SHOULD** be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency. |
+| **max_amount** (optional) | [number](#number) | The maximum economic amount of the impact using the currency specified in the **currency** property. This value **MUST** be greater than zero. This value **MUST** be included if the **min_amount** property is included. If **min_amount** and **max_amount** properties are both defined, then **max_amount** value **MUST** be greater than or equal to the **min_amount** value. |
+| **min_amount** (optional) | [number](#number) | The maximum economic amount of the impact using the currency specified in the **currency** property. This value **MUST** be greater than zero. This value **MUST** be included if the **max_amount** property is included. If **min_amount** and **max_amount** properties are both defined, then **max_amount** value **MUST** be greater than or equal to the **min_amount** value. |
+
+**Example**
+
+```
+{
+    "type": "impact",
+    "id": "impact--562c7b03-3c27-4adf-8580-57ecce6687c8",
+    "created": "2023-11-22T15:30:00.000Z",
+    "modified": "2023-11-22T15:30:00.000Z",
+    "spec_version": "2.2",
+    "impact_category": "economic",
+    "criticality": 85,
+    "description": "Financial loss due to a ransomware attack.",
+    "start_time": "2023-11-22T15:30:00Z",
+    "start_time_fidelity": "minute",
+    "extensions": {
+        "economic-ext": {
+            "variety": "ransom",
+            "currency": "USD",
+            "min_amount": 10000,
+            "max_amount": 15000
+        }
+    }
+}
+```
+
+### 4.7.7 Physical Impact Extension
+
+**Type Name:** physical-ext
+
+#### 4.7.7.1 Properties
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **impact_type** (required) | [physical-impact-enum](#physical-impact-enum) | The type of physical impact that has occurred. The value of this property **MUST** come from the [physical-impact-enum](#physical-impact-enum) enumeration. |
+| **asset_type** (optional) | [open-vocab](#open-vocab) | The type of property or system that was affected by this impact. The value of this property **SHOULD** come from the [asset-type-ov](#asset-type-ov) open vocabulary. This value **MUST** be included if the **impact_type** is not none . Otherwise, including an entry with an **impact_type** of none and no asset_type indicates that no physical damage was caused by the related incident. |
+
+**Example**
+
+```
+{
+    "type": "impact",
+    "id": "impact--738492bd-288b-48c9-ad2a-83230d2dee86",
+    "created": "2023-11-22T15:30:00.123Z",
+    "modified": "2023-11-22T15:30:00.446Z",
+    "spec_version": "2.2",
+    "impact_category": "physical",
+    "criticality": 95,
+    "description": "Physical damage to a power plant.",
+    "start_time": "2023-11-22T15:30:00Z",
+    "start_time_fidelity": "minute",
+    "extensions": {
+        "physical-ext": {
+            "impact_type": "destruction",
+            "asset_type": "power-plant"
+        }
+    }
+}
+```
+
+### 4.7.8 Traceability Impact Extension
+
+**Type Name:** traceability-ext
+
+#### 4.7.8.1 Properties
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **traceability_impact** (required) | [traceability-enum](#traceability-enum) | The impact on a system or organization’s ability to perform audits or provide non-repudiation. The value of this property **MUST** come from the [traceability-enum](#traceability-enum) enumeration. |
+
+**Example**
+
+```
+{
+    "type": "impact",
+    "id": "impact--ef58b184-e4b8-4f1f-9ac3-f22aff3f9459",
+    "created": "2023-11-22T15:30:00.628Z",
+    "modified": "2023-11-22T15:30:00.845Z",
+    "spec_version": "2.2",
+    "impact_category": "traceability",
+    "criticality": 65,
+    "description": "Loss of audit logs due to a cyber attack.",
+    "start_time": "2023-11-22T15:30:00Z",
+    "start_time_fidelity": "minute",
+    "extensions": {
+        "traceability-ext": {
+            "traceability_impact": "partial-accountability"
+        }
+    }
+}
+```
+
+### 4.7.9 Relationships <a id="impact-relationships"></a>
+
+There are no relationships explicitly defined between the Impact object and other STIX Objects, other than those defined as common relationships (duplicate-of, derived-from, related-to, and the embedded relationships defined by the common SDO properties.)
+
+The reverse relationships section illustrates the relationships targeting this object type from another object type.
+
+Relationships are not restricted to those listed below. Relationships can be created between any objects using the related-to relationship type or, as with open vocabularies, user-defined names.
+
+| **Reverse Relationships** |
+| --- | --- | --- | --- |
+| **Source** | **Type** | **Target** | **Description** |
+| [event](#event) | causes | [impact](#impact) | An event causes an impact. |
+
+## 4.8 Incident <a id="incident"></a>
 
 **Type Name:** <span class="stixtype">incident</span>
 
@@ -2794,7 +3236,7 @@ Incident objects represent cases composed of <span class='stixtype'>events</span
 
 The Incident object should have sufficient properties to represent the current state of the investigation while serving as an anchor point to record both related activities and the impact to an organization.
 
-### 4.6.1 Properties <a id="incident-properties"></a>
+### 4.8.1 Properties <a id="incident-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -2912,7 +3354,7 @@ The Incident object should have sufficient properties to represent the current s
   </tr>
 </table>
 
-### 4.6.2 Relationships <a id="incident-relationships"></a>
+### 4.8.2 Relationships <a id="incident-relationships"></a>
 
 These are the relationships explicitly defined between the Incident object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -2963,7 +3405,7 @@ This table is left intentionally blank and will be fleshed out in a future relea
 ```JSON
 {
   "type": "incident",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "incident--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:48.000Z",
@@ -2973,7 +3415,7 @@ This table is left intentionally blank and will be fleshed out in a future relea
 }
 ```
 
-## 4.7 Indicator <a id="indicator"></a>
+## 4.9 Indicator <a id="indicator"></a>
 
 **Type Name:** <span class="stixtype">indicator</span>
 
@@ -2983,7 +3425,7 @@ The Indicator SDO contains a simple textual description, the Kill Chain Phases t
 
 Relationships from the Indicator can describe the malicious or suspicious behavior that it directly detects (Malware, Tool, and Attack Pattern). In addition, it may also imply the presence of a Campaigns, Intrusion Sets, and Threat Actors, etc.
 
-### 4.7.1 Properties <a id="indicator-properties"></a>
+### 4.9.1 Properties <a id="indicator-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -3070,7 +3512,7 @@ Relationships from the Indicator can describe the malicious or suspicious behavi
   </tr>
 </table>
 
-### 4.7.2 Relationships <a id="indicator-relationships"></a>
+### 4.9.2 Relationships <a id="indicator-relationships"></a>
 
 These are the relationships explicitly defined between the Indicator object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -3140,7 +3582,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 [
   {
     "type": "indicator",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "indicator--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:03:48.000Z",
@@ -3154,7 +3596,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--44298a74-ba52-4f0c-87a3-1824e67d7fad",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:06:37.000Z",
@@ -3165,7 +3607,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--31b940d4-6f7f-459a-80ea-9c1f17b5891b",
     "is_family": true,
     "created": "2016-04-06T20:07:09.000Z",
@@ -3177,7 +3619,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ]
 ```
 
-## 4.8 Infrastructure <a id="infrastructure"></a>
+## 4.10 Infrastructure <a id="infrastructure"></a>
 
 **Type Name:** <span class="stixtype">infrastructure</span>
 
@@ -3261,7 +3703,7 @@ While elements of an attack can be represented by other SDOs or SCOs, the Infras
   </tr>
 </table>
 
-### 4.8.2 Relationships <a id="infrastructure-relationships"></a>
+### 4.10.2 Relationships <a id="infrastructure-relationships"></a>
 
 These are the relationships explicitly defined between the Infrastructure object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -3405,7 +3847,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 [
   {
     "type":"infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id":"infrastructure--38c47d93-d984-4fd9-b87b-d69d0841628d",
     "created":"2016-05-07T11:22:30.000Z",
     "modified":"2016-05-07T11:22:30.000Z",
@@ -3414,7 +3856,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--7aebe2f0-28d6-48a2-9c3e-b0aaa60266ed",
     "created": "2016-05-09T08:17:27.000Z",
     "modified": "2016-05-09T08:17:27.000Z",
@@ -3424,7 +3866,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--16f4f3f9-1b68-4abb-bb66-7639d49f1e30",
     "created": "2016-05-08T14:31:09.000Z",
     "modified": "2016-05-08T14:31:09.000Z",
@@ -3436,7 +3878,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--7aebe2f0-28d6-48a2-9c3e-b0aaa60266ef",
     "created": "2016-05-09T08:17:27.000Z",
     "modified": "2016-05-09T08:17:27.000Z",
@@ -3446,7 +3888,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--b82b2819-3b86-4bd5-afb3-fa36cfbc3f18",
     "created": "2016-05-09T08:17:27.000Z",
     "modified": "2016-05-09T08:17:27.000Z",
@@ -3456,20 +3898,20 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
     "value": "198.51.100.3"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--055987b7-7d94-5326-8e20-c3dad8241976",
     "value": "198.52.200.4"
   }
 ]
 ```
 
-## 4.9 Intrusion Set <a id="intrusion-set"></a>
+## 4.11 Intrusion Set <a id="intrusion-set"></a>
 
 **Type Name:** <span class="stixtype">intrusion-set</span>
 
@@ -3479,7 +3921,7 @@ Where a Campaign is a set of attacks over a period of time against a specific se
 
 While sometimes an Intrusion Set is not active, or changes focus, it is usually difficult to know if it has truly disappeared or ended. Analysts may have varying level of fidelity on attributing an Intrusion Set back to Threat Actors.
 
-### 4.9.1 Properties <a id="intrusion-set-properties"></a>
+### 4.11.1 Properties <a id="intrusion-set-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -3566,7 +4008,7 @@ While sometimes an Intrusion Set is not active, or changes focus, it is usually 
   </tr>
 </table>
 
-### 4.9.2 Relationships <a id="intrusion-set-relationships"></a>
+### 4.11.2 Relationships <a id="intrusion-set-relationships"></a>
 
 These are the relationships explicitly defined between the Intrusion Set object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -3669,7 +4111,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "intrusion-set",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "intrusion-set--4e78f46f-a023-4e5f-bc24-71b3ca22ec29",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:48.000Z",
@@ -3681,7 +4123,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.10 Location <a id="location"></a>
+## 4.12 Location <a id="location"></a>
 
 **Type Name:** <span class="stixtype">location</span>
 
@@ -3798,7 +4240,7 @@ If precision is specified, then the datum for **latitude** and **longitude** **M
   </tr>
 </table>
 
-### 4.10.2 Relationships <a id="location-relationships"></a>
+### 4.12.2 Relationships <a id="location-relationships"></a>
 
 These are the relationships explicitly defined between the Location object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -3872,7 +4314,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   [
     {
     "type": "location",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "location--a6e9345f-5a15-4c29-8bb3-7dcc5d168d64",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:03:00.000Z",
@@ -3881,7 +4323,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   }
   {
     "type": "location",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "location--a6e9345f-5a15-4c29-8bb3-7dcc5d168d64",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:03:00.000Z",
@@ -3893,7 +4335,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   }
   {
     "type": "location",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "location--a6e9345f-5a15-4c29-8bb3-7dcc5d168d64",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:03:00.000Z",
@@ -3904,7 +4346,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ]
 ```
 
-## 4.11 Malware <a id="malware"></a>
+## 4.13 Malware <a id="malware"></a>
 
 **Type Name:** <span class="stixtype">malware</span>
 
@@ -3916,7 +4358,7 @@ The Indicator SDO provides intelligence producers with the ability to define, us
 
 To minimize the risk of a consumer compromising their system in parsing malware samples, producers **SHOULD** consider sharing defanged content (archive and password-protected samples) instead of raw, base64-encoded malware samples.
 
-### 4.11.1 Properties <a id="malware-properties"></a>
+### 4.13.1 Properties <a id="malware-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4023,7 +4465,7 @@ To minimize the risk of a consumer compromising their system in parsing malware 
   </tr>
 </table>
 
-### 4.11.2 Relationships <a id="malware-relationships"></a>
+### 4.13.2 Relationships <a id="malware-relationships"></a>
 
 These are the relationships explicitly defined between the Malware object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -4181,7 +4623,7 @@ Rather, it is meant to state that the malware instance or family is able to subv
 ```JSON
 {
   "type": "malware",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "malware--0c7b5b88-8ff7-4a4d-aa9d-feb398cd0061",
   "created": "2016-05-12T08:17:27.000Z",
   "modified": "2016-05-12T08:17:27.000Z",
@@ -4192,14 +4634,14 @@ Rather, it is meant to state that the malware instance or family is able to subv
 }
 ```
 
-## 4.12 Malware Analysis <a id="malware-analysis"></a>
+## 4.14 Malware Analysis <a id="malware-analysis"></a>
 
 **Type Name:** <span class="stixtype">malware-analysis</span>
 
 Malware Analysis captures the metadata and results of a particular static or dynamic analysis performed on a malware instance or family.
 One of **result** or **analysis_sco_refs** properties **MUST** be provided.
 
-### 4.12.1 Properties <a id="malware-analysis-properties"></a>
+### 4.14.1 Properties <a id="malware-analysis-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4321,7 +4763,7 @@ One of **result** or **analysis_sco_refs** properties **MUST** be provided.
   </tr>
 </table>
 
-### 4.12.2 Relationships <a id="malware-analysis-relationships"></a>
+### 4.14.2 Relationships <a id="malware-analysis-relationships"></a>
 
 These are the relationships explicitly defined between the Malware Analysis object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -4421,7 +4863,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 [
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--8bcf14e9-2ba2-44ef-9e32-fbbc9d2608b2",
     "created": "2020-01-16T18:52:24.277Z",
     "modified": "2020-01-16T18:52:24.277Z",
@@ -4436,7 +4878,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   }
   {
     "type": "malware-analysis",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware-analysis--d25167b7-fed0-4068-9ccd-a73dd2c5b07c",
     "created": "2020-01-16T18:52:24.277Z",
     "modified": "2020-01-16T18:52:24.277Z",
@@ -4449,7 +4891,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   }
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--014841f8-eb38-4673-9904-70f67c92dd8b",
     "created": "2020-01-16T18:52:24.277Z",
     "modified": "2020-01-16T18:52:24.277Z",
@@ -4460,7 +4902,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   {
     "type": "file",
     "id": "file--ba8965d8-e4ec-5f9c-a4df-1c460994ca58",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "hashes": {
       "MD5": "a92e5b2bae0b4b3a3d81c85610b95cd4",
       "SHA-1": "5374e08903744ceeaedd8f5e1bfc06b2c4688e76"
@@ -4472,13 +4914,13 @@ Relationships are not restricted to those listed below. Relationships can be cre
   {
     "type": "directory",
     "id": "directory--ab82f84a-5afc-5ea7-8d98-9fcbc277eda6",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "path": "C:\\"
   }
 ]
 ```
 
-## 4.13 Note <a id="note"></a>
+## 4.15 Note <a id="note"></a>
 
 **Type Name:** <span class="stixtype">note</span>
 
@@ -4488,7 +4930,7 @@ For example, an analyst may add a Note to a Campaign object created by another o
 
 Because Notes are typically (though not always) created by human analysts and are comprised of human-oriented text, they contain an additional property to capture the analyst(s) that created the Note. This is distinct from the **created_by_ref** property, which is meant to capture the organization that created the object.
 
-### 4.13.1 Properties <a id="note-properties"></a>
+### 4.15.1 Properties <a id="note-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4550,7 +4992,7 @@ Because Notes are typically (though not always) created by human analysts and ar
   </tr>
 </table>
 
-### 4.13.2 Relationships <a id="note-relationships"></a>
+### 4.15.2 Relationships <a id="note-relationships"></a>
 
 There are no relationships explicitly defined between the Note object and other STIX Objects, other than the embedded relationships listed below.
 These embedded relationships are listed by property name along with their corresponding target.
@@ -4580,7 +5022,7 @@ These embedded relationships are listed by property name along with their corres
 ```JSON
 {
   "type": "note",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "note--0c7b5b88-8ff7-4a4d-aa9d-feb398cd0061",
   "created": "2016-05-12T08:17:27.000Z",
   "modified": "2016-05-12T08:17:27.000Z",
@@ -4597,7 +5039,7 @@ These embedded relationships are listed by property name along with their corres
 }
 ```
 
-## 4.14 Observed Data <a id="observed-data"></a>
+## 4.16 Observed Data <a id="observed-data"></a>
 
 **Type Name:** <span class="stixtype">observed-data</span>
 
@@ -4611,7 +5053,7 @@ Observed Data may also be related to other SDOs to represent raw data that is re
 
 To support backwards compatibility, related SCOs can still be specified using the **objects** properties, either the **objects** property or the **object_refs** property **MUST** be provided, but both **MUST NOT** be present at the same time.
 
-### 4.14.1 Properties <a id="observed-data-properties"></a>
+### 4.16.1 Properties <a id="observed-data-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4678,7 +5120,7 @@ To support backwards compatibility, related SCOs can still be specified using th
   </tr>
 </table>
 
-### 4.14.2 Relationships <a id="observed-data-relationships"></a>
+### 4.16.2 Relationships <a id="observed-data-relationships"></a>
 
 There are no forward relationships explicitly defined between the Observed Data object and other STIX Objects, other than those defined as common relationships. The first section lists the embedded relationships by property name along with their corresponding target. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -4753,7 +5195,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "observed-data",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "observed-data--b67d30ff-02ac-498a-92f9-32f845f448cf",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T19:58:16.000Z",
@@ -4768,20 +5210,20 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 {
   "type": "domain-name",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "domain-name--bedb4899-d24b-5401-bc86-8f6b4cc18ec7",
   "value": "example.com",
   "resolves_to_refs": ["ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4"]
 }
 {
   "type": "ipv4-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
   "value": "198.51.100.3"
 }
 ```
 
-## 4.15 Opinion <a id="opinion"></a>
+## 4.17 Opinion <a id="opinion"></a>
 
 **Type Name**: <span class="stixtype">opinion</span>
 
@@ -4791,7 +5233,7 @@ For example, an analyst from a consuming organization might say that they "stron
 
 Because Opinions are typically (though not always) created by human analysts and are comprised of human-oriented text, they contain an additional property to capture the analyst(s) that created the Opinion. This is distinct from the **created_by_ref** property, which is meant to capture the organization that created the object.
 
-### 4.15.1 Properties <a id="opinion-properties"></a>
+### 4.17.1 Properties <a id="opinion-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4853,7 +5295,7 @@ Because Opinions are typically (though not always) created by human analysts and
   </tr>
 </table>
 
-### 4.15.2 Relationships <a id="opinion-relationships"></a>
+### 4.17.2 Relationships <a id="opinion-relationships"></a>
 
 There are no relationships explicitly defined between the Opinion object and other STIX Objects, other than those defined as common relationships. The first section lists the embedded relationships by property name along with their corresponding target.
 
@@ -4906,7 +5348,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "opinion",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "opinion--b01efc25-77b4-4003-b18b-f6e24b5cd9f7",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-05-12T08:17:27.000Z",
@@ -4917,7 +5359,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.16 Report <a id="report"></a>
+## 4.18 Report <a id="report"></a>
 
 **Type Name:** <span class="stixtype">report</span>
 
@@ -4927,7 +5369,7 @@ The Report SDO contains a list of references to STIX Objects (the CTI objects in
 
 For example, a threat report produced by ACME Defense Corp. discussing the Glass Gazelle campaign should be represented using Report. The Report itself would contain the narrative of the report while the Campaign SDO and any related SDOs (e.g., Indicators for the Campaign, Malware it uses, and the associated Relationships) would be referenced in the report contents.
 
-### 4.16.1 Properties <a id="report-properties"></a>
+### 4.18.1 Properties <a id="report-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4994,7 +5436,7 @@ For example, a threat report produced by ACME Defense Corp. discussing the Glass
   </tr>
 </table>
 
-### 4.16.2 Relationships <a id="report-relationships"></a>
+### 4.18.2 Relationships <a id="report-relationships"></a>
 
 There are no relationships explicitly defined between the Report object and other STIX Objects, other than those defined as common relationships. The first section lists the embedded relationships by property name along with their corresponding target.
 
@@ -5049,7 +5491,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "report",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "report--84e4d88f-44ea-4bcd-bbf3-b2c1c320bcb3",
   "created_by_ref": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
   "created": "2015-12-21T19:59:11.000Z",
@@ -5075,7 +5517,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   "objects": [
     {
       "type": "identity",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
       "created": "2015-01-21T19:59:17.000Z",
       "modified": "2015-01-21T19:59:17.000Z",
@@ -5083,7 +5525,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
     },
     {
       "type": "report",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "report--84e4d88f-44ea-4bcd-bbf3-b2c1c320bcbd",
       "created_by_ref": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
       "created": "2015-12-21T19:59:11.000Z",
@@ -5100,7 +5542,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
     },
     {
       "type": "indicator",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "indicator--26ffb872-1dd9-446e-b6f5-d58527e5b5d2",
       "created": "2015-12-21T19:59:17.000Z",
       "modified": "2016-05-21T19:59:17.000Z",
@@ -5112,7 +5554,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
     },
     {
       "type": "campaign",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "campaign--83422c77-904c-4dc1-aff5-5c38f3a2c55c",
       "created_by_ref": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
       "created": "2015-12-21T19:59:17.000Z",
@@ -5121,7 +5563,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
     },
     {
       "type": "relationship",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "relationship--f82356ae-fe6c-437c-9c24-6b64314ae68a",
       "created_by_ref": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
       "created": "2015-12-21T19:59:17.000Z",
@@ -5134,7 +5576,107 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.17 Threat Actor <a id="threat-actor"></a>
+## 4.19 Task <a id="task"></a>
+
+A Task is an activity that is performed by or for the victim/defender to respond to the related incident.
+
+### 4.19.1 Properties
+
+| **Required Common Properties** |
+| --- |
+| **created**, **id**, **modified**, **spec_version**, **type** |
+| **Optional Common Properties** |
+| **created_by_ref**, **revoked**, **labels**, **confidence**, **lang**, **external_references**, **object_marking_refs**, **granular_markings**, **extensions** |
+| **Not Applicable Common Properties** |
+| **defanged** |
+| **Task Object Specific Properties** |
+| **task_types**, **affected_entity_counts**, **changed_objects**, **description**, **end_time**, **end_time_fidelity**, **error**, **name**, **next_tasks_refs** **outcome**, **priority**, **start_time**, **start_time_fidelity** |
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **outcome** (required) | [task-outcome-enum](#task-outcome-enum) | The outcome of the task. The value of this property **MUST** come from the [task-outcome-enum](#task-outcome-enum) enumeration. |
+| **type** (required) | [string](#string) | The value of this property **MUST** be set to task. |
+| **affected_entity_counts** (optional) | [entity-count](#entity-count) | A list of affected entity types, along with the number of each type affected. This property is used primarily to capture victim notification information. |
+| **changed_objects** (optional) | [list](#list) of type [state-change](#state-change) | A list of changes that this task has caused. This is typically used to indicate how a task has affected impacts. |
+| **task_types** (optional) | [list](#list) of type [open-vocabulary](#open-vocabulary) | A list of high level types for the task in order to enable aggregation and summaries. The values of this property **SHOULD** come from the [task-type-ov](#task-type-ov) open vocabulary. |
+| **description** (optional) | [string](#string) | A description of the task. |
+| **due_date** (optional) | [timestamp](#list) | The date and time the task is/was due to be completed. The value of due_date **MAY** be unrelated to the values of **start_time** and **end_time**, i.e., there is no requirement that a **due_date** be between those values. |
+| **end_time** (optional) | [timestamp](#list) | The date and time the task was last recorded. If this is not present it is assumed to be unknown. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
+| **end_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **end_time** fidelity is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+| **error** (optional) | [string](#string) | Details about any failures or deviations that occurred in the task. |
+| **name** (optional) | [string](#string) | A name used to identify the task. |
+| **next_task_refs** (optional) | [list](#list) of type [identifier](#identifier) | The [task](#task) objects to follow. They **MUST** be of type [task](#task). There can be more than one if they take place in parallel. |
+| **priority** (optional) | [integer](#integer) | The priority or importance of the task. This value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix B](#appendix-b). |
+| **start_time** (optional) | [timestamp](#list) | The date and time the task was first recorded. If this is not present it is assumed to be unknown. This property **SHOULD** be populated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
+| **start_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+
+### 4.19.2 Relationships
+
+These are the relationships explicitly defined between the Task object and other STIX Objects. The table identifies the relationships that can be made from this object type to another object type by way of the Relationship object.
+
+The reverse relationships section illustrates the relationships targeting this object type from another object type.
+
+Relationships are not restricted to those listed below. Relationships can be created between any objects using the related-to relationship type or, as with open vocabularies, user-defined names.
+
+To relate [tasks](#task) to an [incident](#incident) the **task_refs** property **SHOULD** be used. Using these embedded relationships ensures that an incomplete sequence cannot be shared accidentally (avoiding potential confusion or misunderstandings when processing STIX data.)
+
+| **Common Relationships** |
+| --- | --- | --- | --- |
+| derived-from, duplicate-of, related-to |
+| **Source** | **Type** | **Target** | **Description** |
+| [task](#task) | uses | [course-of-action](#threat-actor) | An task uses a particular course of action. |
+| [task](#task) | blocks | [event](#event) | A task was performed to block a potential event. |
+| [task](#task) | causes | [event](#event) | A task was performed that caused an event, usually due to an error. |
+| [task](#task) | detects | [event](#event) | A task was used to detect an event. |
+| [task](#task) | creates | [indicator](#indicator) | A task was performed that created an indicator. |
+| [task](#task) | impacts | [infrastructure](#infrastructure), [<All STIX Cyber-observable Objects>](#stix-cyber-observable-objects) | A task has an impact on specific infrastructure. |
+| [task](#task) | located-at | [location](#location) | The task occurred at a specific location. |
+
+| **Reverse Relationships** |
+| --- | --- | --- | --- |
+| **Source** | **Type** | **Target** | **Description** |
+| [event](#event) | led-to | [task](#task) | The event led to performing the task. |
+| [identity](#identity) | assigned | [task](#task) | An identity has been assigned the task |
+| [identity](#identity) | poc-for | [task](#task) | An identity is a point of contact for this task. |
+| [identity](#identity) | participated-in | [task](#task) | An identity participated in a specific task, but as not the primary performer |
+| [identity](#identity) | performed | [task](#task) | An identity performed a specific task. |
+| [tool](#tool) | performed | [task](#task) | A tool performed a specific task. |
+
+**Example**
+
+```
+{
+    "type": "task",
+    "id": "task--4e1e2a5a-6b3c-4d5e-8f6a-9e7b8a9a5b6c",
+    "created": "2023-11-22T15:30:00.529Z",
+    "modified": "2023-11-22T15:30:00.811Z",
+    "spec_version": "2.2",
+    "outcome": "successful",
+    "changed_objects": [
+        {
+            "state_change_type": "mitigated",
+            "initial_ref": "impact--f3e1a6f3-1a95-457a-84a7-887c2d9e5e7c",
+            "result_ref": "impact--c1f2d3e4-5b6c-4a8d-9e0a-1b2c3d4e5f62"
+        }
+    ],
+    "description": "Mitigated the impact of the phishing attack.",
+    "due_date": "2023-11-30T00:00:00Z",
+    "end_time": "2023-11-22T16:30:00Z",
+    "end_time_fidelity": "minute",
+    "task_types": [
+        "blocked"
+    ],
+    "name": "Mitigation Task",
+    "next_tasks_refs": [
+        "task--1cb3fbba-3216-4fd7-a1c2-b33473d20ed7"
+    ],
+    "priority": 80,
+    "start_time": "2023-11-22T15:30:00Z",
+    "start_time_fidelity": "minute"
+}
+```
+
+## 4.20 Threat Actor <a id="threat-actor"></a>
 
 **Type Name:** <span class="stixtype">threat-actor</span>
 
@@ -5144,7 +5686,7 @@ Threat Actors leverage their resources, and possibly the resources of an Intrusi
 
 Threat Actors can be characterized by their motives, capabilities, goals, sophistication level, past activities, resources they have access to, and their role in the organization.
 
-### 4.17.1 Properties <a id="threat-actor-properties"></a>
+### 4.20.1 Properties <a id="threat-actor-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -5251,7 +5793,7 @@ Threat Actors can be characterized by their motives, capabilities, goals, sophis
   </tr>
 </table>
 
-### 4.17.2 Relationships <a id="threat-actor-relationships"></a>
+### 4.20.2 Relationships <a id="threat-actor-relationships"></a>
 
 These are the relationships explicitly defined between the Threat Actor object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -5360,7 +5902,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "threat-actor",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "threat-actor--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:48.000Z",
@@ -5377,7 +5919,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.18 Tool <a id="tool"></a>
+## 4.21 Tool <a id="tool"></a>
 
 **Type Name:** <span class="stixtype">tool</span>
 
@@ -5387,7 +5929,7 @@ The Tool SDO characterizes the properties of these software tools and can be use
 
 This SDO **MUST NOT** be used to characterize malware. Further, Tool **MUST NOT** be used to characterize tools used as part of a course of action in response to an attack.
 
-### 4.18.1 Properties <a id="tool-properties"></a>
+### 4.21.1 Properties <a id="tool-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -5459,7 +6001,7 @@ This SDO **MUST NOT** be used to characterize malware. Further, Tool **MUST NOT*
   </tr>
 </table>
 
-### 4.18.2 Relationships <a id="tool-relationships"></a>
+### 4.21.2 Relationships <a id="tool-relationships"></a>
 
 These are the relationships explicitly defined between the Tool object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -5568,7 +6110,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "tool",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "tool--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:48.000Z",
@@ -5578,7 +6120,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.19 Vulnerability <a id="vulnerability"></a>
+## 4.22 Vulnerability <a id="vulnerability"></a>
 
 **Type Name:** <span class="stixtype">vulnerability</span>
 
@@ -5588,7 +6130,7 @@ CVE is a list of information security vulnerabilities and exposures that provide
 
 The Vulnerability SDO is primarily used to link to external definitions of vulnerabilities or to describe 0-day vulnerabilities that do not yet have an external definition. Typically, other SDOs assert relationships to Vulnerability objects when a specific vulnerability is targeted and exploited as part of malicious cyber activity. As such, Vulnerability objects can be used as a linkage to the asset management and compliance process.
 
-### 4.19.1 Properties <a id="vulnerability-properties"></a>
+### 4.22.1 Properties <a id="vulnerability-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -5645,7 +6187,7 @@ The Vulnerability SDO is primarily used to link to external definitions of vulne
   </tr>
 </table>
 
-### 4.19.2 Relationships <a id="vulnerability-relationships"></a>
+### 4.22.2 Relationships <a id="vulnerability-relationships"></a>
 
 These are the relationships explicitly defined between the Vulnerability object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -5724,7 +6266,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "vulnerability",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "vulnerability--0c7b5b88-8ff7-4a4d-aa9d-feb398cd0061",
   "created": "2016-05-12T08:17:27.000Z",
   "modified": "2016-05-12T08:17:27.000Z",
@@ -5994,7 +6536,7 @@ The only type of relationship that can point to a Sighting Object is the embedde
 ```JSON
 {
   "type": "sighting",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "sighting--ee20065d-2555-424f-ad9e-0f8428623c75",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:08:31.000Z",
@@ -6009,7 +6551,7 @@ The only type of relationship that can point to a Sighting Object is the embedde
 [
   {
     "type": "sighting",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "sighting--ee20065d-2555-424f-ad9e-0f8428623c75",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:08:31.000Z",
@@ -6023,7 +6565,7 @@ The only type of relationship that can point to a Sighting Object is the embedde
   },
   {
     "type": "observed-data",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "observed-data--b67d30ff-02ac-498a-92f9-32f845f448cf",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T19:58:16.000Z",
@@ -6133,7 +6675,7 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
 ```JSON
 {
   "type": "artifact",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "artifact--a785c567-cc53-52a1-abeb-026bb7ddf8ba",
   "mime_type": "image/jpeg",
   "payload_bin": "VBORw0KGgoAAAANSUhEUgAAADI== ..."
@@ -6145,7 +6687,7 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
 ```JSON
 {
   "type": "artifact",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "artifact--6be1fbcb-fd03-5ec3-b05f-4329746e9d2b",
   "mime_type": "application/zip",
   "payload_bin": "ZX7HIBWPQA99NSUhEUgAAADI== ...",
@@ -6230,7 +6772,7 @@ This object represents the properties of an Autonomous System (AS).
 ```JSON
 {
   "type": "autonomous-system",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "autonomous-system--3aa27478-50b5-5ab8-9da9-cdc12b657fff",
   "number": 15139,
   "name": "Slime Industries",
@@ -6329,7 +6871,7 @@ The Directory object represents the properties common to a file system directory
 ```JSON
 {
   "type": "directory",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "directory--0a58d0c1-59e6-5afd-8252-dcd3f13e5622",
   "path": "C:\\Windows\\System32"
 }
@@ -6426,14 +6968,14 @@ These are the relationships explicitly defined between the Domain Name object an
 [
   {
     "type": "domain-name",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "domain-name--bedb4899-d24b-5401-bc86-8f6b4cc18ec7",
     "value": "example.com",
     "resolves_to_refs": ["ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4"]
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
     "value": "198.51.100.3"
   }
@@ -6516,7 +7058,7 @@ The Email Address object represents a single email address.
 ```JSON
 {
   "type": "email-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "email-addr--7165e2a9-671f-585d-b1e1-ca59c671d934",
   "value": "john@example.com",
   "display_name": "John Doe"
@@ -6702,7 +7244,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
 [
   {
     "type": "email-message",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-message--92fa1bfd-2c62-5a30-8b7c-5b91ea73cf29",
     "from_ref": "email-addr--6deb37bd-12b7-54ae-805f-5f7146f3d171",
     "to_refs": ["email-addr--2aeeb98c-9db4-525e-874d-221fdfe9f76e"],
@@ -6712,14 +7254,14 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--6deb37bd-12b7-54ae-805f-5f7146f3d171",
     "value": "jdoe@example.com",
     "display_name": "John Doe"
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--2aeeb98c-9db4-525e-874d-221fdfe9f76e",
     "value": "mary@example.com",
     "display_name": "Mary Smith"
@@ -6733,7 +7275,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
 [
   {
     "type": "email-message",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-message--0c57a381-2a17-5e61-8754-5ef96efb286c",
     "from_ref": "email-addr--9b7e29b3-fd8d-562e-b3f0-8fc8134f5dda",
     "to_refs": ["email-addr--3734e66b-c4e8-5d0b-bca9-befdd5699746"],
@@ -6749,14 +7291,14 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--9b7e29b3-fd8d-562e-b3f0-8fc8134f5dda",
     "value": "joe@example.com",
     "display_name": "Joe Smith"
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--3734e66b-c4e8-5d0b-bca9-befdd5699746",
     "value": "bob@example.com",
     "display_name": "Bob Smith"
@@ -6770,7 +7312,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
 [
   {
     "type": "email-message",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-message--d7d69ead-3347-5772-815a-7766dc29c72c",
     "is_multipart": true,
     "received_lines": [
@@ -6807,28 +7349,28 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--6deb37bd-12b7-54ae-805f-5f7146f3d171",
     "value": "jdoe@example.com",
     "display_name": "John Doe"
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--3734e66b-c4e8-5d0b-bca9-befdd5699746",
     "value": "bob@example.com",
     "display_name": "Bob Smith"
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--2aeeb98c-9db4-525e-874d-221fdfe9f76e",
     "value": "mary@example.com",
     "display_name": "Mary Smith"
   },
   {
     "type": "artifact",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "artifact--0682152c-646a-513b-bc07-e516494ed178"
     "mime_type": "image/jpeg",
     "payload_bin": "VBORw0KGgoAAAANSUhEUgAAADI== ...",
@@ -6838,7 +7380,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   },
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--cfebcece-2336-51b0-baf1-d94daae5e1d1",
     "name": "tabby_pics.zip",
     "magic_number_hex": "504B0304",
@@ -6975,7 +7517,7 @@ The File object represents the properties of a file. A File object **MUST** cont
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--949eb97a-da1e-5292-8959-03c4249dc9f3",
   "hashes": {
     "SHA-256": "fe90a7e910cb3a4739bed9180e807e93fa70c90f25a8915476f5e4bfbac681db"
@@ -6990,7 +7532,7 @@ The File object represents the properties of a file. A File object **MUST** cont
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--7d1e3a18-89e7-5bc5-be36-9879f5b7f5c8",
   "hashes": {
     "SHA-256": "841a8921140aba50671ebb0770fecc4ee308c4952cfeff8de154ab14eeef4649"
@@ -7008,13 +7550,13 @@ In this example, the file name would have originally appeared using the bytes 71
 [
   {
     "type": "directory",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "directory--0a58d0c1-59e6-5afd-8252-dcd3f13e5622",
     "path": "C:\\Windows\\System32"
   },
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--39643577-13b7-5f21-9584-df7e7c33f357",
     "hashes": {
       "SHA-256": "ceafbfd424be2ca4a5f0402cae090dda2fb0526cf521b60b60077c0f622b285a"
@@ -7058,7 +7600,7 @@ The Archive File extension specifies a default extension for capturing propertie
 [
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--70221dbf-52fd-5377-9619-c0ce6b3ffc8c",
     "hashes": {
       "SHA-256": "ceafbfd424be2ca4a5f0402cae090dda2fb0526cf521b60b60077c0f622b285a"
@@ -7066,7 +7608,7 @@ The Archive File extension specifies a default extension for capturing propertie
   }
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--c0e2b1c9-232d-5b64-8b74-b6aee5bb9c47",
     "hashes": {
       "SHA-256": "19c549ec2628b989382f6b280cbd7bb836a0b461332c0fe53511ce7d584b89d3"
@@ -7074,7 +7616,7 @@ The Archive File extension specifies a default extension for capturing propertie
   }
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--5d0833b7-065e-571f-8bf2-657cb9569570",
     "hashes": {
       "SHA-256": "0969de02ecf8a5f003e3f6d063d848c8a193aada092623f8ce408c15bcb5f038"
@@ -7082,7 +7624,7 @@ The Archive File extension specifies a default extension for capturing propertie
   }
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--9a1f834d-2506-5367-baec-7aa63996ac43",
     "name": "foo.zip",
     "hashes": {
@@ -7167,7 +7709,7 @@ The Alternate Data Stream type represents an NTFS alternate data stream.
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--ba04c974-3cef-5f42-adc7-084d467874e2",
   "hashes": {
     "SHA-256": "35a01331e9ad96f751278b891b6ea09699806faedfa237d40513d92ad1b7100f"
@@ -7235,7 +7777,7 @@ An object using the PDF File Extension **MUST** contain at least one property fr
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--965aa96f-d90a-506a-8317-d38d44b235f9",
   "name": "example.pdf",
   "extensions": {
@@ -7300,7 +7842,7 @@ An object using the Raster Image File Extension **MUST** contain at least one pr
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--66772174-3442-5e0d-b577-4bd7be55fb87",
   "name": "picture.jpg",
   "hashes": {
@@ -7611,7 +8153,7 @@ The Windows PE Section type specifies metadata about a PE file section.
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--9af228db-9a04-5787-ad43-ccadc137a0e2",
   "name": "example.exe",
   "extensions": {
@@ -7779,7 +8321,7 @@ These are the relationships explicitly defined between the IPv4 Address object a
 ```JSON
 {
   "type": "ipv4-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
   "value": "198.51.100.3"
 }
@@ -7790,7 +8332,7 @@ These are the relationships explicitly defined between the IPv4 Address object a
 ```JSON
 {
   "type": "ipv4-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "ipv4-addr--1ea47840-aa39-5aa8-b4a2-cd203eb6662a",
   "value": "198.51.100.0/24"
 }
@@ -7896,7 +8438,7 @@ These are the relationships explicitly defined between the IPv6 Address object a
 ```JSON
 {
   "type": "ipv6-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "ipv6-addr--85a85a8c-ee99-5722-946d-3c3a3270fc6f",
   "value": "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
 }
@@ -7907,7 +8449,7 @@ These are the relationships explicitly defined between the IPv6 Address object a
 ```JSON
 {
   "type": "ipv6-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "ipv6-addr--084d3b4c-7785-568a-a569-0c61c95754ab",
   "value": "2001:0db8::/96"
 }
@@ -7979,7 +8521,7 @@ The MAC Address object represents a single Media Access Control (MAC) address.
 ```JSON
 {
   "type": "mac-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "mac-addr--757b1725-9903-54f5-a855-1240691d7659",
   "value": "d2:fb:49:24:37:18"
 }
@@ -8051,7 +8593,7 @@ The Mutex object represents the properties of a mutual exclusion (mutex) object.
 ```JSON
 {
   "type": "mutex",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "mutex--f93fe911-e545-5239-b9b0-597840d0c871",
   "name": "__CLEANSWEEP__"
 }
@@ -8211,19 +8753,19 @@ To allow for use cases where a source or destination address may be sensitive an
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "value": "198.51.100.2"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
     "value": "198.51.100.3"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--6e0cb830-0305-57d4-8536-7be874d42005",
     "src_ref": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "dst_ref": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
@@ -8240,13 +8782,13 @@ To allow for use cases where a source or destination address may be sensitive an
 [
   {
     "type": "domain-name",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "domain-name--bedb4899-d24b-5401-bc86-8f6b4cc18ec7",
     "value": "example.com"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--c695ada6-5d5d-5446-a661-935874e1d058",
     "dst_ref": "domain-name--bedb4899-d24b-5401-bc86-8f6b4cc18ec7",
     "protocols": [
@@ -8264,19 +8806,19 @@ To allow for use cases where a source or destination address may be sensitive an
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
     "value": "203.0.113.1"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--826fe3cb-56b0-5620-9d30-4c17ed7b24e3",
     "value": "203.0.113.5"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--44eb3012-751d-5c12-b9ba-1506e42e26ef",
     "src_ref": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
     "dst_ref": "ipv4-addr--826fe3cb-56b0-5620-9d30-4c17ed7b24e3",
@@ -8300,25 +8842,25 @@ To allow for use cases where a source or destination address may be sensitive an
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "value": "198.51.100.2"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
     "value": "203.0.113.1"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--a2935766-2522-5939-9513-cc3536f212a3",
     "value": "203.0.113.2"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--372c0c73-777a-50de-bc3a-92cc72fcf7dd",
     "src_ref": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "dst_ref": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
@@ -8336,7 +8878,7 @@ To allow for use cases where a source or destination address may be sensitive an
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--8dce0dc4-f5ea-5313-8e6c-03646d419b6a",
     "src_ref": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "dst_ref": "ipv4-addr--a2935766-2522-5939-9513-cc3536f212a3",
@@ -8360,25 +8902,25 @@ To allow for use cases where a source or destination address may be sensitive an
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
     "value": "203.0.113.1"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--13cba85b-1780-5517-b600-7b6546cfd760",
     "value": "198.51.100.34"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--23476ffc-8715-5eee-bd37-2f204b7db486",
     "value": "198.51.100.54"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--fc1686c0-b36e-5041-9ce4-c8df9cf10d6d",
     "src_ref": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
     "dst_ref": "ipv4-addr--13cba85b-1780-5517-b600-7b6546cfd760",
@@ -8397,7 +8939,7 @@ To allow for use cases where a source or destination address may be sensitive an
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--27ed09d5-f85a-5a8e-8590-49a91d7e510e",
     "src_ref": "ipv4-addr--13cba85b-1780-5517-b600-7b6546cfd760",
     "dst_ref": "ipv4-addr--23476ffc-8715-5eee-bd37-2f204b7db486",
@@ -8470,14 +9012,14 @@ The HTTP request extension specifies a default extension for capturing network t
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--165070a8-c561-58a8-8659-fce2f255c2c0",
     "value": "198.51.100.53"
 
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--fdd6dbda-a206-52fe-b19b-64d908748850",
     "dst_ref": "ipv4-addr--165070a8-c561-58a8-8659-fce2f255c2c0",
     "protocols": [
@@ -8534,19 +9076,19 @@ The ICMP extension specifies a default extension for capturing network traffic p
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--4b8ed646-46df-5a9c-b5a6-b3ae128f35a6",
     "value": "198.51.100.9"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--826fe3cb-56b0-5620-9d30-4c17ed7b24e3",
     "value": "203.0.113.5"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--4f156a67-4efc-58fb-b0a7-f2612927a37d",
     "src_ref": "ipv4-addr--4b8ed646-46df-5a9c-b5a6-b3ae128f35a6",
     "dst_ref": "ipv4-addr--826fe3cb-56b0-5620-9d30-4c17ed7b24e3",
@@ -8622,13 +9164,13 @@ The Network Socket extension specifies a default extension for capturing network
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "value": "198.51.100.2"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--59d8852c-0c68-5e0c-8ae2-f3c46bd7b1df",
     "src_ref": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "src_port": 223,
@@ -8683,19 +9225,19 @@ An object using the TCP Extension **MUST** contain at least one property from th
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--f85034be-e4ad-5153-aa6b-79c450eb25b3",
     "value": "198.51.100.5"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--72073c96-1246-5058-8e5c-6ca59d656dee",
     "value": "198.51.100.6"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--47b27c77-4272-563f-91ca-87e2a4afd6ef",
     "src_ref": "ipv4-addr--f85034be-e4ad-5153-aa6b-79c450eb25b3",
     "dst_ref": "ipv4-addr--72073c96-1246-5058-8e5c-6ca59d656dee",
@@ -8835,7 +9377,7 @@ The Process object represents common properties of an instance of a computer pro
 [
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--3eb55c0e-fe96-588b-a7ab-10f55f7ec596",
     "name": "gedit-bin",
     "hashes": {
@@ -8844,7 +9386,7 @@ The Process object represents common properties of an instance of a computer pro
   },
   {
     "type": "process",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "process--8fac80fe-a220-4ba9-8ffe-4f43ce8edff8",
     "pid": 1221,
     "created_time": "2016-01-20T14:11:25.55Z",
@@ -8914,7 +9456,7 @@ An object using the Windows Process Extension **MUST** contain at least one prop
 ```JSON
 {
   "type": "process",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "process--65a99d8a-e5b2-44bb-8311-963a580ee9a1",
   "pid": 314,
   "extensions": {
@@ -8994,7 +9536,7 @@ As all properties of this extension are optional, at least one of the properties
 [
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--ca7d6a8a-b79e-5c3b-b736-8d48adcf0c97",
     "hashes": {
       "SHA-256": "bf07a7fbb825fc0aae7bf4a1177b2b31fcf8a3feeaf7092761e18c859ee52a9c"
@@ -9003,7 +9545,7 @@ As all properties of this extension are optional, at least one of the properties
   }
   {
     "type": "process",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "process--ab1ff083-dc96-4896-8c8d-4e623f6e145e",
     "pid": 2217,
     "command_line": "C:\\Windows\\System32\\sirvizio.exe /s",
@@ -9112,7 +9654,7 @@ The Software object represents high-level properties associated with software, i
 ```JSON
 {
   "type": "software",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "software--710b0b41-d4d0-5d6c-a400-fc9254554ffc",
   "name": "Word",
   "cpe": "cpe:2.3:a:microsoft:word:2000:*:*:*:*:*:*:*",
@@ -9187,7 +9729,7 @@ The URL object represents the properties of a uniform resource locator (URL).
 ```JSON
 {
   "type": "url",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "url--47c3cf9a-5027-5bf0-997a-017c7edc7c55",
   "value": "https://example.com/research/index.html"
 }
@@ -9330,7 +9872,7 @@ As all properties of this object are optional, at least one of the properties de
 ```JSON
 {
   "type": "user-account",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "user-account--f94d689e-707d-58c3-b803-c720bb6ed096",
   "user_id": "1001",
   "account_login": "jdoe",
@@ -9351,7 +9893,7 @@ As all properties of this object are optional, at least one of the properties de
 ```JSON
 {
   "type": "user-account",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "user-account--f223e803-846b-591a-aefa-545e938f8a56",
   "user_id": "thegrugq_ebooks",
   "account_login": "thegrugq_ebooks",
@@ -9405,7 +9947,7 @@ An object using the UNIX Account Extension **MUST** contain at least one propert
 ```JSON
 {
   "type": "user-account",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "user-account--f94d689e-707d-58c3-b803-c720bb6ed096",
   "user_id": "1001",
   "account_login": "jdoe",
@@ -9542,7 +10084,7 @@ The Windows Registry Value type captures the properties of a Windows Registry Ke
 ```JSON
 {
   "type": "windows-registry-key",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "windows-registry-key--1884b770-b679-522a-a9c7-45fadaaec7bb",
   "key": "HKEY_LOCAL_MACHINE\\System\\Foo\\Bar"
 }
@@ -9553,7 +10095,7 @@ The Windows Registry Value type captures the properties of a Windows Registry Ke
 ```JSON
 {
   "type": "windows-registry-key",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "windows-registry-key--f6a11ddf-fa2b-54c8-97ab-e7f28413095a",
   "key": "hkey_local_machine\\system\\bar\\foo",
   "values": [
@@ -9795,7 +10337,7 @@ Note that the use of the term "extensions" in this context refers to the X.509 v
 ```JSon
 {
   "type": "x509-certificate",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "x509-certificate--bf86f034-2390-54d7-8426-d08433db3fbe",
   "issuer": "C=ZA, ST=Western Cape, L=Cape Town, O=Thawte Consulting cc, OU=Certification Services Division, CN=Thawte Server CA/emailAddress=server-certs@thawte.com",
   "validity_not_before": "2016-03-12T12:00:00Z",
@@ -9810,7 +10352,7 @@ Note that the use of the term "extensions" in this context refers to the X.509 v
 ```JSon
 {
   "type":"x509-certificate",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "x509-certificate--5adb038a-160d-5d1c-826e-bde4926a0d2d",
   "issuer":"C=ZA, ST=Western Cape, L=Cape Town, O=Thawte Consulting cc, OU=Certification Services Division, CN=Thawte Server CA/emailAddress=server-certs@thawte.com",
   "validity_not_before":"2016-03-12T12:00:00Z",
@@ -9949,7 +10491,7 @@ Note that the **object_ref** relationship has a companion property, **object_mod
     "type": "campaign",
     "id": "campaign--12a111f0-b824-4baf-a224-83b80237a094",
     "lang": "en",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "created": "2017-02-08T21:31:22.007Z",
     "modified": "2017-02-08T21:31:22.007Z",
     "name": "Bank Attack",
@@ -9958,7 +10500,7 @@ Note that the **object_ref** relationship has a companion property, **object_mod
   {
     "type": "language-content",
     "id": "language-content--b86bd89f-98bb-4fa9-8cb2-9ad421da981d",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "created": "2017-02-08T21:31:22.007Z",
     "modified": "2017-02-08T21:31:22.007Z",
     "object_ref": "campaign--12a111f0-b824-4baf-a224-83b80237a094",
@@ -9983,7 +10525,7 @@ Note that the **object_ref** relationship has a companion property, **object_mod
 {
   "type": "language-content",
   "id": "language-content--0911f616-727f-48cb-a4c5-9420299562a4",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "created": "2019-06-08T21:31:22.007Z",
   "modified": "2019-07-08T21:31:22.007Z",
   "object_ref": "threat-actor--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
@@ -10125,7 +10667,7 @@ Content may be marked with multiple statements of use. In other words, the same 
 ```JSON
 {
   "type": "marking-definition",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "marking-definition--4a0042fe-8b88-40fe-9600-dfa128ce6fbd",
   "created": "2016-08-01T00:00:00.000Z",
   "definition_type": "statement",
@@ -10159,7 +10701,7 @@ The following standard marking definitions **MUST** be used to reference or repr
     <td><span class="stixliteral">white</span></td>
     <td><pre class="nowrap"><code class="language-JSON">{
   "type": "marking-definition",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
   "created": "2017-01-20T00:00:00.000Z",
   "definition_type": "tlp",
@@ -10173,7 +10715,7 @@ The following standard marking definitions **MUST** be used to reference or repr
     <td><span class="stixliteral">green</span></td>
     <td><pre class="nowrap"><code class="language-JSON">{
   "type": "marking-definition",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
   "created": "2017-01-20T00:00:00.000Z",
   "definition_type": "tlp",
@@ -10187,7 +10729,7 @@ The following standard marking definitions **MUST** be used to reference or repr
     <td><span class="stixliteral">amber</span></td>
     <td><pre class="nowrap"><code class="language-JSON">{
   "type": "marking-definition",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82",
   "created": "2017-01-20T00:00:00.000Z",
   "definition_type": "tlp",
@@ -10201,7 +10743,7 @@ The following standard marking definitions **MUST** be used to reference or repr
     <td><span class="stixliteral">red</span></td>
     <td><pre class="nowrap"><code class="language-JSON">{
   "type": "marking-definition",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed",
   "created": "2017-01-20T00:00:00.000Z",
   "definition_type": "tlp",
@@ -10224,7 +10766,7 @@ Object Markings apply data markings to an entire STIX Object and all of its cont
 ```JSON
 {
   "type": "indicator",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "indicator--b346b4b3-f4b7-4235-b659-f985f65f0009",
   ...
   "object_marking_refs": ["marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"],
@@ -10288,7 +10830,7 @@ As an example, consider the following STIX Object:
 ```JSON
 {
   "id": "vulnerability--ee916c28-c7a4-4d0d-ad56-a8d357f89fef",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "created": "2016-02-14T00:00:00.000Z",
   "modified": "2016-02-14T00:00:00.000Z",
   "type": "vulnerability",
@@ -10343,7 +10885,7 @@ This syntax is inspired by JSONPath \[[Goessner 2007](#goessner-2007)\] and is i
 ```JSON
 {
   "type": "campaign",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "campaign--12a111f0-b824-4baf-a224-83b80237a094",
   "lang": "en",
   "created": "2017-02-08T21:31:22.007Z",
@@ -10518,7 +11060,7 @@ This is an example of a new SDO object type being created with the STIX Extensio
   {
     "id": "extension-definition--9c59fd79-4215-4ba2-920d-3e4f320e1e62",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "New SDO 1",
     "description": "This schema creates a new object type called my-favorite-sdo-1",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -10530,7 +11072,7 @@ This is an example of a new SDO object type being created with the STIX Extensio
   },
   {
     "type": "my-favorite-sdo",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "my-favorite-sdo--ac97aae4-83f1-46ca-a351-7aeb76678189",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -10555,7 +11097,7 @@ This example adds the properties **rank** and **toxicity** to the <span class="s
   {
     "id": "extension-definition--d83fce45-ef58-4c6c-a3f4-1fbc32e98c6e",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 1",
     "description": "This schema adds two properties to a STIX object",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -10567,7 +11109,7 @@ This example adds the properties **rank** and **toxicity** to the <span class="s
   },
   {
     "type": "indicator",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "indicator--e97bfccf-8970-4a3c-9cd1-5b5b97ed5d0c",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -10601,7 +11143,7 @@ This example is similar to the previous example, but uses the <span class="stixt
   {
     "id": "extension-definition--71736db5-10db-43d3-b0e3-65cf81601fe1",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 1a",
     "description": "This schema adds two properties to a STIX object at the toplevel",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -10617,7 +11159,7 @@ This example is similar to the previous example, but uses the <span class="stixt
   },
   {
     "type": "indicator",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "indicator--66a63e16-92d7-4b2f-bd3d-21540d6b3fc7",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -10649,7 +11191,7 @@ In this example, the extension introduces a new SDO, SCO, and some properties to
   {
     "id": "extension-definition--c5333451-c08c-4c48-be5e-9ad4c947776a",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension My Favorite SDO and Sub-Comp",
     "description": "This schema adds a new object my-favorite-sdo and some sub-component to existing objects",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -10661,7 +11203,7 @@ In this example, the extension introduces a new SDO, SCO, and some properties to
   },
   {
     "type": "my-favorite-sdo",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "my-favorite-sdo--a5461d2e-7ba9-43ef-9b3e-11471d1ad8da",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -10675,7 +11217,7 @@ In this example, the extension introduces a new SDO, SCO, and some properties to
   },
   {
     "type": "my-favorite-sco",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "my-favorite-sco--f9dbe89c-0030-4a9d-8b78-0dcd0a0de874",
     "name": "This is the name of my favorite SCO",
     "some_network_protocol_field": "value",
@@ -10687,7 +11229,7 @@ In this example, the extension introduces a new SDO, SCO, and some properties to
   },
   {
     "type": "indicator",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "indicator--50a77dab-ccc6-439c-b142-92786c394b43",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -10758,7 +11300,7 @@ STIX Bundle Object is not a STIX Object and **MUST NOT** have any relationships 
   "objects": [
     {
       "type": "indicator",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "indicator--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
       "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
       "created": "2016-04-29T14:09:00.000Z",
@@ -14468,7 +15010,7 @@ This following relationship summary table is provided as a convenience. If there
 [
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--d09c50cf-5bab-465e-9e2d-543912148b73",
     "created": "2016-11-22T09:22:30.000Z",
     "modified": "2016-11-22T09:22:30.000Z",
@@ -14477,7 +15019,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--37ac0c8d-f86d-4e56-aee9-914343959a4c",
     "created": "2016-11-23T08:17:27.000Z",
     "modified": "2016-11-23T08:17:27.000Z",
@@ -14487,7 +15029,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--3a41e552-999b-4ad3-bedc-332b6d9ff80c",
     "created": "2016-11-12T14:31:09.000Z",
     "modified": "2016-11-12T14:31:09.000Z",
@@ -14499,7 +15041,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--81f12913-1372-4c96-85ec-E9034ac98aba",
     "created": "2016-11-23T10:42:39.000Z",
     "modified": "2016-11-23T10:42:39.000Z",
@@ -14523,7 +15065,7 @@ This following relationship summary table is provided as a convenience. If there
 [
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--78cc7b4b-c6ab-40d1-82eb-95a3059641da",
     "created": "2017-03-15T04:22:30.000Z",
     "modified": "2017-03-15T04:22:30.000Z",
@@ -14532,7 +15074,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--edce6fe8-2ac7-49d6-bd57-3973a4f819b8",
     "created": "2017-03-16T22:17:27.000Z",
     "modified": "2017-03-16T22:17:27.000Z",
@@ -14542,7 +15084,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--496cac0a-77ea-4da0-b913-88e553483c8d",
     "created": "2017-03-10T07:31:09.000Z",
     "modified": "2017-03-10T07:31:09.000Z",
@@ -14554,7 +15096,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--7aebe2f0-28d6-48a2-9c3e-b0aaa60266ef",
     "created": "2017-03-16T10:19:23.000Z",
     "modified": "2017-03-16T10:19:23.000Z",
@@ -14569,7 +15111,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--2168b17d-f0ba-4c2e-920b-276ad803c5f3",
     "created": "2017-03-16T10:29:55.000Z",
     "modified": "2017-03-16T10:29:55.000Z",
@@ -14584,7 +15126,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--2e48e1aa-469d-4473-a110-a128280db964",
     "created": "2017-03-16T10:33:14.000Z",
     "modified": "2017-03-16T10:33:14.000Z",
@@ -14608,7 +15150,7 @@ This following relationship summary table is provided as a convenience. If there
 [
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--767ed805-f00a-4603-9bd8-5b5a006b56fa",
     "created": "2016-11-21T09:22:30.000Z",
     "modified": "2016-11-21T09:22:30.000Z",
@@ -14617,7 +15159,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--81f12913-1372-4c96-85ec-E9034ac98aba",
     "created": "2016-11-23T10:42:39.000Z",
     "modified": "2016-11-23T10:42:39.000Z",
@@ -14632,7 +15174,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--e4ed271e-e023-45db-99e6-1f912e79bd06",
     "created": "2016-11-22T11:04:18.000Z",
     "modified": "2016-11-22T11:04:18.000Z",
@@ -14641,7 +15183,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--2f340a76-edef-443d-a203-bede067c0bb0",
     "created": "2016-11-25T09:46:09.000Z",
     "modified": "2016-11-25T09:46:09.000Z",
@@ -14656,7 +15198,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--a3536537-456a-47b5-84dc-fb7c340959e8",
     "created": "2016-11-18T04:22:30.000Z",
     "modified": "2016-11-18T04:22:30.000Z",
@@ -14665,7 +15207,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--3263dfe0-6bf4-42eb-bab9-5fc9edc6e443",
     "created": "2016-11-18T08:27:37.000Z",
     "modified": "2016-11-18T08:27:37.000Z",
@@ -14680,7 +15222,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--80d9ba7d-893b-4286-96f9-32225060a730",
     "created": "2016-11-18T06:22:31.000Z",
     "modified": "2016-11-18T06:22:31.000Z",
@@ -14695,7 +15237,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--43f753d8-61e2-472e-918e-d7c58e2463e7",
     "created": "2016-11-25T13:37:27.000Z",
     "modified": "2017-11-25T13:37:27.000Z",
@@ -14705,7 +15247,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--8386f241-b583-4c59-9056-a3b0db596d93",
     "created": "2016-11-25T13:37:27.000Z",
     "modified": "2017-11-25T13:37:27.000Z",
@@ -14724,7 +15266,7 @@ This following relationship summary table is provided as a convenience. If there
 [
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--33588e0e-2bab-430e-9073-cacf704ea1e7",
     "created": "2017-04-04T13:01:21.000Z",
     "modified": "2017-04-04T13:01:21.000Z",
@@ -14733,7 +15275,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--409244ac-01cd-4465-ad30-3f92a226f59f",
     "created": "2016-11-25T09:46:09.000Z",
     "modified": "2016-11-25T09:46:09.000Z",
@@ -14748,7 +15290,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--b3ab5ba1-e6d6-46b0-8ebe-91fc91978c85",
     "created": "2017-04-05T13:37:27.000Z",
     "modified": "2017-04-05T13:37:27.000Z",
@@ -14758,7 +15300,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--0c7b5b88-8ff7-4a4d-aa9d-feb398cd0061",
     "created": "2016-05-12T08:17:27.000Z",
     "modified": "2016-05-12T08:17:27.000Z",
@@ -14781,7 +15323,7 @@ In this example one can see a new SDO object type being created with the STIX ex
 [
   {
     "type": "marking-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
     "created": "2016-08-01T00:00:00.000Z",
     "definition_type": "statement",
@@ -14792,7 +15334,7 @@ In this example one can see a new SDO object type being created with the STIX ex
   {
     "id": "extension-definition--04b2d3ef-d061-4912-ab77-6bbe807a5bd5",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
     "created_by_ref": "identity--11b76a96-5d2b-45e0-8a5a-f6994f370731",
@@ -14805,7 +15347,7 @@ In this example one can see a new SDO object type being created with the STIX ex
   },
   {
     "type": "my-favorite-sdo",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "my-favorite-sdo--64b8f076-a336-4d08-a0a3-fa6bd4ccc7c6",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -14830,7 +15372,7 @@ This example adds the properties **rank** and **toxicity** to the <span class="s
   {
     "id": "extension-definition--d83fce45-ef58-4c6c-a3f4-1fbc32e98c6e",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 1",
     "description": "This schema adds two properties to a STIX object",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -14842,7 +15384,7 @@ This example adds the properties **rank** and **toxicity** to the <span class="s
   },
   {
     "type": "indicator",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "indicator--e97bfccf-8970-4a3c-9cd1-5b5b97ed5d0c",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -14870,7 +15412,7 @@ This example shows how one can also add the same extension (properties **rank** 
 ```JSON
 {
   "type": "artifact",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "artifact--6be1fbcb-fd03-5ec3-b05f-4329746e9d2b",
   "mime_type": "application/zip",
   "payload_bin": "ZX7HIBWPQA99NSUhEUgAAADI== ...",
@@ -14895,7 +15437,7 @@ This example adds the property **mysightingprop** to the <span class="stixtype">
   {
     "id": "extension-definition--a19a6f0a-93dc-4f34-ac9f-83a0141261de",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 2",
     "description": "This schema adds a property to the sighting object",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -14907,7 +15449,7 @@ This example adds the property **mysightingprop** to the <span class="stixtype">
   },
   {
     "type": "sighting",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "sighting--ee20065d-2555-424f-ad9e-0f8428623c75",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:08:31.000Z",
@@ -14932,7 +15474,7 @@ This example adds the properties **additional_marking_prop** and **required_data
   {
     "id": "extension-definition--9ef47f81-1443-4632-8497-8b2878f8ac21",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 3",
     "description": "This schema adds properties to the marking definition object",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -14944,7 +15486,7 @@ This example adds the properties **additional_marking_prop** and **required_data
   },
   {
     "type": "marking-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "marking-definition--7adc34dc-f5c7-4b7c-a7da-28fc4dd716cc",
     "created": "2016-08-01T00:00:00.000Z",
     "extensions": {
@@ -14967,7 +15509,7 @@ This example adds the property **translation_engine** to the <span class="stixty
   {
     "id": "extension-definition--b63766f9-b39e-4a4f-9396-e5e753722df0",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 4",
     "description": "This schema adds translation engines to the language content object",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -14980,7 +15522,7 @@ This example adds the property **translation_engine** to the <span class="stixty
   {
     "type": "language-content",
     "id": "language-content--0911f616-727f-48cb-a4c5-9420299562a4",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "created": "2019-06-08T21:31:22.007Z",
     "modified": "2019-07-08T21:31:22.007Z",
     "object_ref": "threat-actor--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
