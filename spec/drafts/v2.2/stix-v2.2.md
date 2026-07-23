@@ -4983,7 +4983,7 @@ For example, a threat report produced by ACME Defense Corp. discussing the Glass
     <td>The primary type(s) of content found in this report.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#report-type-vocabulary"><span class="stixvocab">report-type-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
-    <td><strong>published</strong> (required)</td>
+    <td><strong>published</strong> (optional)</td>
     <td><span class="stixtype">timestamp</span></td>
     <td>The date that this Report object was officially published by the creator of this report.<br><br>The publication date (public release, legal release, etc.) may be different than the date the report was created or shared internally (the date in the <strong>created</strong> property).</td>
   </tr>

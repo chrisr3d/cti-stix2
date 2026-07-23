@@ -41,24 +41,9 @@
 :tool_url: https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_z4voa9ndw8v
 :sco_url: https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_mlbmudhl16lr
 
-= [stixtitle]*Incident Core Extension Version 2.1 for STIX^TM^ Version 2.1*
+= [stixtitle]*STIX^TM^ 2.2 Incident Expansion*
 
 [.stix-doc-information-heading]#Draft#
-
-[.stix-doc-information-heading]#7 March 2025#
-
-[.stix-doc-information-heading]
-Editors:
-[.stix-indent]
-- IMG - Incident Mini Group
-
-
-[.stix-doc-information-heading]
-Additional artifacts:
-[.stix-indent]
-.This prose specification is one component of a Work Product that also includes:
-
-- STIX™ Version 2.1 - OS
 
 [.stix-doc-information-heading]
 Related work:
@@ -68,7 +53,7 @@ Related work:
 [.stix-indent]
 .This specification replaces or supersedes: +
 
-- Incident Core Extension Version 1.0 for STIX^TM^ Version 2.1
+- Incident Core Extension Version 2.0 for STIX^TM^ Version 2.1
 
 toc::[]
 
@@ -76,7 +61,7 @@ toc::[]
 
 The current STIX 2.1 Incident object was defined as a stub with the expectation that it would be fleshed out using extensions, and that in time either a set of core features would be integrated into a future version of the STIX or that the community would arrive at the consensus to continue to use these extensions.
 
-In this 2.2 proposal we add additional core properties to the Incident object and also add additional event, impact, and task objects.
+In this 2.2 proposal we add additional core properties to the Incident object and also add additional event, impact, and task objects. This also makes published optional for reports to allow easier MISP integration and to better handle incident reports that are in a pre-publication state.
 
 [[incident]]
 == 1. Incidents in STIX
@@ -2782,4 +2767,10 @@ Added [stixliteral]#ransom-demand# and [stixliteral]#ransom-payment# to [stixtyp
 |2024-07-02
 |Richard Piazza, Jeffrey Mates and Dez Beck
 |Removed event_sequence, event_entry, task_sequence, task_entry
+
+|08
+|
+|
+|Converting to STIX 2.2 proposal
+
 |===
