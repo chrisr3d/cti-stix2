@@ -2790,7 +2790,9 @@ Relationships are not restricted to those listed below. Relationships can be cre
 
 **Type Name:** <span class="stixtype">incident</span>
 
-> NOTE: The Incident object in STIX 2.1 is a stub. It is included to support basic use cases but does not contain properties to represent metadata about incidents. Future STIX 2 releases will expand it to include these capabilities. It is suggested that it is used as an extension point for an Incident object defined using the extension facility described in [section 7.3](#extension-definition).
+Incident objects represent cases composed of <span class='stixtype'>events</span> and <span class='stixtype'>tasks</span> as well as actual or potential <span class='stixtype'>impacts</span>. An <span class='stixtype'>Incident</span> can be created prior to a formal determination that the incident has an impact as a way to logically track case work in an attempt to investigate events or lower level alerts.
+
+The Incident object should have sufficient properties to represent the current state of the investigation while serving as an anchor point to record both related activities and the impact to an organization.
 
 ### 4.6.1 Properties <a id="incident-properties"></a>
 
@@ -2817,7 +2819,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <th><span class='stixtr'>Incident Specific Properties</span></th>
   </tr>
   <tr>
-    <td><strong>name</strong>, <strong>description</strong></td>
+    <td><strong>criticality</strong>, <strong>description</strong>, <strong>detection_methods</strong>, <strong>determination</strong>, <strong>investigation_status</strong>, <strong>event_refs</strong>, <strong>impact_refs</strong>, <strong>name</strong>, <strong>recoverability</strong>, <strong>scores</strong>, <strong>task_refs</strong></td>
   </tr>
 </table>
 
@@ -2841,6 +2843,72 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <td><strong>description</strong> (optional)</td>
     <td><span class="stixtype">string</span></td>
     <td>A description that provides more details and context about the Incident, potentially including its purpose and its key characteristics.</td>
+  </tr>
+  <tbody>
+  <tr>
+    <td><strong>determination</strong> (required)</td>
+    <td><span class="stixtype"><a href="#incident-determination-enum">incident-determination-enum</a></span></td>
+    <td>A high-level determination on the status of this incident.
+    The value of this property <strong>SHOULD</strong> be <span class="stixliteral">suspected</span> until enough information is available to provide a well researched result.
+    Some automated tools may flag results as <span class="stixliteral">blocked</span> or <span class="stixliteral">low-value</span> automatically depending on the tool type or activity.
+    For example, a tool that blocks a series of phishing emails may create an incident with a <span class="stixliteral">blocked</span> determination automatically.
+    The values of this property <strong>MUST</strong> come from the <span class="stixtype"><a href="#incident-determination-enum">incident-determination-enum</a></span> enumeration.</td>
+  </tr>
+  <tr>
+    <td><strong>investigation_status</strong> (required)</td>
+    <td><span class="stixtype">open-vocab</span></td>
+    <td>The current status of the incident investigation.
+    The values of this property <strong>SHOULD</strong> come from the <span class="stixtype"><a href="#incident-investigation-ov">incident-investigation-ov</a></span> open vocabulary.</td>
+  </tr>
+  <tr>
+    <td><strong>criticality</strong> (optional)</td>
+    <td><span class="stixtype">integer</span></td>
+    <td>The criticality of the incident.
+    If present, this value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#appendix-b">Appendix B</a>.</td>
+  </tr>
+  <tr>
+    <td><strong>detection_methods</strong> (optional)</td>
+    <td><span class="stixtype">open-vocab</span></td>
+    <td>A list of strings corresponding to the methods used to detect the activity, e.g., commercial tool names, techniques associated with proprietary solutions, human review, external sources, or other methods.
+    These values <strong>SHOULD</strong> be selected from the <span class="stixtype"><a href="#detection-methods-ov">detection-methods-ov</a></span> open vocabulary.</td>
+  </tr>
+  <tr>
+    <td><strong>event_refs</strong> (optional)</td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></td>
+    <td>A list of events tied to this incident.
+    It <strong>MUST</strong> contain references to one or more <span class="stixtype"><a href="#event">event</a></span> objects.
+    Events can be grouped into sequences based on the <strong>next_events_refs</strong> property of the relevant <span class="stixtype"><a href="#event">event</a></span> objects. Events that are the first in a sequence are not referenced by the <strong>next_event_refs</strong> property of any other <span class="stixtype"><a href="#event">event</a></span> object.</td>
+  </tr>
+  <tr>
+    <td><strong>impact_refs</strong> (optional)</td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></td>
+    <td>A list of the impacts of this incident.
+    All objects referenced in this list <strong>MUST</strong> be an <span class="stixtype"><a href="#impact">impact</a></span> object.</td>
+  </tr>
+  <tr>
+    <td><strong>incident_types</strong> (optional)</td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></td>
+    <td>A list of incident types of incident that occurred, if applicable.
+    The values of this property <strong>SHOULD</strong> come from the <span class="stixtype"><a href="#event-type-ov">event-type-ov</a></span> open vocabulary.</td>
+  </tr>
+  <tr>
+    <td><strong>recoverability</strong> (optional)</td>
+    <td><span class="stixtype"><a href="#recoverability-enum">recoverability-enum</a></span></td>
+    <td>The recoverability of this particular Incident with respect to feasibility and required time and resources.
+    The value of this property <strong>MUST</strong> come from the <span class="stixtype"><a href="#recoverability-enum">recoverability-enum</a></span>
+    enumeration.</td>
+  </tr>
+  <tr>
+    <td><strong>scores</strong> (optional)</td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype"><a href="#incident-score">incident-score</a></span></td>
+    <td>A list of scores from various automated or manual mechanisms along with optional descriptions.</td> 
+  </tr>
+  <tr>
+    <td><strong>task_refs</strong> (optional)</td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></td>
+    <td>A list of tasks tied to this incident.
+    It <strong>MUST</strong> contain references to one or more <span class="stixtype"><a href="#task">task</a></span> objects.
+    Tasks can be grouped into sequences based on the <strong>next_tasks_refs</strong> property of the relevant <span class="stixtype"><a href="#task">task</a></span>  objects. Tasks that are the first in a sequence are not referenced by the <strong>next_tasks_refs</strong> property of any other <span class="stixtype"><a href="#task">task</a></span> object.</td>
   </tr>
 </table>
 
