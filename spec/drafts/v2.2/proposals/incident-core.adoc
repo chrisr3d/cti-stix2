@@ -122,8 +122,6 @@ The values of this property *MUST* come from the [stixtype]#<<incident-determina
 |[stixtype]#{string_url}[string]#
 |The value of this property *MUST* be set to [stixliteral]#incident#.
 
-The values of this property *SHOULD* come from the [stixtype]#<<incident-investigation-ov,incident-investigation-ov>># open vocabulary.
-
 |*criticality* (optional)
 |[stixtype]#{int_url}[integer]#
  
