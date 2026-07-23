@@ -109,7 +109,7 @@ The Incident object should have sufficient properties to represent the current s
 |A high-level determination on the status of this incident.
 The value of this property *SHOULD* be [stixliteral]#suspected# until enough information is available to provide a well researched result.
 
-Some automated tools may flag results as [stixliteral]#blocked# or [stixliteral]#low-value# automatically depending on the tool type or activity.
+Some automated tools may flag results as [stixliteral]#blocked# or [stixliteral]#false-positive# automatically depending on the tool type or activity.
 For example, a tool that blocks a series of phishing emails may create an incident with a [stixliteral]#blocked# determination automatically.
 
 The values of this property *MUST* come from the [stixtype]#<<incident-determination-enum,incident-determination-enum>># enumeration.
@@ -2221,8 +2221,6 @@ This option should be used to affirmatively supply this information when necessa
 
 |[stixliteral]#false-positive#
 |An incident was determined to have been triggered by a false alert and no action including automatically performed automated actions were needed to remediate the issue.
-
-This should not be used when an incident was flagged correctly, but is of no importance. For findings of that nature low-value should be used.
 
 |[stixliteral]#suspected#
 |An incident is suspected, but not yet confirmed.
