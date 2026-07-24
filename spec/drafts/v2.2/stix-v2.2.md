@@ -3411,6 +3411,8 @@ This table is left intentionally blank and will be fleshed out in a future relea
   "created": "2016-04-06T20:03:48.000Z",
   "modified": "2016-04-06T20:03:48.000Z",
   "name": "Incident 43",
+  "determination": "suspected",
+  "investigation_status": "ongoing",
   "description": "This incident addresses APT 28 ..."
 }
 ```
