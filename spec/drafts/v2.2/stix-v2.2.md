@@ -248,12 +248,6 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
 - 6. [STIX Cyber-observable Objects](#stix-cyber-observable-objects)
   - 6.1 [Artifact Object](#artifact-object)
     - 6.1.1 [Properties](#artifact-object-properties)
-  - 6.x [Asset Object](#asset-object)
-    - 6.x.1 [Properties](#asset-object-properties)
-    - 6.x.2 [Asset Object Container Extension](#asset-object-container)
-      - 6.x.2.1 [Properties](#asset-object-container-properties)
-    - 6.x.3 [Asset Object Pod Extension](#asset-object-pod)
-      - 6.x.3.1 [Properties](#asset-object-pod-properties)
   - 6.2 [Autonomous System (AS) Object](#autonomous-system-as-object)
     - 6.2.1 [Properties](#autonomous-system-as-object-properties)
   - 6.3 [Directory Object](#directory-object)
@@ -288,44 +282,42 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
   - 6.9 [IPv6 Address Object](#ipv6-address-object)
     - 6.9.1 [Properties](#ipv6-address-object-properties)
     - 6.9.2 [Relationships](#ipv6-address-object-relationships)
-  - 6.10 [Log Event](#log-event-object)
-    - 6.10.1 [Properties](#log-event-properties)
-  - 6.11 [MAC Address Object](#mac-address-object)
-    - 6.11.1 [Properties](#mac-address-object-properties)
-  - 6.12 [Mutex Object](#mutex-object)
-    - 6.12.1 [Properties](#mutex-object-properties)
-  - 6.13 [Network Traffic Object](#network-traffic-object)
-    - 6.13.1 [Properties](#network-traffic-object-properties)
-    - 6.13.2 [HTTP Request Extension](#http-request-extension)
-      - 6.13.2.1 [Properties](#http-request-extension-properties)
-    - 6.13.3 [ICMP Extension](#icmp-extension)
-      - 6.13.3.1 [Properties](#icmp-extension-properties)
-    - 6.13.4 [Network Socket Extension](#network-socket-extension)
-      - 6.13.4.1 [Properties](#network-socket-extension-properties)
-    - 6.13.5 [TCP Extension](#tcp-extension)
-      - 6.13.5.1 [Properties](#tcp-extension-properties)
-  - 6.14 [Process Object](#process-object)
-    - 6.14.1 [Properties](#process-object-properties)
-    - 6.14.2 [Windows Process Extension](#windows-process-extension)
-      - 6.14.2.1 [Properties](#windows-process-extension-properties)
-    - 6.14.3 [Windows Service Extension](#windows-service-extension)
-      - 6.14.3.1 [Properties](#windows-service-extension-properties)
-  - 6.15 [Software Object](#software-object)
-    - 6.15.1 [Properties](#software-object-properties)
-  - 6.16 [URL Object](#url-object)
-    - 6.16.1 [Properties](#url-object-properties)
-  - 6.17 [User Account Object](#user-account-object)
-    - 6.17.1 [Properties](#user-account-object-properties)
-    - 6.17.2 [UNIX Account Extension](#unix-account-extension)
-      - 6.17.2.1 [Properties](#unix-account-extension-properties)
-  - 6.18 [Windows Registry Key Object](#windows-registry-key-object)
-    - 6.18.1 [Properties](#windows-registry-key-object-properties)
-    - 6.18.2 [Windows Registry Value Type](#windows-registry-value-type)
-      - 6.18.2.1 [Properties](#windows-registry-value-type-properties)
-  - 6.19 [X.509 Certificate Object](#x509-certificate-object)
-    - 6.19.1 [Properties](#x509-certificate-object-properties)
-    - 6.19.2 [X.509 v3 Extensions Type](#x509-v3-extensions-type)
-      - 6.19.2.1 [Properties](#x509-v3-extensions-type-properties)
+  - 6.10 [MAC Address Object](#mac-address-object)
+    - 6.10.1 [Properties](#mac-address-object-properties)
+  - 6.11 [Mutex Object](#mutex-object)
+    - 6.11.1 [Properties](#mutex-object-properties)
+  - 6.12 [Network Traffic Object](#network-traffic-object)
+    - 6.12.1 [Properties](#network-traffic-object-properties)
+    - 6.12.2 [HTTP Request Extension](#http-request-extension)
+      - 6.12.2.1 [Properties](#http-request-extension-properties)
+    - 6.12.3 [ICMP Extension](#icmp-extension)
+      - 6.12.3.1 [Properties](#icmp-extension-properties)
+    - 6.12.4 [Network Socket Extension](#network-socket-extension)
+      - 6.12.4.1 [Properties](#network-socket-extension-properties)
+    - 6.12.5 [TCP Extension](#tcp-extension)
+      - 6.12.5.1 [Properties](#tcp-extension-properties)
+  - 6.13 [Process Object](#process-object)
+    - 6.13.1 [Properties](#process-object-properties)
+    - 6.13.2 [Windows Process Extension](#windows-process-extension)
+      - 6.13.2.1 [Properties](#windows-process-extension-properties)
+    - 6.13.3 [Windows Service Extension](#windows-service-extension)
+      - 6.13.3.1 [Properties](#windows-service-extension-properties)
+  - 6.14 [Software Object](#software-object)
+    - 6.14.1 [Properties](#software-object-properties)
+  - 6.15 [URL Object](#url-object)
+    - 6.15.1 [Properties](#url-object-properties)
+  - 6.16 [User Account Object](#user-account-object)
+    - 6.16.1 [Properties](#user-account-object-properties)
+    - 6.16.2 [UNIX Account Extension](#unix-account-extension)
+      - 6.16.2.1 [Properties](#unix-account-extension-properties)
+  - 6.17 [Windows Registry Key Object](#windows-registry-key-object)
+    - 6.17.1 [Properties](#windows-registry-key-object-properties)
+    - 6.17.2 [Windows Registry Value Type](#windows-registry-value-type)
+      - 6.17.2.1 [Properties](#windows-registry-value-type-properties)
+  - 6.18 [X.509 Certificate Object](#x509-certificate-object)
+    - 6.18.1 [Properties](#x509-certificate-object-properties)
+    - 6.18.2 [X.509 v3 Extensions Type](#x509-v3-extensions-type)
+      - 6.18.2.1 [Properties](#x509-v3-extensions-type-properties)
 - 7. [STIX Meta Objects](#stix-meta-objects)
   - 7.1 [Language Content](#language-content)
     - 7.1.1 [Properties](#language-content-properties)
@@ -689,7 +681,7 @@ STIX 2.1 Errata 01 differs from STIX 2.1 in the following ways:
   - wrong <span class="stixliteral">analysis-of</span> is replaced with the right <span class="stixliteral">av-analysis-of</span> relationship type.
 - Email Message property descriptions fixed in [section 6.6.1](#email-message-object-properties).
   - **from_ref**, **sender_ref**, **to_refs**, **cc_refs** and **bcc_refs** properties descriptions now mention the right <span class="stixtype">email-addr</span> type they are referencing.
-- HTTP Request Extension examples fixed in [section 6.13.2.1](#http-request-extension-properties).
+- HTTP Request Extension examples fixed in [section 6.12.2.1](#http-request-extension-properties).
   - the **request_header** property is now a <span class="stixtype">list</span> of type <span class="stixtype">string</span> in the examples, as expected from the description.
 - Observation Expression Qualifiers example fixed in [section 9.5.1](#observation-expression-qualifiers).
   - the example used to illustrate the use of *Observation Expression* <span class="stixliteral">WITHIN</span> *x* <span class="stixliteral">SECONDS</span> now has the right <span class="stixtype">windows-registry-key</span> Observable type.
@@ -6706,177 +6698,6 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
 }
 ```
 
-## 6.x Asset Object <a id="asset-object"></a>
-
-The `asset` object is a component of telemtry that describes an asset and its properties.
-It can be referenced to give context on events that took place on this asset.
-It describes the hostname, the associated IP addresses and physical addresses of the asset.
-In SIEM terminology which collects events from many systems - it is used to describe where the events took place.
-
-### 6.x.1 Properties <a id="asset-object-properties"></a>
-
-| property name | type | description |
-|--|--|--|
-| **type** (required) | `string` | asset |
-| **id** (required) | `identifier` | A valid [stix-id](#identifier) |
-| **spec_version** (optional) | `string` | The value of this property MUST be 2.2 for STIX Objects defined according to this specification. |
-| **extensions** | `dictionary` | Specifies any extensions of the object, as a dictionary. |
-| **device_id** | `string` | The ID of the device. |
-| **hostname** (required)|`string`|The name of this host|
-| **ip_refs**|`list` of type `identifier`| references the ip addresses related to this host. must be `ipv4-addr` or `ipv6-addr`|
-| **mac_refs**|`list` of type `identifier`| references the mac addresses related to this host. must be of type `mac-addr`|
-| **os_ref**| `identifier` | Specifies the operating system of the asset, as a reference to the Cyber-observable Object. The object referenced must be of type `software`. |
-| **architecture** | `string` | Architecture of the asset. |
-| **uptime** | `string` | Specifies the seconds the asset has been up.|
-| **host_type** | `string` | Specifies the type of asset. Example, firewall, t2.micro etc.|
-| **ingress** | `x-oca-traffic-type` | Specifies information like interface number and name, vlan, and zone information to classify ingress traffic using the Traff9c-type sub-object.|
-| **egress** | `x-oca-traffic-type` | Specifies information like interface number and name, vlan, and zone information to classify egress traffic using the Traffic-type sub object.|
-| **geo_ref**|`identifier`| references the geolocation of this host. must be of type `x-oca-geo`|
-
-### 6.x.2 Asset Object Container Extenstion <a id="asset-object-container"></a>
-
-Extension Name `container-ext`
-
-The container asset extension represents a container.
-
-#### 6.x.2.1 Properties <a id="asset-object-container-properties"></a>
-
-| property name | type | description |
-|--|--|--|
-| **type** | `string` | x-oca-container-ext |
-| **name** | `string` | container name |
-| **container_id** | `string` | container id |
-| **image_name** | `string` | container image name |
-| **image_id** | `string` | container image id |
-| **container_type** | `string` | container type |
-| **privileged** | `boolean` | indicates a priviliged container |
-
-### 6.x.3 Asset Object Pod Extenstion <a id="asset-object-pod"></a>
-
-Extension Name `pod-ext`
-
-The pod asset extension represents an oc/k8s pod.
-
-#### 6.x.3.1 Properties <a id="asset-object-pod-properties"></a>
-
-| property name | type | description |
-|--|--|--|
-| **type** | `string` | x-oca-pod-ext |
-| **name** | `string` | pod name |
-| **ip_refs** | `list` of type `identifier` | references the ip addresses allocated to this pod. must be `ipv4-addr` or `ipv6-addr` |
-
-**Examples**
-
-
-The Observed Data SDO can only gather any SCO's (Observables), while the Sighting SRO is used to combine these observations with appropriate SDOs like `location`.
-
-```json
-[
-  {
-    "type": "ipv4-addr",
-    "spec_version": "2.1",
-    "id": "ipv4-addr--38609426-bc06-5cbc-9763-e77e99c9d9e4",
-    "value": "9.9.9.9"
-  },
-  {
-    "type": "asset",
-    "spec_version": "2.1",
-    "id": "asset--fec3de6d-bfc4-4ef3-9f4b-c21aa2d57e7a",
-    "created": "2024-09-01T06:55:35.241Z",
-    "modified": "2024-09-01T06:55:35.241Z",
-    "ip_refs": [
-      "ipv4-addr--38609426-bc06-5cbc-9763-e77e99c9d9e4",
-      "ipv6-addr--dc0ef52f-b6cf-52a0-a6a1-977b32a57063"
-    ],
-    "hostname": "example host",
-    "host_id": "123A",
-    "geo_ref": "location--419f0ac4-2836-46f0-9985-820f7a4b7abc",
-    "mac_refs": [
-      "mac-addr--b5dbdbbb-5470-58c8-9b86-81b7d83a770b"
-    ],
-    "host_type": "APM Server",
-    "egress": {
-      "zone": "internal",
-      "interfaces": [
-        {
-          "alias": "inside",
-          "interface_id": "10",
-          "name": "eth0"
-        }
-      ]
-    },
-    "extensions": {
-      "container-ext": {
-        "name": "example container",
-        "container_id": "bf032feb4117",
-        "image_id": "92b1b5d66457...",
-        "image_name": "us.icr.io/...",
-        "container_type": "crio"
-      },
-      "pod-ext": {
-        "name": "example pod",
-        "ip_refs": [
-          "ipv4-addr--f1958dd5-5175-5702-beef-742d2cf3c0ec"
-        ]
-      }
-    }
-  },
-  {
-    "type": "ipv6-addr",
-    "spec_version": "2.1",
-    "id": "ipv6-addr--dc0ef52f-b6cf-52a0-a6a1-977b32a57063",
-    "value": "ffff:1111:ffff:1111:ffff:1111:ffff:1111",
-    "resolves_to_refs": [
-      "mac-addr--b5dbdbbb-5470-58c8-9b86-81b7d83a770b"
-    ]
-  },
-  {
-    "type": "mac-addr",
-    "spec_version": "2.1",
-    "id": "mac-addr--b5dbdbbb-5470-58c8-9b86-81b7d83a770b",
-    "value": "00-00-11-00-22-00"
-  },
-  {
-    "type": "ipv4-addr",
-    "spec_version": "2.1",
-    "id": "ipv4-addr--f1958dd5-5175-5702-beef-742d2cf3c0ec",
-    "value": "192.168.xxx.yyy"
-  },
-  {
-    "type": "observed-data",
-    "spec_version": "2.1",
-    "id": "observed-data--b67d30ff-02ac-498a-92f9-32f845f448cf",
-    "created_by_ref": "identity--e5f1b90a-d9b6-40ab-81a9-8a29df4b6b65",
-    "created": "2016-04-06T19:58:16.000Z",
-    "modified": "2016-04-06T19:58:16.000Z",
-    "first_observed": "2015-12-21T19:00:00Z",
-    "last_observed": "2015-12-21T19:00:00Z",
-    "number_observed": 50,
-    "object_refs": [
-      "ipv4-addr--38609426-bc06-5cbc-9763-e77e99c9d9e4",
-      "ipv6-addr--dc0ef52f-b6cf-52a0-a6a1-977b32a57063",
-      "mac-addr--b5dbdbbb-5470-58c8-9b86-81b7d83a770b",
-      "ipv4-addr--f1958dd5-5175-5702-beef-742d2cf3c0ec"
-    ]
-  },
-  {
-    "type": "sighting",
-    "spec_version": "2.1",
-    "id": "sighting--49cc5c32-98b8-4d15-94bf-2f867d71a2fa",
-    "created": "2023-11-18T05:26:43.45768Z",
-    "modified": "2023-11-18T05:26:43.45768Z",
-    "sighting_of_ref": "x-oca-asset--fec3de6d-bfc4-4ef3-9f4b-c21aa2d57e7a",
-    "where_sighted_refs": [
-          "x-oca-geo--419f0ac4-2836-46f0-9985-820f7a4b7abc"
-    ],
-    "observed_data_refs": [
-      "observed-data--b67d30ff-02ac-498a-92f9-32f845f448cf"
-    ]
-  }
-]
-```
-
-
 ## 6.2 Autonomous System (AS) Object <a id="autonomous-system-as-object"></a>
 
 **Type Name:** <span class="stixtype">autonomous-system</span>
@@ -8636,66 +8457,13 @@ These are the relationships explicitly defined between the IPv6 Address object a
 }
 ```
 
-## 6.10 Log Event Object <a id="log-event-object"></a>
-
-Adds a new object for describing log events.
-
-Take an endpoint file create event as an example if you just record an observed data including the process and file details then the context is lost.
-To understand what happened between these two a log-event can be used.
-
-Another example is a cross process event. Using a `log-event` you can record how the processes interacted. The `log-event` object adds this context. What action was performed, where was it performed, what was the outcome and what are the references to other SCO's that these are related.
-
-This is not designed to replace comprehensive logging standards. It simply provides a means to share key information that can provide context for cyber events in STIX.
-
-### 6.10.1 Log Event Properties <a id="log-event-properties"></a>
-
-| **property name**            | **type**                       | **description**                                                                                                                                                                                                                          |
-|--------------------------|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **type** (required)          | `string`                   | log-event                                                                                                                                                                                                                          |
-| **id** (required) | `string` | A valid [stix-id](https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_64yvzeku5a5c) |
-| **spec_version** (required) | `string` | The value of this property MUST be 2.1 for STIX Objects defined according to this specification. |
-| **created** (required) | `timestamp` | The date and time the object was created |
-| **modified** (required) | `timestamp` | The date and time the object was modified |
-| **action** (required)        | `string`                   | describes the event action. for example process create                                                                                                                                                                               |
-| **category**                 | `list` of type `string`    | categories describing the event. for example "process" or "system"                                                                                                                                                                   |
-| **code**                     | `string`                   | event code or event id from the original log source                                                                                                                                                                                  |
-| **description**              | `string`                   | additional data on the event beyond the action field                                                                                                                                                                                 |
-| **created**                  | `timestamp`                | when this event was created                                                                                                                                                                                                          |
-| **start**                    | `timestamp`                | when this event started                                                                                                                                                                                                              |
-| **end**                      | `timestamp`                | when this event ended                                                                                                                                                                                                                |
-| **duration**                 | `integer`                  | the duration of this event from start to end in nanoseconds                                                                                                                                                                          |
-| **module**                   | `string`                   | Name of the module this data is coming from. for example "sysmon"                                                                                                                                                                    |
-| **original_ref**             | `identifier`               | references the original raw event data. must be of type `artifact`                                                                                                                                                                   |
-| **outcome**                  | `string`                   | the outcome of this event. for example "process create success"                                                                                                                                                                      |
-| **provider**                 | `string`                   | the provider of this log. for example "Microsoft Windows Security Event Log"                                                                                                                                                         |
-| **agent**                    | `string`                   | describes the name of the agent that collected this event log                                                                                                                                                                        |
-| **host_ref**                 | `identifier`               | references the host related to this event. must be of type `x-oca-asset`                                                                                                                                                             |
-| **url_ref**                  | `identifier`               | references a url related to this event. must be of type `url`                                                                                                                                                                        |
-| **file_ref**                 | `identifier`               | references a file related to this event. must be of type `file`                                                                                                                                                                      |
-| **process_ref**              | `identifier`               | references a process related to this event. must be of type `process`                                                                                                                                                                |
-| **parent_process_ref**       | `identifier`               | references a parent process related to this event. must be of type `process`                                                                                                                                                         |
-| **cross_process_target_ref** | `identifier`               | references the target process in case of a cross process event. must be of type `process`                                                                                                                                            |
-| **domain_ref**               | `identifier`               | references a domain related to this event. must be of type `domain-name`                                                                                                                                                             |
-| **registry_ref**             | `identifier`               | references windows registry data related to this event. must be of type `windows-registry-key`                                                                                                                                       |
-| **network_ref**              | `identifier`               | references network traffic related to this event. must be of type `network-traffic`                                                                                                                                                  |
-| **ip_refs**                  | `list` of type `identifier` | references any ip addresses related to this event. must be of type `ipv4-address` or `ipv6-address`                                                                                                                                  |
-| **user_ref**                 | `identifier`               | references the user related to this event. must be of type `user-account`                                                                                                                                                            |
-| **severity**                 | `number`                   | Severity of the event on a scale of 1-100.                                                                                                                                                                                           |
-| **start**                    | `timestamp`                | The start time in UTC of the event.                                                                                                                                                                                                  |
-| **end**                      | `timestamp`                | The end time in UTC of the event.                                                                                                                                                                                                    |
-| **timezone**                 | `string`                   | The timezone where the event was discovered.                                                                                                                                                                                         |
-| **duration**                 | `string`                   | The duration of the event.                                                                                                                                                                                                           |
-| **dataset**                  | `string`                   | The dataset of the event.                                                                                                                                                                                                            |
-| **pipe_name**                | `string`                   | In windows, there are many security rules that look for the pipe name property in a named pipe event. the value of this property should include the full pipe name in case of a named pipe event. see [example](#a-named-pipe-event). | 
-
-
-## 6.11 MAC Address Object <a id="mac-address-object"></a>
+## 6.10 MAC Address Object <a id="mac-address-object"></a>
 
 **Type Name:** <span class="stixtype">mac-addr</span>
 
 The MAC Address object represents a single Media Access Control (MAC) address.
 
-### 6.11.1 Properties <a id="mac-address-object-properties"></a>
+### 6.10.1 Properties <a id="mac-address-object-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -8761,13 +8529,13 @@ The MAC Address object represents a single Media Access Control (MAC) address.
 }
 ```
 
-## 6.12 Mutex Object <a id="mutex-object"></a>
+## 6.11 Mutex Object <a id="mutex-object"></a>
 
 **Type Name:** <span class="stixtype">mutex</span>
 
 The Mutex object represents the properties of a mutual exclusion (mutex) object.
 
-### 6.12.1 Properties <a id="mutex-object-properties"></a>
+### 6.11.1 Properties <a id="mutex-object-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -8833,7 +8601,7 @@ The Mutex object represents the properties of a mutual exclusion (mutex) object.
 }
 ```
 
-## 6.13 Network Traffic Object <a id="network-traffic-object"></a>
+## 6.12 Network Traffic Object <a id="network-traffic-object"></a>
 
 **Type Name:** <span class="stixtype">network-traffic</span>
 
@@ -8841,7 +8609,7 @@ The Network Traffic object represents arbitrary network traffic that originates 
 
 To allow for use cases where a source or destination address may be sensitive and not suitable for sharing, such as addresses that are internal to an organization's network, the source and destination properties (**src_ref** and **dst_ref**, respectively) are defined as optional in the properties table below. However, a Network Traffic object **MUST** contain the **protocols** property and at least one of the **src_ref** or **dst_ref** properties and **SHOULD** contain the **src_port** and **dst_port** properties.
 
-### 6.13.1 Properties <a id="network-traffic-object-properties"></a>
+### 6.12.1 Properties <a id="network-traffic-object-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9192,7 +8960,7 @@ To allow for use cases where a source or destination address may be sensitive an
 ]
 ```
 
-### 6.13.2 HTTP Request Extension <a id="http-request-extension"></a>
+### 6.12.2 HTTP Request Extension <a id="http-request-extension"></a>
 
 **Type Name:** <span class="stixtype">http-request-ext</span>
 
@@ -9276,7 +9044,7 @@ The HTTP request extension specifies a default extension for capturing network t
 ]
 ```
 
-### 6.13.3 ICMP Extension <a id="icmp-extension"></a>
+### 6.12.3 ICMP Extension <a id="icmp-extension"></a>
 
 **Type Name:** <span class="stixtype">icmp-ext</span>
 
@@ -9339,7 +9107,7 @@ The ICMP extension specifies a default extension for capturing network traffic p
 ]
 ```
 
-### 6.13.4 Network Socket Extension <a id="network-socket-extension"></a>
+### 6.12.4 Network Socket Extension <a id="network-socket-extension"></a>
 
 **Type Name:** <span class="stixtype">socket-ext</span>
 
@@ -9423,7 +9191,7 @@ The Network Socket extension specifies a default extension for capturing network
 ]
 ```
 
-### 6.13.5 TCP Extension <a id="tcp-extension"></a>
+### 6.12.5 TCP Extension <a id="tcp-extension"></a>
 
 **Type Name:** <span class="stixtype">tcp-ext</span>
 
@@ -9489,13 +9257,13 @@ An object using the TCP Extension **MUST** contain at least one property from th
 ]
 ```
 
-## 6.14 Process Object <a id="process-object"></a>
+## 6.13 Process Object <a id="process-object"></a>
 
 **Type Name:** <span class="stixtype">process</span>
 
 The Process object represents common properties of an instance of a computer program as executed on an operating system. A Process object **MUST** contain at least one property (other than **type**) from this object (or one of its extensions).
 
-### 6.14.1 Properties <a id="process-object-properties"></a>
+### 6.13.1 Properties <a id="process-object-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9630,7 +9398,7 @@ The Process object represents common properties of an instance of a computer pro
 ]
 ```
 
-### 6.14.2 Windows™ Process Extension <a id="windows-process-extension"></a>
+### 6.13.2 Windows™ Process Extension <a id="windows-process-extension"></a>
 
 **Type Name:** <span class="stixtype">windows-process-ext</span>
 
@@ -9704,7 +9472,7 @@ An object using the Windows Process Extension **MUST** contain at least one prop
 }
 ```
 
-### 6.14.3 Windows™ Service Extension <a id="windows-service-extension"></a>
+### 6.13.3 Windows™ Service Extension <a id="windows-service-extension"></a>
 
 **Type Name:** <span class="stixtype">windows-service-ext</span>
 
@@ -9797,13 +9565,13 @@ As all properties of this extension are optional, at least one of the properties
 ]
 ```
 
-## 6.15 Software Object <a id="software-object"></a>
+## 6.14 Software Object <a id="software-object"></a>
 
 **Type Name:** <span class="stixtype">software</span>
 
 The Software object represents high-level properties associated with software, including software products.
 
-### 6.15.1 Properties <a id="software-object-properties"></a>
+### 6.14.1 Properties <a id="software-object-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9897,13 +9665,13 @@ The Software object represents high-level properties associated with software, i
 }
 ```
 
-## 6.16 URL Object <a id="url-object"></a>
+## 6.15 URL Object <a id="url-object"></a>
 
 **Type Name:** <span class="stixtype">url</span>
 
 The URL object represents the properties of a uniform resource locator (URL).
 
-### 6.16.1 Properties <a id="url-object-properties"></a>
+### 6.15.1 Properties <a id="url-object-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9969,14 +9737,14 @@ The URL object represents the properties of a uniform resource locator (URL).
 }
 ```
 
-## 6.17 User Account Object <a id="user-account-object"></a>
+## 6.16 User Account Object <a id="user-account-object"></a>
 
 **Type Name:** <span class="stixtype">user-account</span>
 
 The User Account object represents an instance of any type of user account, including but not limited to operating system, device, messaging service, and social media platform accounts.
 As all properties of this object are optional, at least one of the properties defined below **MUST** be included when using this object.
 
-### 6.17.1 Properties <a id="user-account-object-properties"></a>
+### 6.16.1 Properties <a id="user-account-object-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -10136,7 +9904,7 @@ As all properties of this object are optional, at least one of the properties de
 }
 ```
 
-### 6.17.2 UNIX™ Account Extension <a id=unix-account-extension></a>
+### 6.16.2 UNIX™ Account Extension <a id=unix-account-extension></a>
 
 **Type Name:** <span class="stixtype">unix-account-ext</span>
 
@@ -10201,13 +9969,13 @@ An object using the UNIX Account Extension **MUST** contain at least one propert
 }
 ```
 
-## 6.18 Windows™ Registry Key Object <a id="windows-registry-key-object"></a>
+## 6.17 Windows™ Registry Key Object <a id="windows-registry-key-object"></a>
 
 **Type Name:** <span class="stixtype">windows-registry-key</span>
 
 The Registry Key object represents the properties of a Windows registry key. As all properties of this object are optional, at least one of the properties defined below **MUST** be included when using this object.
 
-### 6.18.1 Properties <a id="windows-registry-key-object-properties"></a>
+### 6.17.1 Properties <a id="windows-registry-key-object-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -10280,7 +10048,7 @@ The Registry Key object represents the properties of a Windows registry key. As 
   </tr>
 </table>
 
-### 6.18.2 Windows™ Registry Value Type <a id="windows-registry-value-type"></a>
+### 6.17.2 Windows™ Registry Value Type <a id="windows-registry-value-type"></a>
 
 **Type Name:** <span class="stixtype">windows-registry-value-type</span>
 
@@ -10347,13 +10115,13 @@ The Windows Registry Value type captures the properties of a Windows Registry Ke
 }
 ```
 
-## 6.19 X.509 Certificate Object <a id="x509-certificate-object"></a>
+## 6.18 X.509 Certificate Object <a id="x509-certificate-object"></a>
 
 **Type Name:** <span class="stixtype">x509-certificate</span>
 
 The X.509 Certificate object represents the properties of an X.509 certificate, as defined by ITU recommendation X.509 [<a href="#x509">X509</a>]. An X.509 Certificate object **MUST** contain at least one object specific property (other than **type**) from this object.
 
-### 6.19.1 Properties <a id="x509-certificate-object-properties"></a>
+### 6.18.1 Properties <a id="x509-certificate-object-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -10466,7 +10234,7 @@ The X.509 Certificate object represents the properties of an X.509 certificate, 
   </tr>
 </table>
 
-### 6.19.2 X.509 v3 Extensions Type <a id="x509-v3-extensions-type"></a>
+### 6.18.2 X.509 v3 Extensions Type <a id="x509-v3-extensions-type"></a>
 
 **Type Name:** <span class="stixtype">x509-v3-extensions-type</span>
 
