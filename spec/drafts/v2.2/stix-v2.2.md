@@ -2532,7 +2532,7 @@ An Event is an activity that has a harmful effect or which will be investigated 
 | **description** (optional) | [string](#string) | A description of event that occurred. |
 | **end_time** (optional) | [timestamp](#timestamp) | The date and time the event was last recorded. If this is not present it is assumed to be unknown. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
 | **end_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **end_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
-| **event_types** (optional) | [list](#list) of type [open-vocab](#open-vocab) | High level types for the event to enable aggregation and summarization. The values of this property **SHOULD** come from the [event-type-ov](#event-type-ov) open vocabulary. |
+| **event_types** (optional) | [list](#list) of type [open-vocab](#open-vocab) | High level types for the event to enable aggregation and summarization. The values of this property **SHOULD** come from the [event-type-ov](#event-type-vocabulary) open vocabulary. |
 | **goal** (optional) | [string](#string) | The assumed goal, objective, desired outcome, or intended effect of this event. Not all events have goals. |
 | **name** (optional) | [string](#string) | A name for the event. |
 | **next_event_refs** (optional) | [list](#list) of type [identifier](#identifier) | The [event](#event) objects to follow. They **MUST** be of type [event](#event). There can be more than one if they take place in parallel. |
@@ -3011,7 +3011,7 @@ Because these extensions are used to specify very different types of impacts, pr
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
 | **loss_type** (required) | [incident-confidentiality-loss-enum](#incident-confidentiality-loss-enum) | The type of loss that occurred with respect to the relevant information. The values of this property **MUST** come from the [incident-confidentiality-loss-enum](#incident-confidentiality-loss-enum) enumeration. |
-| **information_type** (optional) | [open-vocab](#open-vocab) | The type of information that had its confidentiality compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-ov) open vocabulary. This value **MUST** be included if the loss_type is not none. Otherwise, including an entry with loss_type of none and no information_type indicates that no information had its confidentiality impacted by the related incident. |
+| **information_type** (optional) | [open-vocab](#open-vocab) | The type of information that had its confidentiality compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-vocabulary) open vocabulary. This value **MUST** be included if the loss_type is not none. Otherwise, including an entry with loss_type of none and no information_type indicates that no information had its confidentiality impacted by the related incident. |
 | **record_count** (optional) | [integer](#integer) | The number of records of this information type that were compromised. The value of this property **MUST NOT** be negative. |
 | **record_size** (optional) | [integer](#integer) | The amount of data that was compromised in bytes. The value of this property **MUST NOT** be negative. |
 
@@ -3047,7 +3047,7 @@ Because these extensions are used to specify very different types of impacts, pr
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **impact_type** (required) | [open-vocab](#open-vocab) | The type of impact outside of the targeted organization. The value of this property **SHOULD** come from the [external-impact-ov](#external-impact-ov) open vocabulary. |
+| **impact_type** (required) | [open-vocab](#open-vocab) | The type of impact outside of the targeted organization. The value of this property **SHOULD** come from the [external-impact-ov](#external-impact-vocabulary) open vocabulary. |
 
 **Example**
 
@@ -3080,7 +3080,7 @@ Because these extensions are used to specify very different types of impacts, pr
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
 | **alteration** (required) | [integrity-alteration-enum](#integrity-alteration-enum) | The type of alteration affecting integrity of the information. The value of this property **MUST** come from the [integrity-alteration-enum](#integrity-alteration-enum) enumeration. |
-| **information_type** (optional) | [open-vocab](#open-vocab) | The type of information that had its integrity compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-ov) open vocabulary. This value **MUST** be included if the alternation is not none. Otherwise, including an entry that with an alteration of none and no information_type provided indicates that no information had its integrity impacted by the related incident. |
+| **information_type** (optional) | [open-vocab](#open-vocab) | The type of information that had its integrity compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-vocabulary) open vocabulary. This value **MUST** be included if the alternation is not none. Otherwise, including an entry that with an alteration of none and no information_type provided indicates that no information had its integrity impacted by the related incident. |
 | **record_count** (optional) | [integer](#integer) | The number of records of this type that were compromised. The value of this property **MUST NOT** be negative. |
 | **record_size** (optional) | [integer](#integer) | The amount of data that was compromised in bytes. The value of this property **MUST NOT** be negative. |
 
@@ -3116,7 +3116,7 @@ Because these extensions are used to specify very different types of impacts, pr
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **variety** (required) | [open-vocab](#open-vocab) | The variety of this economic impact. The value of this property **SHOULD** come from the [economic-impact-type-ov](#economic-impact-type-ov) open vocabulary. |
+| **variety** (required) | [open-vocab](#open-vocab) | The variety of this economic impact. The value of this property **SHOULD** come from the [economic-impact-type-ov](#economic-impact-type-vocabulary) open vocabulary. |
 | **conversion_rate** (optional) | [number](#number) | The conversion rate between the **currency** and **currency_actual** properties. This **MUST NOT** be included if the **currency_actual** property is not included. This **MUST** be included if the **currency_actual** property is included. This value **MUST** be greater than zero. If this property is provided, the **conversion_time** property must also be provided. |
 | **conversion_time** (optional) | [timestamp](#timestamp) | The timestamp corresponding to the conversion rate from the **currency** property to the **currency_actual** property. This **MUST** be included if a **conversion_rate** property is included. |
 | **currency** (optional) | [string](#string) | The currency used for reporting the **max_amount** and **min_amount** properties values. This **SHOULD** be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency. This **SHOULD** match the currency of the organization or the government producing the report. This value **MUST** be included if the **min_amount** property is included. |
@@ -3158,7 +3158,7 @@ Because these extensions are used to specify very different types of impacts, pr
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
 | **impact_type** (required) | [physical-impact-enum](#physical-impact-enum) | The type of physical impact that has occurred. The value of this property **MUST** come from the [physical-impact-enum](#physical-impact-enum) enumeration. |
-| **asset_type** (optional) | [open-vocab](#open-vocab) | The type of property or system that was affected by this impact. The value of this property **SHOULD** come from the [asset-type-ov](#asset-type-ov) open vocabulary. This value **MUST** be included if the **impact_type** is not none . Otherwise, including an entry with an **impact_type** of none and no asset_type indicates that no physical damage was caused by the related incident. |
+| **asset_type** (optional) | [open-vocab](#open-vocab) | The type of property or system that was affected by this impact. The value of this property **SHOULD** come from the [asset-type-ov](#asset-type-vocabulary) open vocabulary. This value **MUST** be included if the **impact_type** is not none . Otherwise, including an entry with an **impact_type** of none and no asset_type indicates that no physical damage was caused by the related incident. |
 
 **Example**
 
@@ -5600,7 +5600,7 @@ A Task is an activity that is performed by or for the victim/defender to respond
 | **type** (required) | [string](#string) | The value of this property **MUST** be set to task. |
 | **affected_entity_counts** (optional) | [entity-count](#entity-count) | A list of affected entity types, along with the number of each type affected. This property is used primarily to capture victim notification information. |
 | **changed_objects** (optional) | [list](#list) of type [state-change](#state-change) | A list of changes that this task has caused. This is typically used to indicate how a task has affected impacts. |
-| **task_types** (optional) | [list](#list) of type [open-vocabulary](#open-vocabulary) | A list of high level types for the task in order to enable aggregation and summaries. The values of this property **SHOULD** come from the [task-type-ov](#task-type-ov) open vocabulary. |
+| **task_types** (optional) | [list](#list) of type [open-vocabulary](#open-vocabulary) | A list of high level types for the task in order to enable aggregation and summaries. The values of this property **SHOULD** come from the [task-type-ov](#task-type-vocabulary) open vocabulary. |
 | **description** (optional) | [string](#string) | A description of the task. |
 | **due_date** (optional) | [timestamp](#list) | The date and time the task is/was due to be completed. The value of due_date **MAY** be unrelated to the values of **start_time** and **end_time**, i.e., there is no requirement that a **due_date** be between those values. |
 | **end_time** (optional) | [timestamp](#list) | The date and time the task was last recorded. If this is not present it is assumed to be unknown. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
@@ -12132,8 +12132,35 @@ An open vocabulary of User Account types.
   </tr>
 </table>
 
-## 10.2 Attack Motivation Vocabulary <a id='attack-motivation-vocabulary'></a>
+## 10.2 Asset Type Vocabulary <a id='asset-type-vocabulary'></a>
 
+**Type Name:** <span class="stixtype">asset-type-ov</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| building-doors | Doors within buildings or structures. |
+| building-windows | The exterior or interior windows of buildings or structures. |
+| buildings | Entire buildings or structures. |
+| computers-mobile | Mobile devices such as smartphones. |
+| computers-personal | Workstations or laptops owned by an organization. |
+| computers-server | Servers owned by an organization. |
+| environment | Land, environment or the ability of either to support humans or wildlife. |
+| ics-actuator | Actuator for industrial control systems. |
+| ics-engineering-workstation | Engineering workstation for industrial control systems. |
+| ics-historian | Historian for industrial control systems. |
+| ics-hmi | Human machine interfaces for industrial control systems. |
+| ics-other | Other Industrial control systems. |
+| ics-plc | Programmable logic controller for industrial control systems. |
+| ics-safety-system | Safety system for industrial control systems. |
+| ics-sensor | Sensor for industrial control systems. |
+| inventory | Stocks of goods to be sold or consumed. |
+| network-device | Switches, routers, and wireless communication towers. |
+| private-infrastructure | Privately owned infrastructure such as roads, plumbing, railways, pipelines and electrical infrastructure. |
+| public-infrastructure | Publicly owned infrastructure such as roads, plumbing, railways, pipelines and electrical infrastructure. |
+| security-containers | Safes or other security containers. |
+| vehicles | Vehicles of various types including cars, trains, and planes. |
+
+## 10.3 Attack Motivation Vocabulary <a id='attack-motivation-vocabulary'></a>
 **Vocabulary Name:** <span class="stixtype">attack-motivation-ov</span>
 
 The attack motivation vocabulary is currently used in the following SDOs:
@@ -12200,7 +12227,7 @@ Motivation shapes the intensity and the persistence of an attack. Threat Actors 
   </tr>
 </table>
 
-## 10.3 Attack Resource Level Vocabulary <a id="attack-resource-level-vocabulary"></a>
+## 10.4 Attack Resource Level Vocabulary <a id="attack-resource-level-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">attack-resource-level-ov</span>
 
@@ -12249,7 +12276,39 @@ Attack Resource Level is an open vocabulary that captures the general level of r
   </tr>
 </table>
 
-## 10.4 Encryption Algorithm Enumeration <a id="encryption-algorithm-enumeration"></a>
+## 10.5 Detection Method Vocabulary <a id='detection-method-vocabulary'></a>
+
+**Type Name:** <span class="stixtype">detection-methods-ov</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| automated-tool | An incident is detected by an automated tool. If this option is used it is generally useful to also include a separate entry for the tool itself. |
+| commercial-solution | A commercial tool or provider detected this incident. This can be combined with other methods including automated-tool to allow greater fidelity. |
+| external-notification | An external entity detected this incident and notified the impacted organization. |
+| human-review | An incident is detected by human threat hunting. |
+| message-from-attacker | Notification comes from a message provided by the attacker including email, a note left of a message or popup message. |
+| proprietary-solution | An internally developed tool or process detected this incident. This can be combined with other methods including automated-tool to allow greater fidelity. |
+| system-outage | An incident is detected because a system is no longer available. |
+| user-reporting | One or more users report an incident. |
+
+## 10.6 Economic Impact Type Vocabulary <a id='economic-impact-type-vocabulary'></a>
+
+**Type Name:** <span class="stixtype">economic-impact-type-ov</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| asset-and-fraud | Losses incurred due to loss of assets or fraud. |
+| brand-damage | Losses incurred due to reputational or brand damage. |
+| business-disruption | Losses incurred due to business disruptions. |
+| competitive-advantage | Losses incurred due to theft of intellectual property, techniques or other capabilities that grant an advantage in the field. |
+| legal-and-regulatory | Losses incurred due to legal or regulatory actions in response to the incident. |
+| operating-costs | Losses incurred due to additional operating costs that have been incurred due to the incident. |
+| ransom-demand | The demanded amount of ransom to be paid. When this is selected the demand amount should be listed as the **max_amount** and the **min_amount** should be 0. |
+| ransom-payment | An actual payment of a ransom. |
+| response-and-recovery | Losses incurred due to response and recovery efforts for the incident. |
+| uncategorized | Losses incurred that have not been categorized yet. |
+
+## 10.7 Encryption Algorithm Enumeration <a id="encryption-algorithm-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">encryption-algorithm-enum</span>
 
@@ -12286,7 +12345,36 @@ An enumeration of encryption algorithms for sharing defanged and/or confidential
   </tr>
 </table>
 
-## 10.5 Extension Type Enumeration <a id="extension-type-enumeration"></a>
+## 10.8 Entity Type Vocabulary <a id="entity-type-vocabulary"></a>
+
+**Type Name:** entity-type-ov
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| computers-mobile | Mobile devices such as smartphones. |
+| computers-personal | Workstations or laptops owned by an organization. |
+| computers-server | Servers owned by an organization. |
+| customer | An customer or client. This can be an individual or organization. |
+| customer-individual | An customer or client that represents an individual. |
+| customer-organization | An customer or client that represents a business or other organization. |
+| domain-controller | A windows domain controller. |
+| employee | An employee of an organization. |
+| group | An informal collection of people, without formal governance, such as a distributed hacker group. |
+| ics-actuator | Actuator for industrial control systems. |
+| ics-engineering-workstation | Engineering workstation for industrial control systems. |
+| ics-historian | Historian for industrial control systems. |
+| ics-hmi | Human machine interfaces for industrial control systems. |
+| ics-other | Other Industrial control systems. |
+| ics-plc | Programmable logic controller for industrial control systems. |
+| ics-safety-system | Safety system for industrial control systems. |
+| ics-sensor | Sensor for industrial control systems. |
+| individual | A single person. |
+| network-device | Switches, routers, and wireless communication towers. |
+| organization | A formal organization of people, with governance, such as a company or country. |
+| system | A computer system, such as a SIEM. |
+| vehicles | Vehicles of various types including cars, trains, and planes. |
+
+## 10.11 Extension Type Enumeration <a id="extension-type-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">extension-type-enum</span>
 
@@ -12328,7 +12416,21 @@ The Extensions Type enumeration is used in the Extension meta-object.
   </tr>
 </table>
 
-## 10.6 Grouping Context Vocabulary <a id="grouping-context-vocabulary"></a>
+## 10.12 External Impact Vocabulary <a id='external-impact-vocabulary'></a>
+
+**Type Name:** <span class="stixtype">external-impact-ov</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| economic | This incident is expected to have national or international economic impacts. |
+| emergency-services | This incident impacts emergency services. |
+| foreign-relations | This incident impacts international politics. |
+| national-security | This incident impacts the national security of one or more nations. |
+| public-confidence | This incident impacts the confidence in public or private institutions. |
+| public-health | This incident impacts the public health of one or more nations. |
+| public-safety | This incident impacts the public safety of individuals in one or more nations. |
+
+## 10.13 Grouping Context Vocabulary <a id="grouping-context-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">grouping-context-ov</span>
 
@@ -12365,7 +12467,7 @@ While the majority of this vocabulary is undefined (producers may use custom voc
   </tr>
 </table>
 
-## 10.7 Hashing Algorithm Vocabulary <a id="hashing-algorithm-vocabulary"></a>
+## 10.14 Hashing Algorithm Vocabulary <a id="hashing-algorithm-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">hash-algorithm-ov</span>
 
@@ -12429,7 +12531,7 @@ A vocabulary of hashing algorithms.
   </tr>
 </table>
 
-## 10.8 Identity Class Vocabulary <a id="identity-class-vocabulary"></a>
+## 10.15 Identity Class Vocabulary <a id="identity-class-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">identity-class-ov</span>
 
@@ -12478,7 +12580,136 @@ This vocabulary describes the type of entity that the Identity represents: wheth
   </tr>
 </table>
 
-## 10.9. Implementation Language Vocabulary <a id="implementation-language-vocabulary"></a>
+## 10.9 Event Status Enumeration <a id="event-status-enumeration"></a>
+
+**Type Name:** event-status-enum
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| ongoing | The event is still occurring. |
+| occurred | The event took place and is no longer ongoing. |
+| not-occurred | The event did not take place, but it was previously expected to. |
+| pending | The event has not yet been started or observed, but it is projected or otherwise planned. Pending activity may never occur as various factors can cause it to be blocked or not attempted. As such any time or sequence values for pending activities should be treated as an estimation or projection that is subject to change. |
+| undetermined | The status of the event has not been determined or is not shareable. |
+
+## 10.17 Incident Confidentiality Loss Enumeration <a id="incident-confidentiality-loss-enumeration"></a>
+
+**Type Name:** incident-confidentiality-loss-enum
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| confirmed-loss | Information has been exfiltrated and is now available to the attacker, but it is unknown if it has been misused. |
+| contained | Information’s confidentiality was compromised, but the spill was within an environment that allowed it to be effectively contained. For example: a sensitive data spill occurred within a controlled network allowing it to be resolved before information exited the organization. |
+| exploited-loss | Information has been exfiltrated and has been actively misused by the attacker. |
+| none | This information type was not compromised based on the investigation that was performed. This option should be used to affirmatively supply this information when necessary. |
+| suspected-loss | It is suspected but not confirmed that the attacker may have gained access to this information. |
+| unknown | It is unknown if the attacker may have gained access to this information. |
+
+## 10.10 Event Type Vocabulary <a id="event-type-vocabulary"></a>
+
+This vocabulary draws for numerous sources including heavily from MISP taxonomies.
+
+These include:
+
+1. [FIRST DNS Abuse Techniques Matrix](https://www.misp-project.org/galaxy.html#_first_dns_abuse_techniques_matrix)
+2. [Europol type of events taxonomy](https://www.misp-project.org/taxonomies.html#_europol_event).
+3. [Europol type of incidents taxonomy](https://www.misp-project.org/taxonomies.html#_europol_incident)
+4. NIST 800-61 Rev. 2
+
+**Type Name:** event-type-ov
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| aggregation-information-phishing-schemes | Collecting data obtained through phishing attacks on web pages, email accounts, etc…​ |
+| benign | The event was neither dangerous nor malicious and was not suspected to be malicious or dangerous. |
+| blocked | The event was suspected to be malicious and was blocked. |
+| brute-force-attempt | Unsuccessful login attempt by using sequential credentials for gaining access to the system. |
+| c&c-server-hosting | Web page disseminating one or various types of malware. |
+| compromised-system | Attackers obtained control of a compromised system. |
+| confirmed | The event was confirmed to be tied to an incident and response is underway. |
+| connection-malware-port | System attempting to gain access to a port normally linked to a specific type of malware. |
+| connection-malware-system | System attempting to gain access to an IP address or URL normally linked to a specific type of malware, e.g. C&C or a distribution page for components linked to a specific botnet. |
+| content-forbidden-by-law | Distribution or sharing of illegal content such as child pornography, racism, xenophobia, etc…​ |
+| control-system-bypass | Unauthorized access to a system or component by bypassing an access control system in place. |
+| copyrighted-content | Distribution or sharing of content protected by copyright and related rights. |
+| data-exfiltration | Unauthorized access to and sharing of a specific set of information. |
+| deferred | The event is deferred due to resource constraints, information types or external reasons. |
+| deletion-information | Unauthorized deleting of a specific set of information. |
+| denial-of-service | The event or incident resulted in a loss of availability for a service or system. Incidents of this type **SHOULD** have an availability impact, but organizations may choose to not share the details of these impacts. |
+| destruction | The event or incident destroyed data or systems. Incidents of this **SHOULD** have an integrity impact, but organizations may choose to not share the details of these impacts. |
+| dictionary-attack-attempt | Unsuccessful login attempt by using system access credentials previously loaded into a dictionary. |
+| discarded | The event was discarded due to resource constraints, information types or external reasons. |
+| disruption-data-transmission | Logical and physical activities aimed at causing damage to information or at preventing its transmission among systems. |
+| dissemination-malware-email | Malware attached to a message or email message containing link to malicious URL. |
+| dissemination-phishing-emails | Mass emailing aimed at collecting data for phishing purposes with regard to the victims. |
+| dns-cache-poisoning | DNS cache poisoning - also known as DNS spoofing, is a type of cyber attack in which an attacker corrupts a DNS resolver’s cache by injecting false DNS records, causing the resolver to records controlled by the attacker. |
+| dns-local-resolver-hijacking | Consumer Premise Equipment (CPE), such as home routers, often provide DNS recursion on the local network. If the CPE device is compromised, the attacker can change the recursive resolver behavior; for example, by changing responses. |
+| dns-spoofing-registered | In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is in fact controlled by or registered to a legitimate registrant. |
+| dns-rebinding | DNS rebinding - a type of attack where a malicious website directs a client to a local network address, allowing the attacker to bypass the same-origin policy and gain access to the victim’s local resources. |
+| dns-server-compromise | Attacker gains administrative privileges on an open recursive DNS server, authoritative DNS server, organizational recursive DNS server, or ISP-operated recursive DNS server. |
+| dns-spoofing-unregistered | In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is not controlled by or registered to a legitimate registrant. |
+| dns-stub-resolver-hijacking | The attacker compromises the Operating System of a computer or a phone with malicious code that intercepts and responds to DNS queries with rogue or malicious responses. |
+| dns-zone-transfer | Transfer of a specific DNS zone. |
+| domain-name-compromise | The wrongfully taking control of a domain name from the rightful name holder. Compromised domains can be used for different kinds of malicious activity like sending spam or phishing, for distributing malware or as botnet command and control. |
+| duplicate | This event is a duplicate of another event. A relationship should be created between this event and the event it duplicates. |
+| email-flooding | Sending an unusually large quantity of email messages. |
+| equipment-loss | A loss of control of physical equipment that is not known to be theft. |
+| equipment-theft | Theft of equipment. In general this should be paired with equipment-loss. |
+| exploit | Successful use of a tool exploiting a specific vulnerability of the system. |
+| exploit-attempt | Unsuccessful use of a tool exploiting a specific vulnerability of the system. |
+| exploit-framework-exhausting-resources | Various sources using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability. |
+| exploit-tool-exhausting-resources | One single source using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability. |
+| failed | The event failed its suspected goal. |
+| file-inclusion | Inclusion of files into a system under attack with the use of file inclusion techniques. |
+| file-inclusion-attempt | Unsuccessful attempt to include files in the system under attack by using file inclusion techniques. |
+| hosting-malware-webpage | Web page disseminating one or various types of malware. |
+| hosting-phishing-sites | Hosting web sites for phishing purposes. |
+| illegitimate-use-name | Using the name of an institution without permission to do so. |
+| illegitimate-use-resources | Use of institutional resources for purposes other than those intended. |
+| infected-by-known-malware | The presence of any of the types of malware was detected in a system. |
+| insufficient-data | Not enough data is available to assess this event. |
+| known-malware | This incident involves a known type of malware. Events and incidents **SHOULD** be related to a Malware object, but organizations may choose not to share the details on this malware. |
+| lame-delegations | Lame delegations occur as a result of expired name server domains allowing attackers to take control of the domain resolution by re-registering this expired name server domain. |
+| major | The incident is classified as major based on the internal criteria within the organization or due to external reporting requirements. |
+| modification-information | Unauthorized changes to a specific set of information. |
+| misconfiguration | A false positive where this event was triggered by a misconfiguration. |
+| natural | The event was due to natural causes such as an earthquake or hurricane. |
+| negotiation | Negotiation of a deal or payment amount. |
+| network-scanning | Scanning a network aimed at identifying systems which are active in the same network. |
+| no-apt | It is not believed that this incident involved an advanced persistent threat. |
+| packet-flood | Mass mailing of requests (network packets, emails, etc…​) from various sources to a specific service, aimed at affecting its normal functioning. |
+| password-cracking-attempt | Attempt to acquire access credentials by breaking the protective cryptographic keys. |
+| policy-violation | The event or incident was a violation of organizational or regulatory policy. |
+| ransomware | This incident involved malware that encrypted data with a demand that a ransom is paid to regain access to it. |
+| ransomware-payment | The event or incident associated with actually paying a ransom. |
+| refuted | The event was previously suspected to have achieved a goal, but this has since been refuted. |
+| scan-probe | Event was triggered based on scanning activity |
+| silently-discarded | The event was silently discarded due to resource constraints, information types or external reasons. |
+| supply-chain-customer | This incident used a vendor further up in the supply chain where the target was a customer. |
+| supply-chain-vendor | This incident targeted a system or product that is supplied to others to enable further attacks. |
+| spam | Sending an email message that was unsolicited or unwanted by the recipient. |
+| sql-injection | Manipulation or reading of information contained in a database by using the SQL injection technique. |
+| sql-injection-attempt | Unsuccessful attempt to manipulate or read the information of a database by using the SQL injection technique. |
+| successful | The event is believed to have succeeded in its goal. |
+| system-probe | Single system scan searching for open ports or services using these ports for responding. |
+| theft-access-credentials | Unauthorized access to a system or component by using stolen access credentials. |
+| unattributed | This event or incident has not been attributed. It is unclear if it is tied to a specific advanced persistent threat group. |
+| unauthorized-access-information | Unauthorized access to a set of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts. |
+| unauthorized-access-system | Unauthorized access to a system or component. |
+| unauthorized-equipment | Usage of unauthorized devices as part of the incident |
+| unauthorized-release | The unauthorized release of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts. |
+| unauthorized-use | The usage of information that falls outside of official purposes |
+| undetermined | Field aimed at the classification of unprocessed events, which have remained undetermined from the beginning. |
+| unintentional | The event was due to unintentional activity. |
+| unknown-apt | This incident is believed to involve an advanced persistent threat, but the specific APT is unknown. |
+| unspecified | Other unlisted events. |
+| vandalism | Logical and physical activities which - although they are not aimed at causing damage to information or at preventing its transmission among systems - have this effect. |
+| wiretapping | Logical or physical interception of communications. |
+| worm-spreading | System infected by a worm trying to infect other systems. |
+| xss | Attacks performed with the use of cross-site scripting techniques. |
+| xss-attempt | Unsuccessful attempts to perform attacks by using cross-site scripting techniques. |
+
+## 10.16 Implementation Language Vocabulary <a id="implementation-language-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">implementation-language-ov</span>
 
@@ -12591,7 +12822,29 @@ This is a non-exhaustive, open vocabulary that covers common programming languag
   </tr>
 </table>
 
-## 10.10 Indicator Type Vocabulary <a id="indicator-type-vocabulary"></a>
+## 10.18 Incident Determination Enumeration <a id='incident-determination-enumeration'></a>
+
+**Type Name:** <span class="stixtype">incident-determination-enum</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| blocked | The incident had no or minimal impact due to pre-emptive measures including rate limiting or spam filters. |
+| confirmed | An incident has been determined to have caused at least some harm or violated a policy. |
+| failed-attempt | The incident had no or minimal impact but not due to any affirmative defense for example a password guesser failed but was also not rate limited. |
+| false-positive | An incident was determined to have been triggered by a false alert and no action including automatically performed automated actions were needed to remediate the issue. This should not be used when an incident was flagged correctly, but is of no importance. For findings of that nature low-value should be used. |
+| suspected | An incident is suspected, but not yet confirmed. |
+
+## 10.19 Incident Investigation Open Vocabulary <a id='incident-investigation-vocabulary'></a>
+
+**Type Name:** <span class="stixtype">incident-investigation-ov</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| closed | All victim/defender work on this incident has been concluded. Blue teams may use a closed incident as a starting point for their work, by creating child Incidents of the closed Incident. In these cases, it is appropriate to mark an initial Incident as closed if the related child incidents that track this work are still open. |
+| new | A new incident which the victim/defender has not begun formal work on. |
+| open | Victim/Defender work is in underway for this Incident. |
+
+## 10.20 Indicator Type Vocabulary <a id="indicator-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">indicator-type-ov</span>
 
@@ -12644,7 +12897,25 @@ Indicator type is an open vocabulary used to categorize Indicators. It is intend
   </tr>
 </table>
 
-## 10.11 Industry Sector Vocabulary <a id="industry-sector-vocabulary"></a>
+## 10.21 Information Type Vocabulary <a id='information-type-vocabulary'></a><a id='information-type-ov'></a>
+
+**Type Name:** <span class="stixtype">information-type-ov</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| classified-material | Data classified based on relevant government authorities. |
+| communication | Communication records including emails, chats and instant messages. |
+| credentials-admin | Administrative credential data. |
+| credentials-user | User credential data. |
+| financial | Financial records including purchasing activity and planned activities. |
+| legal | Legal records that are not yet public including contracts under negotiation and documents protected under legal privilege. |
+| payment | Payment information. |
+| phi | Protected Health Information. |
+| pii | Personally Identifiable Information. |
+| proprietary | Proprietary information e.g., intellectual property. |
+| system | Information necessary to keep a system operational. The destruction or encryption of this data can cause availability impacts. |
+
+## 10.22 Industry Sector Vocabulary <a id="industry-sector-vocabulary"></a><a id='industry-sector-ov'></a>
 
 **Vocabulary Name:** <span class="stixtype">industry-sector-ov</span>
 
@@ -12809,7 +13080,7 @@ Industry sector is an open vocabulary that describes industrial and commercial s
   </tr>
 </table>
 
-## 10.12 Infrastructure Type Vocabulary <a id="infrastructure-type-vocabulary"></a>
+## 10.24 Infrastructure Type Vocabulary <a id="infrastructure-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">infrastructure-type-ov</span>
 
@@ -12894,7 +13165,7 @@ A non-exhaustive enumeration of infrastructure types.
   </tr>
 </table>
 
-## 10.13 Malware Capabilities Vocabulary <a id="malware-capabilities-vocabulary"></a>
+## 10.25 Malware Capabilities Vocabulary <a id="malware-capabilities-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">malware-capabilities-ov</span>
 
@@ -13072,7 +13343,7 @@ This is an open vocabulary that covers common capabilities that may be exhibited
   </tr>
 </table>
 
-## 10.14 Malware Result Vocabulary <a id="malware-result-vocabulary"></a>
+## 10.26 Malware Result Vocabulary <a id="malware-result-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">malware-result-ov</span>
 
@@ -13113,7 +13384,7 @@ This is a non-exhaustive, open vocabulary that captures common types of scanner 
   </tr>
 </table>
 
-## 10.15 Malware Type Vocabulary <a id="malware-type-vocabulary"></a>
+## 10.27 Malware Type Vocabulary <a id="malware-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">malware-type-ov</span>
 
@@ -13226,7 +13497,7 @@ Malware type is an open vocabulary that represents different types and functions
   </tr>
 </table>
 
-## 10.16 Network Socket Address Family Enumeration <a id=network-socket-address-family-enumeration></a>
+## 10.28 Network Socket Address Family Enumeration <a id=network-socket-address-family-enumeration></a>
 
 **Enumeration Name:** <span class="stixtype">network-socket-address-family-enum</span>
 
@@ -13283,7 +13554,7 @@ An enumeration of network socket address family types.
   </tr>
 </table>
 
-## 10.17 Network Socket Type Enumeration <a id="network-socket-type-enumeration"></a>
+## 10.29 Network Socket Type Enumeration <a id="network-socket-type-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">network-socket-type-enum</span>
 
@@ -13328,7 +13599,7 @@ An enumeration of network socket types.
   </tr>
 </table>
 
-## 10.18 Opinion Enumeration <a id="opinion-enumeration"></a>
+## 10.30 Opinion Enumeration <a id="opinion-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">opinion-enum</span>
 
@@ -13373,7 +13644,19 @@ This enumeration captures a degree of agreement with the information in a STIX O
   </tr>
 </table>
 
-## 10.19 Pattern Type Vocabulary <a id="pattern-type-vocabulary"></a>
+## 10.31 Physical Impact Enumeration <a id='physical-impact-enumeration'></a><a id='physical-impact-enum'></a>
+
+**Type Name:** <span class="stixtype">physical-impact-enum</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| damaged-functional | The property, asset or system was damaged but still remains functional and repair may be possible. |
+| damaged-nonfunctional | The property, asset or system was damaged and does not remain functional, but repair may be possible. |
+| destruction | The property, asset or system was destroyed, cannot be repaired and no longer functions. In some cases destroyed assets can be rebuilt, but doing so involves a similar amount of effort as the original construction. |
+| none | No damage or destruction has occurred. |
+| unknown | The degree of damage has not been determined yet. |
+
+## 10.32 Pattern Type Vocabulary <a id="pattern-type-vocabulary"></a><a id='pattern-type-ov'></a>
 
 **Vocabulary Name:** <span class="stixtype">pattern-type-ov</span>
 
@@ -13422,7 +13705,7 @@ This is a non-exhaustive, open vocabulary that covers common pattern languages a
   </tr>
 </table>
 
-## 10.20. Processor Architecture Vocabulary <a id="processor-architecture-vocabulary"></a>
+## 10.33 Processor Architecture Vocabulary <a id="processor-architecture-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">processor-architecture-ov</span>
 
@@ -13479,7 +13762,19 @@ This is a non-exhaustive, open vocabulary that covers common processor architect
   </tr>
 </table>
 
-## 10.21. Region Vocabulary <a id="region-vocabulary"></a>
+## 10.34 Recoverability Enumeration <a id='recoverability-enumeration'></a><a id='recoverability-enum'></a>
+
+**Type Name:** <span class="stixtype">recoverability-enum</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| extended | Time to recovery is unpredictable; additional resources and outside help are necessary. |
+| not-applicable | No recovery is necessary. |
+| not-recoverable | Recovery from the incident is not possible. |
+| regular | Time to recovery is predictable with existing resources. |
+| supplemented | Time to recovery is predictable with additional resources. |
+
+## 10.35 Region Vocabulary <a id="region-vocabulary"></a><a id='region-ov'></a>
 
 **Vocabulary Name:** <span class="stixtype">region-ov</span>
 
@@ -13620,7 +13915,7 @@ A list of world regions based on the United Nations geoscheme [UNSD M49].
   </tr>
 </table>
 
-## 10.22. Report Type Vocabulary <a id="report-type-vocabulary"></a>
+## 10.36 Report Type Vocabulary <a id="report-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">report-type-ov</span>
 
@@ -13693,7 +13988,61 @@ Report type is an open vocabulary to describe the primary purpose or subject of 
   </tr>
 </table>
 
-## 10.23. Threat Actor Type Vocabulary <a id="threat-actor-type-vocabulary"></a>
+## 10.37 State Change Type Vocabulary <a id='state-change-type-vocabulary'></a>
+
+**Type Name:** <span class="stixtype">state-change-type-ov</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| caused | This task or event is the primary cause of the resulting object. |
+| contributed-to | This task or event is a contributing factor to the result occurring. |
+| input | This task or event took in a group as an input for automated or playbook activities. If this is selected the **initial_ref** property **MUST** be populated. |
+| mitigated | This task or event lessened the severity of the initial object. |
+| output | This task or event produced a group as an output as part of automated or playbook activities. If this is selected the **result_ref** property **MUST** be populated.. |
+| resolved | This task or event resolved the initial object. |
+
+## 10.38 Task Outcome Enumeration <a id='task-outcome-enumeration'></a>
+
+**Type Name:** <span class="stixtype">task-outcome-enum</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| cancelled | The task was planned or started, but later cancelled or discarded. |
+| failed | The task has been completed, but failed. |
+| ongoing | The task is still taking place. |
+| pending | The task has not yet been started, but is currently planned. |
+| successful | The task was completed successfully. |
+| unknown | The status of this task is currently unknown. |
+
+## 10.39 Task Type Vocabulary <a id='task-type-vocabulary'></a><a id='task-type-ov'></a>
+
+**Type Name:** <span class="stixtype">task-type-ov</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| administrative | Perform an administrative action such as the introduction or change of a policy. |
+| attribution | Perform an administrative action such as the introduction or change of a policy. |
+| containment | The containment phase of incident response |
+| declared | When this was officially declared an incident. |
+| detected | When the incident was detected. |
+| eradication | The eradication phase of incident response. |
+| escalated | When the incident was escalated to a major incident. |
+| exercised-control | Attempted to use a security control that was already in place within the environment. |
+| external-intelligence | Used external intelligence information. |
+| external-outreach | Reaching out to an external organization to gain support or information. |
+| external-support | Acquire support from an external organization. |
+| implemented-control | Implemented a security control within the environment. |
+| investigation | Performed an investigation into an event or incident. |
+| negotiation | Negotiation of a deal or payment amount. |
+| playbook-execution | Executing an automated playbook. If the playbook is stored outside of STIX it should be included as an [external-reference](https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_72bcfr3t79jx). |
+| playbook-step-execution | Executing a step in an automated playbook. If the playbook is stored outside of STIX both the playbook and step stored in separate [external-reference](https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_72bcfr3t79jx) objects. If playbook steps feed each other information that is designed to be passed as STIX it **SHOULD** be referenced as a [grouping](https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_t56pn7elv6u7) as either the **initial_ref** or **result_ref** of a [state-change](#state-change). |
+| ransom-payment | An actual payment of a ransom. |
+| recovery | The recovery phase of incident response. |
+| reported | When the incident was reported externally. |
+| routine-updates | Performed a routine update in the environment including patching. |
+| victim-notification | Notified victims, potentially impacted individuals or organizations about the incident. |
+
+## 10.40 Threat Actor Type Vocabulary <a id="threat-actor-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">threat-actor-type-ov</span>
 
@@ -13770,7 +14119,7 @@ Threat actor type is an open vocabulary used to describe what type of threat act
   </tr>
 </table>
 
-## 10.24. Threat Actor Role Vocabulary <a id="threat-actor-role-vocabulary"></a>
+## 10.41 Threat Actor Role Vocabulary <a id="threat-actor-role-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">threat-actor-role-ov</span>
 
@@ -13824,7 +14173,7 @@ Threat actor roles are not mutually exclusive. For example, an actor can be both
   </tr>
 </table>
 
-## 10.25. Threat Actor Sophistication Vocabulary <a id="threat-actor-sophistication-vocabulary"></a>
+## 10.42 Threat Actor Sophistication Vocabulary <a id="threat-actor-sophistication-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">threat-actor-sophistication-ov</span>
 
@@ -13877,7 +14226,20 @@ Threat actor sophistication vocabulary captures the skill level of a threat acto
   </tr>
 </table>
 
-## 10.26. Tool Type Vocabulary <a id="tool-type-vocabulary"></a>
+## 10.43 Timestamp Fidelity Enumeration <a id='timestamp-fidelity-enumeration'></a>
+
+**Type Name:** <span class="stixtype">timestamp-fidelity-enum</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| day | The associated timestamp should be considered to represent a time within the one day period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for this activity. |
+| hour | The associated timestamp should be considered to represent a time within the one hour period starting with the provided timestamp. |
+| minute | The associated timestamp should be considered to represent a time within the one minute period starting with the provided timestamp. |
+| month | The associated timestamp should be considered to represent a time within the one month period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for the activity. The day should always be listed as the first or the last day of the previous month if in a timezone that is offset before UTC. |
+| second | The associated timestamp should be considered to represent a time within the one second period starting with the provided timestamp. |
+| year | The associated timestamp should be considered to represent a time within the one year period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for the activity. |
+
+## 10.44 Tool Type Vocabulary <a id="tool-type-vocabulary"></a><a id='tool-type-ov'></a>
 
 **Vocabulary Name:** <span class="stixtype">tool-type-ov</span>
 
@@ -13934,7 +14296,18 @@ Tool types describe the categories of tools that can be used to perform attacks.
   </tr>
 </table>
 
-## 10.27. Windows™ Integrity Level Enumeration <a id="windows-integrity-level-enumeration"></a>
+## 10.45 Traceability Enumeration <a id='traceability-enumeration'></a>
+
+**Type Name:** <span class="stixtype">traceability-enum</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| accountability-lost | Traces used to retrieve accountability are lost or do not exist. |
+| partial-accountability | Traces are present, but insufficient to have provable accountability. |
+| provable-accountability | Accountability can be ensured from the traces that are present. |
+| unknown-accountability | Accountability is unknown. |
+
+## 10.46 Windows™ Integrity Level Enumeration <a id="windows-integrity-level-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">windows-integrity-level-enum</span>
 
@@ -13975,7 +14348,7 @@ Windows integrity levels are a security feature and represent the trustworthines
   </tr>
 </table>
 
-## 10.28. Windows™ PE Binary Vocabulary <a id="windows-pe-binary-vocabulary"></a>
+## 10.47 Windows™ PE Binary Vocabulary <a id="windows-pe-binary-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">windows-pebinary-type-ov</span>
 
@@ -14012,7 +14385,7 @@ An open vocabulary of Windows PE binary types.
   </tr>
 </table>
 
-## 10.29. Windows™ Registry Datatype Enumeration <a id="windows-registry-datatype-enumeration"></a>
+## 10.48 Windows™ Registry Datatype Enumeration <a id="windows-registry-datatype-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">windows-registry-datatype-enum</span>
 
@@ -14093,7 +14466,7 @@ An enumeration of Windows registry data types.
   </tr>
 </table>
 
-## 10.30. Windows™ Service Start Type Enumeration <a id="windows-service-start-type-enumeration"></a>
+## 10.49 Windows™ Service Start Type Enumeration <a id="windows-service-start-type-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">windows-service-start-type-enum</span>
 
@@ -14138,7 +14511,7 @@ An enumeration of Windows service start types.
   </tr>
 </table>
 
-## 10.31. Windows™ Service Type Enumeration <a id="windows-service-type-enumeration"></a>
+## 10.50 Windows™ Service Type Enumeration <a id="windows-service-type-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">windows-service-type-enum</span>
 
@@ -14179,7 +14552,7 @@ An enumeration of Windows service types.
   </tr>
 </table>
 
-## 10.32. Windows™ Service Status Enumeration <a id="windows-service-status-enumeration"></a>
+## 10.51 Windows™ Service Status Enumeration <a id="windows-service-status-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">windows-service-status-enum</span>
 
