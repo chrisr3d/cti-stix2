@@ -38,7 +38,7 @@ Emily Ratliff (<emily.ratliff@ibm.com>), [IBM](http://www.ibm.com/)
 Stephan Relitz (<stephan.relitz@peraton.com>), [Peraton](https://www.peraton.com/)  
 Christian Studer (<christian.studer@circl.lu>), [CIRCL](https://www.circl.lu/)
 
-#### Related work:
+#### Related work: <a id="related-work"></a>
 
 This specification replaces or supersedes:
 
@@ -126,22 +126,27 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
   - 2.1 [Binary](#binary)
   - 2.2 [Boolean](#boolean)
   - 2.3 [Dictionary](#dictionary)
-  - 2.4 [Enum](#enum)
-  - 2.5 [External Reference](#external-reference)
-    - 2.5.1 [Properties](#external-reference-properties)
-    - 2.5.2 [Requirements](#external-reference-requirements)
-  - 2.6 [Float](#float)
-  - 2.7 [Hashes](#hashes)
-  - 2.8 [Hexadecimal](#hexadecimal)
-  - 2.9 [Identifier](#identifier)
-  - 2.10 [Integer](#integer)
-  - 2.11 [Kill Chain Phase](#kill-chain-phase)
-  - 2.12 [List](#list)
-  - 2.13 [Observable Container (deprecated)](#observable-container)
-  - 2.14 [Open Vocabulary](#open-vocabulary)
-  - 2.15 [String](#string)
-  - 2.16 [Timestamp](#timestamp)
-    - 2.16.1 [Requirements](#timestamp-requirements)
+  - 2.4 [Entity Count](#entity-count)
+  - 2.5 [Enum](#enum)
+  - 2.6 [External Reference](#external-reference)
+    - 2.6.1 [Properties](#external-reference-properties)
+    - 2.6.2 [Requirements](#external-reference-requirements)
+  - 2.7 [Float](#float)
+  - 2.8 [Hashes](#hashes)
+  - 2.9 [Hexadecimal](#hexadecimal)
+  - 2.10 [Identifier](#identifier)
+  - 2.11 [Integer](#integer)
+  - 2.12 [Kill Chain Phase](#kill-chain-phase)
+  - 2.13 [List](#list)
+  - 2.14 [Observable Container (deprecated)](#observable-container)
+  - 2.15 [Open Vocabulary](#open-vocabulary)
+  - 2.16 [Score](#score)
+    - 2.16.1 [Properties](#score-properties)
+  - 2.17 [State Change](#state-change)
+    - 2.17.1 [Properties](#state-change-properties)
+  - 2.18 [String](#string)
+  - 2.19 [Timestamp](#timestamp)
+    - 2.19.1 [Requirements](#timestamp-requirements)
 - 3. [STIX General Concepts](#stix-general-concepts)
   - 3.1 [Property Names and String Literals](#property-names-and-string-literals)
   - 3.2 [Common Properties](#common-properties)
@@ -380,10 +385,10 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
   - 10.18 [Incident Determination Enumeration](#incident-determination-enumeration)
   - 10.19 [Incident Investigation Open Vocabulary](#incident-investigation-vocabulary)
   - 10.20 [Indicator Type Vocabulary](#indicator-type-vocabulary)
-  - 10.21 [Integrity Alteration Enumeration](#integrity-alteration-enumeration)
-  - 10.22 [Industry Sector Vocabulary](#industry-sector-vocabulary)
-  - 10.23 [Information Type Vocabulary](#information-type-vocabulary)
-  - 10.24 [Infrastructure Type Vocabulary](#infrastructure-type-vocabulary)
+  - 10.21 [Industry Sector Vocabulary](#industry-sector-vocabulary)
+  - 10.22 [Information Type Vocabulary](#information-type-vocabulary)
+  - 10.23 [Infrastructure Type Vocabulary](#infrastructure-type-vocabulary)
+  - 10.24 [Integrity Alteration Enumeration](#integrity-alteration-enumeration)
   - 10.25 [Malware Capabilities Vocabulary](#malware-capabilities-vocabulary)
   - 10.26 [Malware Result Vocabulary](#malware-result-vocabulary)
   - 10.27 [Malware Type Vocabulary](#malware-type-vocabulary)
@@ -399,9 +404,9 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
   - 10.37 [State Change Type Vocabulary](#state-change-type-vocabulary)
   - 10.38 [Task Outcome Enumeration](#task-outcome-enumeration)
   - 10.39 [Task Type Vocabulary](#task-type-vocabulary)
-  - 10.40 [Threat Actor Type Vocabulary](#threat-actor-type-vocabulary)
-  - 10.41 [Threat Actor Role Vocabulary](#threat-actor-role-vocabulary)
-  - 10.42 [Threat Actor Sophistication Vocabulary](#threat-actor-sophistication-vocabulary)
+  - 10.40 [Threat Actor Role Vocabulary](#threat-actor-role-vocabulary)
+  - 10.41 [Threat Actor Sophistication Vocabulary](#threat-actor-sophistication-vocabulary)
+  - 10.42 [Threat Actor Type Vocabulary](#threat-actor-type-vocabulary)
   - 10.43 [Timestamp Fidelity Enumeration](#timestamp-fidelity-enumeration)
   - 10.44 [Tool Type Vocabulary](#tool-type-vocabulary)
   - 10.45 [Traceability Enumeration](#traceability-enumeration)
@@ -409,8 +414,8 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
   - 10.47 [Windows™ PE Binary Vocabulary](#windows-pe-binary-vocabulary)
   - 10.48 [Windows™ Registry Datatype Enumeration](#windows-registry-datatype-enumeration)
   - 10.49 [Windows™ Service Start Type Enumeration](#windows-service-start-type-enumeration)
-  - 10.50 [Windows™ Service Type Enumeration](#windows-service-type-enumeration)
-  - 10.51 [Windows™ Service Status Enumeration](#windows-service-status-enumeration)
+  - 10.50 [Windows™ Service Status Enumeration](#windows-service-status-enumeration)
+  - 10.51 [Windows™ Service Type Enumeration](#windows-service-type-enumeration)
 - 11. [Customizing STIX (Deprecated)](#customizing-stix)
   - 11.1 [Custom Properties (Deprecated)](#custom-properties)
     - 11.1.1 [Requirements (Deprecated)](#custom-properties-requirements)
@@ -447,17 +452,19 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
     - C.2.3 [Adding properties to an existing STIX relationship object instance](#adding-properties-to-an-existing-stix-relationship-object-instance)
     - C.2.4 [Adding properties to an existing STIX marking definition object instance](#adding-properties-to-an-existing-stix-marking-definition-object-instance)
     - C.2.5 [Adding properties to an existing STIX language content object instance](#adding-properties-to-an-existing-stix-language-content-object-instance)
-- Appendix D: [IANA Considerations](#iana-considerations)
-- Appendix E: [References](#references)
-  - E.1 [Normative References](#normative-references)
-  - E.2 [Informative References](#informative-references)
-- Appendix F: [Acknowledgments](#acknowledgments)
-- Appendix G: [Revision History](#revision-history)
-- Appendix H: [Notices](#notices)
+- Appendix D: [Incident Availability Impact Mapping](#availability-impact-mapping)
+- Appendix E: [Criticality Mapping](#criticality-mapping)
+- Appendix F: [IANA Considerations](#iana-considerations)
+- Appendix G: [References](#references)
+  - G.1 [Normative References](#normative-references)
+  - G.2 [Informative References](#informative-references)
+- Appendix H: [Acknowledgments](#acknowledgments)
+- Appendix I: [Revision History](#revision-history)
+- Appendix J: [Notices](#notices)
 
 ---
 
-# 1. Introduction <a id='introduction'></a>
+# 1 Introduction <a id='introduction'></a>
 
 Structured Threat Information Expression (STIX) is a language and serialization format used to exchange cyber threat intelligence (CTI).
 STIX enables organizations to share CTI with one another in a consistent and machine-readable manner, allowing security communities to better understand what computer-based attacks they are most likely to see and to anticipate and/or respond to those attacks faster and more effectively.
@@ -868,7 +875,42 @@ Empty dictionaries are prohibited in STIX and **MUST NOT** be used as a substitu
 
 <span class="stixtype">dictionary</span> values **MUST** be valid property base types 
 
-## 2.4 Enum <a id='enum'></a>
+## 2.4 Entity Count <a id='entity-count'></a>
+
+**Type Name:** entity-count
+
+The Entity Count type represents the count of one or more entity types. The name of each entity type **MUST** be specified as a key in the dictionary and **MUST** identify the count of the entity that corresponds to the value. Each key **SHOULD** come from [entity-type-ov](#entity-type-vocabulary) open vocabulary. This value **MUST** be an [integer](#integer) that is equal to or greater than zero.
+
+**Examples:**
+
+*100 individuals, 70 employees, 30 customers*
+
+```
+{
+    "individual": 100,
+    "employee": 70,
+    "customer-individual": 30
+}
+```
+
+*1000 systems, 10 organizations*
+
+```
+{
+    "organization": 10,
+    "system": 1000
+}
+```
+
+*0 individuals*
+
+```
+{
+    "individual": 0
+}
+```
+
+## 2.5 Enum <a id='enum'></a>
 
 **Type Name:** <span class="stixtype">enum</span>
 
@@ -876,7 +918,7 @@ The <span class="stixtype">enum</span> type is a hardcoded list of terms that is
 
 The JSON MTI serialization uses the JSON String type \[[RFC8259](#rfc8259)\] when representing <span class="stixtype">enum</span> enumeration.
 
-## 2.5 External Reference <a id='external-reference'></a>
+## 2.6 External Reference <a id='external-reference'></a>
 
 **Type Name:** <span class="stixtype">external-reference</span>
 
@@ -884,7 +926,7 @@ External references are used to describe pointers to information represented out
 
 The JSON MTI serialization uses the JSON Object type \[[RFC8259](#rfc8259)\] when representing <span class="stixtype">external-reference</span>.
 
-### 2.5.1 Properties <a id='external-reference-properties'></a>
+### 2.6.1 Properties <a id='external-reference-properties'></a>
 
 | **<span class="stixtr">Property Name</span>** | **<span class="stixtr">Type</span>** | **<span class="stixtr">Description</span>** |
 |----|----|----|
@@ -894,7 +936,7 @@ The JSON MTI serialization uses the JSON Object type \[[RFC8259](#rfc8259)\] whe
 | **hashes** (optional) | <span class="stixtype">hashes</span> | Specifies a dictionary of hashes for the contents of the **url**. This **SHOULD** be provided when the **url** property is present.<br><br>Dictionary keys **MUST** come from one of the entries listed in the [<span class="stixtype">hash-algorithm-ov</span>](#hashing-algorithm-vocabulary) open vocabulary.<br><br>As stated in [section 2.7](#hashes), to ensure interoperability, a SHA-256 hash **SHOULD** be included when possible. |
 | **external_id** (optional) | <span class="stixtype">string</span> | An identifier for the external reference content. |
 
-### 2.5.2 Requirements <a id='external-reference-requirements'></a>
+### 2.6.2 Requirements <a id='external-reference-requirements'></a>
 
 - In addition to the **source_name** property, at least one of the **description**, **url** or **external_id** properties **MUST** be present.
 
@@ -997,7 +1039,7 @@ An <span class="stixtype">external-reference</span> to an offline threat report 
 }
 ```
 
-## 2.6 Float <a id='float'></a>
+## 2.7 Float <a id='float'></a>
 
 **Type Name:** <span class="stixtype">float</span>
 
@@ -1015,7 +1057,7 @@ In the JSON MTI serialization, floating point values are represented by the JSON
 }
 ```
 
-## 2.7 Hashes <a id='hashes'></a>
+## 2.8 Hashes <a id='hashes'></a>
 
 **Type Name:** <span class="stixtype">hashes</span>
 
@@ -1037,7 +1079,7 @@ To enhance compatibility, the SHA-256 hash **SHOULD** be used whenever possible.
 }
 ```
 
-## 2.8 Hexadecimal <a id='hexadecimal'></a>
+## 2.9 Hexadecimal <a id='hexadecimal'></a>
 
 **Type Name:** <span class="stixtype">hex</span>
 
@@ -1053,7 +1095,7 @@ The <span class="stixtype">hex</span> data type encodes an array of octets (8-bi
 }
 ```
 
-## 2.9 Identifier <a id='identifier'></a>
+## 2.10 Identifier <a id='identifier'></a>
 
 **Type Name:** <span class="stixtype">identifier</span>
 
@@ -1116,7 +1158,7 @@ The JSON MTI serialization uses the JSON String type \[[RFC8259](#rfc8259)\] whe
 }
 ```
 
-## 2.10 Integer <a id='integer'></a>
+## 2.11 Integer <a id='integer'></a>
 
 **Type Name:** <span class="stixtype">integer</span>
 
@@ -1134,7 +1176,7 @@ In the JSON MTI serialization, integers are represented by the JSON Number type 
 }
 ```
 
-## 2.11 Kill Chain Phase <a id='kill-chain-phase'></a>
+## 2.12 Kill Chain Phase <a id='kill-chain-phase'></a>
 
 **Type Name:** <span class="stixtype">kill-chain-phase</span>
 
@@ -1194,7 +1236,7 @@ Example specifying the "pre-attack" phase from the "foo" kill-chain
 }
 ```
 
-## 2.12 List <a id='list'></a>
+## 2.13 List <a id='list'></a>
 
 **Type Name:** <span class="stixtype">list</span>
 
@@ -1218,7 +1260,7 @@ The JSON MTI serialization uses the JSON Array type \[[RFC8259](#rfc8259)\], whi
 }
 ```
 
-## 2.13 Observable Container (deprecated) <a id='observable-container'></a>
+## 2.14 Observable Container (deprecated) <a id='observable-container'></a>
 
 **Type Name:** <span class="stixtype">observable-container</span>
 
@@ -1279,7 +1321,7 @@ Resolving a reference is the process of identifying all of the objects in an obs
 }
 ```
 
-## 2.14 Open Vocabulary <a id='open-vocabulary'></a>
+## 2.15 Open Vocabulary <a id='open-vocabulary'></a>
 
 **Type Name:** <span class="stixtype">open-vocab</span>
 
@@ -1311,7 +1353,47 @@ Example using a user-defined value. In this example, for the same Threat Actor *
 }
 ```
 
-## 2.15 String <a id='string'></a>
+## 2.16 Score <a id='score'></a>
+
+**Type Name:** score
+
+The <span class="stixtype">score</span> data type represents a numeric score that can be applied to STIX objects to allows for a narrative description that can be supplied by analytical processes or tools.
+
+### 2.16.1 Properties  <a id='score-properties'></a>
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **name** (required) | [string](#string) | The name of the score. This is normally a system or process name or some combination of these such as "<Tool Name> Automated Exposure Score". |
+| **value** (required) | [float](#float) | The numeric score. |
+| **description** (optional) | [string](#string) | A description of how this score was calculated by the system, if that information is provided. |
+
+**Examples**
+
+```
+{
+    "name": "ExampleSystem Automated Exposure Score",
+    "value": 75.5,
+    "description": "The score is calculated based on the severity of the incident and the potential impact on the organization."
+}
+```
+
+## 2.17 State Change <a id='state-change'></a>
+
+**Type Name:** state-change
+
+The <span class="stixtype">state-change</span> data type captures a relationship where the parent object such as a <span class="stixtype">task</span> or <span class="stixtype">event</span> causes some other object such as an <span class="stixtype">impact</span> to to come into existance, be alter in severity, be resolved.
+
+### 2.17.1 Properties  <a id='state-change-properties'></a>
+
+The **initial_ref** or **result_ref** property **MUST** be populated.
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **state_change_type** (required) | [open-vocabulary](#open-vocabulary) | How this activity influenced the change in state between the **initial_ref** and **result_ref**. The value of this property **SHOULD** come from the [state-change-type-ov](#state-change-type-vocabulary) open vocabulary. |
+| **initial_ref** (optional) | [identifier](#identifier) | The initial object state that this event affected. It **MUST** be an SDO. To capture a changing SCO, the Observed Data SDO must be used. If the **result_ref** property is not populated then this **MUST** be populated. If there is no result state this typically means that this event/task removed or resolved the initial object. For example, a task resolved a network outage. If both are present this indicates a transition between these states. For example, a confidentiality impact was made worse as the information was shared further. If the **result_ref** property is populated this **MUST** reference the same type of SDO. |
+| **result_ref** (optional) | [identifier](#identifier) | The final state that this event influenced. If the **initial_ref** property is not populated then this **MUST** be populated. If there is no initial state it typically means that this event/task caused or created the result. For example, an event causing a network outage. If the **initial_ref** property is populated this **MUST** reference the same type of SDO. |
+
+## 2.18 String <a id='string'></a>
 
 **Type Name:** <span class="stixtype">string</span>
 
@@ -1329,7 +1411,7 @@ The JSON MTI serialization uses the JSON String type \[[RFC8259](#rfc8259)\], wh
 }
 ```
 
-## 2.16 Timestamp <a id='timestamp'></a>
+## 2.19 Timestamp <a id='timestamp'></a>
 
 **Type Name:** <span class="stixtype">timestamp</span>
 
@@ -1337,7 +1419,7 @@ The <span class="stixtype">timestamp</span> type defines how dates and times are
 
 The JSON MTI serialization uses the JSON String type \[[RFC8259](#rfc8259)\] when representing <span class="stixtype">timestamp</span>.
 
-### 2.16.1 Requirements <a id='timestamp-requirements'></a>
+### 2.19.1 Requirements <a id='timestamp-requirements'></a>
 
 - The <span class="stixtype">timestamp</span> property **MUST** be a valid RFC 3339-formatted timestamp \[[RFC3339](#rfc3339)\] using the format <span class="stixalt">YYYY-MM-DDTHH:mm:ss\[.s+\]Z</span> where the "s+" represents 1 or more sub-second values. The brackets denote that sub-second precision is optional, and that if no digits are provided, the decimal place **MUST NOT** be present.
 - The timestamp **MUST** be represented in the UTC timezone and **MUST** use the "Z" designation to indicate this.
@@ -2526,19 +2608,19 @@ An Event is an activity that has a harmful effect or which will be investigated 
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **status** (required) | [event-status-enum](#event-status-enum) | The current status of the event. The values of this property **MUST** come from the [event-status-enum](#event-status-enum) enumeration. |
+| **status** (required) | [event-status-enumeration](#event-status-enumeration) | The current status of the event. The values of this property **MUST** come from the [event-status-enumeration](#event-status-enumeration) enumeration. |
 | **type** (required) | [string](#string) | The value of this property **MUST** be set to event. |
 | **changed_objects** (optional) | [list](#list) of type [state-change](#state-change) | A list of changes that this event has caused. This is typically used to indicate how an event has affected impacts. |
 | **description** (optional) | [string](#string) | A description of event that occurred. |
 | **end_time** (optional) | [timestamp](#timestamp) | The date and time the event was last recorded. If this is not present it is assumed to be unknown. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
-| **end_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **end_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
-| **event_types** (optional) | [list](#list) of type [open-vocab](#open-vocab) | High level types for the event to enable aggregation and summarization. The values of this property **SHOULD** come from the [event-type-ov](#event-type-vocabulary) open vocabulary. |
+| **end_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **end_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+| **event_types** (optional) | [list](#list) of type [open-vocab](#stix-open-vocabularies-and-enumerations) | High level types for the event to enable aggregation and summarization. The values of this property **SHOULD** come from the [event-type-ov](#event-type-vocabulary) open vocabulary. |
 | **goal** (optional) | [string](#string) | The assumed goal, objective, desired outcome, or intended effect of this event. Not all events have goals. |
 | **name** (optional) | [string](#string) | A name for the event. |
 | **next_event_refs** (optional) | [list](#list) of type [identifier](#identifier) | The [event](#event) objects to follow. They **MUST** be of type [event](#event). There can be more than one if they take place in parallel. |
 | **sighting_refs** (optional) | [list](#list) of type [identifier](#identifier) | A list of [sighting](#sighting) objects that were related to this event. Sightings referenced in this **SHOULD** be based on [attack-pattern](#attack-pattern), [indicator](#indicator), or [malware](#malware) SDOs. The **sighting_refs** property **SHOULD** be used to relate an [event](#event) to an SDO, instead of using right an SRO. In some cases observed data may be present, but no [indicator](#indicator) can be created. In these cases it is recommended to use an [attack-pattern](#attack-pattern) using the name or description of the behavior or rule that triggered the sighting. |
 | **start_time** (optional) | [timestamp](#timestamp) | The date and time the event was first recorded. If this is not present it is assumed to be unknown. This property **SHOULD** be populated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
-| **start_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+| **start_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
 
 ### 4.4.2 Relationships  <a id="event-relationships"></a>
 
@@ -2948,29 +3030,29 @@ Because these extensions are used to specify very different types of impacts, pr
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
 | **type** (required) | [string](#string) | The value of this property **MUST** be set to impact. |
-| **criticality** (optional) | [integer](#integer) | The criticality of this impact. If present, this value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix B](#appendix-b). |
+| **criticality** (optional) | [integer](#integer) | The criticality of this impact. If present, this value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix B](#relationship-summary-table). |
 | **description** (optional) | [string](#string) | Additional details about this impact |
 | **end_time** (optional) | [timestamp](#timestamp) | The date and time the impact was last recorded. This property **SHOULD** be populated if this impact is resolved or mitigated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. If the **superseded_by_ref** property is included this **MUST** be included. |
-| **end_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **end_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+| **end_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **end_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
 | **impact_category** (optional) | [string](#string) | The category to which the impact belongs. If one of the defined extensions (see section 2.3.2) is used it **MUST** correspond to the value of this property. If there is insufficient information about the category, this property is not populated and no extension will be specified. The value **MUST** be specified without the "-ext" suffix which is used to indicate the extension used. |
 | **impacted_entity_counts** (optional) | [entity-count](#entity-count) | A list of the entity types, along with the number of each type impacted. If this property is not present it should be assumed that this information is not being shared, not that there were no impacted entities. To affirmatively state no entities of a given class were impacted they should be included in the list with the number of entities impacted set to 0. |
 | **impacted_refs** (optional) | [list](#list) of type [identifier](#identifier) | A list of all impacted entities or infrastructure. The values of this property MUST be the identifier for an SDO or SCO. |
-| **recoverability** (optional) | [recoverability-enum](#recoverability-enum) | The recoverability of this particular impact with respect to feasibility and required time and resources. The value of this property **MUST** come from the [recoverability-enum](#recoverability-enum) enumeration. |
+| **recoverability** (optional) | [recoverability-enumeration](#recoverability-enumeration) | The recoverability of this particular impact with respect to feasibility and required time and resources. The value of this property **MUST** come from the [recoverability-enumeration](#recoverability-enumeration) enumeration. |
 | **start_time** (optional) | [timestamp](#timestamp) | The date and time this impact was first recorded. This property **SHOULD** be populated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
-| **start_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+| **start_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
 | **sub_impact_refs** (optional) | [list](#list) of type [identifier](#identifier) | The [impact](#impact) objects to that are part of this impact. They **MUST** be of type [impact](#impact). |
 | **superseded_by_ref** (optional) | [identifier](#identifier) | The referenced [impact](#impact) supersedes the **end_time** for the current impact. This allows capturing how the severity of this impact changes over time. When this property is populated this impact **MUST** have an **end_time** and and the **superseded_by_ref** value **MUST** reference an [impact](#impact) of the same as the category specified in the **impact_category** property. |
 
 
-### 4.7.2 Availability Impact Extension
+### 4.7.2 Availability Impact Extension <a id="availability-impact-extension"></a>
 
 **Type Name:** availability-ext
 
-#### 4.7.2.1 Properties
+#### 4.7.2.1 Properties <a id="availability-impact-extension-properties"></a>
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **availability_impact** (required) | [integer](#integer) | The availability / functional impact of the related incident on the objects referenced in **impacted_refs**. If no objects are referenced, the impact should be treated as the overall availability impact for the related [incident](#incident). This value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix A](#appendix-a). |
+| **availability_impact** (required) | [integer](#integer) | The availability / functional impact of the related incident on the objects referenced in **impacted_refs**. If no objects are referenced, the impact should be treated as the overall availability impact for the related [incident](#incident). This value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix A](#confidence-scales). |
 
 **Example**
 
@@ -3002,16 +3084,16 @@ Because these extensions are used to specify very different types of impacts, pr
 }
 ```
 
-### 4.7.3 Confidentiality Impact Extension
+### 4.7.3 Confidentiality Impact Extension <a id="confidentiality-impact-extension"></a>
 
 **Type Name:** confidentiality-ext
 
-#### 4.7.3.1 Properties
+#### 4.7.3.1 Properties <a id="confidentiality-impact-extension-properties"></a>
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **loss_type** (required) | [incident-confidentiality-loss-enum](#incident-confidentiality-loss-enum) | The type of loss that occurred with respect to the relevant information. The values of this property **MUST** come from the [incident-confidentiality-loss-enum](#incident-confidentiality-loss-enum) enumeration. |
-| **information_type** (optional) | [open-vocab](#open-vocab) | The type of information that had its confidentiality compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-vocabulary) open vocabulary. This value **MUST** be included if the loss_type is not none. Otherwise, including an entry with loss_type of none and no information_type indicates that no information had its confidentiality impacted by the related incident. |
+| **loss_type** (required) | [incident-confidentiality-loss-enumeration](#incident-confidentiality-loss-enumeration) | The type of loss that occurred with respect to the relevant information. The values of this property **MUST** come from the [incident-confidentiality-loss-enumeration](#incident-confidentiality-loss-enumeration) enumeration. |
+| **information_type** (optional) | [open-vocab](#stix-open-vocabularies-and-enumerations) | The type of information that had its confidentiality compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-vocabulary) open vocabulary. This value **MUST** be included if the loss_type is not none. Otherwise, including an entry with loss_type of none and no information_type indicates that no information had its confidentiality impacted by the related incident. |
 | **record_count** (optional) | [integer](#integer) | The number of records of this information type that were compromised. The value of this property **MUST NOT** be negative. |
 | **record_size** (optional) | [integer](#integer) | The amount of data that was compromised in bytes. The value of this property **MUST NOT** be negative. |
 
@@ -3039,15 +3121,15 @@ Because these extensions are used to specify very different types of impacts, pr
 }
 ```
 
-### 4.7.4 External Impact Extension
+### 4.7.4 External Impact Extension <a id="external-impact-extension"></a>
 
 **Type Name:** external-ext
 
-#### 4.7.4.1 Properties
+#### 4.7.4.1 Properties <a id="external-impact-extension-properties"></a>
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **impact_type** (required) | [open-vocab](#open-vocab) | The type of impact outside of the targeted organization. The value of this property **SHOULD** come from the [external-impact-ov](#external-impact-vocabulary) open vocabulary. |
+| **impact_type** (required) | [open-vocab](#stix-open-vocabularies-and-enumerations) | The type of impact outside of the targeted organization. The value of this property **SHOULD** come from the [external-impact-ov](#external-impact-vocabulary) open vocabulary. |
 
 **Example**
 
@@ -3071,16 +3153,16 @@ Because these extensions are used to specify very different types of impacts, pr
 }
 ```
 
-### 4.7.5 Integrity Impact Extension
+### 4.7.5 Integrity Impact Extension <a id="integrity-impact-extension"></a>
 
 **Type Name:** integrity-ext
 
-#### 4.7.5.1 Properties
+#### 4.7.5.1 Properties <a id="integrity-impact-extension-properties"></a>
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **alteration** (required) | [integrity-alteration-enum](#integrity-alteration-enum) | The type of alteration affecting integrity of the information. The value of this property **MUST** come from the [integrity-alteration-enum](#integrity-alteration-enum) enumeration. |
-| **information_type** (optional) | [open-vocab](#open-vocab) | The type of information that had its integrity compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-vocabulary) open vocabulary. This value **MUST** be included if the alternation is not none. Otherwise, including an entry that with an alteration of none and no information_type provided indicates that no information had its integrity impacted by the related incident. |
+| **alteration** (required) | [integrity-alteration-enumeration](#integrity-alteration-enumeration) | The type of alteration affecting integrity of the information. The value of this property **MUST** come from the [integrity-alteration-enumeration](#integrity-alteration-enumeration) enumeration. |
+| **information_type** (optional) | [open-vocab](#stix-open-vocabularies-and-enumerations) | The type of information that had its integrity compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-vocabulary) open vocabulary. This value **MUST** be included if the alternation is not none. Otherwise, including an entry that with an alteration of none and no information_type provided indicates that no information had its integrity impacted by the related incident. |
 | **record_count** (optional) | [integer](#integer) | The number of records of this type that were compromised. The value of this property **MUST NOT** be negative. |
 | **record_size** (optional) | [integer](#integer) | The amount of data that was compromised in bytes. The value of this property **MUST NOT** be negative. |
 
@@ -3108,21 +3190,21 @@ Because these extensions are used to specify very different types of impacts, pr
 }
 ```
 
-### 4.7.6 Economic Impact Extension
+### 4.7.6 Economic Impact Extension <a id="economic-impact-extension"></a>
 
 **Type Name:** economic-ext
 
-#### 4.7.6.1 Properties
+#### 4.7.6.1 Properties <a id="economic-impact-extension-properties"></a>
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **variety** (required) | [open-vocab](#open-vocab) | The variety of this economic impact. The value of this property **SHOULD** come from the [economic-impact-type-ov](#economic-impact-type-vocabulary) open vocabulary. |
-| **conversion_rate** (optional) | [number](#number) | The conversion rate between the **currency** and **currency_actual** properties. This **MUST NOT** be included if the **currency_actual** property is not included. This **MUST** be included if the **currency_actual** property is included. This value **MUST** be greater than zero. If this property is provided, the **conversion_time** property must also be provided. |
+| **variety** (required) | [open-vocab](#stix-open-vocabularies-and-enumerations) | The variety of this economic impact. The value of this property **SHOULD** come from the [economic-impact-type-ov](#economic-impact-type-vocabulary) open vocabulary. |
+| **conversion_rate** (optional) | [float](#float) | The conversion rate between the **currency** and **currency_actual** properties. This **MUST NOT** be included if the **currency_actual** property is not included. This **MUST** be included if the **currency_actual** property is included. This value **MUST** be greater than zero. If this property is provided, the **conversion_time** property must also be provided. |
 | **conversion_time** (optional) | [timestamp](#timestamp) | The timestamp corresponding to the conversion rate from the **currency** property to the **currency_actual** property. This **MUST** be included if a **conversion_rate** property is included. |
 | **currency** (optional) | [string](#string) | The currency used for reporting the **max_amount** and **min_amount** properties values. This **SHOULD** be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency. This **SHOULD** match the currency of the organization or the government producing the report. This value **MUST** be included if the **min_amount** property is included. |
 | **currency_actual** (optional) | [string](#string) | The currency that the impact actually used. For ransom demands this should be the currency of the demand. If this is not included it should be assumed to be the same value as the **currency** property. If this is included then the **currency** property **MUST** be included. This **SHOULD** be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency. |
-| **max_amount** (optional) | [number](#number) | The maximum economic amount of the impact using the currency specified in the **currency** property. This value **MUST** be greater than zero. This value **MUST** be included if the **min_amount** property is included. If **min_amount** and **max_amount** properties are both defined, then **max_amount** value **MUST** be greater than or equal to the **min_amount** value. |
-| **min_amount** (optional) | [number](#number) | The maximum economic amount of the impact using the currency specified in the **currency** property. This value **MUST** be greater than zero. This value **MUST** be included if the **max_amount** property is included. If **min_amount** and **max_amount** properties are both defined, then **max_amount** value **MUST** be greater than or equal to the **min_amount** value. |
+| **max_amount** (optional) | [float](#float) | The maximum economic amount of the impact using the currency specified in the **currency** property. This value **MUST** be greater than zero. This value **MUST** be included if the **min_amount** property is included. If **min_amount** and **max_amount** properties are both defined, then **max_amount** value **MUST** be greater than or equal to the **min_amount** value. |
+| **min_amount** (optional) | [float](#float) | The maximum economic amount of the impact using the currency specified in the **currency** property. This value **MUST** be greater than zero. This value **MUST** be included if the **max_amount** property is included. If **min_amount** and **max_amount** properties are both defined, then **max_amount** value **MUST** be greater than or equal to the **min_amount** value. |
 
 **Example**
 
@@ -3149,16 +3231,16 @@ Because these extensions are used to specify very different types of impacts, pr
 }
 ```
 
-### 4.7.7 Physical Impact Extension
+### 4.7.7 Physical Impact Extension <a id="physical-impact-extension"></a>
 
 **Type Name:** physical-ext
 
-#### 4.7.7.1 Properties
+#### 4.7.7.1 Properties <a id="physical-impact-extension-properties"></a>
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **impact_type** (required) | [physical-impact-enum](#physical-impact-enum) | The type of physical impact that has occurred. The value of this property **MUST** come from the [physical-impact-enum](#physical-impact-enum) enumeration. |
-| **asset_type** (optional) | [open-vocab](#open-vocab) | The type of property or system that was affected by this impact. The value of this property **SHOULD** come from the [asset-type-ov](#asset-type-vocabulary) open vocabulary. This value **MUST** be included if the **impact_type** is not none . Otherwise, including an entry with an **impact_type** of none and no asset_type indicates that no physical damage was caused by the related incident. |
+| **impact_type** (required) | [physical-impact-enumeration](#physical-impact-enumeration) | The type of physical impact that has occurred. The value of this property **MUST** come from the [physical-impact-enumeration](#physical-impact-enumeration) enumeration. |
+| **asset_type** (optional) | [open-vocab](#stix-open-vocabularies-and-enumerations) | The type of property or system that was affected by this impact. The value of this property **SHOULD** come from the [asset-type-ov](#asset-type-vocabulary) open vocabulary. This value **MUST** be included if the **impact_type** is not none . Otherwise, including an entry with an **impact_type** of none and no asset_type indicates that no physical damage was caused by the related incident. |
 
 **Example**
 
@@ -3183,15 +3265,15 @@ Because these extensions are used to specify very different types of impacts, pr
 }
 ```
 
-### 4.7.8 Traceability Impact Extension
+### 4.7.8 Traceability Impact Extension <a id="traceability-impact-extension"></a>
 
 **Type Name:** traceability-ext
 
-#### 4.7.8.1 Properties
+#### 4.7.8.1 Properties <a id="traceability-impact-extension-properties"></a>
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **traceability_impact** (required) | [traceability-enum](#traceability-enum) | The impact on a system or organization’s ability to perform audits or provide non-repudiation. The value of this property **MUST** come from the [traceability-enum](#traceability-enum) enumeration. |
+| **traceability_impact** (required) | [traceability-enumeration](#traceability-enumeration) | The impact on a system or organization’s ability to perform audits or provide non-repudiation. The value of this property **MUST** come from the [traceability-enumeration](#traceability-enumeration) enumeration. |
 
 **Example**
 
@@ -3289,30 +3371,30 @@ The Incident object should have sufficient properties to represent the current s
   <tbody>
   <tr>
     <td><strong>determination</strong> (required)</td>
-    <td><span class="stixtype"><a href="#incident-determination-enum">incident-determination-enum</a></span></td>
+    <td><span class="stixtype"><a href="#incident-determination-enumeration">incident-determination-enum</a></span></td>
     <td>A high-level determination on the status of this incident.
     The value of this property <strong>SHOULD</strong> be <span class="stixliteral">suspected</span> until enough information is available to provide a well researched result.
     Some automated tools may flag results as <span class="stixliteral">blocked</span> or <span class="stixliteral">low-value</span> automatically depending on the tool type or activity.
     For example, a tool that blocks a series of phishing emails may create an incident with a <span class="stixliteral">blocked</span> determination automatically.
-    The values of this property <strong>MUST</strong> come from the <span class="stixtype"><a href="#incident-determination-enum">incident-determination-enum</a></span> enumeration.</td>
+    The values of this property <strong>MUST</strong> come from the <span class="stixtype"><a href="#incident-determination-enumeration">incident-determination-enum</a></span> enumeration.</td>
   </tr>
   <tr>
     <td><strong>investigation_status</strong> (required)</td>
     <td><span class="stixtype">open-vocab</span></td>
     <td>The current status of the incident investigation.
-    The values of this property <strong>SHOULD</strong> come from the <span class="stixtype"><a href="#incident-investigation-ov">incident-investigation-ov</a></span> open vocabulary.</td>
+    The values of this property <strong>SHOULD</strong> come from the <span class="stixtype"><a href="#incident-investigation-vocabulary">incident-investigation-vocabulary</a></span> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>criticality</strong> (optional)</td>
     <td><span class="stixtype">integer</span></td>
     <td>The criticality of the incident.
-    If present, this value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#appendix-b">Appendix B</a>.</td>
+    If present, this value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#relationship-summary-table">Appendix B</a>.</td>
   </tr>
   <tr>
     <td><strong>detection_methods</strong> (optional)</td>
     <td><span class="stixtype">open-vocab</span></td>
     <td>A list of strings corresponding to the methods used to detect the activity, e.g., commercial tool names, techniques associated with proprietary solutions, human review, external sources, or other methods.
-    These values <strong>SHOULD</strong> be selected from the <span class="stixtype"><a href="#detection-methods-ov">detection-methods-ov</a></span> open vocabulary.</td>
+    These values <strong>SHOULD</strong> be selected from the <span class="stixtype"><a href="#detection-method-vocabulary">detection-method-ov</a></span> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>event_refs</strong> (optional)</td>
@@ -3331,18 +3413,18 @@ The Incident object should have sufficient properties to represent the current s
     <td><strong>incident_types</strong> (optional)</td>
     <td><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></td>
     <td>A list of incident types of incident that occurred, if applicable.
-    The values of this property <strong>SHOULD</strong> come from the <span class="stixtype"><a href="#event-type-ov">event-type-ov</a></span> open vocabulary.</td>
+    The values of this property <strong>SHOULD</strong> come from the <span class="stixtype"><a href="#event-type-vocabulary">event-type-vocabulary</a></span> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>recoverability</strong> (optional)</td>
-    <td><span class="stixtype"><a href="#recoverability-enum">recoverability-enum</a></span></td>
+    <td><span class="stixtype"><a href="#recoverability-enumeration">recoverability-enum</a></span></td>
     <td>The recoverability of this particular Incident with respect to feasibility and required time and resources.
-    The value of this property <strong>MUST</strong> come from the <span class="stixtype"><a href="#recoverability-enum">recoverability-enum</a></span>
+    The value of this property <strong>MUST</strong> come from the <span class="stixtype"><a href="#recoverability-enumeration">recoverability-enum</a></span>
     enumeration.</td>
   </tr>
   <tr>
     <td><strong>scores</strong> (optional)</td>
-    <td><span class="stixtype">list</span> of type <span class="stixtype"><a href="#incident-score">incident-score</a></span></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype"><a href="#score">score</a></span></td>
     <td>A list of scores from various automated or manual mechanisms along with optional descriptions.</td> 
   </tr>
   <tr>
@@ -5582,7 +5664,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 
 A Task is an activity that is performed by or for the victim/defender to respond to the related incident.
 
-### 4.19.1 Properties
+### 4.19.1 Properties <a id="task-properties"></a>
 
 | **Required Common Properties** |
 | --- |
@@ -5596,7 +5678,7 @@ A Task is an activity that is performed by or for the victim/defender to respond
 
 | **Property Name** | **Type** | **Description** |
 | --- | --- | --- |
-| **outcome** (required) | [task-outcome-enum](#task-outcome-enum) | The outcome of the task. The value of this property **MUST** come from the [task-outcome-enum](#task-outcome-enum) enumeration. |
+| **outcome** (required) | [task-outcome-enumeration](#task-outcome-enumeration) | The outcome of the task. The value of this property **MUST** come from the [task-outcome-enumeration](#task-outcome-enumeration) enumeration. |
 | **type** (required) | [string](#string) | The value of this property **MUST** be set to task. |
 | **affected_entity_counts** (optional) | [entity-count](#entity-count) | A list of affected entity types, along with the number of each type affected. This property is used primarily to capture victim notification information. |
 | **changed_objects** (optional) | [list](#list) of type [state-change](#state-change) | A list of changes that this task has caused. This is typically used to indicate how a task has affected impacts. |
@@ -5604,15 +5686,15 @@ A Task is an activity that is performed by or for the victim/defender to respond
 | **description** (optional) | [string](#string) | A description of the task. |
 | **due_date** (optional) | [timestamp](#list) | The date and time the task is/was due to be completed. The value of due_date **MAY** be unrelated to the values of **start_time** and **end_time**, i.e., there is no requirement that a **due_date** be between those values. |
 | **end_time** (optional) | [timestamp](#list) | The date and time the task was last recorded. If this is not present it is assumed to be unknown. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
-| **end_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **end_time** fidelity is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+| **end_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **end_time** fidelity is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
 | **error** (optional) | [string](#string) | Details about any failures or deviations that occurred in the task. |
 | **name** (optional) | [string](#string) | A name used to identify the task. |
 | **next_task_refs** (optional) | [list](#list) of type [identifier](#identifier) | The [task](#task) objects to follow. They **MUST** be of type [task](#task). There can be more than one if they take place in parallel. |
-| **priority** (optional) | [integer](#integer) | The priority or importance of the task. This value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix B](#appendix-b). |
+| **priority** (optional) | [integer](#integer) | The priority or importance of the task. This value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix B](#relationship-summary-table). |
 | **start_time** (optional) | [timestamp](#list) | The date and time the task was first recorded. If this is not present it is assumed to be unknown. This property **SHOULD** be populated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
-| **start_time_fidelity** (optional) | [timestamp-fidelity-enum](#timestamp-fidelity-enum) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enum](#timestamp-fidelity-enum) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+| **start_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
 
-### 4.19.2 Relationships
+### 4.19.2 Relationships <a id="task-relationships"></a>
 
 These are the relationships explicitly defined between the Task object and other STIX Objects. The table identifies the relationships that can be made from this object type to another object type by way of the Relationship object.
 
@@ -9904,7 +9986,7 @@ As all properties of this object are optional, at least one of the properties de
 }
 ```
 
-### 6.16.2 UNIX™ Account Extension <a id=unix-account-extension></a>
+### 6.16.2 UNIX™ Account Extension <a id="unix-account-extension"></a>
 
 **Type Name:** <span class="stixtype">unix-account-ext</span>
 
@@ -12055,7 +12137,7 @@ AND [file:hashes.'SHA-256' = 'aec070645fe53ee3b3763059376134f058cc337247c978add1
 ([file:name = 'foo.dll'] AND [windows-registry-key:key = 'HKEY_LOCAL_MACHINE\\foo\\bar']) OR [process:image_ref.name = 'fooproc' OR process:image_ref.name = 'procfoo']
 ```
 
-# 10. STIX Vocabularies <a id=stix-vocabularies></a>
+# 10. STIX Vocabularies <a id="stix-vocabularies"></a>
 
 The following sections provide object-specific listings for each of the vocabularies referenced in the object description sections defined in [section 4](#stix-domain-objects), [section 5](#stix-relationship-objects), [section 6](#stix-cyber-observable-objects), and [section 7](#stix-meta-objects).
 
@@ -12278,7 +12360,7 @@ Attack Resource Level is an open vocabulary that captures the general level of r
 
 ## 10.5 Detection Method Vocabulary <a id='detection-method-vocabulary'></a>
 
-**Type Name:** <span class="stixtype">detection-methods-ov</span>
+**Type Name:** <span class="stixtype">detection-method-ov</span>
 
 | **Vocabulary Value** | **Description** |
 | --- | --- |
@@ -12373,6 +12455,122 @@ An enumeration of encryption algorithms for sharing defanged and/or confidential
 | organization | A formal organization of people, with governance, such as a company or country. |
 | system | A computer system, such as a SIEM. |
 | vehicles | Vehicles of various types including cars, trains, and planes. |
+
+## 10.9 Event Status Enumeration <a id="event-status-enumeration"></a>
+
+**Type Name:** event-status-enum
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| ongoing | The event is still occurring. |
+| occurred | The event took place and is no longer ongoing. |
+| not-occurred | The event did not take place, but it was previously expected to. |
+| pending | The event has not yet been started or observed, but it is projected or otherwise planned. Pending activity may never occur as various factors can cause it to be blocked or not attempted. As such any time or sequence values for pending activities should be treated as an estimation or projection that is subject to change. |
+| undetermined | The status of the event has not been determined or is not shareable. |
+
+## 10.10 Event Type Vocabulary <a id="event-type-vocabulary"></a>
+
+This vocabulary draws for numerous sources including heavily from MISP taxonomies.
+
+These include:
+
+1. [FIRST DNS Abuse Techniques Matrix](https://www.misp-project.org/galaxy.html#_first_dns_abuse_techniques_matrix)
+2. [Europol type of events taxonomy](https://www.misp-project.org/taxonomies.html#_europol_event).
+3. [Europol type of incidents taxonomy](https://www.misp-project.org/taxonomies.html#_europol_incident)
+4. NIST 800-61 Rev. 2
+
+**Type Name:** event-type-ov
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| aggregation-information-phishing-schemes | Collecting data obtained through phishing attacks on web pages, email accounts, etc…​ |
+| benign | The event was neither dangerous nor malicious and was not suspected to be malicious or dangerous. |
+| blocked | The event was suspected to be malicious and was blocked. |
+| brute-force-attempt | Unsuccessful login attempt by using sequential credentials for gaining access to the system. |
+| c&c-server-hosting | Web page disseminating one or various types of malware. |
+| compromised-system | Attackers obtained control of a compromised system. |
+| confirmed | The event was confirmed to be tied to an incident and response is underway. |
+| connection-malware-port | System attempting to gain access to a port normally linked to a specific type of malware. |
+| connection-malware-system | System attempting to gain access to an IP address or URL normally linked to a specific type of malware, e.g. C&C or a distribution page for components linked to a specific botnet. |
+| content-forbidden-by-law | Distribution or sharing of illegal content such as child pornography, racism, xenophobia, etc…​ |
+| control-system-bypass | Unauthorized access to a system or component by bypassing an access control system in place. |
+| copyrighted-content | Distribution or sharing of content protected by copyright and related rights. |
+| data-exfiltration | Unauthorized access to and sharing of a specific set of information. |
+| deferred | The event is deferred due to resource constraints, information types or external reasons. |
+| deletion-information | Unauthorized deleting of a specific set of information. |
+| denial-of-service | The event or incident resulted in a loss of availability for a service or system. Incidents of this type **SHOULD** have an availability impact, but organizations may choose to not share the details of these impacts. |
+| destruction | The event or incident destroyed data or systems. Incidents of this **SHOULD** have an integrity impact, but organizations may choose to not share the details of these impacts. |
+| dictionary-attack-attempt | Unsuccessful login attempt by using system access credentials previously loaded into a dictionary. |
+| discarded | The event was discarded due to resource constraints, information types or external reasons. |
+| disruption-data-transmission | Logical and physical activities aimed at causing damage to information or at preventing its transmission among systems. |
+| dissemination-malware-email | Malware attached to a message or email message containing link to malicious URL. |
+| dissemination-phishing-emails | Mass emailing aimed at collecting data for phishing purposes with regard to the victims. |
+| dns-cache-poisoning | DNS cache poisoning - also known as DNS spoofing, is a type of cyber attack in which an attacker corrupts a DNS resolver’s cache by injecting false DNS records, causing the resolver to records controlled by the attacker. |
+| dns-local-resolver-hijacking | Consumer Premise Equipment (CPE), such as home routers, often provide DNS recursion on the local network. If the CPE device is compromised, the attacker can change the recursive resolver behavior; for example, by changing responses. |
+| dns-spoofing-registered | In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is in fact controlled by or registered to a legitimate registrant. |
+| dns-rebinding | DNS rebinding - a type of attack where a malicious website directs a client to a local network address, allowing the attacker to bypass the same-origin policy and gain access to the victim’s local resources. |
+| dns-server-compromise | Attacker gains administrative privileges on an open recursive DNS server, authoritative DNS server, organizational recursive DNS server, or ISP-operated recursive DNS server. |
+| dns-spoofing-unregistered | In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is not controlled by or registered to a legitimate registrant. |
+| dns-stub-resolver-hijacking | The attacker compromises the Operating System of a computer or a phone with malicious code that intercepts and responds to DNS queries with rogue or malicious responses. |
+| dns-zone-transfer | Transfer of a specific DNS zone. |
+| domain-name-compromise | The wrongfully taking control of a domain name from the rightful name holder. Compromised domains can be used for different kinds of malicious activity like sending spam or phishing, for distributing malware or as botnet command and control. |
+| duplicate | This event is a duplicate of another event. A relationship should be created between this event and the event it duplicates. |
+| email-flooding | Sending an unusually large quantity of email messages. |
+| equipment-loss | A loss of control of physical equipment that is not known to be theft. |
+| equipment-theft | Theft of equipment. In general this should be paired with equipment-loss. |
+| exploit | Successful use of a tool exploiting a specific vulnerability of the system. |
+| exploit-attempt | Unsuccessful use of a tool exploiting a specific vulnerability of the system. |
+| exploit-framework-exhausting-resources | Various sources using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability. |
+| exploit-tool-exhausting-resources | One single source using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability. |
+| failed | The event failed its suspected goal. |
+| file-inclusion | Inclusion of files into a system under attack with the use of file inclusion techniques. |
+| file-inclusion-attempt | Unsuccessful attempt to include files in the system under attack by using file inclusion techniques. |
+| hosting-malware-webpage | Web page disseminating one or various types of malware. |
+| hosting-phishing-sites | Hosting web sites for phishing purposes. |
+| illegitimate-use-name | Using the name of an institution without permission to do so. |
+| illegitimate-use-resources | Use of institutional resources for purposes other than those intended. |
+| infected-by-known-malware | The presence of any of the types of malware was detected in a system. |
+| insufficient-data | Not enough data is available to assess this event. |
+| known-malware | This incident involves a known type of malware. Events and incidents **SHOULD** be related to a Malware object, but organizations may choose not to share the details on this malware. |
+| lame-delegations | Lame delegations occur as a result of expired name server domains allowing attackers to take control of the domain resolution by re-registering this expired name server domain. |
+| major | The incident is classified as major based on the internal criteria within the organization or due to external reporting requirements. |
+| modification-information | Unauthorized changes to a specific set of information. |
+| misconfiguration | A false positive where this event was triggered by a misconfiguration. |
+| natural | The event was due to natural causes such as an earthquake or hurricane. |
+| negotiation | Negotiation of a deal or payment amount. |
+| network-scanning | Scanning a network aimed at identifying systems which are active in the same network. |
+| no-apt | It is not believed that this incident involved an advanced persistent threat. |
+| packet-flood | Mass mailing of requests (network packets, emails, etc…​) from various sources to a specific service, aimed at affecting its normal functioning. |
+| password-cracking-attempt | Attempt to acquire access credentials by breaking the protective cryptographic keys. |
+| policy-violation | The event or incident was a violation of organizational or regulatory policy. |
+| ransomware | This incident involved malware that encrypted data with a demand that a ransom is paid to regain access to it. |
+| ransomware-payment | The event or incident associated with actually paying a ransom. |
+| refuted | The event was previously suspected to have achieved a goal, but this has since been refuted. |
+| scan-probe | Event was triggered based on scanning activity |
+| silently-discarded | The event was silently discarded due to resource constraints, information types or external reasons. |
+| supply-chain-customer | This incident used a vendor further up in the supply chain where the target was a customer. |
+| supply-chain-vendor | This incident targeted a system or product that is supplied to others to enable further attacks. |
+| spam | Sending an email message that was unsolicited or unwanted by the recipient. |
+| sql-injection | Manipulation or reading of information contained in a database by using the SQL injection technique. |
+| sql-injection-attempt | Unsuccessful attempt to manipulate or read the information of a database by using the SQL injection technique. |
+| successful | The event is believed to have succeeded in its goal. |
+| system-probe | Single system scan searching for open ports or services using these ports for responding. |
+| theft-access-credentials | Unauthorized access to a system or component by using stolen access credentials. |
+| unattributed | This event or incident has not been attributed. It is unclear if it is tied to a specific advanced persistent threat group. |
+| unauthorized-access-information | Unauthorized access to a set of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts. |
+| unauthorized-access-system | Unauthorized access to a system or component. |
+| unauthorized-equipment | Usage of unauthorized devices as part of the incident |
+| unauthorized-release | The unauthorized release of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts. |
+| unauthorized-use | The usage of information that falls outside of official purposes |
+| undetermined | Field aimed at the classification of unprocessed events, which have remained undetermined from the beginning. |
+| unintentional | The event was due to unintentional activity. |
+| unknown-apt | This incident is believed to involve an advanced persistent threat, but the specific APT is unknown. |
+| unspecified | Other unlisted events. |
+| vandalism | Logical and physical activities which - although they are not aimed at causing damage to information or at preventing its transmission among systems - have this effect. |
+| wiretapping | Logical or physical interception of communications. |
+| worm-spreading | System infected by a worm trying to infect other systems. |
+| xss | Attacks performed with the use of cross-site scripting techniques. |
+| xss-attempt | Unsuccessful attempts to perform attacks by using cross-site scripting techniques. |
 
 ## 10.11 Extension Type Enumeration <a id="extension-type-enumeration"></a>
 
@@ -12580,135 +12778,6 @@ This vocabulary describes the type of entity that the Identity represents: wheth
   </tr>
 </table>
 
-## 10.9 Event Status Enumeration <a id="event-status-enumeration"></a>
-
-**Type Name:** event-status-enum
-
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| ongoing | The event is still occurring. |
-| occurred | The event took place and is no longer ongoing. |
-| not-occurred | The event did not take place, but it was previously expected to. |
-| pending | The event has not yet been started or observed, but it is projected or otherwise planned. Pending activity may never occur as various factors can cause it to be blocked or not attempted. As such any time or sequence values for pending activities should be treated as an estimation or projection that is subject to change. |
-| undetermined | The status of the event has not been determined or is not shareable. |
-
-## 10.17 Incident Confidentiality Loss Enumeration <a id="incident-confidentiality-loss-enumeration"></a>
-
-**Type Name:** incident-confidentiality-loss-enum
-
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| confirmed-loss | Information has been exfiltrated and is now available to the attacker, but it is unknown if it has been misused. |
-| contained | Information’s confidentiality was compromised, but the spill was within an environment that allowed it to be effectively contained. For example: a sensitive data spill occurred within a controlled network allowing it to be resolved before information exited the organization. |
-| exploited-loss | Information has been exfiltrated and has been actively misused by the attacker. |
-| none | This information type was not compromised based on the investigation that was performed. This option should be used to affirmatively supply this information when necessary. |
-| suspected-loss | It is suspected but not confirmed that the attacker may have gained access to this information. |
-| unknown | It is unknown if the attacker may have gained access to this information. |
-
-## 10.10 Event Type Vocabulary <a id="event-type-vocabulary"></a>
-
-This vocabulary draws for numerous sources including heavily from MISP taxonomies.
-
-These include:
-
-1. [FIRST DNS Abuse Techniques Matrix](https://www.misp-project.org/galaxy.html#_first_dns_abuse_techniques_matrix)
-2. [Europol type of events taxonomy](https://www.misp-project.org/taxonomies.html#_europol_event).
-3. [Europol type of incidents taxonomy](https://www.misp-project.org/taxonomies.html#_europol_incident)
-4. NIST 800-61 Rev. 2
-
-**Type Name:** event-type-ov
-
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| aggregation-information-phishing-schemes | Collecting data obtained through phishing attacks on web pages, email accounts, etc…​ |
-| benign | The event was neither dangerous nor malicious and was not suspected to be malicious or dangerous. |
-| blocked | The event was suspected to be malicious and was blocked. |
-| brute-force-attempt | Unsuccessful login attempt by using sequential credentials for gaining access to the system. |
-| c&c-server-hosting | Web page disseminating one or various types of malware. |
-| compromised-system | Attackers obtained control of a compromised system. |
-| confirmed | The event was confirmed to be tied to an incident and response is underway. |
-| connection-malware-port | System attempting to gain access to a port normally linked to a specific type of malware. |
-| connection-malware-system | System attempting to gain access to an IP address or URL normally linked to a specific type of malware, e.g. C&C or a distribution page for components linked to a specific botnet. |
-| content-forbidden-by-law | Distribution or sharing of illegal content such as child pornography, racism, xenophobia, etc…​ |
-| control-system-bypass | Unauthorized access to a system or component by bypassing an access control system in place. |
-| copyrighted-content | Distribution or sharing of content protected by copyright and related rights. |
-| data-exfiltration | Unauthorized access to and sharing of a specific set of information. |
-| deferred | The event is deferred due to resource constraints, information types or external reasons. |
-| deletion-information | Unauthorized deleting of a specific set of information. |
-| denial-of-service | The event or incident resulted in a loss of availability for a service or system. Incidents of this type **SHOULD** have an availability impact, but organizations may choose to not share the details of these impacts. |
-| destruction | The event or incident destroyed data or systems. Incidents of this **SHOULD** have an integrity impact, but organizations may choose to not share the details of these impacts. |
-| dictionary-attack-attempt | Unsuccessful login attempt by using system access credentials previously loaded into a dictionary. |
-| discarded | The event was discarded due to resource constraints, information types or external reasons. |
-| disruption-data-transmission | Logical and physical activities aimed at causing damage to information or at preventing its transmission among systems. |
-| dissemination-malware-email | Malware attached to a message or email message containing link to malicious URL. |
-| dissemination-phishing-emails | Mass emailing aimed at collecting data for phishing purposes with regard to the victims. |
-| dns-cache-poisoning | DNS cache poisoning - also known as DNS spoofing, is a type of cyber attack in which an attacker corrupts a DNS resolver’s cache by injecting false DNS records, causing the resolver to records controlled by the attacker. |
-| dns-local-resolver-hijacking | Consumer Premise Equipment (CPE), such as home routers, often provide DNS recursion on the local network. If the CPE device is compromised, the attacker can change the recursive resolver behavior; for example, by changing responses. |
-| dns-spoofing-registered | In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is in fact controlled by or registered to a legitimate registrant. |
-| dns-rebinding | DNS rebinding - a type of attack where a malicious website directs a client to a local network address, allowing the attacker to bypass the same-origin policy and gain access to the victim’s local resources. |
-| dns-server-compromise | Attacker gains administrative privileges on an open recursive DNS server, authoritative DNS server, organizational recursive DNS server, or ISP-operated recursive DNS server. |
-| dns-spoofing-unregistered | In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is not controlled by or registered to a legitimate registrant. |
-| dns-stub-resolver-hijacking | The attacker compromises the Operating System of a computer or a phone with malicious code that intercepts and responds to DNS queries with rogue or malicious responses. |
-| dns-zone-transfer | Transfer of a specific DNS zone. |
-| domain-name-compromise | The wrongfully taking control of a domain name from the rightful name holder. Compromised domains can be used for different kinds of malicious activity like sending spam or phishing, for distributing malware or as botnet command and control. |
-| duplicate | This event is a duplicate of another event. A relationship should be created between this event and the event it duplicates. |
-| email-flooding | Sending an unusually large quantity of email messages. |
-| equipment-loss | A loss of control of physical equipment that is not known to be theft. |
-| equipment-theft | Theft of equipment. In general this should be paired with equipment-loss. |
-| exploit | Successful use of a tool exploiting a specific vulnerability of the system. |
-| exploit-attempt | Unsuccessful use of a tool exploiting a specific vulnerability of the system. |
-| exploit-framework-exhausting-resources | Various sources using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability. |
-| exploit-tool-exhausting-resources | One single source using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability. |
-| failed | The event failed its suspected goal. |
-| file-inclusion | Inclusion of files into a system under attack with the use of file inclusion techniques. |
-| file-inclusion-attempt | Unsuccessful attempt to include files in the system under attack by using file inclusion techniques. |
-| hosting-malware-webpage | Web page disseminating one or various types of malware. |
-| hosting-phishing-sites | Hosting web sites for phishing purposes. |
-| illegitimate-use-name | Using the name of an institution without permission to do so. |
-| illegitimate-use-resources | Use of institutional resources for purposes other than those intended. |
-| infected-by-known-malware | The presence of any of the types of malware was detected in a system. |
-| insufficient-data | Not enough data is available to assess this event. |
-| known-malware | This incident involves a known type of malware. Events and incidents **SHOULD** be related to a Malware object, but organizations may choose not to share the details on this malware. |
-| lame-delegations | Lame delegations occur as a result of expired name server domains allowing attackers to take control of the domain resolution by re-registering this expired name server domain. |
-| major | The incident is classified as major based on the internal criteria within the organization or due to external reporting requirements. |
-| modification-information | Unauthorized changes to a specific set of information. |
-| misconfiguration | A false positive where this event was triggered by a misconfiguration. |
-| natural | The event was due to natural causes such as an earthquake or hurricane. |
-| negotiation | Negotiation of a deal or payment amount. |
-| network-scanning | Scanning a network aimed at identifying systems which are active in the same network. |
-| no-apt | It is not believed that this incident involved an advanced persistent threat. |
-| packet-flood | Mass mailing of requests (network packets, emails, etc…​) from various sources to a specific service, aimed at affecting its normal functioning. |
-| password-cracking-attempt | Attempt to acquire access credentials by breaking the protective cryptographic keys. |
-| policy-violation | The event or incident was a violation of organizational or regulatory policy. |
-| ransomware | This incident involved malware that encrypted data with a demand that a ransom is paid to regain access to it. |
-| ransomware-payment | The event or incident associated with actually paying a ransom. |
-| refuted | The event was previously suspected to have achieved a goal, but this has since been refuted. |
-| scan-probe | Event was triggered based on scanning activity |
-| silently-discarded | The event was silently discarded due to resource constraints, information types or external reasons. |
-| supply-chain-customer | This incident used a vendor further up in the supply chain where the target was a customer. |
-| supply-chain-vendor | This incident targeted a system or product that is supplied to others to enable further attacks. |
-| spam | Sending an email message that was unsolicited or unwanted by the recipient. |
-| sql-injection | Manipulation or reading of information contained in a database by using the SQL injection technique. |
-| sql-injection-attempt | Unsuccessful attempt to manipulate or read the information of a database by using the SQL injection technique. |
-| successful | The event is believed to have succeeded in its goal. |
-| system-probe | Single system scan searching for open ports or services using these ports for responding. |
-| theft-access-credentials | Unauthorized access to a system or component by using stolen access credentials. |
-| unattributed | This event or incident has not been attributed. It is unclear if it is tied to a specific advanced persistent threat group. |
-| unauthorized-access-information | Unauthorized access to a set of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts. |
-| unauthorized-access-system | Unauthorized access to a system or component. |
-| unauthorized-equipment | Usage of unauthorized devices as part of the incident |
-| unauthorized-release | The unauthorized release of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts. |
-| unauthorized-use | The usage of information that falls outside of official purposes |
-| undetermined | Field aimed at the classification of unprocessed events, which have remained undetermined from the beginning. |
-| unintentional | The event was due to unintentional activity. |
-| unknown-apt | This incident is believed to involve an advanced persistent threat, but the specific APT is unknown. |
-| unspecified | Other unlisted events. |
-| vandalism | Logical and physical activities which - although they are not aimed at causing damage to information or at preventing its transmission among systems - have this effect. |
-| wiretapping | Logical or physical interception of communications. |
-| worm-spreading | System infected by a worm trying to infect other systems. |
-| xss | Attacks performed with the use of cross-site scripting techniques. |
-| xss-attempt | Unsuccessful attempts to perform attacks by using cross-site scripting techniques. |
-
 ## 10.16 Implementation Language Vocabulary <a id="implementation-language-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">implementation-language-ov</span>
@@ -12822,6 +12891,19 @@ This is a non-exhaustive, open vocabulary that covers common programming languag
   </tr>
 </table>
 
+## 10.17 Incident Confidentiality Loss Enumeration <a id="incident-confidentiality-loss-enumeration"></a>
+
+**Type Name:** incident-confidentiality-loss-enum
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| confirmed-loss | Information has been exfiltrated and is now available to the attacker, but it is unknown if it has been misused. |
+| contained | Information’s confidentiality was compromised, but the spill was within an environment that allowed it to be effectively contained. For example: a sensitive data spill occurred within a controlled network allowing it to be resolved before information exited the organization. |
+| exploited-loss | Information has been exfiltrated and has been actively misused by the attacker. |
+| none | This information type was not compromised based on the investigation that was performed. This option should be used to affirmatively supply this information when necessary. |
+| suspected-loss | It is suspected but not confirmed that the attacker may have gained access to this information. |
+| unknown | It is unknown if the attacker may have gained access to this information. |
+
 ## 10.18 Incident Determination Enumeration <a id='incident-determination-enumeration'></a>
 
 **Type Name:** <span class="stixtype">incident-determination-enum</span>
@@ -12897,25 +12979,7 @@ Indicator type is an open vocabulary used to categorize Indicators. It is intend
   </tr>
 </table>
 
-## 10.21 Information Type Vocabulary <a id='information-type-vocabulary'></a><a id='information-type-ov'></a>
-
-**Type Name:** <span class="stixtype">information-type-ov</span>
-
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| classified-material | Data classified based on relevant government authorities. |
-| communication | Communication records including emails, chats and instant messages. |
-| credentials-admin | Administrative credential data. |
-| credentials-user | User credential data. |
-| financial | Financial records including purchasing activity and planned activities. |
-| legal | Legal records that are not yet public including contracts under negotiation and documents protected under legal privilege. |
-| payment | Payment information. |
-| phi | Protected Health Information. |
-| pii | Personally Identifiable Information. |
-| proprietary | Proprietary information e.g., intellectual property. |
-| system | Information necessary to keep a system operational. The destruction or encryption of this data can cause availability impacts. |
-
-## 10.22 Industry Sector Vocabulary <a id="industry-sector-vocabulary"></a><a id='industry-sector-ov'></a>
+## 10.21 Industry Sector Vocabulary <a id="industry-sector-vocabulary"></a><a id='industry-sector-ov'></a>
 
 **Vocabulary Name:** <span class="stixtype">industry-sector-ov</span>
 
@@ -13080,7 +13144,25 @@ Industry sector is an open vocabulary that describes industrial and commercial s
   </tr>
 </table>
 
-## 10.24 Infrastructure Type Vocabulary <a id="infrastructure-type-vocabulary"></a>
+## 10.22 Information Type Vocabulary <a id='information-type-vocabulary'></a><a id='information-type-ov'></a>
+
+**Type Name:** <span class="stixtype">information-type-ov</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| classified-material | Data classified based on relevant government authorities. |
+| communication | Communication records including emails, chats and instant messages. |
+| credentials-admin | Administrative credential data. |
+| credentials-user | User credential data. |
+| financial | Financial records including purchasing activity and planned activities. |
+| legal | Legal records that are not yet public including contracts under negotiation and documents protected under legal privilege. |
+| payment | Payment information. |
+| phi | Protected Health Information. |
+| pii | Personally Identifiable Information. |
+| proprietary | Proprietary information e.g., intellectual property. |
+| system | Information necessary to keep a system operational. The destruction or encryption of this data can cause availability impacts. |
+
+## 10.23 Infrastructure Type Vocabulary <a id="infrastructure-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">infrastructure-type-ov</span>
 
@@ -13164,6 +13246,21 @@ A non-exhaustive enumeration of infrastructure types.
     <td>Specifies an infrastructure of some unknown type.</td>
   </tr>
 </table>
+
+## 10.24 Integrity Alteration Enumeration <a id='integrity-alteration-enumeration'></a>
+
+**Type Name:** integrity-alteration-enum
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| potential-destruction | Information may have been destroyed within the system. |
+| potential-modification | Information may have been modified within the system. |
+| partial-destruction | Some data of this type has been destroyed, but sufficient data remains to allow partial functionality. |
+| partial-modification | Some data in the system has been modified, but the remaining data is of an acceptable level of integrity for operations to continue. |
+| full-destruction | Sufficient data of this type was destroyed to render the system inoperable until recovery can be completed. |
+| full-modification | Sufficient data of this type was modified to render the system inoperable until recovery can be completed. |
+| none | There is no evidence of destruction or modification of this data type in the system. |
+| unknown | It is unknown if destruction or modification of this data type in the system has occurred. |
 
 ## 10.25 Malware Capabilities Vocabulary <a id="malware-capabilities-vocabulary"></a>
 
@@ -13497,7 +13594,7 @@ Malware type is an open vocabulary that represents different types and functions
   </tr>
 </table>
 
-## 10.28 Network Socket Address Family Enumeration <a id=network-socket-address-family-enumeration></a>
+## 10.28 Network Socket Address Family Enumeration <a id="network-socket-address-family-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">network-socket-address-family-enum</span>
 
@@ -13644,19 +13741,7 @@ This enumeration captures a degree of agreement with the information in a STIX O
   </tr>
 </table>
 
-## 10.31 Physical Impact Enumeration <a id='physical-impact-enumeration'></a><a id='physical-impact-enum'></a>
-
-**Type Name:** <span class="stixtype">physical-impact-enum</span>
-
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| damaged-functional | The property, asset or system was damaged but still remains functional and repair may be possible. |
-| damaged-nonfunctional | The property, asset or system was damaged and does not remain functional, but repair may be possible. |
-| destruction | The property, asset or system was destroyed, cannot be repaired and no longer functions. In some cases destroyed assets can be rebuilt, but doing so involves a similar amount of effort as the original construction. |
-| none | No damage or destruction has occurred. |
-| unknown | The degree of damage has not been determined yet. |
-
-## 10.32 Pattern Type Vocabulary <a id="pattern-type-vocabulary"></a><a id='pattern-type-ov'></a>
+## 10.31 Pattern Type Vocabulary <a id="pattern-type-vocabulary"></a><a id='pattern-type-ov'></a>
 
 **Vocabulary Name:** <span class="stixtype">pattern-type-ov</span>
 
@@ -13704,6 +13789,18 @@ This is a non-exhaustive, open vocabulary that covers common pattern languages a
     <td>Specifies the YARA language [<a href="#yara">YARA</a>].</td>
   </tr>
 </table>
+
+## 10.32 Physical Impact Enumeration <a id='physical-impact-enumeration'></a><a id='physical-impact-enum'></a>
+
+**Type Name:** <span class="stixtype">physical-impact-enum</span>
+
+| **Vocabulary Value** | **Description** |
+| --- | --- |
+| damaged-functional | The property, asset or system was damaged but still remains functional and repair may be possible. |
+| damaged-nonfunctional | The property, asset or system was damaged and does not remain functional, but repair may be possible. |
+| destruction | The property, asset or system was destroyed, cannot be repaired and no longer functions. In some cases destroyed assets can be rebuilt, but doing so involves a similar amount of effort as the original construction. |
+| none | No damage or destruction has occurred. |
+| unknown | The degree of damage has not been determined yet. |
 
 ## 10.33 Processor Architecture Vocabulary <a id="processor-architecture-vocabulary"></a>
 
@@ -14042,7 +14139,114 @@ Report type is an open vocabulary to describe the primary purpose or subject of 
 | routine-updates | Performed a routine update in the environment including patching. |
 | victim-notification | Notified victims, potentially impacted individuals or organizations about the incident. |
 
-## 10.40 Threat Actor Type Vocabulary <a id="threat-actor-type-vocabulary"></a>
+## 10.40 Threat Actor Role Vocabulary <a id="threat-actor-role-vocabulary"></a>
+
+**Vocabulary Name:** <span class="stixtype">threat-actor-role-ov</span>
+
+The threat actor role vocabulary is currently used in the following SDO(s):
+- Threat Actor
+
+Threat actor role is an open vocabulary that is used to describe the different roles that a threat actor can play. For example, some threat actors author malware or operate botnets while other actors actually carry out attacks directly.
+
+Threat actor roles are not mutually exclusive. For example, an actor can be both a financial backer for attacks and also direct attacks.
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class='stixtr'>Vocabulary Summary</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">agent</span>, <span class="stixliteral">director</span>, <span class="stixliteral">independent</span>, <span class="stixliteral">infrastructure-architect</span>, <span class="stixliteral">infrastructure-operator</span>, <span class="stixliteral">malware-author</span>, <span class="stixliteral">sponsor</span></td>
+  </tr>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Vocabulary Value</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">agent</span></td>
+    <td>Threat actor executes attacks either on behalf of themselves or at the direction of someone else.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">director</span></td>
+    <td>The threat actor who directs the activities, goals, and objectives of the malicious activities.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">independent</span></td>
+    <td>A threat actor acting by themselves.</td>
+  </tr>
+  <tr>
+    <td><span style="white-space: nowrap;"><span class="stixliteral">infrastructure-architect</span></span></td>
+    <td>Someone who designs the battle space.</td>
+  </tr>
+  <tr>
+    <td><span style="white-space: nowrap;"><span class="stixliteral">infrastructure-operator</span></span></td>
+    <td>The threat actor who provides and supports the attack infrastructure that is used to deliver the attack (botnet providers, cloud services, etc.).</td>
+  </tr>
+  <tr>
+    <td><span style="white-space: nowrap;"><span class="stixliteral">malware-author</span></span></td>
+    <td>The threat actor who authors malware or other malicious tools.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">sponsor</span></td>
+    <td>The threat actor who funds the malicious activities.</td>
+  </tr>
+</table>
+
+## 10.41 Threat Actor Sophistication Vocabulary <a id="threat-actor-sophistication-vocabulary"></a>
+
+**Vocabulary Name:** <span class="stixtype">threat-actor-sophistication-ov</span>
+
+Threat actor sophistication vocabulary is currently used in the following SDO(s):
+- Threat Actor
+
+Threat actor sophistication vocabulary captures the skill level of a threat actor. It ranges from "none", which describes a complete novice, to "strategic", which describes an attacker who is able to influence supply chains to introduce vulnerabilities. This vocabulary is separate from resource level because an innovative, highly-skilled threat actor may have access to very few resources while a minimal-level actor might have the resources of an organized crime ring.
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class='stixtr'>Vocabulary Summary</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">none</span>, <span class="stixliteral">minimal</span>, <span class="stixliteral">intermediate</span>, <span class="stixliteral">advanced</span>, <span class="stixliteral">expert</span>, <span class="stixliteral">innovator</span>, <span class="stixliteral">strategic</span></td>
+  </tr>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Vocabulary Value</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">none</span></td>
+    <td>Can carry out random acts of disruption or destruction by running tools they do not understand. Actors in this category have average computer skills.<br><br>Example Roles: Average User <br><br>These actors: <br>- can not launch targeted attacks</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">minimal</span></td>
+    <td>Can minimally use existing and frequently well known and easy-to-find techniques and programs or scripts to search for and exploit weaknesses in other computers. Commonly referred to as a script-kiddie.<br><br>These actors rely on others to develop the malicious tools, delivery mechanisms, and execution strategy and often do not fully understand the tool they are using or how they work. They also lack the ability to conduct their own reconnaissance and targeting research.<br><br>Example Roles: Script-Kiddie<br><br>These actors:<br>- attack known weaknesses;<br>- use well known scripts and tools; and<br>- have minimal knowledge of the tools.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">intermediate</span></td>
+    <td>Can proficiently use existing attack frameworks and toolkits to search for and exploit vulnerabilities in computers or systems. Actors in this category have computer skills equivalent to an IT professional and typically have a working knowledge of networks, operating systems, and possibly even defensive techniques and will typically exhibit some operational security.<br><br>These actors rely others to develop the malicious tools and delivery mechanisms but are able to plan their own execution strategy. They are proficient in the tools they are using and how they work and can even make minimal modifications as needed.<br><br>Example Roles: Toolkit User<br><br>These actors:<br>- attack known vulnerabilities;<br>- use attack frameworks and toolkits; and<br>- have proficient knowledge of the tools.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">advanced</span></td>
+    <td>Can develop their own tools or scripts from publicly known vulnerabilities to target systems and users. Actors in this category are very adept at IT systems and have a background in software development along with a solid understanding of defensive techniques and operational security.<br><br>These actors rely on others to find and identify weaknesses and vulnerabilities in systems, but are able to create their own tools, delivery mechanisms, and execution strategies.<br><br>Example Roles: Toolkit Developer<br><br>These actors:<br>- attack known vulnerabilities;<br>- can create their own tools; and<br>- have proficient knowledge of the tools.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">expert</span></td>
+    <td>Can focus on the discovery and use of unknown malicious code, are is adept at installing user and kernel mode rootkits, frequently use data mining tools, target corporate executives and key users (government and industry) for the purpose of stealing personal and corporate data. Actors in this category are very adept at IT systems and software development and are experts with security systems, defensive techniques, attack methods, and operational security.<br><br>Example Roles: Vulnerability Researcher, Reverse Engineer, Threat Researcher, Malware Creator<br><br>These actors:<br>- attack unknown and known vulnerabilities;<br>- can create their own tools from scratch; and<br>- have proficient knowledge of the tools.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">innovator</span></td>
+    <td>Typically, organized, highly technical, proficient, well-funded professionals working in teams to discover new vulnerabilities and develop exploits.<br><br>Demonstrates sophisticated capability. An innovator has the ability to create and script unique programs and codes targeting virtually any form of technology. At this level, this actor has a deep knowledge of networks, operating systems, programming languages, firmware, and infrastructure topologies and will demonstrate operational security when conducting his activities. Innovators are largely responsible for the discovery of 0-day vulnerabilities and the development of new attack techniques.<br><br>Example Roles: Toolkit Innovator, 0-Day Exploit Author<br><br>These actors:<br>- attack unknown and known vulnerabilities;<br>- create attacks against 0-Day exploits from scratch; and<br>- create new and innovative attacks and toolkits.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">strategic</span></td>
+    <td>State actors who create vulnerabilities through an active program to "influence" commercial products and services during design, development or manufacturing, or with the ability to impact products while in the supply chain to enable exploitation of networks and systems of interest.<br><br>These actors:<br>- can create or use entire supply chains to launch an attack;<br>- can create and design attacks for any systems, software package, or device; and<br>- are responsible for APT-level attacks.</td>
+  </tr>
+</table>
+
+## 10.42 Threat Actor Type Vocabulary <a id="threat-actor-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">threat-actor-type-ov</span>
 
@@ -14116,113 +14320,6 @@ Threat actor type is an open vocabulary used to describe what type of threat act
   <tr>
     <td><span class="stixliteral">unknown</span></td>
     <td>There is not enough information available to determine the type of threat actor.</td>
-  </tr>
-</table>
-
-## 10.41 Threat Actor Role Vocabulary <a id="threat-actor-role-vocabulary"></a>
-
-**Vocabulary Name:** <span class="stixtype">threat-actor-role-ov</span>
-
-The threat actor role vocabulary is currently used in the following SDO(s):
-- Threat Actor
-
-Threat actor role is an open vocabulary that is used to describe the different roles that a threat actor can play. For example, some threat actors author malware or operate botnets while other actors actually carry out attacks directly.
-
-Threat actor roles are not mutually exclusive. For example, an actor can be both a financial backer for attacks and also direct attacks.
-
-<table border="1" cellspacing="0" cellpadding="6" width="100%">
-  <tr>
-    <th><span class='stixtr'>Vocabulary Summary</span></th>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">agent</span>, <span class="stixliteral">director</span>, <span class="stixliteral">independent</span>, <span class="stixliteral">infrastructure-architect</span>, <span class="stixliteral">infrastructure-operator</span>, <span class="stixliteral">malware-author</span>, <span class="stixliteral">sponsor</span></td>
-  </tr>
-
-<table border="1" cellspacing="0" cellpadding="6" width="100%">
-  <tr>
-    <th><span class="stixtr">Vocabulary Value</span></th>
-    <th><span class="stixtr">Description</span></th>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">agent</span></td>
-    <td>Threat actor executes attacks either on behalf of themselves or at the direction of someone else.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">director</span></td>
-    <td>The threat actor who directs the activities, goals, and objectives of the malicious activities.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">independent</span></td>
-    <td>A threat actor acting by themselves.</td>
-  </tr>
-  <tr>
-    <td><span style="white-space: nowrap;"><span class="stixliteral">infrastructure-architect</span></span></td>
-    <td>Someone who designs the battle space.</td>
-  </tr>
-  <tr>
-    <td><span style="white-space: nowrap;"><span class="stixliteral">infrastructure-operator</span></span></td>
-    <td>The threat actor who provides and supports the attack infrastructure that is used to deliver the attack (botnet providers, cloud services, etc.).</td>
-  </tr>
-  <tr>
-    <td><span style="white-space: nowrap;"><span class="stixliteral">malware-author</span></span></td>
-    <td>The threat actor who authors malware or other malicious tools.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">sponsor</span></td>
-    <td>The threat actor who funds the malicious activities.</td>
-  </tr>
-</table>
-
-## 10.42 Threat Actor Sophistication Vocabulary <a id="threat-actor-sophistication-vocabulary"></a>
-
-**Vocabulary Name:** <span class="stixtype">threat-actor-sophistication-ov</span>
-
-Threat actor sophistication vocabulary is currently used in the following SDO(s):
-- Threat Actor
-
-Threat actor sophistication vocabulary captures the skill level of a threat actor. It ranges from "none", which describes a complete novice, to "strategic", which describes an attacker who is able to influence supply chains to introduce vulnerabilities. This vocabulary is separate from resource level because an innovative, highly-skilled threat actor may have access to very few resources while a minimal-level actor might have the resources of an organized crime ring.
-
-<table border="1" cellspacing="0" cellpadding="6" width="100%">
-  <tr>
-    <th><span class='stixtr'>Vocabulary Summary</span></th>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">none</span>, <span class="stixliteral">minimal</span>, <span class="stixliteral">intermediate</span>, <span class="stixliteral">advanced</span>, <span class="stixliteral">expert</span>, <span class="stixliteral">innovator</span>, <span class="stixliteral">strategic</span></td>
-  </tr>
-</table>
-
-<table border="1" cellspacing="0" cellpadding="6" width="100%">
-  <tr>
-    <th><span class="stixtr">Vocabulary Value</span></th>
-    <th><span class="stixtr">Description</span></th>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">none</span></td>
-    <td>Can carry out random acts of disruption or destruction by running tools they do not understand. Actors in this category have average computer skills.<br><br>Example Roles: Average User <br><br>These actors: <br>- can not launch targeted attacks</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">minimal</span></td>
-    <td>Can minimally use existing and frequently well known and easy-to-find techniques and programs or scripts to search for and exploit weaknesses in other computers. Commonly referred to as a script-kiddie.<br><br>These actors rely on others to develop the malicious tools, delivery mechanisms, and execution strategy and often do not fully understand the tool they are using or how they work. They also lack the ability to conduct their own reconnaissance and targeting research.<br><br>Example Roles: Script-Kiddie<br><br>These actors:<br>- attack known weaknesses;<br>- use well known scripts and tools; and<br>- have minimal knowledge of the tools.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">intermediate</span></td>
-    <td>Can proficiently use existing attack frameworks and toolkits to search for and exploit vulnerabilities in computers or systems. Actors in this category have computer skills equivalent to an IT professional and typically have a working knowledge of networks, operating systems, and possibly even defensive techniques and will typically exhibit some operational security.<br><br>These actors rely others to develop the malicious tools and delivery mechanisms but are able to plan their own execution strategy. They are proficient in the tools they are using and how they work and can even make minimal modifications as needed.<br><br>Example Roles: Toolkit User<br><br>These actors:<br>- attack known vulnerabilities;<br>- use attack frameworks and toolkits; and<br>- have proficient knowledge of the tools.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">advanced</span></td>
-    <td>Can develop their own tools or scripts from publicly known vulnerabilities to target systems and users. Actors in this category are very adept at IT systems and have a background in software development along with a solid understanding of defensive techniques and operational security.<br><br>These actors rely on others to find and identify weaknesses and vulnerabilities in systems, but are able to create their own tools, delivery mechanisms, and execution strategies.<br><br>Example Roles: Toolkit Developer<br><br>These actors:<br>- attack known vulnerabilities;<br>- can create their own tools; and<br>- have proficient knowledge of the tools.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">expert</span></td>
-    <td>Can focus on the discovery and use of unknown malicious code, are is adept at installing user and kernel mode rootkits, frequently use data mining tools, target corporate executives and key users (government and industry) for the purpose of stealing personal and corporate data. Actors in this category are very adept at IT systems and software development and are experts with security systems, defensive techniques, attack methods, and operational security.<br><br>Example Roles: Vulnerability Researcher, Reverse Engineer, Threat Researcher, Malware Creator<br><br>These actors:<br>- attack unknown and known vulnerabilities;<br>- can create their own tools from scratch; and<br>- have proficient knowledge of the tools.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">innovator</span></td>
-    <td>Typically, organized, highly technical, proficient, well-funded professionals working in teams to discover new vulnerabilities and develop exploits.<br><br>Demonstrates sophisticated capability. An innovator has the ability to create and script unique programs and codes targeting virtually any form of technology. At this level, this actor has a deep knowledge of networks, operating systems, programming languages, firmware, and infrastructure topologies and will demonstrate operational security when conducting his activities. Innovators are largely responsible for the discovery of 0-day vulnerabilities and the development of new attack techniques.<br><br>Example Roles: Toolkit Innovator, 0-Day Exploit Author<br><br>These actors:<br>- attack unknown and known vulnerabilities;<br>- create attacks against 0-Day exploits from scratch; and<br>- create new and innovative attacks and toolkits.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">strategic</span></td>
-    <td>State actors who create vulnerabilities through an active program to "influence" commercial products and services during design, development or manufacturing, or with the ability to impact products while in the supply chain to enable exploitation of networks and systems of interest.<br><br>These actors:<br>- can create or use entire supply chains to launch an attack;<br>- can create and design attacks for any systems, software package, or device; and<br>- are responsible for APT-level attacks.</td>
   </tr>
 </table>
 
@@ -14511,48 +14608,7 @@ An enumeration of Windows service start types.
   </tr>
 </table>
 
-## 10.50 Windows™ Service Type Enumeration <a id="windows-service-type-enumeration"></a>
-
-**Enumeration Name:** <span class="stixtype">windows-service-type-enum</span>
-
-The Windows service type vocabulary is currently used in the following SCO(s):
-- Process (Windows Service extension)
-
-An enumeration of Windows service types.
-
-<table border="1" cellspacing="0" cellpadding="6" width="100%">
-  <tr>
-    <th><span class='stixtr'>Enumeration Summary</span></th>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">SERVICE_KERNEL_DRIVER</span>, <span class="stixliteral">SERVICE_FILE_SYSTEM_DRIVER</span>, <span class="stixliteral">SERVICE_WIN32_OWN_PROCESS</span>, <span class="stixliteral">SERVICE_WIN32_SHARE_PROCESS</span></td>
-  </tr>
-</table>
-
-<table border="1" cellspacing="0" cellpadding="6" width="100%">
-  <tr>
-    <th><span class="stixtr">Enumeration Value</span></th>
-    <th><span class="stixtr">Description</span></th>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">SERVICE_KERNEL_DRIVER</span></td>
-    <td>The service is a device driver.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">SERVICE_FILE_SYSTEM_DRIVER</span></td>
-    <td>The service is a file system driver.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">SERVICE_WIN32_OWN_PROCESS</span></td>
-    <td>The service runs in its own process.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">SERVICE_WIN32_SHARE_PROCESS</span></td>
-    <td>The service shares a process with other services.</td>
-  </tr>
-</table>
-
-## 10.51 Windows™ Service Status Enumeration <a id="windows-service-status-enumeration"></a>
+## 10.50 Windows™ Service Status Enumeration <a id="windows-service-status-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">windows-service-status-enum</span>
 
@@ -14602,6 +14658,47 @@ An enumeration of Windows service statuses.
   <tr>
     <td><span class="stixliteral">SERVICE_STOPPED</span></td>
     <td>The service is not running.</td>
+  </tr>
+</table>
+
+## 10.51 Windows™ Service Type Enumeration <a id="windows-service-type-enumeration"></a>
+
+**Enumeration Name:** <span class="stixtype">windows-service-type-enum</span>
+
+The Windows service type vocabulary is currently used in the following SCO(s):
+- Process (Windows Service extension)
+
+An enumeration of Windows service types.
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class='stixtr'>Enumeration Summary</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">SERVICE_KERNEL_DRIVER</span>, <span class="stixliteral">SERVICE_FILE_SYSTEM_DRIVER</span>, <span class="stixliteral">SERVICE_WIN32_OWN_PROCESS</span>, <span class="stixliteral">SERVICE_WIN32_SHARE_PROCESS</span></td>
+  </tr>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Enumeration Value</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">SERVICE_KERNEL_DRIVER</span></td>
+    <td>The service is a device driver.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">SERVICE_FILE_SYSTEM_DRIVER</span></td>
+    <td>The service is a file system driver.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">SERVICE_WIN32_OWN_PROCESS</span></td>
+    <td>The service runs in its own process.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">SERVICE_WIN32_SHARE_PROCESS</span></td>
+    <td>The service shares a process with other services.</td>
   </tr>
 </table>
 
@@ -15066,7 +15163,7 @@ The use of these confidence scales is defined in [section 3.2](#common-propertie
 
 *DNI Scale ([ICD203](#icd-203))
 
-# Appendix B: Relationship Summary Table <a id=relationship-summary-table></a>
+# Appendix B: Relationship Summary Table <a id="relationship-summary-table"></a>
 
 This following relationship summary table is provided as a convenience. If there is a discrepancy between this table and the relationships defined with each of the SDOs, then the relationships defined with the SDOs **MUST** be viewed as authoritative.
 
@@ -15840,7 +15937,7 @@ This example adds the property **mysightingprop** to the <span class="stixtype">
 ]
 ```
 
-### C.2.4 Adding properties to an existing STIX marking definition object instance <a id=adding-properties-to-an-existing-stix-marking-definition-object-instance></a>
+### C.2.4 Adding properties to an existing STIX marking definition object instance <a id="adding-properties-to-an-existing-stix-marking-definition-object-instance"></a>
 
 This example adds the properties **additional_marking_prop** and **required_data_storage_hash** to the <span class="stixtype">marking-definition</span> object.
 
@@ -15875,7 +15972,7 @@ This example adds the properties **additional_marking_prop** and **required_data
 ]
 ```
 
-### C.2.5 Adding properties to an existing STIX language content object instance <a id=adding-properties-to-an-existing-stix-language-content-object-instance></a>
+### C.2.5 Adding properties to an existing STIX language content object instance <a id="adding-properties-to-an-existing-stix-language-content-object-instance"></a>
 
 This example adds the property **translation_engine** to the <span class="stixtype">language-content</span> object.
 
@@ -15919,7 +16016,107 @@ This example adds the property **translation_engine** to the <span class="stixty
 ]
 ```
 
-# Appendix D: IANA Considerations <a id="iana-considerations"></a>
+# Appendix D: [Incident Availability Impact Mapping] <a id="availability-impact-mapping"></a>
+
+This appendix defines mappings for availability and functional scales to be used by the availability impact property. A value of "Not Specified" in the table below means that the criticality property is not present.
+
+| **US-CERT** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| No Impact | 0 | 0 |
+| No Impact to Services | 5 | 1-9 |
+| Minimal Impact to Non-Critical Services | 15 | 10-19 |
+| Minimal Impact to Critical Services | 30 | 20-39 |
+| Significant Impact to Non-Critical Services | 50 | 40-59 |
+| Denial of Non-Critical Services | 65 | 60-69 |
+| Significant Impact to Critical Services | 75 | 70-79 |
+| Denial of Critical Services / Loss of Control | 90 | 80-100 |
+
+| **Simple Qualitative** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| None | 0 | 0 |
+| Minimal | 20 | 1-39 |
+| Significant | 50 | 40-59 |
+| Denial | 75 | 60-89 |
+| Loss of Control | 95 | 90-100 |
+
+| **0 to 10** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| 0 | 0 | 0-4 |
+| 1 | 10 | 5-14 |
+| 2 | 20 | 15-24 |
+| 3 | 30 | 25-34 |
+| 4 | 40 | 35-44 |
+| 5 | 50 | 45-54 |
+| 6 | 60 | 55-64 |
+| 7 | 70 | 65-74 |
+| 8 | 80 | 75-84 |
+| 9 | 90 | 85-94 |
+| 10 | 100 | 95-100 |
+
+## Appendix E. Incident Criticality Mapping <a id="criticality-mapping"></a>
+
+This appendix defines mappings for criticality scales to be used by the criticality property. A value of "Not Specified" in the table below means that the criticality property is not present.
+
+| **5 Qualitative** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| False Positive | 0 | 0 |
+| Low | 15 | 1-29 |
+| Moderate | 40 | 30-49 |
+| High | 70 | 50-89 |
+| Extreme | 95 | 90-100 |
+
+| **Major / Minor** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| None | 0 | 0 |
+| Minor | 25 | 1-49 |
+| Major | 75 | 50-100 |
+
+| **Major / Minor / Critical** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| None | 0 | 0 |
+| Minor | 25 | 1-49 |
+| Major | 70 | 50-89 |
+| Critical | 95 | 90-100 |
+
+| **None, Low, High, Extreme** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| None | 0 | 0 |
+| Low | 20 | 1-39 |
+| High | 65 | 40-89 |
+| Extreme | 95 | 90-100 |
+
+| **VERIS** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Unknown | Not Specified | N/A |
+| Insignificant | 10 | 0-19 |
+| Distracting | 35 | 20-49 |
+| Painful | 60 | 50-69 |
+| Damaging | 80 | 70-90 |
+| Catastrophic | 95 | 90-100 |
+
+| **0 to 10** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| 0 | 0 | 0-4 |
+| 1 | 10 | 5-14 |
+| 2 | 20 | 15-24 |
+| 3 | 30 | 25-34 |
+| 4 | 40 | 35-44 |
+| 5 | 50 | 45-54 |
+| 6 | 60 | 55-64 |
+| 7 | 70 | 65-74 |
+| 8 | 80 | 75-84 |
+| 9 | 90 | 85-94 |
+| 10 | 100 | 95-100 |
+
+# Appendix F: IANA Considerations <a id="iana-considerations"></a>
 
 This appendix contains the required information to register the STIX media type with IANA. While some of the information here is only for IANA, implementers of STIX should pay close attention to the security considerations and privacy considerations outlined in this appendix.
 
@@ -16009,11 +16206,11 @@ Change controller: OASIS
 
 Provisional registration: No
 
-# Appendix E: References <a id="references"></a>
+# Appendix G: References <a id="references"></a>
 
 This appendix contains the normative and informative references that are used in this document. Normative references are specific (identified by date of publication and/or edition number or version number) and Informative references are either specific or non-specific. For specific references, only the cited version applies. For non-specific references, the latest version of the reference document (including any amendments) applies. While any hyperlinks included in this appendix were valid at the time of publication, OASIS cannot guarantee their long term validity.
 
-## E.1. Normative References <a id="normative-references"></a>
+## G.1. Normative References <a id="normative-references"></a>
 
 The following documents are referenced in such a way that some or all of their content constitutes requirements of this document.
 
@@ -16128,7 +16325,7 @@ National Imagery and Mapping Agency (NIMA), Department of Defense World Geodetic
 **[X.509]** <a id="x509"></a>  
 X.509 : Information technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks, ITU, October 2016. [Online]. Available: https://www.itu.int/rec/T-REC-X.509/.
 
-## E.2. Informative References <a id="informative-references"></a>
+## G.2. Informative References <a id="informative-references"></a>
 
 The following referenced documents are not required for the application of this document but may assist the reader with regard to a particular subject area.
 
@@ -16183,7 +16380,7 @@ VERIS Community Database. (n.d.). [Online]. Available: http://veriscommunity.net
 **[YARA]** <a id="yara"></a>  
 YARA: The pattern matching swiss knife for malware researchers (and everyone else), Virus Total [Online]. Available: http://virustotal.github.io/yara/.
 
-# Appendix F: Acknowledgments <a id="acknowledgments"></a>
+# Appendix H: Acknowledgments <a id="acknowledgments"></a>
 
 **STIX Subcommitee Chairs**:
 
@@ -16475,7 +16672,7 @@ Preston Werntz, US DHS Cybersecurity and Infrastructure Security Agency (CISA)
 
 Stephen Banghart, US NIST
 
-# Appendix G: Revision History <a id="revision-history"></a>
+# Appendix I: Revision History <a id="revision-history"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -16570,7 +16767,7 @@ Stephen Banghart, US NIST
   </tr>
 </table>
 
-# Appendix H: Notices <a id="notices"></a>
+# Appendix J: Notices <a id="notices"></a>
 
 Copyright © OASIS Open 2025. All Rights Reserved.
 
