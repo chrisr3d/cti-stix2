@@ -38,10 +38,9 @@ def validate_section_numbers(content: str):
                 errors.append(f"Section {number} contains {name} which should appear before {last_name}")
             last_name = name
 
-        prefix, suffix = _split_number(number)
         running_counts[-1] += 1
-        if running_counts[-1] != suffix:
-            expected_num = ".".join(str(count) for count in running_counts)
+        expected_num = ".".join(str(count) for count in running_counts)
+        if expected_num != number:
             errors.append(f"Section number mismatch for section: {number} expected {expected_num}")
 
         if depth != len(number.split('.')):
@@ -68,6 +67,39 @@ def validate_references(content: str):
 
     return list(errors)
 
+def validate_table_of_contents(content: str):
+    errors = []
+    table_start = content.find('# Table of Contents')
+    table_end = content.find('---', table_start + 1)
+    full_table = content[table_start: table_end]
+    table_entries = re.findall(r'- ([\dA-Z]+(\.\d+)*|Appendix [A-Z])[:\.]? +\[([^\]]+)\]\(#([^)]+)\)', full_table)
+    all_sections = re.findall(r'\n#+ ([\dA-Z]+(\.\d+)*|Appendix [A-Z])[:\.]? +([^<\n]+)<a id=[\'"]([^"\']*)["\']>', content[table_end:], re.MULTILINE)
+
+    table_dict = {}
+    actual_entries = set()
+    
+    for entry in table_entries:
+        if entry[0]:
+            table_dict[entry[0]] = {
+                "title": entry[2].strip(),
+                "anchor": entry[3].strip()
+            }
+
+    for entry in all_sections:
+        actual_entries.add(entry[0])
+        if entry[0] not in table_dict:
+            errors.append(f"Section {entry[0]} is in the document but not in the table of contents.")
+        elif table_dict[entry[0]]["title"] != entry[2].strip():
+            errors.append(f"Title mismatch for section {entry[0]}: expected '{table_dict[entry[0]]['title']}', got '{entry[2].strip()}'")
+        elif table_dict[entry[0]]["anchor"] != entry[3].strip():
+            errors.append(f"Anchor mismatch for section {entry[0]}: expected '{table_dict[entry[0]]['anchor']}', got '{entry[3].strip()}'")
+
+    for entry in table_dict.keys():
+        if entry not in actual_entries:
+            errors.append(f"Section {entry} is in the table of contents but not in the document.")
+
+    return errors
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Validates Markdown Document')
     parser.add_argument("file", help="Path to the Markdown file to validate")
@@ -79,7 +111,7 @@ if __name__ == "__main__":
 
     errors.extend(validate_section_numbers(content))
     errors.extend(validate_references(content))
-
+    errors.extend(validate_table_of_contents(content))
     if len(errors) > 0:
         for error in errors:
             print(error)

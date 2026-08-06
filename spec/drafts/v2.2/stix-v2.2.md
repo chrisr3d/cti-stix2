@@ -120,7 +120,7 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
     - 1.2.11 [Transporting STIX](#transporting-stix)
     - 1.2.12 [JSON Schemas](#json-schemas)
   - 1.3 [Changes From Earlier Version](#changes-from-earlier-version)
-    - 1.3.1 [STIX 2.1 Errata 01 Changes from earlier version](#stix-21-errata-01-changes-from-earlier-version)
+    - 1.3.1 [STIX 2.1 Errata 01 Changes From Earlier Version](#stix-21-errata-01-changes-from-earlier-version)
   - 1.4 [Glossary](#glossary)
 - 2. [Common Data Types](#common-data-types)
   - 2.1 [Binary](#binary)
@@ -233,15 +233,15 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
   - 4.19 [Task](#task)
     - 4.19.1 [Properties](#task-properties)
     - 4.19.2 [Relationships](#task-relationships)
-  - 4.19 [Threat Actor](#threat-actor)
-    - 4.19.1 [Properties](#threat-actor-properties)
-    - 4.19.2 [Relationships](#threat-actor-relationships)
-  - 4.20 [Tool](#tool)
-    - 4.20.1 [Properties](#tool-properties)
-    - 4.20.2 [Relationships](#tool-relationships)
-  - 4.21 [Vulnerability](#vulnerability)
-    - 4.21.1 [Properties](#vulnerability-properties)
-    - 4.21.2 [Relationships](#vulnerability-relationships)
+  - 4.20 [Threat Actor](#threat-actor)
+    - 4.20.1 [Properties](#threat-actor-properties)
+    - 4.20.2 [Relationships](#threat-actor-relationships)
+  - 4.21 [Tool](#tool)
+    - 4.21.1 [Properties](#tool-properties)
+    - 4.21.2 [Relationships](#tool-relationships)
+  - 4.22 [Vulnerability](#vulnerability)
+    - 4.22.1 [Properties](#vulnerability-properties)
+    - 4.22.2 [Relationships](#vulnerability-relationships)
 - 5. [STIX Relationship Objects](#stix-relationship-objects)
   - 5.1 [Relationship](#relationship)
     - 5.1.1 [Specification-Defined Relationships Summary](#specification-defined-relationships-summary)
@@ -277,10 +277,10 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
       - 6.7.4.1 [Properties](#pdf-file-extension-properties)
     - 6.7.5 [Raster Image File Extension](#raster-image-file-extension)
       - 6.7.5.1 [Properties](#raster-image-file-extension-properties)
-    - 6.7.6 [Windows PE Binary File Extension](#windows-pe-binary-file-extension)
+    - 6.7.6 [Windows™ PE Binary File Extension](#windows-pe-binary-file-extension)
       - 6.7.6.1 [Properties](#windows-pe-binary-file-extension-properties)
-      - 6.7.6.2 [Windows PE Optional Header Type](#windows-pe-optional-header-type)
-      - 6.7.6.3 [Windows PE Section Type](#windows-pe-section-type)
+      - 6.7.6.2 [Windows™ PE Optional Header Type](#windows-pe-optional-header-type)
+      - 6.7.6.3 [Windows™ PE Section Type](#windows-pe-section-type)
   - 6.8 [IPv4 Address Object](#ipv4-address-object)
     - 6.8.1 [Properties](#ipv4-address-object-properties)
     - 6.8.2 [Relationships](#ipv4-address-object-relationships)
@@ -303,9 +303,9 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
       - 6.12.5.1 [Properties](#tcp-extension-properties)
   - 6.13 [Process Object](#process-object)
     - 6.13.1 [Properties](#process-object-properties)
-    - 6.13.2 [Windows Process Extension](#windows-process-extension)
+    - 6.13.2 [Windows™ Process Extension](#windows-process-extension)
       - 6.13.2.1 [Properties](#windows-process-extension-properties)
-    - 6.13.3 [Windows Service Extension](#windows-service-extension)
+    - 6.13.3 [Windows™ Service Extension](#windows-service-extension)
       - 6.13.3.1 [Properties](#windows-service-extension-properties)
   - 6.14 [Software Object](#software-object)
     - 6.14.1 [Properties](#software-object-properties)
@@ -313,11 +313,11 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
     - 6.15.1 [Properties](#url-object-properties)
   - 6.16 [User Account Object](#user-account-object)
     - 6.16.1 [Properties](#user-account-object-properties)
-    - 6.16.2 [UNIX Account Extension](#unix-account-extension)
+    - 6.16.2 [UNIX™ Account Extension](#unix-account-extension)
       - 6.16.2.1 [Properties](#unix-account-extension-properties)
-  - 6.17 [Windows Registry Key Object](#windows-registry-key-object)
+  - 6.17 [Windows™ Registry Key Object](#windows-registry-key-object)
     - 6.17.1 [Properties](#windows-registry-key-object-properties)
-    - 6.17.2 [Windows Registry Value Type](#windows-registry-value-type)
+    - 6.17.2 [Windows™ Registry Value Type](#windows-registry-value-type)
       - 6.17.2.1 [Properties](#windows-registry-value-type-properties)
   - 6.18 [X.509 Certificate Object](#x509-certificate-object)
     - 6.18.1 [Properties](#x509-certificate-object-properties)
@@ -3015,7 +3015,7 @@ There are many categories of impacts, each with its own unique properties, there
 
 Because these extensions are used to specify very different types of impacts, producers **SHOULD** use one and only one of these extensions per Impact object. However, additional extensions might be proposed in the future and might be used in conjunction with one of these.
 
-### 4.7.1 Properites <a id="impact-properties"></a>
+### 4.7.1 Properties <a id="impact-properties"></a>
 
 | **Required Common Properties** |
 | --- |
@@ -3710,7 +3710,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 The Infrastructure SDO represents a type of TTP and describes any systems, software services and any associated physical or virtual resources intended to support some purpose (e.g., C2 servers used as part of an attack, device or server that are part of defense, database servers targeted by an attack, etc.).
 While elements of an attack can be represented by other SDOs or SCOs, the Infrastructure SDO represents a named group of related data that constitutes the infrastructure.
 
-### 4.8.1 Properties <a id="infrastructure-properties"></a>
+### 4.10.1 Properties <a id="infrastructure-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4227,7 +4227,7 @@ When a combination of properties is provided (e.g. a **region** and a **latitude
 
 If precision is specified, then the datum for **latitude** and **longitude** **MUST** be [WGS 84](#wgs84). Organizations specifying a designated location using **latitude** and **longitude** **SHOULD** specify the precision which is appropriate for the scope of the location being identified. The scope is defined by the boundary as outlined by the precision around the coordinates.
 
-### 4.10.1 Properties <a id="location-properties"></a>
+### 4.12.1 Properties <a id="location-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -7290,7 +7290,7 @@ There is no property to capture the value of the "Content-Transfer-Encoding" hea
 
 One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
 
-#### Properties <a id="email-mime-component-type-properties"></a>
+#### 6.6.2.1 Properties <a id="email-mime-component-type-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -7657,7 +7657,7 @@ In this example, the file name would have originally appeared using the bytes 71
 
 The Archive File extension specifies a default extension for capturing properties specific to archive files. The key for this extension when used in the **extensions** dictionary **MUST** be <span class="stixliteral">archive-ext</span>. Note that this predefined extension does not use the extension facility described in [section 7.3](#extension-definition).
 
-#### Properties <a id="archive-file-extension-properties"></a>
+#### 6.7.2.1 Properties <a id="archive-file-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -7736,7 +7736,7 @@ The NTFS File extension specifies a set of properties specific to files stored o
 
 An object using the NTFS File Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="ntfs-file-extension-properties"></a>
+#### 6.7.3.1 Properties <a id="ntfs-file-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -7755,7 +7755,7 @@ An object using the NTFS File Extension **MUST** contain at least one property f
     <td>Specifies a list of NTFS alternate data streams that exist for the file.</td>
 </table>
 
-#### Alternate Data Stream Type <a id="alternate-data-stream-type"></a>
+#### 6.7.3.2 Alternate Data Stream Type <a id="alternate-data-stream-type"></a>
 
 **Type Name**: <span class="stixtype">alternate-data-stream-type</span>
 
@@ -7819,7 +7819,7 @@ The PDF file extension specifies a default extension for capturing properties sp
 
 An object using the PDF File Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="pdf-file-extension-properties"></a>
+#### 6.7.4.1 Properties <a id="pdf-file-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -7889,7 +7889,7 @@ The Raster Image file extension specifies a default extension for capturing prop
 
 An object using the Raster Image File Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="raster-image-file-extension-properties"></a>
+#### 6.7.5.1 Properties <a id="raster-image-file-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -7953,7 +7953,7 @@ The Windows™ PE Binary File extension specifies a default extension for captur
 
 An object using the Windows™ PE Binary File Extension **MUST** contain at least one property other than the required **pe_type** property from this extension.
 
-#### Properties <a id="windows-pe-binary-file-extension-properties"></a>
+#### 6.7.6.1 Properties <a id="windows-pe-binary-file-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -8023,7 +8023,7 @@ An object using the Windows™ PE Binary File Extension **MUST** contain at leas
   </tr>
 </table>
 
-#### Windows™ PE Optional Header Type <a id="windows-pe-optional-header-type"></a>
+#### 6.7.6.2 Windows™ PE Optional Header Type <a id="windows-pe-optional-header-type"></a>
 
 **Type Name:** <span class="stixtype">windows-pe-optional-header-type</span>
 
@@ -8194,7 +8194,7 @@ The Windows PE Optional Header type represents the properties of the PE optional
   </tr>
 </table>
 
-#### Windows™ PE Section Type <a id="windows-pe-section-type"></a>
+#### 6.7.6.3 Windows™ PE Section Type <a id="windows-pe-section-type"></a>
 
 **Type Name:** <span class="stixtype">windows-pe-section-type</span>
 
@@ -9048,7 +9048,7 @@ To allow for use cases where a source or destination address may be sensitive an
 
 The HTTP request extension specifies a default extension for capturing network traffic properties specific to HTTP requests. The key for this extension when used in the **extensions** dictionary **MUST** be <span class="stixliteral">http-request-ext</span>. Note that this predefined extension does not use the extension facility described in [section 7.3](#extension-definition). The corresponding protocol value for this extension is <span class="stixliteral">http</span>.
 
-#### Properties <a id="http-request-extension-properties"></a>
+#### 6.12.2.1 Properties <a id="http-request-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -9132,7 +9132,7 @@ The HTTP request extension specifies a default extension for capturing network t
 
 The ICMP extension specifies a default extension for capturing network traffic properties specific to ICMP. The key for this extension when used in the <strong>extensions</strong> dictionary <strong>MUST</strong> be <span class="stixliteral">icmp-ext</span>. Note that this predefined extension does not use the extension facility described in [section 7.3](#extension-definition). The corresponding protocol value for this extension is <span class="stixliteral">icmp</span>.
 
-#### Properties <a id="icmp-extension-properties"></a>
+#### 6.12.3.1 Properties <a id="icmp-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9195,7 +9195,7 @@ The ICMP extension specifies a default extension for capturing network traffic p
 
 The Network Socket extension specifies a default extension for capturing network traffic properties associated with network sockets. The key for this extension when used in the extensions dictionary MUST be <span class="stixliteral">socket-ext</span>. Note that this predefined extension does not use the extension facility described in [section 7.3](#extension-definition).
 
-#### Properties <a id="network-socket-extension-properties"></a>
+#### 6.12.4.1 Properties <a id="network-socket-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9281,7 +9281,7 @@ The TCP extension specifies a default extension for capturing network traffic pr
 
 An object using the TCP Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="tcp-extension-properties"></a>
+#### 6.12.5.1 Properties <a id="tcp-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9488,7 +9488,7 @@ The Windows Process extension specifies a default extension for capturing proper
 
 An object using the Windows Process Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="windows-process-extension-properties"></a>
+#### 6.13.2.1 Properties <a id="windows-process-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -9562,7 +9562,7 @@ The Windows Service extension specifies a default extension for capturing proper
 
 As all properties of this extension are optional, at least one of the properties defined below **MUST** be included when using this extension.
 
-#### Properties <a id="windows-service-extension-properties"></a>
+#### 6.13.3.1 Properties <a id="windows-service-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -9994,7 +9994,7 @@ The UNIX account extension specifies a default extension for capturing the addit
 
 An object using the UNIX Account Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="unix-account-extension-properties"></a>
+#### 6.16.2.1 Properties <a id="unix-account-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -10136,7 +10136,7 @@ The Registry Key object represents the properties of a Windows registry key. As 
 
 The Windows Registry Value type captures the properties of a Windows Registry Key Value. As all properties of this type are optional, at least one of the properties defined below **MUST** be included when using this type.
 
-#### Properties <a id="windows-registry-value-type-properties"></a>
+#### 6.17.2.1 Properties <a id="windows-registry-value-type-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -10324,7 +10324,7 @@ The X.509 v3 Extensions type captures properties associated with X.509 v3 extens
 
 Note that the use of the term "extensions" in this context refers to the X.509 v3 Extensions type and is not a STIX Cyber Observables extension. Therefore, it is a type that describes X.509 extensions.
 
-#### Properties <a id="x509-v3-extensions-type-properties"></a>
+#### 6.18.2.1 Properties <a id="x509-v3-extensions-type-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -10644,7 +10644,7 @@ Unlike other STIX Objects, Marking Definition objects cannot be versioned becaus
 
 The JSON MTI serialization uses the JSON Object type \[[RFC8259](#rfc8259)\] when representing <span class="stixtype">marking-definition</span>.
 
-#### Properties <a id="marking-definition-properties"></a>
+#### 7.2.1.1 Properties <a id="marking-definition-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -10709,7 +10709,7 @@ The JSON MTI serialization uses the JSON Object type \[[RFC8259](#rfc8259)\] whe
   </tr>
 </table>
 
-#### Relationships <a id="marking-definition-relationships"></a>
+#### 7.2.1.2 Relationships <a id="marking-definition-relationships"></a>
 
 There are no relationships explicitly defined between the Marking Definition object and other STIX Objects, other than the embedded relationships listed below. These embedded relationships are listed by property name along with their corresponding target.
 
@@ -10727,7 +10727,7 @@ There are no relationships explicitly defined between the Marking Definition obj
   </tr>
 </table>
 
-#### Statement Marking Object Type <a id="statement-marking-object-type"></a>
+#### 7.2.1.3 Statement Marking Object Type <a id="statement-marking-object-type"></a>
 
 The Statement marking type defines the representation of a textual marking statement (e.g., copyright, terms of use, etc.) in a definition. The value of the **definition_type** property **MUST** be <span class="stixliteral">statement</span> when using this marking type. Statement markings are generally not machine-readable, and this specification does not define any behavior or actions based on their values.
 
@@ -10761,7 +10761,7 @@ Content may be marked with multiple statements of use. In other words, the same 
 }
 ```
 
-#### TLP Marking Object Type <a id="tlp-marking-object-type"></a>
+#### 7.2.1.4 TLP Marking Object Type <a id="tlp-marking-object-type"></a>
 
 The TLP marking type defines how you would represent a Traffic Light Protocol (TLP) marking in a definition property. The value of the **definition_type** property **MUST** be <span class="stixliteral">tlp</span> when using this marking type.
 
@@ -10864,7 +10864,7 @@ Whereas object markings apply to an entire STIX Object or Marking Definition and
 
 The **granular_markings** property can also be used for language markings. To support applying both data markings and language markings to an object, the <span class="stixtype">granular-marking</span> type has a choice of two properties in addition to the selector: the lang property is used to apply language markings, and the **marking_ref** property is used to apply data markings. Because each granular marking instance applies to either a language or a marking, one and only one of these properties **MUST** be present on each instance of a granular marking.
 
-#### Granular Marking Type <a id="granular-marking-type"></a>
+#### 7.2.3.1 Granular Marking Type <a id="granular-marking-type"></a>
 
 The <span class="stixtype">granular-marking</span> type defines how the <span class="stixtype">marking-definition</span> object referenced by the **marking_ref** property or a language specified by the **lang** property applies to a set of content identified by the list of selectors in the **selectors** property.
 
@@ -11110,7 +11110,7 @@ Producers **SHOULD NOT** use the hybrid extension mechanism if the extensions ar
 
 The requirements listed below apply to the extension schema referred to by the **schema** property. These requirements are not for the Extension Definition object itself.
 
-#### Requirements for Extension Properties <a id="requirements-for-extension-properties"></a>
+#### 7.3.2.1 Requirements for Extension Properties <a id="requirements-for-extension-properties"></a>
 
 - A STIX Object **MAY** have any number of Extensions containing one or more properties.
 - Extension property names **MUST** be in ASCII and **MUST** only contain the characters a–z (lowercase ASCII), 0–9, and underscore (_).
@@ -11118,7 +11118,7 @@ The requirements listed below apply to the extension schema referred to by the *
 - Extension property names **MUST** be no longer than 250 ASCII characters in length.
 - Extension properties **SHOULD** only be used when there are no existing properties defined by the STIX specification that fulfils that need.
 
-#### Requirements for Extension STIX Objects <a id="requirements-for-extension-stix-objects"></a>
+#### 7.3.2.2 Requirements for Extension STIX Objects <a id="requirements-for-extension-stix-objects"></a>
 - Producers **MAY** include any number of STIX Extensions in STIX content.
 - Extension STIX Objects **MUST** support the Common Properties as defined in [section 3.2](#common-properties).
   - Common property names **MUST NOT** be reused to represent the custom properties in the object.
@@ -16016,7 +16016,7 @@ This example adds the property **translation_engine** to the <span class="stixty
 ]
 ```
 
-# Appendix D: [Incident Availability Impact Mapping] <a id="availability-impact-mapping"></a>
+# Appendix D: Incident Availability Impact Mapping <a id="availability-impact-mapping"></a>
 
 This appendix defines mappings for availability and functional scales to be used by the availability impact property. A value of "Not Specified" in the table below means that the criticality property is not present.
 
@@ -16056,7 +16056,7 @@ This appendix defines mappings for availability and functional scales to be used
 | 9 | 90 | 85-94 |
 | 10 | 100 | 95-100 |
 
-## Appendix E. Incident Criticality Mapping <a id="criticality-mapping"></a>
+## Appendix E. Criticality Mapping <a id="criticality-mapping"></a>
 
 This appendix defines mappings for criticality scales to be used by the criticality property. A value of "Not Specified" in the table below means that the criticality property is not present.
 
