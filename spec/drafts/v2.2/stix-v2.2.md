@@ -6676,7 +6676,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   {
     "type": "email-message",
     "spec_version": "2.1",
-    "id": "email-message--92fa1bfd-2c62-5a30-8b7c-5b91ea73cf29",
+    "id": "email-message--16177f7c-38c5-59f4-baa5-b934fa13ce49",
     "from_ref": "email-addr--6deb37bd-12b7-54ae-805f-5f7146f3d171",
     "to_refs": ["email-addr--2aeeb98c-9db4-525e-874d-221fdfe9f76e"],
     "is_multipart": false,
@@ -6707,8 +6707,8 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   {
     "type": "email-message",
     "spec_version": "2.1",
-    "id": "email-message--0c57a381-2a17-5e61-8754-5ef96efb286c",
-    "from_ref": "email-addr--9b7e29b3-fd8d-562e-b3f0-8fc8134f5dda",
+    "id": "email-message--88bf73b1-f3ac-57a3-a7dc-cfa0facba538",
+    "from_ref": "email-addr--9d9e6665-57ca-501a-9c1f-435852499a2a",
     "to_refs": ["email-addr--3734e66b-c4e8-5d0b-bca9-befdd5699746"],
     "is_multipart": false,
     "date": "2004-04-19T12:22:23.000Z",
@@ -6723,7 +6723,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   {
     "type": "email-addr",
     "spec_version": "2.1",
-    "id": "email-addr--9b7e29b3-fd8d-562e-b3f0-8fc8134f5dda",
+    "id": "email-addr--9d9e6665-57ca-501a-9c1f-435852499a2a",
     "value": "joe@example.com",
     "display_name": "Joe Smith"
   },
@@ -6744,7 +6744,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   {
     "type": "email-message",
     "spec_version": "2.1",
-    "id": "email-message--d7d69ead-3347-5772-815a-7766dc29c72c",
+    "id": "email-message--1ad5d678-0d09-5ed2-b23f-db3b297baee6",
     "is_multipart": true,
     "received_lines": [
       "from mail.example.com ([198.51.100.3]) by smtp.gmail.com with ESMTPSA id q23sm23309939wme.17.2016.07.19.07.20.32 (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128); Tue, 19 Jul 2016 07:20:40 -0700 (PDT)"
@@ -6802,7 +6802,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   {
     "type": "artifact",
     "spec_version": "2.1",
-    "id": "artifact--0682152c-646a-513b-bc07-e516494ed178"
+    "id": "artifact--0682152c-646a-513b-bc07-e516494ed178",
     "mime_type": "image/jpeg",
     "payload_bin": "VBORw0KGgoAAAANSUhEUgAAADI== ...",
     "hashes": {
