@@ -1,18 +1,12 @@
 # This script exists to validate the structure and numbering of sections in a Markdown document.
 # It will return 1 if any errors appear in 0 if it succeeds
+# Usage: python validate_markdown.py <markdown_file.md>
 
 import argparse
-import html
 import re
 
-def _split_number(number: str) -> (str, int):
-    parts = number.split('.')
-    if len(parts) == 1:
-        return '', int(parts[0])
-    else:
-        return '.'.join(parts[:-1]), int(parts[-1])
-
 def validate_section_numbers(content: str):
+    """Check heading numbering, indentation depth, and ordering in the document."""
     pattern = re.compile(r'\n(#+) (\d+(\.\d+)*)\.? +([^<\n]+)')
     results = pattern.findall(content, re.MULTILINE)
     errors = []
@@ -49,6 +43,7 @@ def validate_section_numbers(content: str):
     return errors
 
 def validate_references(content: str):
+    """Validate that markdown and HTML links point to existing anchors."""
     valid_anchors = set()
     anchors = re.findall(r'<a id=[\'"]([^"\']*)["\']', content, re.MULTILINE)
     markdown_references = re.findall(r'\(#([^)]+)\)', content, re.MULTILINE)
@@ -68,6 +63,7 @@ def validate_references(content: str):
     return list(errors)
 
 def validate_table_of_contents(content: str):
+    """Verify that the table of contents matches the document headings."""
     errors = []
     table_start = content.find('# Table of Contents')
     table_end = content.find('---', table_start + 1)
