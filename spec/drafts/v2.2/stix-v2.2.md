@@ -1030,7 +1030,7 @@ STIX Domain Objects, STIX Relationship Objects, STIX Meta Objects, and STIX Bund
 STIX Cyber-observable Objects **SHOULD** use UUIDv5 for the *<span class="stixalt">UUID</span>* portion of the <span class="stixtype">identifier</span> and the *<span class="stixalt">UUID</span>* portion of the UUIDv5-based <span class="stixtype">identifier</span> **SHOULD** be generated according to the following rules:
 - The namespace **SHOULD** be <span class="stixliteral">00abedb4-aa42-466c-9c01-fed23315a9b7</span>. This defined namespace is necessary to support the goal of deduplication and semantic equivalence of some STIX objects in the community of producers.
 - The value of the name portion **SHOULD** be the list of "ID Contributing Properties" (property-name and property value pairs) as defined on each SCO object and **SHOULD** be represented as a JSON object that is then serialized / stringified according to \[[RFC8785](#rfc8785)\] to ensure a canonical representation of the JSON data.
-- If the contributing properties are all optional, and none are present on the SCO, then a UUIDv4 **MUST** be used.
+- If the contributing properties are all optional, and none are present on the SCO, then a UUIDv4 **SHOULD** be used.
 - Producers not following these rules **MUST NOT** use a namespace of <span class="stixliteral">00abedb4-aa42-466c-9c01-fed23315a9b7</span> and **SHOULD** use UUIDv4 in cases where the id would not be unique.
 
 STIX Cyber-observable Objects that are used in the deprecated Cyber Observable Container **MAY** use any <span class="stixtype">string</span> value for the <span class="stixtype">identifier</span>. For the deprecated Cyber Observable Container, it is common for implementers to use simple numerical strings for these <span class="stixtype">identifiers</span> (e.g., "0", "1", "2", etc.). See [section 2.13](#observable-container) for more information.
@@ -6011,7 +6011,7 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>hashes</strong>, <strong>payload_bin</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].<br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
+    <td><strong>hashes</strong>, <strong>payload_bin</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].<br><br>If none of these properties is present, a UUIDv4 <strong>SHOULD</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -6439,7 +6439,7 @@ The Email Address object represents a single email address. To allow for use cas
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>value</strong><br><br>If the <strong>value</strong> property is not present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
+    <td><strong>value</strong><br><br>If the <strong>value</strong> property is not present, a UUIDv4 <strong>SHOULD</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -6535,7 +6535,7 @@ Header field values that have been encoded as described in section 2 of \[[RFC20
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>from_ref</strong>, <strong>subject</strong>, <strong>body</strong><br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
+    <td><strong>from_ref</strong>, <strong>subject</strong>, <strong>body</strong><br><br>If none of these properties is present, a UUIDv4 <strong>SHOULD</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -6859,7 +6859,7 @@ The File object represents the properties of a file. A File object **MUST** cont
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>hashes</strong>, <strong>name</strong>, <strong>extensions</strong>, <strong>parent_directory_ref</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].<br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
+    <td><strong>hashes</strong>, <strong>name</strong>, <strong>extensions</strong>, <strong>parent_directory_ref</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].<br><br>If none of these properties is present, a UUIDv4 <strong>SHOULD</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -8728,7 +8728,7 @@ The Process object represents common properties of an instance of a computer pro
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td>Since all properties on this object are optional, no ID contributing properties are defined; a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
+    <td>Since all properties on this object are optional, no ID contributing properties are defined; a UUIDv4 <strong>SHOULD</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -9209,7 +9209,7 @@ As all properties of this object are optional, at least one of the properties de
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>account_type</strong>, <strong>user_id</strong>, <strong>account_login</strong><br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
+    <td><strong>account_type</strong>, <strong>user_id</strong>, <strong>account_login</strong><br><br>If none of these properties is present, a UUIDv4 <strong>SHOULD</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -9440,7 +9440,7 @@ The Registry Key object represents the properties of a Windows registry key. As 
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>key</strong>, <strong>values</strong> <em>(all items defined in the <strong>values</strong> property <strong>MUST</strong> be included)</em><br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
+    <td><strong>key</strong>, <strong>values</strong> <em>(all items defined in the <strong>values</strong> property <strong>MUST</strong> be included)</em><br><br>If none of these properties is present, a UUIDv4 <strong>SHOULD</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -9586,7 +9586,7 @@ The X.509 Certificate object represents the properties of an X.509 certificate, 
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>hashes</strong>, <strong>serial_number</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].<br><br>If none of these properties is present, a UUIDv4 <strong>MUST</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
+    <td><strong>hashes</strong>, <strong>serial_number</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].<br><br>If none of these properties is present, a UUIDv4 <strong>SHOULD</strong> be used, as defined in <a href="#identifier">section 2.9</a>.</td>
   </tr>
 </table>
 
@@ -15165,7 +15165,7 @@ Bray, T., Ed., "The JavaScript Object Notation (JSON) Data Interchange Format", 
 **[RFC8785]** <a id="rfc8785"></a>  
 Rundgren, A., Jordan, B., and S. Erdtman, "JSON Canonicalization Scheme (JCS)", RFC 8785, DOI 10.17487/RFC8785, June 2020, https://www.rfc-editor.org/info/rfc8785.
 
-**[RFC9562]** <a id="rfc9562"></a>
+**[RFC9562]** <a id="rfc9562"></a>  
 Davis, K., Peabody, B., and P. Leach, "Universally Unique IDentifiers (UUIDs)", RFC 9562, DOI 10.17487/RFC9562, May 2024, https://www.rfc-editor.org/info/rfc9562.
 
 **[SSDEEP]** <a id="ssdeep"></a>  
