@@ -14131,8 +14131,8 @@ Report type is an open vocabulary to describe the primary purpose or subject of 
 | implemented-control | Implemented a security control within the environment. |
 | investigation | Performed an investigation into an event or incident. |
 | negotiation | Negotiation of a deal or payment amount. |
-| playbook-execution | Executing an automated playbook. If the playbook is stored outside of STIX it should be included as an [external-reference](https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_72bcfr3t79jx). |
-| playbook-step-execution | Executing a step in an automated playbook. If the playbook is stored outside of STIX both the playbook and step stored in separate [external-reference](https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_72bcfr3t79jx) objects. If playbook steps feed each other information that is designed to be passed as STIX it **SHOULD** be referenced as a [grouping](https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html#_t56pn7elv6u7) as either the **initial_ref** or **result_ref** of a [state-change](#state-change). |
+| playbook-execution | Executing an automated playbook. If the playbook is stored outside of STIX it should be included as an [external-reference](#external-reference). |
+| playbook-step-execution | Executing a step in an automated playbook. If the playbook is stored outside of STIX both the playbook and step stored in separate [external-reference](#external-reference) objects. If playbook steps feed each other information that is designed to be passed as STIX it **SHOULD** be referenced as a [grouping](#grouping) as either the **initial_ref** or **result_ref** of a [state-change](#state-change). |
 | ransom-payment | An actual payment of a ransom. |
 | recovery | The recovery phase of incident response. |
 | reported | When the incident was reported externally. |
