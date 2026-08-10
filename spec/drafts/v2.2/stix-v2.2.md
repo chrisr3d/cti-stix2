@@ -1,5 +1,7 @@
 ![OASIS Logo](https://docs.oasis-open.org/templates/OASISLogo-v3.0.png)
 
+<link rel="stylesheet" href="../css/stix.css" />
+
 ---
 
 # STIX Version 2.2 GitHub Draft
@@ -2596,31 +2598,110 @@ An Event is an activity that has a harmful effect or which will be investigated 
 
 ### 4.4.1 Properties <a id="event-properties"></a>
 
-| **Required Common Properties** |
-| --- |
-| **created**, **id**, **modified**, **spec_version**, **type** |
-| **Optional Common Properties** |
-| **created_by_ref**, **revoked**, **labels**, **confidence**, **lang**, **external_references**, **object_marking_refs**, **granular_markings**, **extensions** |
-| **Not Applicable Common Properties** |
-| **defanged** |
-| **Event Object Specific Properties** |
-| **changed_objects**, **description**, **end_time**, **end_time_fidelity**, **event_types**, **goal**, **name**, **next_events_refs**, **status**, **sighting_refs**, **start_time**, **start_time_fidelity** |
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Required Common Properties</span></th>
+  </tr>
+  <tr><td>created, id, modified, spec_version, type</td></tr>
+  <tr>
+    <th><span class="stixtr">Optional Common Properties</span></th>
+  </tr>
+  <tr><td>created_by_ref, revoked, labels, confidence, lang, external_references, object_marking_refs, granular_markings, extensions</td></tr>
+  <tr>
+<th><span class="stixtr">Not Applicable Common Properties</span></th>
+</tr>
+  <tr><td>defanged</td></tr>
+  <tr>
+<th><span class="stixtr">Object Specific Properties</span></th>
+</tr>
+  <tr><td></td></tr>
+</table>
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
 
-| **Property Name** | **Type** | **Description** |
-| --- | --- | --- |
-| **status** (required) | [event-status-enumeration](#event-status-enumeration) | The current status of the event. The values of this property **MUST** come from the [event-status-enumeration](#event-status-enumeration) enumeration. |
-| **type** (required) | [string](#string) | The value of this property **MUST** be set to event. |
-| **changed_objects** (optional) | [list](#list) of type [state-change](#state-change) | A list of changes that this event has caused. This is typically used to indicate how an event has affected impacts. |
-| **description** (optional) | [string](#string) | A description of event that occurred. |
-| **end_time** (optional) | [timestamp](#timestamp) | The date and time the event was last recorded. If this is not present it is assumed to be unknown. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
-| **end_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **end_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
-| **event_types** (optional) | [list](#list) of type [open-vocab](#stix-open-vocabularies-and-enumerations) | High level types for the event to enable aggregation and summarization. The values of this property **SHOULD** come from the [event-type-ov](#event-type-vocabulary) open vocabulary. |
-| **goal** (optional) | [string](#string) | The assumed goal, objective, desired outcome, or intended effect of this event. Not all events have goals. |
-| **name** (optional) | [string](#string) | A name for the event. |
-| **next_event_refs** (optional) | [list](#list) of type [identifier](#identifier) | The [event](#event) objects to follow. They **MUST** be of type [event](#event). There can be more than one if they take place in parallel. |
-| **sighting_refs** (optional) | [list](#list) of type [identifier](#identifier) | A list of [sighting](#sighting) objects that were related to this event. Sightings referenced in this **SHOULD** be based on [attack-pattern](#attack-pattern), [indicator](#indicator), or [malware](#malware) SDOs. The **sighting_refs** property **SHOULD** be used to relate an [event](#event) to an SDO, instead of using right an SRO. In some cases observed data may be present, but no [indicator](#indicator) can be created. In these cases it is recommended to use an [attack-pattern](#attack-pattern) using the name or description of the behavior or rule that triggered the sighting. |
-| **start_time** (optional) | [timestamp](#timestamp) | The date and time the event was first recorded. If this is not present it is assumed to be unknown. This property **SHOULD** be populated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
-| **start_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+  <tr>
+    <td><strong>status</strong> (required)</td>
+    <td><a href="#event-status-enumeration" style="stixtype">event-status-enumeration</a></td>
+    <td>The current status of the event. The values of this property <strong>MUST</strong> come from the <a href="#event-status-enumeration" style="stixtype">event-status-enumeration</a> enumeration.</td>
+</tr>
+
+  <tr>
+    <td><strong>type</strong> (required)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>The value of this property <strong>MUST</strong> be set to event.</td>
+</tr>
+
+  <tr>
+    <td><strong>changed_objects</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">list</a> of type <a href="#state-change" style="stixtype">state-change</a></td>
+    <td>A list of changes that this event has caused. This is typically used to indicate how an event has affected impacts.</td>
+</tr>
+
+  <tr>
+    <td><strong>description</strong> (optional)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>A description of event that occurred.</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time</strong> (optional)</td>
+    <td><a href="#timestamp" style="stixtype">timestamp</a></td>
+    <td>The date and time the event was last recorded. If this is not present it is assumed to be unknown. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>end_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+  <tr>
+    <td><strong>event_types</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">list</a> of type <a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
+    <td>High level types for the event to enable aggregation and summarization. The values of this property <strong>SHOULD</strong> come from the <a href="#event-type-vocabulary" style="stixtype">event-type-ov</a> open vocabulary.</td>
+</tr>
+
+  <tr>
+    <td><strong>goal</strong> (optional)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>The assumed goal, objective, desired outcome, or intended effect of this event. Not all events have goals.</td>
+</tr>
+
+  <tr>
+    <td><strong>name</strong> (optional)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>A name for the event.</td>
+</tr>
+
+  <tr>
+    <td><strong>next_event_refs</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">list</a> of type <a href="#identifier" style="stixtype">identifier</a></td>
+    <td>The <a href="#event" style="stixtype">event</a> objects to follow. They <strong>MUST</strong> be of type <a href="#event" style="stixtype">event</a>. There can be more than one if they take place in parallel.</td>
+</tr>
+
+  <tr>
+    <td><strong>sighting_refs</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">list</a> of type <a href="#identifier" style="stixtype">identifier</a></td>
+    <td>A list of <a href="#sighting" style="stixtype">sighting</a> objects that were related to this event. Sightings referenced in this <strong>SHOULD</strong> be based on <a href="#attack-pattern" style="stixtype">attack-pattern</a>, <a href="#indicator" style="stixtype">indicator</a>, or <a href="#malware" style="stixtype">malware</a> SDOs. The <strong>sighting_refs</strong> property <strong>SHOULD</strong> be used to relate an <a href="#event" style="stixtype">event</a> to an SDO, instead of using right an SRO. In some cases observed data may be present, but no <a href="#indicator" style="stixtype">indicator</a> can be created. In these cases it is recommended to use an <a href="#attack-pattern" style="stixtype">attack-pattern</a> using the name or description of the behavior or rule that triggered the sighting.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time</strong> (optional)</td>
+    <td><a href="#timestamp" style="stixtype">timestamp</a></td>
+    <td>The date and time the event was first recorded. If this is not present it is assumed to be unknown. This property <strong>SHOULD</strong> be populated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+</table>
 
 ### 4.4.2 Relationships  <a id="event-relationships"></a>
 
@@ -2633,9 +2714,12 @@ Relationships are not restricted to those listed below. Relationships can be cre
 To relate [events](#event) to an [incident](#incident) the **event_refs** property **SHOULD** be used. Using these embedded relationships ensures that an incomplete sequence cannot be shared accidentally (avoiding potential confusion or misunderstandings when processing STIX data.)
 
 | **Common Relationships** |
-| --- | --- | --- | --- |
+| --- |
 | derived-from, duplicate-of, related-to |
+
+
 | **Source** | **Type** | **Target** | **Description** |
+| --- | --- | --- | --- |
 | [event](#event) | causes | [impact](#impact) | The event caused the impact. |
 | [event](#event) | affects | [identity](#identity) | The identity is affected by this event. |
 | [event](#event) | led-to | [task](#task) | The event led to performing the task. |
@@ -2643,8 +2727,10 @@ To relate [events](#event) to an [incident](#incident) the **event_refs** proper
 | [event](#event) | located-at | [location](#location) | The event occurred at a specific location. |
 
 | **Reverse Relationships** |
-| --- | --- | --- | --- |
+| -- |
+
 | **Source** | **Type** | **Target** | **Description** |
+| --- | --- | --- | --- |
 | [identity](#identity) | performed | [event](#event) | An identity performed a specific event. |
 | [indicator](#indicator) | based-on | [event](#event) | An indicator is based on an event. |
 | [malware](#malware) | performed | [event](#event) | Malware performed a specific event. |
@@ -3017,32 +3103,110 @@ Because these extensions are used to specify very different types of impacts, pr
 
 ### 4.7.1 Properties <a id="impact-properties"></a>
 
-| **Required Common Properties** |
-| --- |
-| **created**, **id**, **modified**, **spec_version**, **type** |
-| **Optional Common Properties** |
-| **created_by_ref**, **revoked**, **labels**, **confidence**, **lang**, **external_references**, **object_marking_refs**, **granular_markings**, **extensions** |
-| **Not Applicable Common Properties** |
-| **defanged** |
-| **Impact Object Specific Properties** |
-| **impact_category**, **criticality**, **description**, **end_time**, **end_time_fidelity**, **impacted_entity_counts**, **impacted_refs**, **recoverability**, **start_time**, **start_time_fidelity**, **superseded_by_ref** |
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Required Common Properties</span></th>
+  </tr>
+  <tr><td>created, id, modified, spec_version, type</td></tr>
+  <tr>
+    <th><span class="stixtr">Optional Common Properties</span></th>
+  </tr>
+  <tr><td>created_by_ref, revoked, labels, confidence, lang, external_references, object_marking_refs, granular_markings, extensions</td></tr>
+  <tr>
+<th><span class="stixtr">Not Applicable Common Properties</span></th>
+</tr>
+  <tr><td>defanged</td></tr>
+  <tr>
+<th><span class="stixtr">Object Specific Properties</span></th>
+</tr>
+  <tr><td></td></tr>
+</table>
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
 
-| **Property Name** | **Type** | **Description** |
-| --- | --- | --- |
-| **type** (required) | [string](#string) | The value of this property **MUST** be set to impact. |
-| **criticality** (optional) | [integer](#integer) | The criticality of this impact. If present, this value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix B](#relationship-summary-table). |
-| **description** (optional) | [string](#string) | Additional details about this impact |
-| **end_time** (optional) | [timestamp](#timestamp) | The date and time the impact was last recorded. This property **SHOULD** be populated if this impact is resolved or mitigated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. If the **superseded_by_ref** property is included this **MUST** be included. |
-| **end_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **end_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
-| **impact_category** (optional) | [string](#string) | The category to which the impact belongs. If one of the defined extensions (see section 2.3.2) is used it **MUST** correspond to the value of this property. If there is insufficient information about the category, this property is not populated and no extension will be specified. The value **MUST** be specified without the "-ext" suffix which is used to indicate the extension used. |
-| **impacted_entity_counts** (optional) | [entity-count](#entity-count) | A list of the entity types, along with the number of each type impacted. If this property is not present it should be assumed that this information is not being shared, not that there were no impacted entities. To affirmatively state no entities of a given class were impacted they should be included in the list with the number of entities impacted set to 0. |
-| **impacted_refs** (optional) | [list](#list) of type [identifier](#identifier) | A list of all impacted entities or infrastructure. The values of this property MUST be the identifier for an SDO or SCO. |
-| **recoverability** (optional) | [recoverability-enumeration](#recoverability-enumeration) | The recoverability of this particular impact with respect to feasibility and required time and resources. The value of this property **MUST** come from the [recoverability-enumeration](#recoverability-enumeration) enumeration. |
-| **start_time** (optional) | [timestamp](#timestamp) | The date and time this impact was first recorded. This property **SHOULD** be populated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
-| **start_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
-| **sub_impact_refs** (optional) | [list](#list) of type [identifier](#identifier) | The [impact](#impact) objects to that are part of this impact. They **MUST** be of type [impact](#impact). |
-| **superseded_by_ref** (optional) | [identifier](#identifier) | The referenced [impact](#impact) supersedes the **end_time** for the current impact. This allows capturing how the severity of this impact changes over time. When this property is populated this impact **MUST** have an **end_time** and and the **superseded_by_ref** value **MUST** reference an [impact](#impact) of the same as the category specified in the **impact_category** property. |
+  <tr>
+    <td><strong>type</strong> (required)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>The value of this property <strong>MUST</strong> be set to impact.</td>
+</tr>
 
+  <tr>
+    <td><strong>criticality</strong> (optional)</td>
+    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td>The criticality of this impact. If present, this value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#relationship-summary-table" style="stixtype">Appendix B</a>.</td>
+</tr>
+
+  <tr>
+    <td><strong>description</strong> (optional)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>Additional details about this impact</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time</strong> (optional)</td>
+    <td><a href="#timestamp" style="stixtype">timestamp</a></td>
+    <td>The date and time the impact was last recorded. This property <strong>SHOULD</strong> be populated if this impact is resolved or mitigated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value. If the <strong>superseded_by_ref</strong> property is included this <strong>MUST</strong> be included.</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>end_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+  <tr>
+    <td><strong>impact_category</strong> (optional)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>The category to which the impact belongs. If one of the defined extensions (see section 2.3.2) is used it <strong>MUST</strong> correspond to the value of this property. If there is insufficient information about the category, this property is not populated and no extension will be specified. The value <strong>MUST</strong> be specified without the "-ext" suffix which is used to indicate the extension used.</td>
+</tr>
+
+  <tr>
+    <td><strong>impacted_entity_counts</strong> (optional)</td>
+    <td><a href="#entity-count" style="stixtype">entity-count</a></td>
+    <td>A list of the entity types, along with the number of each type impacted. If this property is not present it should be assumed that this information is not being shared, not that there were no impacted entities. To affirmatively state no entities of a given class were impacted they should be included in the list with the number of entities impacted set to 0.</td>
+</tr>
+
+  <tr>
+    <td><strong>impacted_refs</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">list</a> of type <a href="#identifier" style="stixtype">identifier</a></td>
+    <td>A list of all impacted entities or infrastructure. The values of this property MUST be the identifier for an SDO or SCO.</td>
+</tr>
+
+  <tr>
+    <td><strong>recoverability</strong> (optional)</td>
+    <td><a href="#recoverability-enumeration" style="stixtype">recoverability-enumeration</a></td>
+    <td>The recoverability of this particular impact with respect to feasibility and required time and resources. The value of this property <strong>MUST</strong> come from the <a href="#recoverability-enumeration" style="stixtype">recoverability-enumeration</a> enumeration.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time</strong> (optional)</td>
+    <td><a href="#timestamp" style="stixtype">timestamp</a></td>
+    <td>The date and time this impact was first recorded. This property <strong>SHOULD</strong> be populated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+  <tr>
+    <td><strong>sub_impact_refs</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">list</a> of type <a href="#identifier" style="stixtype">identifier</a></td>
+    <td>The <a href="#impact" style="stixtype">impact</a> objects to that are part of this impact. They <strong>MUST</strong> be of type <a href="#impact" style="stixtype">impact</a>.</td>
+</tr>
+
+  <tr>
+    <td><strong>superseded_by_ref</strong> (optional)</td>
+    <td><a href="#identifier" style="stixtype">identifier</a></td>
+    <td>The referenced <a href="#impact" style="stixtype">impact</a> supersedes the <strong>end_time</strong> for the current impact. This allows capturing how the severity of this impact changes over time. When this property is populated this impact <strong>MUST</strong> have an <strong>end_time</strong> and and the <strong>superseded_by_ref</strong> value <strong>MUST</strong> reference an <a href="#impact" style="stixtype">impact</a> of the same as the category specified in the <strong>impact_category</strong> property.</td>
+</tr>
+
+</table>
 
 ### 4.7.2 Availability Impact Extension <a id="availability-impact-extension"></a>
 
@@ -3050,39 +3214,20 @@ Because these extensions are used to specify very different types of impacts, pr
 
 #### 4.7.2.1 Properties <a id="availability-impact-extension-properties"></a>
 
-| **Property Name** | **Type** | **Description** |
-| --- | --- | --- |
-| **availability_impact** (required) | [integer](#integer) | The availability / functional impact of the related incident on the objects referenced in **impacted_refs**. If no objects are referenced, the impact should be treated as the overall availability impact for the related [incident](#incident). This value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix A](#confidence-scales). |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
 
-**Example**
+  <tr>
+    <td><strong>availability_impact</strong> (required)</td>
+    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td>The availability / functional impact of the related incident on the objects referenced in <strong>impacted_refs</strong>. If no objects are referenced, the impact should be treated as the overall availability impact for the related <a href="#incident" style="stixtype">incident</a>. This value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#confidence-scales" style="stixtype">Appendix A</a>.</td>
+</tr>
 
-```
-{
-    "type": "impact",
-    "id": "impact--de425325-5ac8-4f4b-ace7-054301b80863",
-    "created": "2023-11-22T15:30:00.000Z",
-    "modified": "2023-11-22T15:30:00.000Z",
-    "spec_version": "2.2",
-    "impact_category": "availability",
-    "criticality": 70,
-    "description": "Loss of availability for a critical service.",
-    "end_time": "2023-11-22T16:00:00Z",
-    "end_time_fidelity": "minute",
-    "impacted_entity_counts": {
-        "system": 1
-    },
-    "impacted_refs": [
-        "infrastructure--11c25d0e-48f5-4491-960a-0da71c4e0d16"
-    ],
-    "start_time": "2023-11-22T15:30:00Z",
-    "start_time_fidelity": "minute",
-    "extensions": {
-        "availability-ext": {
-            "availability_impact": 90
-        }
-    }
-}
-```
+</table>
 
 ### 4.7.3 Confidentiality Impact Extension <a id="confidentiality-impact-extension"></a>
 
@@ -3090,36 +3235,38 @@ Because these extensions are used to specify very different types of impacts, pr
 
 #### 4.7.3.1 Properties <a id="confidentiality-impact-extension-properties"></a>
 
-| **Property Name** | **Type** | **Description** |
-| --- | --- | --- |
-| **loss_type** (required) | [incident-confidentiality-loss-enumeration](#incident-confidentiality-loss-enumeration) | The type of loss that occurred with respect to the relevant information. The values of this property **MUST** come from the [incident-confidentiality-loss-enumeration](#incident-confidentiality-loss-enumeration) enumeration. |
-| **information_type** (optional) | [open-vocab](#stix-open-vocabularies-and-enumerations) | The type of information that had its confidentiality compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-vocabulary) open vocabulary. This value **MUST** be included if the loss_type is not none. Otherwise, including an entry with loss_type of none and no information_type indicates that no information had its confidentiality impacted by the related incident. |
-| **record_count** (optional) | [integer](#integer) | The number of records of this information type that were compromised. The value of this property **MUST NOT** be negative. |
-| **record_size** (optional) | [integer](#integer) | The amount of data that was compromised in bytes. The value of this property **MUST NOT** be negative. |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
 
-**Example**
+  <tr>
+    <td><strong>information_type</strong> (optional)</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
+    <td>The type of information that had its confidentiality compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property <strong>SHOULD</strong> come from the <a href="#information-type-vocabulary" style="stixtype">information-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the loss_type is not none. Otherwise, including an entry with loss_type of none and no information_type indicates that no information had its confidentiality impacted by the related incident.</td>
+</tr>
 
-```
-{
-    "type": "impact",
-    "id": "impact--c08d9e5a-ba7e-465c-96d5-659683aa9395",
-    "created": "2023-11-22T15:30:00.000Z",
-    "modified": "2023-11-22T15:30:00.000Z",
-    "spec_version": "2.2",
-    "impact_category": "confidentiality-ext",
-    "criticality": 80,
-    "description": "Confidential customer data was leaked.",
-    "start_time": "2023-11-22T15:30:00Z",
-    "start_time_fidelity": "minute",
-    "extensions": {
-        "confidentiality-ext": {
-            "information_type": "customer-data",
-            "loss_type": "confirmed-loss",
-            "record_count": 1000
-        }
-    }
-}
-```
+  <tr>
+    <td><strong>loss_type</strong> (required)</td>
+    <td><a href="#incident-confidentiality-loss-enumeration" style="stixtype">incident-confidentiality-loss-enumeration</a></td>
+    <td>The type of loss that occurred with respect to the relevant information. The values of this property <strong>MUST</strong> come from the <a href="#incident-confidentiality-loss-enumeration" style="stixtype">incident-confidentiality-loss-enumeration</a> enumeration.</td>
+</tr>
+
+  <tr>
+    <td><strong>record_count</strong> (optional)</td>
+    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td>The number of records of this information type that were compromised. The value of this property <strong>MUST NOT</strong> be negative.</td>
+</tr>
+
+  <tr>
+    <td><strong>record_size</strong> (optional)</td>
+    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td>The amount of data that was compromised in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
+</tr>
+
+</table>
 
 ### 4.7.4 External Impact Extension <a id="external-impact-extension"></a>
 
@@ -3127,31 +3274,20 @@ Because these extensions are used to specify very different types of impacts, pr
 
 #### 4.7.4.1 Properties <a id="external-impact-extension-properties"></a>
 
-| **Property Name** | **Type** | **Description** |
-| --- | --- | --- |
-| **impact_type** (required) | [open-vocab](#stix-open-vocabularies-and-enumerations) | The type of impact outside of the targeted organization. The value of this property **SHOULD** come from the [external-impact-ov](#external-impact-vocabulary) open vocabulary. |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
 
-**Example**
+  <tr>
+    <td><strong>impact_type</strong> (required)</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
+    <td>The type of impact outside of the targeted organization. The value of this property <strong>SHOULD</strong> come from the <a href="#external-impact-vocabulary" style="stixtype">external-impact-ov</a> open vocabulary.</td>
+</tr>
 
-```
-{
-    "type": "impact",
-    "id": "impact--765719be-0e65-4c40-8024-a7295c90da35",
-    "created": "2023-11-22T15:30:00.000Z",
-    "modified": "2023-11-22T15:30:00.000Z",
-    "spec_version": "2.2",
-    "impact_category": "external-ext",
-    "criticality": 60,
-    "description": "Negative impact on the company's reputation.",
-    "start_time": "2023-11-22T15:30:00Z",
-    "start_time_fidelity": "minute",
-    "extensions": {
-        "external-ext": {
-            "impact_type": "reputation"
-        }
-    }
-}
-```
+</table>
 
 ### 4.7.5 Integrity Impact Extension <a id="integrity-impact-extension"></a>
 
@@ -3159,36 +3295,38 @@ Because these extensions are used to specify very different types of impacts, pr
 
 #### 4.7.5.1 Properties <a id="integrity-impact-extension-properties"></a>
 
-| **Property Name** | **Type** | **Description** |
-| --- | --- | --- |
-| **alteration** (required) | [integrity-alteration-enumeration](#integrity-alteration-enumeration) | The type of alteration affecting integrity of the information. The value of this property **MUST** come from the [integrity-alteration-enumeration](#integrity-alteration-enumeration) enumeration. |
-| **information_type** (optional) | [open-vocab](#stix-open-vocabularies-and-enumerations) | The type of information that had its integrity compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property **SHOULD** come from the [information-type-ov](#information-type-vocabulary) open vocabulary. This value **MUST** be included if the alternation is not none. Otherwise, including an entry that with an alteration of none and no information_type provided indicates that no information had its integrity impacted by the related incident. |
-| **record_count** (optional) | [integer](#integer) | The number of records of this type that were compromised. The value of this property **MUST NOT** be negative. |
-| **record_size** (optional) | [integer](#integer) | The amount of data that was compromised in bytes. The value of this property **MUST NOT** be negative. |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
 
-**Example**
+  <tr>
+    <td><strong>alteration</strong> (required)</td>
+    <td><a href="#integrity-alteration-enumeration" style="stixtype">integrity-alteration-enumeration</a></td>
+    <td>The type of alteration affecting integrity of the information. The value of this property <strong>MUST</strong> come from the <a href="#integrity-alteration-enumeration" style="stixtype">integrity-alteration-enumeration</a> enumeration.</td>
+</tr>
 
-```
-{
-    "type": "impact",
-    "id": "impact--72047fc7-1b34-4cc2-aea7-61b90cdb832d",
-    "created": "2023-11-22T15:30:00.000Z",
-    "modified": "2023-11-22T15:30:00.000Z",
-    "spec_version": "2.2",
-    "impact_category": "integrity-ext",
-    "criticality": 75,
-    "description": "Unauthorized modification of financial records.",
-    "start_time": "2023-11-22T15:30:00Z",
-    "start_time_fidelity": "minute",
-    "extensions": {
-        "integrity-ext": {
-            "alteration": "full-modification",
-            "information_type": "financial-records",
-            "record_count": 500
-        }
-    }
-}
-```
+  <tr>
+    <td><strong>information_type</strong> (optional)</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
+    <td>The type of information that had its integrity compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property <strong>SHOULD</strong> come from the <a href="#information-type-vocabulary" style="stixtype">information-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the alternation is not none. Otherwise, including an entry that with an alteration of none and no information_type provided indicates that no information had its integrity impacted by the related incident.</td>
+</tr>
+
+  <tr>
+    <td><strong>record_count</strong> (optional)</td>
+    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td>The number of records of this type that were compromised. The value of this property <strong>MUST NOT</strong> be negative.</td>
+</tr>
+
+  <tr>
+    <td><strong>record_size</strong> (optional)</td>
+    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td>The amount of data that was compromised in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
+</tr>
+
+</table>
 
 ### 4.7.6 Economic Impact Extension <a id="economic-impact-extension"></a>
 
@@ -3196,40 +3334,56 @@ Because these extensions are used to specify very different types of impacts, pr
 
 #### 4.7.6.1 Properties <a id="economic-impact-extension-properties"></a>
 
-| **Property Name** | **Type** | **Description** |
-| --- | --- | --- |
-| **variety** (required) | [open-vocab](#stix-open-vocabularies-and-enumerations) | The variety of this economic impact. The value of this property **SHOULD** come from the [economic-impact-type-ov](#economic-impact-type-vocabulary) open vocabulary. |
-| **conversion_rate** (optional) | [float](#float) | The conversion rate between the **currency** and **currency_actual** properties. This **MUST NOT** be included if the **currency_actual** property is not included. This **MUST** be included if the **currency_actual** property is included. This value **MUST** be greater than zero. If this property is provided, the **conversion_time** property must also be provided. |
-| **conversion_time** (optional) | [timestamp](#timestamp) | The timestamp corresponding to the conversion rate from the **currency** property to the **currency_actual** property. This **MUST** be included if a **conversion_rate** property is included. |
-| **currency** (optional) | [string](#string) | The currency used for reporting the **max_amount** and **min_amount** properties values. This **SHOULD** be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency. This **SHOULD** match the currency of the organization or the government producing the report. This value **MUST** be included if the **min_amount** property is included. |
-| **currency_actual** (optional) | [string](#string) | The currency that the impact actually used. For ransom demands this should be the currency of the demand. If this is not included it should be assumed to be the same value as the **currency** property. If this is included then the **currency** property **MUST** be included. This **SHOULD** be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency. |
-| **max_amount** (optional) | [float](#float) | The maximum economic amount of the impact using the currency specified in the **currency** property. This value **MUST** be greater than zero. This value **MUST** be included if the **min_amount** property is included. If **min_amount** and **max_amount** properties are both defined, then **max_amount** value **MUST** be greater than or equal to the **min_amount** value. |
-| **min_amount** (optional) | [float](#float) | The maximum economic amount of the impact using the currency specified in the **currency** property. This value **MUST** be greater than zero. This value **MUST** be included if the **max_amount** property is included. If **min_amount** and **max_amount** properties are both defined, then **max_amount** value **MUST** be greater than or equal to the **min_amount** value. |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
 
-**Example**
+  <tr>
+    <td><strong>conversion_rate</strong> (optional)</td>
+    <td><a href="#float" style="stixtype">float</a></td>
+    <td>The conversion rate between the <strong>currency</strong> and <strong>currency_actual</strong> properties. This <strong>MUST NOT</strong> be included if the <strong>currency_actual</strong> property is not included. This <strong>MUST</strong> be included if the <strong>currency_actual</strong> property is included. This value <strong>MUST</strong> be greater than zero. If this property is provided, the <strong>conversion_time</strong> property must also be provided.</td>
+</tr>
 
-```
-{
-    "type": "impact",
-    "id": "impact--562c7b03-3c27-4adf-8580-57ecce6687c8",
-    "created": "2023-11-22T15:30:00.000Z",
-    "modified": "2023-11-22T15:30:00.000Z",
-    "spec_version": "2.2",
-    "impact_category": "economic",
-    "criticality": 85,
-    "description": "Financial loss due to a ransomware attack.",
-    "start_time": "2023-11-22T15:30:00Z",
-    "start_time_fidelity": "minute",
-    "extensions": {
-        "economic-ext": {
-            "variety": "ransom",
-            "currency": "USD",
-            "min_amount": 10000,
-            "max_amount": 15000
-        }
-    }
-}
-```
+  <tr>
+    <td><strong>conversion_time</strong> (optional)</td>
+    <td><a href="#timestamp" style="stixtype">timestamp</a></td>
+    <td>The timestamp corresponding to the conversion rate from the <strong>currency</strong> property to the <strong>currency_actual</strong> property. This <strong>MUST</strong> be included if a <strong>conversion_rate</strong> property is included.</td>
+</tr>
+
+  <tr>
+    <td><strong>currency</strong> (optional)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>The currency used for reporting the <strong>max_amount</strong> and <strong>min_amount</strong> properties values. This <strong>SHOULD</strong> be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency. This <strong>SHOULD</strong> match the currency of the organization or the government producing the report. This value <strong>MUST</strong> be included if the <strong>min_amount</strong> property is included.</td>
+</tr>
+
+  <tr>
+    <td><strong>currency_actual</strong> (optional)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>The currency that the impact actually used. For ransom demands this should be the currency of the demand. If this is not included it should be assumed to be the same value as the <strong>currency</strong> property. If this is included then the <strong>currency</strong> property <strong>MUST</strong> be included. This <strong>SHOULD</strong> be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency.</td>
+</tr>
+
+  <tr>
+    <td><strong>max_amount</strong> (optional)</td>
+    <td><a href="#float" style="stixtype">float</a></td>
+    <td>The maximum economic amount of the impact using the currency specified in the <strong>currency</strong> property. This value <strong>MUST</strong> be greater than zero. This value <strong>MUST</strong> be included if the <strong>min_amount</strong> property is included. If <strong>min_amount</strong> and <strong>max_amount</strong> properties are both defined, then <strong>max_amount</strong> value <strong>MUST</strong> be greater than or equal to the <strong>min_amount</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>min_amount</strong> (optional)</td>
+    <td><a href="#float" style="stixtype">float</a></td>
+    <td>The maximum economic amount of the impact using the currency specified in the <strong>currency</strong> property. This value <strong>MUST</strong> be greater than zero. This value <strong>MUST</strong> be included if the <strong>max_amount</strong> property is included. If <strong>min_amount</strong> and <strong>max_amount</strong> properties are both defined, then <strong>max_amount</strong> value <strong>MUST</strong> be greater than or equal to the <strong>min_amount</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>variety</strong> (required)</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
+    <td>The variety of this economic impact. The value of this property <strong>SHOULD</strong> come from the <a href="#economic-impact-type-vocabulary" style="stixtype">economic-impact-type-ov</a> open vocabulary.</td>
+</tr>
+
+</table>
 
 ### 4.7.7 Physical Impact Extension <a id="physical-impact-extension"></a>
 
@@ -3237,33 +3391,26 @@ Because these extensions are used to specify very different types of impacts, pr
 
 #### 4.7.7.1 Properties <a id="physical-impact-extension-properties"></a>
 
-| **Property Name** | **Type** | **Description** |
-| --- | --- | --- |
-| **impact_type** (required) | [physical-impact-enumeration](#physical-impact-enumeration) | The type of physical impact that has occurred. The value of this property **MUST** come from the [physical-impact-enumeration](#physical-impact-enumeration) enumeration. |
-| **asset_type** (optional) | [open-vocab](#stix-open-vocabularies-and-enumerations) | The type of property or system that was affected by this impact. The value of this property **SHOULD** come from the [asset-type-ov](#asset-type-vocabulary) open vocabulary. This value **MUST** be included if the **impact_type** is not none . Otherwise, including an entry with an **impact_type** of none and no asset_type indicates that no physical damage was caused by the related incident. |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
 
-**Example**
+  <tr>
+    <td><strong>asset_type</strong> (optional)</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
+    <td>The type of property or system that was affected by this impact. The value of this property <strong>SHOULD</strong> come from the <a href="#asset-type-vocabulary" style="stixtype">asset-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the <strong>impact_type</strong> is not none . Otherwise, including an entry with an <strong>impact_type</strong> of none and no asset_type indicates that no physical damage was caused by the related incident.</td>
+</tr>
 
-```
-{
-    "type": "impact",
-    "id": "impact--738492bd-288b-48c9-ad2a-83230d2dee86",
-    "created": "2023-11-22T15:30:00.123Z",
-    "modified": "2023-11-22T15:30:00.446Z",
-    "spec_version": "2.2",
-    "impact_category": "physical",
-    "criticality": 95,
-    "description": "Physical damage to a power plant.",
-    "start_time": "2023-11-22T15:30:00Z",
-    "start_time_fidelity": "minute",
-    "extensions": {
-        "physical-ext": {
-            "impact_type": "destruction",
-            "asset_type": "power-plant"
-        }
-    }
-}
-```
+  <tr>
+    <td><strong>impact_type</strong> (required)</td>
+    <td><a href="#physical-impact-enumeration" style="stixtype">physical-impact-enumeration</a></td>
+    <td>The type of physical impact that has occurred. The value of this property <strong>MUST</strong> come from the <a href="#physical-impact-enumeration" style="stixtype">physical-impact-enumeration</a> enumeration.</td>
+</tr>
+
+</table>
 
 ### 4.7.8 Traceability Impact Extension <a id="traceability-impact-extension"></a>
 
@@ -3271,31 +3418,20 @@ Because these extensions are used to specify very different types of impacts, pr
 
 #### 4.7.8.1 Properties <a id="traceability-impact-extension-properties"></a>
 
-| **Property Name** | **Type** | **Description** |
-| --- | --- | --- |
-| **traceability_impact** (required) | [traceability-enumeration](#traceability-enumeration) | The impact on a system or organization’s ability to perform audits or provide non-repudiation. The value of this property **MUST** come from the [traceability-enumeration](#traceability-enumeration) enumeration. |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
 
-**Example**
+  <tr>
+    <td><strong>traceability_impact</strong> (required)</td>
+    <td><a href="#traceability-enumeration" style="stixtype">traceability-enumeration</a></td>
+    <td>The impact on a system or organization’s ability to perform audits or provide non-repudiation. The value of this property <strong>MUST</strong> come from the <a href="#traceability-enumeration" style="stixtype">traceability-enumeration</a> enumeration.</td>
+</tr>
 
-```
-{
-    "type": "impact",
-    "id": "impact--ef58b184-e4b8-4f1f-9ac3-f22aff3f9459",
-    "created": "2023-11-22T15:30:00.628Z",
-    "modified": "2023-11-22T15:30:00.845Z",
-    "spec_version": "2.2",
-    "impact_category": "traceability",
-    "criticality": 65,
-    "description": "Loss of audit logs due to a cyber attack.",
-    "start_time": "2023-11-22T15:30:00Z",
-    "start_time_fidelity": "minute",
-    "extensions": {
-        "traceability-ext": {
-            "traceability_impact": "partial-accountability"
-        }
-    }
-}
-```
+</table>
 
 ### 4.7.9 Relationships <a id="impact-relationships"></a>
 
@@ -5666,33 +5802,122 @@ A Task is an activity that is performed by or for the victim/defender to respond
 
 ### 4.19.1 Properties <a id="task-properties"></a>
 
-| **Required Common Properties** |
-| --- |
-| **created**, **id**, **modified**, **spec_version**, **type** |
-| **Optional Common Properties** |
-| **created_by_ref**, **revoked**, **labels**, **confidence**, **lang**, **external_references**, **object_marking_refs**, **granular_markings**, **extensions** |
-| **Not Applicable Common Properties** |
-| **defanged** |
-| **Task Object Specific Properties** |
-| **task_types**, **affected_entity_counts**, **changed_objects**, **description**, **end_time**, **end_time_fidelity**, **error**, **name**, **next_tasks_refs** **outcome**, **priority**, **start_time**, **start_time_fidelity** |
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Required Common Properties</span></th>
+  </tr>
+  <tr><td>created, id, modified, spec_version, type</td></tr>
+  <tr>
+    <th><span class="stixtr">Optional Common Properties</span></th>
+  </tr>
+  <tr><td>created_by_ref, revoked, labels, confidence, lang, external_references, object_marking_refs, granular_markings, extensions</td></tr>
+  <tr>
+<th><span class="stixtr">Not Applicable Common Properties</span></th>
+</tr>
+  <tr><td>defanged</td></tr>
+  <tr>
+<th><span class="stixtr">Object Specific Properties</span></th>
+</tr>
+  <tr><td></td></tr>
+</table>
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
 
-| **Property Name** | **Type** | **Description** |
-| --- | --- | --- |
-| **outcome** (required) | [task-outcome-enumeration](#task-outcome-enumeration) | The outcome of the task. The value of this property **MUST** come from the [task-outcome-enumeration](#task-outcome-enumeration) enumeration. |
-| **type** (required) | [string](#string) | The value of this property **MUST** be set to task. |
-| **affected_entity_counts** (optional) | [entity-count](#entity-count) | A list of affected entity types, along with the number of each type affected. This property is used primarily to capture victim notification information. |
-| **changed_objects** (optional) | [list](#list) of type [state-change](#state-change) | A list of changes that this task has caused. This is typically used to indicate how a task has affected impacts. |
-| **task_types** (optional) | [list](#list) of type [open-vocabulary](#open-vocabulary) | A list of high level types for the task in order to enable aggregation and summaries. The values of this property **SHOULD** come from the [task-type-ov](#task-type-vocabulary) open vocabulary. |
-| **description** (optional) | [string](#string) | A description of the task. |
-| **due_date** (optional) | [timestamp](#list) | The date and time the task is/was due to be completed. The value of due_date **MAY** be unrelated to the values of **start_time** and **end_time**, i.e., there is no requirement that a **due_date** be between those values. |
-| **end_time** (optional) | [timestamp](#list) | The date and time the task was last recorded. If this is not present it is assumed to be unknown. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
-| **end_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **end_time** fidelity is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
-| **error** (optional) | [string](#string) | Details about any failures or deviations that occurred in the task. |
-| **name** (optional) | [string](#string) | A name used to identify the task. |
-| **next_task_refs** (optional) | [list](#list) of type [identifier](#identifier) | The [task](#task) objects to follow. They **MUST** be of type [task](#task). There can be more than one if they take place in parallel. |
-| **priority** (optional) | [integer](#integer) | The priority or importance of the task. This value **MUST** be an integer between 0 and 100. This can be translated into qualitative values as described in [Appendix B](#relationship-summary-table). |
-| **start_time** (optional) | [timestamp](#list) | The date and time the task was first recorded. If this is not present it is assumed to be unknown. This property **SHOULD** be populated. If **start_time** and **end_time** properties are both defined, then **end_time** value **MUST** be the same or later than the **start_time** value. |
-| **start_time_fidelity** (optional) | [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) | The level of fidelity that the **start_time** property is recorded in. This value **MUST** come from [timestamp-fidelity-enumeration](#timestamp-fidelity-enumeration) enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes. |
+  <tr>
+    <td><strong>outcome</strong> (required)</td>
+    <td><a href="#task-outcome-enumeration" style="stixtype">task-outcome-enumeration</a></td>
+    <td>The outcome of the task. The value of this property <strong>MUST</strong> come from the <a href="#task-outcome-enumeration" style="stixtype">task-outcome-enumeration</a> enumeration.</td>
+</tr>
+
+  <tr>
+    <td><strong>type</strong> (required)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>The value of this property <strong>MUST</strong> be set to task.</td>
+</tr>
+
+  <tr>
+    <td><strong>affected_entity_counts</strong> (optional)</td>
+    <td><a href="#entity-count" style="stixtype">entity-count</a></td>
+    <td>A list of affected entity types, along with the number of each type affected. This property is used primarily to capture victim notification information.</td>
+</tr>
+
+  <tr>
+    <td><strong>changed_objects</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">list</a> of type <a href="#state-change" style="stixtype">state-change</a></td>
+    <td>A list of changes that this task has caused. This is typically used to indicate how a task has affected impacts.</td>
+</tr>
+
+  <tr>
+    <td><strong>description</strong> (optional)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>A description of the task.</td>
+</tr>
+
+  <tr>
+    <td><strong>due_date</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">timestamp</a></td>
+    <td>The date and time the task is/was due to be completed. The value of due_date <strong>MAY</strong> be unrelated to the values of <strong>start_time</strong> and <strong>end_time</strong>, i.e., there is no requirement that a <strong>due_date</strong> be between those values.</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">timestamp</a></td>
+    <td>The date and time the task was last recorded. If this is not present it is assumed to be unknown. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>end_time</strong> fidelity is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+  <tr>
+    <td><strong>error</strong> (optional)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>Details about any failures or deviations that occurred in the task.</td>
+</tr>
+
+  <tr>
+    <td><strong>name</strong> (optional)</td>
+    <td><a href="#string" style="stixtype">string</a></td>
+    <td>A name used to identify the task.</td>
+</tr>
+
+  <tr>
+    <td><strong>next_task_refs</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">list</a> of type <a href="#identifier" style="stixtype">identifier</a></td>
+    <td>The <a href="#task" style="stixtype">task</a> objects to follow. They <strong>MUST</strong> be of type <a href="#task" style="stixtype">task</a>. There can be more than one if they take place in parallel.</td>
+</tr>
+
+  <tr>
+    <td><strong>priority</strong> (optional)</td>
+    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td>The priority or importance of the task. This value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#relationship-summary-table" style="stixtype">Appendix B</a>.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">timestamp</a></td>
+    <td>The date and time the task was first recorded. If this is not present it is assumed to be unknown. This property <strong>SHOULD</strong> be populated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+  <tr>
+    <td><strong>task_types</strong> (optional)</td>
+    <td><a href="#list" style="stixtype">list</a> of type <a href="#open-vocabulary" style="stixtype">open-vocabulary</a></td>
+    <td>A list of high level types for the task in order to enable aggregation and summaries. The values of this property <strong>SHOULD</strong> come from the <a href="#task-type-vocabulary" style="stixtype">task-type-ov</a> open vocabulary.</td>
+</tr>
+
+</table>
 
 ### 4.19.2 Relationships <a id="task-relationships"></a>
 
@@ -12218,29 +12443,97 @@ An open vocabulary of User Account types.
 
 **Type Name:** <span class="stixtype">asset-type-ov</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| building-doors | Doors within buildings or structures. |
-| building-windows | The exterior or interior windows of buildings or structures. |
-| buildings | Entire buildings or structures. |
-| computers-mobile | Mobile devices such as smartphones. |
-| computers-personal | Workstations or laptops owned by an organization. |
-| computers-server | Servers owned by an organization. |
-| environment | Land, environment or the ability of either to support humans or wildlife. |
-| ics-actuator | Actuator for industrial control systems. |
-| ics-engineering-workstation | Engineering workstation for industrial control systems. |
-| ics-historian | Historian for industrial control systems. |
-| ics-hmi | Human machine interfaces for industrial control systems. |
-| ics-other | Other Industrial control systems. |
-| ics-plc | Programmable logic controller for industrial control systems. |
-| ics-safety-system | Safety system for industrial control systems. |
-| ics-sensor | Sensor for industrial control systems. |
-| inventory | Stocks of goods to be sold or consumed. |
-| network-device | Switches, routers, and wireless communication towers. |
-| private-infrastructure | Privately owned infrastructure such as roads, plumbing, railways, pipelines and electrical infrastructure. |
-| public-infrastructure | Publicly owned infrastructure such as roads, plumbing, railways, pipelines and electrical infrastructure. |
-| security-containers | Safes or other security containers. |
-| vehicles | Vehicles of various types including cars, trains, and planes. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">building-doors</span>, <span class="stixliteral">building-windows</span>, <span class="stixliteral">buildings</span>, <span class="stixliteral">computers-mobile</span>, <span class="stixliteral">computers-personal</span>, <span class="stixliteral">computers-server</span>, <span class="stixliteral">environment</span>, <span class="stixliteral">ics-actuator</span>, <span class="stixliteral">ics-engineering-workstation</span>, <span class="stixliteral">ics-historian</span>, <span class="stixliteral">ics-hmi</span>, <span class="stixliteral">ics-other</span>, <span class="stixliteral">ics-plc</span>, <span class="stixliteral">ics-safety-system</span>, <span class="stixliteral">ics-sensor</span>, <span class="stixliteral">inventory</span>, <span class="stixliteral">network-device</span>, <span class="stixliteral">private-infrastructure</span>, <span class="stixliteral">public-infrastructure</span>, <span class="stixliteral">security-containers</span>, <span class="stixliteral">vehicles</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">building-doors</span></td>
+    <td>Doors within buildings or structures.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">building-windows</span></td>
+    <td>The exterior or interior windows of buildings or structures.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">buildings</span></td>
+    <td>Entire buildings or structures.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">computers-mobile</span></td>
+    <td>Mobile devices such as smartphones.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">computers-personal</span></td>
+    <td>Workstations or laptops owned by an organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">computers-server</span></td>
+    <td>Servers owned by an organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">environment</span></td>
+    <td>Land, environment or the ability of either to support humans or wildlife.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-actuator</span></td>
+    <td>Actuator for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-engineering-workstation</span></td>
+    <td>Engineering workstation for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-historian</span></td>
+    <td>Historian for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-hmi</span></td>
+    <td>Human machine interfaces for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-other</span></td>
+    <td>Other Industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-plc</span></td>
+    <td>Programmable logic controller for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-safety-system</span></td>
+    <td>Safety system for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-sensor</span></td>
+    <td>Sensor for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">inventory</span></td>
+    <td>Stocks of goods to be sold or consumed.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">network-device</span></td>
+    <td>Switches, routers, and wireless communication towers.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">private-infrastructure</span></td>
+    <td>Privately owned infrastructure such as roads, plumbing, railways, pipelines and electrical infrastructure.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">public-infrastructure</span></td>
+    <td>Publicly owned infrastructure such as roads, plumbing, railways, pipelines and electrical infrastructure.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">security-containers</span></td>
+    <td>Safes or other security containers.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">vehicles</span></td>
+    <td>Vehicles of various types including cars, trains, and planes.</td>
+</tr>
+
+</table>
+
 
 ## 10.3 Attack Motivation Vocabulary <a id='attack-motivation-vocabulary'></a>
 **Vocabulary Name:** <span class="stixtype">attack-motivation-ov</span>
@@ -12362,33 +12655,97 @@ Attack Resource Level is an open vocabulary that captures the general level of r
 
 **Type Name:** <span class="stixtype">detection-method-ov</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| automated-tool | An incident is detected by an automated tool. If this option is used it is generally useful to also include a separate entry for the tool itself. |
-| commercial-solution | A commercial tool or provider detected this incident. This can be combined with other methods including automated-tool to allow greater fidelity. |
-| external-notification | An external entity detected this incident and notified the impacted organization. |
-| human-review | An incident is detected by human threat hunting. |
-| message-from-attacker | Notification comes from a message provided by the attacker including email, a note left of a message or popup message. |
-| proprietary-solution | An internally developed tool or process detected this incident. This can be combined with other methods including automated-tool to allow greater fidelity. |
-| system-outage | An incident is detected because a system is no longer available. |
-| user-reporting | One or more users report an incident. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">automated-tool</span>, <span class="stixliteral">commercial-solution</span>, <span class="stixliteral">external-notification</span>, <span class="stixliteral">human-review</span>, <span class="stixliteral">message-from-attacker</span>, <span class="stixliteral">proprietary-solution</span>, <span class="stixliteral">system-outage</span>, <span class="stixliteral">user-reporting</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">automated-tool</span></td>
+    <td>An incident is detected by an automated tool. If this option is used it is generally useful to also include a separate entry for the tool itself.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">commercial-solution</span></td>
+    <td>A commercial tool or provider detected this incident. This can be combined with other methods including automated-tool to allow greater fidelity.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">external-notification</span></td>
+    <td>An external entity detected this incident and notified the impacted organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">human-review</span></td>
+    <td>An incident is detected by human threat hunting.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">message-from-attacker</span></td>
+    <td>Notification comes from a message provided by the attacker including email, a note left of a message or popup message.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">proprietary-solution</span></td>
+    <td>An internally developed tool or process detected this incident. This can be combined with other methods including automated-tool to allow greater fidelity.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">system-outage</span></td>
+    <td>An incident is detected because a system is no longer available.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">user-reporting</span></td>
+    <td>One or more users report an incident.</td>
+</tr>
+
+</table>
+
 
 ## 10.6 Economic Impact Type Vocabulary <a id='economic-impact-type-vocabulary'></a>
 
 **Type Name:** <span class="stixtype">economic-impact-type-ov</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| asset-and-fraud | Losses incurred due to loss of assets or fraud. |
-| brand-damage | Losses incurred due to reputational or brand damage. |
-| business-disruption | Losses incurred due to business disruptions. |
-| competitive-advantage | Losses incurred due to theft of intellectual property, techniques or other capabilities that grant an advantage in the field. |
-| legal-and-regulatory | Losses incurred due to legal or regulatory actions in response to the incident. |
-| operating-costs | Losses incurred due to additional operating costs that have been incurred due to the incident. |
-| ransom-demand | The demanded amount of ransom to be paid. When this is selected the demand amount should be listed as the **max_amount** and the **min_amount** should be 0. |
-| ransom-payment | An actual payment of a ransom. |
-| response-and-recovery | Losses incurred due to response and recovery efforts for the incident. |
-| uncategorized | Losses incurred that have not been categorized yet. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">asset-and-fraud</span>, <span class="stixliteral">brand-damage</span>, <span class="stixliteral">business-disruption</span>, <span class="stixliteral">competitive-advantage</span>, <span class="stixliteral">legal-and-regulatory</span>, <span class="stixliteral">operating-costs</span>, <span class="stixliteral">ransom-demand</span>, <span class="stixliteral">ransom-payment</span>, <span class="stixliteral">response-and-recovery</span>, <span class="stixliteral">uncategorized</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">asset-and-fraud</span></td>
+    <td>Losses incurred due to loss of assets or fraud.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">brand-damage</span></td>
+    <td>Losses incurred due to reputational or brand damage.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">business-disruption</span></td>
+    <td>Losses incurred due to business disruptions.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">competitive-advantage</span></td>
+    <td>Losses incurred due to theft of intellectual property, techniques or other capabilities that grant an advantage in the field.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">legal-and-regulatory</span></td>
+    <td>Losses incurred due to legal or regulatory actions in response to the incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">operating-costs</span></td>
+    <td>Losses incurred due to additional operating costs that have been incurred due to the incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ransom-demand</span></td>
+    <td>The demanded amount of ransom to be paid. When this is selected the demand amount should be listed as the **max_amount** and the **min_amount** should be 0.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ransom-payment</span></td>
+    <td>An actual payment of a ransom.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">response-and-recovery</span></td>
+    <td>Losses incurred due to response and recovery efforts for the incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">uncategorized</span></td>
+    <td>Losses incurred that have not been categorized yet.</td>
+</tr>
+
+</table>
+
 
 ## 10.7 Encryption Algorithm Enumeration <a id="encryption-algorithm-enumeration"></a>
 
@@ -12431,42 +12788,133 @@ An enumeration of encryption algorithms for sharing defanged and/or confidential
 
 **Type Name:** entity-type-ov
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| computers-mobile | Mobile devices such as smartphones. |
-| computers-personal | Workstations or laptops owned by an organization. |
-| computers-server | Servers owned by an organization. |
-| customer | An customer or client. This can be an individual or organization. |
-| customer-individual | An customer or client that represents an individual. |
-| customer-organization | An customer or client that represents a business or other organization. |
-| domain-controller | A windows domain controller. |
-| employee | An employee of an organization. |
-| group | An informal collection of people, without formal governance, such as a distributed hacker group. |
-| ics-actuator | Actuator for industrial control systems. |
-| ics-engineering-workstation | Engineering workstation for industrial control systems. |
-| ics-historian | Historian for industrial control systems. |
-| ics-hmi | Human machine interfaces for industrial control systems. |
-| ics-other | Other Industrial control systems. |
-| ics-plc | Programmable logic controller for industrial control systems. |
-| ics-safety-system | Safety system for industrial control systems. |
-| ics-sensor | Sensor for industrial control systems. |
-| individual | A single person. |
-| network-device | Switches, routers, and wireless communication towers. |
-| organization | A formal organization of people, with governance, such as a company or country. |
-| system | A computer system, such as a SIEM. |
-| vehicles | Vehicles of various types including cars, trains, and planes. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">computers-mobile</span>, <span class="stixliteral">computers-personal</span>, <span class="stixliteral">computers-server</span>, <span class="stixliteral">customer</span>, <span class="stixliteral">customer-individual</span>, <span class="stixliteral">customer-organization</span>, <span class="stixliteral">domain-controller</span>, <span class="stixliteral">employee</span>, <span class="stixliteral">group</span>, <span class="stixliteral">ics-actuator</span>, <span class="stixliteral">ics-engineering-workstation</span>, <span class="stixliteral">ics-historian</span>, <span class="stixliteral">ics-hmi</span>, <span class="stixliteral">ics-other</span>, <span class="stixliteral">ics-plc</span>, <span class="stixliteral">ics-safety-system</span>, <span class="stixliteral">ics-sensor</span>, <span class="stixliteral">individual</span>, <span class="stixliteral">network-device</span>, <span class="stixliteral">organization</span>, <span class="stixliteral">system</span>, <span class="stixliteral">vehicles</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">computers-mobile</span></td>
+    <td>Mobile devices such as smartphones.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">computers-personal</span></td>
+    <td>Workstations or laptops owned by an organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">computers-server</span></td>
+    <td>Servers owned by an organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">customer</span></td>
+    <td>An customer or client. This can be an individual or organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">customer-individual</span></td>
+    <td>An customer or client that represents an individual.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">customer-organization</span></td>
+    <td>An customer or client that represents a business or other organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">domain-controller</span></td>
+    <td>A windows domain controller.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">employee</span></td>
+    <td>An employee of an organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">group</span></td>
+    <td>An informal collection of people, without formal governance, such as a distributed hacker group.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-actuator</span></td>
+    <td>Actuator for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-engineering-workstation</span></td>
+    <td>Engineering workstation for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-historian</span></td>
+    <td>Historian for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-hmi</span></td>
+    <td>Human machine interfaces for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-other</span></td>
+    <td>Other Industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-plc</span></td>
+    <td>Programmable logic controller for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-safety-system</span></td>
+    <td>Safety system for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-sensor</span></td>
+    <td>Sensor for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">individual</span></td>
+    <td>A single person.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">network-device</span></td>
+    <td>Switches, routers, and wireless communication towers.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">organization</span></td>
+    <td>A formal organization of people, with governance, such as a company or country.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">system</span></td>
+    <td>A computer system, such as a SIEM.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">vehicles</span></td>
+    <td>Vehicles of various types including cars, trains, and planes.</td>
+</tr>
+
+</table>
+
 
 ## 10.9 Event Status Enumeration <a id="event-status-enumeration"></a>
 
 **Type Name:** event-status-enum
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| ongoing | The event is still occurring. |
-| occurred | The event took place and is no longer ongoing. |
-| not-occurred | The event did not take place, but it was previously expected to. |
-| pending | The event has not yet been started or observed, but it is projected or otherwise planned. Pending activity may never occur as various factors can cause it to be blocked or not attempted. As such any time or sequence values for pending activities should be treated as an estimation or projection that is subject to change. |
-| undetermined | The status of the event has not been determined or is not shareable. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">not-occurred</span>, <span class="stixliteral">occurred</span>, <span class="stixliteral">ongoing</span>, <span class="stixliteral">pending</span>, <span class="stixliteral">undetermined</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">not-occurred</span></td>
+    <td>The event did not take place, but it was previously expected to.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">occurred</span></td>
+    <td>The event took place and is no longer ongoing.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ongoing</span></td>
+    <td>The event is still occurring.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">pending</span></td>
+    <td>The event has not yet been started or observed, but it is projected or otherwise planned. Pending activity may never occur as various factors can cause it to be blocked or not attempted. As such any time or sequence values for pending activities should be treated as an estimation or projection that is subject to change.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">undetermined</span></td>
+    <td>The status of the event has not been determined or is not shareable.</td>
+</tr>
+
+</table>
+
 
 ## 10.10 Event Type Vocabulary <a id="event-type-vocabulary"></a>
 
@@ -12481,96 +12929,365 @@ These include:
 
 **Type Name:** event-type-ov
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| aggregation-information-phishing-schemes | Collecting data obtained through phishing attacks on web pages, email accounts, etc…​ |
-| benign | The event was neither dangerous nor malicious and was not suspected to be malicious or dangerous. |
-| blocked | The event was suspected to be malicious and was blocked. |
-| brute-force-attempt | Unsuccessful login attempt by using sequential credentials for gaining access to the system. |
-| c&c-server-hosting | Web page disseminating one or various types of malware. |
-| compromised-system | Attackers obtained control of a compromised system. |
-| confirmed | The event was confirmed to be tied to an incident and response is underway. |
-| connection-malware-port | System attempting to gain access to a port normally linked to a specific type of malware. |
-| connection-malware-system | System attempting to gain access to an IP address or URL normally linked to a specific type of malware, e.g. C&C or a distribution page for components linked to a specific botnet. |
-| content-forbidden-by-law | Distribution or sharing of illegal content such as child pornography, racism, xenophobia, etc…​ |
-| control-system-bypass | Unauthorized access to a system or component by bypassing an access control system in place. |
-| copyrighted-content | Distribution or sharing of content protected by copyright and related rights. |
-| data-exfiltration | Unauthorized access to and sharing of a specific set of information. |
-| deferred | The event is deferred due to resource constraints, information types or external reasons. |
-| deletion-information | Unauthorized deleting of a specific set of information. |
-| denial-of-service | The event or incident resulted in a loss of availability for a service or system. Incidents of this type **SHOULD** have an availability impact, but organizations may choose to not share the details of these impacts. |
-| destruction | The event or incident destroyed data or systems. Incidents of this **SHOULD** have an integrity impact, but organizations may choose to not share the details of these impacts. |
-| dictionary-attack-attempt | Unsuccessful login attempt by using system access credentials previously loaded into a dictionary. |
-| discarded | The event was discarded due to resource constraints, information types or external reasons. |
-| disruption-data-transmission | Logical and physical activities aimed at causing damage to information or at preventing its transmission among systems. |
-| dissemination-malware-email | Malware attached to a message or email message containing link to malicious URL. |
-| dissemination-phishing-emails | Mass emailing aimed at collecting data for phishing purposes with regard to the victims. |
-| dns-cache-poisoning | DNS cache poisoning - also known as DNS spoofing, is a type of cyber attack in which an attacker corrupts a DNS resolver’s cache by injecting false DNS records, causing the resolver to records controlled by the attacker. |
-| dns-local-resolver-hijacking | Consumer Premise Equipment (CPE), such as home routers, often provide DNS recursion on the local network. If the CPE device is compromised, the attacker can change the recursive resolver behavior; for example, by changing responses. |
-| dns-spoofing-registered | In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is in fact controlled by or registered to a legitimate registrant. |
-| dns-rebinding | DNS rebinding - a type of attack where a malicious website directs a client to a local network address, allowing the attacker to bypass the same-origin policy and gain access to the victim’s local resources. |
-| dns-server-compromise | Attacker gains administrative privileges on an open recursive DNS server, authoritative DNS server, organizational recursive DNS server, or ISP-operated recursive DNS server. |
-| dns-spoofing-unregistered | In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is not controlled by or registered to a legitimate registrant. |
-| dns-stub-resolver-hijacking | The attacker compromises the Operating System of a computer or a phone with malicious code that intercepts and responds to DNS queries with rogue or malicious responses. |
-| dns-zone-transfer | Transfer of a specific DNS zone. |
-| domain-name-compromise | The wrongfully taking control of a domain name from the rightful name holder. Compromised domains can be used for different kinds of malicious activity like sending spam or phishing, for distributing malware or as botnet command and control. |
-| duplicate | This event is a duplicate of another event. A relationship should be created between this event and the event it duplicates. |
-| email-flooding | Sending an unusually large quantity of email messages. |
-| equipment-loss | A loss of control of physical equipment that is not known to be theft. |
-| equipment-theft | Theft of equipment. In general this should be paired with equipment-loss. |
-| exploit | Successful use of a tool exploiting a specific vulnerability of the system. |
-| exploit-attempt | Unsuccessful use of a tool exploiting a specific vulnerability of the system. |
-| exploit-framework-exhausting-resources | Various sources using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability. |
-| exploit-tool-exhausting-resources | One single source using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability. |
-| failed | The event failed its suspected goal. |
-| file-inclusion | Inclusion of files into a system under attack with the use of file inclusion techniques. |
-| file-inclusion-attempt | Unsuccessful attempt to include files in the system under attack by using file inclusion techniques. |
-| hosting-malware-webpage | Web page disseminating one or various types of malware. |
-| hosting-phishing-sites | Hosting web sites for phishing purposes. |
-| illegitimate-use-name | Using the name of an institution without permission to do so. |
-| illegitimate-use-resources | Use of institutional resources for purposes other than those intended. |
-| infected-by-known-malware | The presence of any of the types of malware was detected in a system. |
-| insufficient-data | Not enough data is available to assess this event. |
-| known-malware | This incident involves a known type of malware. Events and incidents **SHOULD** be related to a Malware object, but organizations may choose not to share the details on this malware. |
-| lame-delegations | Lame delegations occur as a result of expired name server domains allowing attackers to take control of the domain resolution by re-registering this expired name server domain. |
-| major | The incident is classified as major based on the internal criteria within the organization or due to external reporting requirements. |
-| modification-information | Unauthorized changes to a specific set of information. |
-| misconfiguration | A false positive where this event was triggered by a misconfiguration. |
-| natural | The event was due to natural causes such as an earthquake or hurricane. |
-| negotiation | Negotiation of a deal or payment amount. |
-| network-scanning | Scanning a network aimed at identifying systems which are active in the same network. |
-| no-apt | It is not believed that this incident involved an advanced persistent threat. |
-| packet-flood | Mass mailing of requests (network packets, emails, etc…​) from various sources to a specific service, aimed at affecting its normal functioning. |
-| password-cracking-attempt | Attempt to acquire access credentials by breaking the protective cryptographic keys. |
-| policy-violation | The event or incident was a violation of organizational or regulatory policy. |
-| ransomware | This incident involved malware that encrypted data with a demand that a ransom is paid to regain access to it. |
-| ransomware-payment | The event or incident associated with actually paying a ransom. |
-| refuted | The event was previously suspected to have achieved a goal, but this has since been refuted. |
-| scan-probe | Event was triggered based on scanning activity |
-| silently-discarded | The event was silently discarded due to resource constraints, information types or external reasons. |
-| supply-chain-customer | This incident used a vendor further up in the supply chain where the target was a customer. |
-| supply-chain-vendor | This incident targeted a system or product that is supplied to others to enable further attacks. |
-| spam | Sending an email message that was unsolicited or unwanted by the recipient. |
-| sql-injection | Manipulation or reading of information contained in a database by using the SQL injection technique. |
-| sql-injection-attempt | Unsuccessful attempt to manipulate or read the information of a database by using the SQL injection technique. |
-| successful | The event is believed to have succeeded in its goal. |
-| system-probe | Single system scan searching for open ports or services using these ports for responding. |
-| theft-access-credentials | Unauthorized access to a system or component by using stolen access credentials. |
-| unattributed | This event or incident has not been attributed. It is unclear if it is tied to a specific advanced persistent threat group. |
-| unauthorized-access-information | Unauthorized access to a set of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts. |
-| unauthorized-access-system | Unauthorized access to a system or component. |
-| unauthorized-equipment | Usage of unauthorized devices as part of the incident |
-| unauthorized-release | The unauthorized release of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts. |
-| unauthorized-use | The usage of information that falls outside of official purposes |
-| undetermined | Field aimed at the classification of unprocessed events, which have remained undetermined from the beginning. |
-| unintentional | The event was due to unintentional activity. |
-| unknown-apt | This incident is believed to involve an advanced persistent threat, but the specific APT is unknown. |
-| unspecified | Other unlisted events. |
-| vandalism | Logical and physical activities which - although they are not aimed at causing damage to information or at preventing its transmission among systems - have this effect. |
-| wiretapping | Logical or physical interception of communications. |
-| worm-spreading | System infected by a worm trying to infect other systems. |
-| xss | Attacks performed with the use of cross-site scripting techniques. |
-| xss-attempt | Unsuccessful attempts to perform attacks by using cross-site scripting techniques. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">aggregation-information-phishing-schemes</span>, <span class="stixliteral">benign</span>, <span class="stixliteral">blocked</span>, <span class="stixliteral">brute-force-attempt</span>, <span class="stixliteral">c&c-server-hosting</span>, <span class="stixliteral">compromised-system</span>, <span class="stixliteral">confirmed</span>, <span class="stixliteral">connection-malware-port</span>, <span class="stixliteral">connection-malware-system</span>, <span class="stixliteral">content-forbidden-by-law</span>, <span class="stixliteral">control-system-bypass</span>, <span class="stixliteral">copyrighted-content</span>, <span class="stixliteral">data-exfiltration</span>, <span class="stixliteral">deferred</span>, <span class="stixliteral">deletion-information</span>, <span class="stixliteral">denial-of-service</span>, <span class="stixliteral">destruction</span>, <span class="stixliteral">dictionary-attack-attempt</span>, <span class="stixliteral">discarded</span>, <span class="stixliteral">disruption-data-transmission</span>, <span class="stixliteral">dissemination-malware-email</span>, <span class="stixliteral">dissemination-phishing-emails</span>, <span class="stixliteral">dns-cache-poisoning</span>, <span class="stixliteral">dns-local-resolver-hijacking</span>, <span class="stixliteral">dns-rebinding</span>, <span class="stixliteral">dns-server-compromise</span>, <span class="stixliteral">dns-spoofing-registered</span>, <span class="stixliteral">dns-spoofing-unregistered</span>, <span class="stixliteral">dns-stub-resolver-hijacking</span>, <span class="stixliteral">dns-zone-transfer</span>, <span class="stixliteral">domain-name-compromise</span>, <span class="stixliteral">duplicate</span>, <span class="stixliteral">email-flooding</span>, <span class="stixliteral">equipment-loss</span>, <span class="stixliteral">equipment-theft</span>, <span class="stixliteral">exploit</span>, <span class="stixliteral">exploit-attempt</span>, <span class="stixliteral">exploit-framework-exhausting-resources</span>, <span class="stixliteral">exploit-tool-exhausting-resources</span>, <span class="stixliteral">failed</span>, <span class="stixliteral">file-inclusion</span>, <span class="stixliteral">file-inclusion-attempt</span>, <span class="stixliteral">hosting-malware-webpage</span>, <span class="stixliteral">hosting-phishing-sites</span>, <span class="stixliteral">illegitimate-use-name</span>, <span class="stixliteral">illegitimate-use-resources</span>, <span class="stixliteral">infected-by-known-malware</span>, <span class="stixliteral">insufficient-data</span>, <span class="stixliteral">known-malware</span>, <span class="stixliteral">lame-delegations</span>, <span class="stixliteral">major</span>, <span class="stixliteral">misconfiguration</span>, <span class="stixliteral">modification-information</span>, <span class="stixliteral">natural</span>, <span class="stixliteral">negotiation</span>, <span class="stixliteral">network-scanning</span>, <span class="stixliteral">no-apt</span>, <span class="stixliteral">packet-flood</span>, <span class="stixliteral">password-cracking-attempt</span>, <span class="stixliteral">policy-violation</span>, <span class="stixliteral">ransomware</span>, <span class="stixliteral">ransomware-payment</span>, <span class="stixliteral">refuted</span>, <span class="stixliteral">scan-probe</span>, <span class="stixliteral">silently-discarded</span>, <span class="stixliteral">spam</span>, <span class="stixliteral">sql-injection</span>, <span class="stixliteral">sql-injection-attempt</span>, <span class="stixliteral">successful</span>, <span class="stixliteral">supply-chain-customer</span>, <span class="stixliteral">supply-chain-vendor</span>, <span class="stixliteral">system-probe</span>, <span class="stixliteral">theft-access-credentials</span>, <span class="stixliteral">unattributed</span>, <span class="stixliteral">unauthorized-access-information</span>, <span class="stixliteral">unauthorized-access-system</span>, <span class="stixliteral">unauthorized-equipment</span>, <span class="stixliteral">unauthorized-release</span>, <span class="stixliteral">unauthorized-use</span>, <span class="stixliteral">undetermined</span>, <span class="stixliteral">unintentional</span>, <span class="stixliteral">unknown-apt</span>, <span class="stixliteral">unspecified</span>, <span class="stixliteral">vandalism</span>, <span class="stixliteral">wiretapping</span>, <span class="stixliteral">worm-spreading</span>, <span class="stixliteral">xss</span>, <span class="stixliteral">xss-attempt</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">aggregation-information-phishing-schemes</span></td>
+    <td>Collecting data obtained through phishing attacks on web pages, email accounts, etc…​</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">benign</span></td>
+    <td>The event was neither dangerous nor malicious and was not suspected to be malicious or dangerous.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">blocked</span></td>
+    <td>The event was suspected to be malicious and was blocked.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">brute-force-attempt</span></td>
+    <td>Unsuccessful login attempt by using sequential credentials for gaining access to the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">c&c-server-hosting</span></td>
+    <td>Web page disseminating one or various types of malware.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">compromised-system</span></td>
+    <td>Attackers obtained control of a compromised system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">confirmed</span></td>
+    <td>The event was confirmed to be tied to an incident and response is underway.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">connection-malware-port</span></td>
+    <td>System attempting to gain access to a port normally linked to a specific type of malware.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">connection-malware-system</span></td>
+    <td>System attempting to gain access to an IP address or URL normally linked to a specific type of malware, e.g. C&C or a distribution page for components linked to a specific botnet.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">content-forbidden-by-law</span></td>
+    <td>Distribution or sharing of illegal content such as child pornography, racism, xenophobia, etc…​</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">control-system-bypass</span></td>
+    <td>Unauthorized access to a system or component by bypassing an access control system in place.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">copyrighted-content</span></td>
+    <td>Distribution or sharing of content protected by copyright and related rights.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">data-exfiltration</span></td>
+    <td>Unauthorized access to and sharing of a specific set of information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">deferred</span></td>
+    <td>The event is deferred due to resource constraints, information types or external reasons.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">deletion-information</span></td>
+    <td>Unauthorized deleting of a specific set of information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">denial-of-service</span></td>
+    <td>The event or incident resulted in a loss of availability for a service or system. Incidents of this type **SHOULD** have an availability impact, but organizations may choose to not share the details of these impacts.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">destruction</span></td>
+    <td>The event or incident destroyed data or systems. Incidents of this **SHOULD** have an integrity impact, but organizations may choose to not share the details of these impacts.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dictionary-attack-attempt</span></td>
+    <td>Unsuccessful login attempt by using system access credentials previously loaded into a dictionary.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">discarded</span></td>
+    <td>The event was discarded due to resource constraints, information types or external reasons.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">disruption-data-transmission</span></td>
+    <td>Logical and physical activities aimed at causing damage to information or at preventing its transmission among systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dissemination-malware-email</span></td>
+    <td>Malware attached to a message or email message containing link to malicious URL.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dissemination-phishing-emails</span></td>
+    <td>Mass emailing aimed at collecting data for phishing purposes with regard to the victims.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-cache-poisoning</span></td>
+    <td>DNS cache poisoning - also known as DNS spoofing, is a type of cyber attack in which an attacker corrupts a DNS resolver’s cache by injecting false DNS records, causing the resolver to records controlled by the attacker.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-local-resolver-hijacking</span></td>
+    <td>Consumer Premise Equipment (CPE), such as home routers, often provide DNS recursion on the local network. If the CPE device is compromised, the attacker can change the recursive resolver behavior; for example, by changing responses.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-rebinding</span></td>
+    <td>DNS rebinding - a type of attack where a malicious website directs a client to a local network address, allowing the attacker to bypass the same-origin policy and gain access to the victim’s local resources.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-server-compromise</span></td>
+    <td>Attacker gains administrative privileges on an open recursive DNS server, authoritative DNS server, organizational recursive DNS server, or ISP-operated recursive DNS server.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-spoofing-registered</span></td>
+    <td>In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is in fact controlled by or registered to a legitimate registrant.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-spoofing-unregistered</span></td>
+    <td>In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is not controlled by or registered to a legitimate registrant.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-stub-resolver-hijacking</span></td>
+    <td>The attacker compromises the Operating System of a computer or a phone with malicious code that intercepts and responds to DNS queries with rogue or malicious responses.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-zone-transfer</span></td>
+    <td>Transfer of a specific DNS zone.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">domain-name-compromise</span></td>
+    <td>The wrongfully taking control of a domain name from the rightful name holder. Compromised domains can be used for different kinds of malicious activity like sending spam or phishing, for distributing malware or as botnet command and control.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">duplicate</span></td>
+    <td>This event is a duplicate of another event. A relationship should be created between this event and the event it duplicates.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">email-flooding</span></td>
+    <td>Sending an unusually large quantity of email messages.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">equipment-loss</span></td>
+    <td>A loss of control of physical equipment that is not known to be theft.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">equipment-theft</span></td>
+    <td>Theft of equipment. In general this should be paired with equipment-loss.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exploit</span></td>
+    <td>Successful use of a tool exploiting a specific vulnerability of the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exploit-attempt</span></td>
+    <td>Unsuccessful use of a tool exploiting a specific vulnerability of the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exploit-framework-exhausting-resources</span></td>
+    <td>Various sources using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exploit-tool-exhausting-resources</span></td>
+    <td>One single source using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">failed</span></td>
+    <td>The event failed its suspected goal.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">file-inclusion</span></td>
+    <td>Inclusion of files into a system under attack with the use of file inclusion techniques.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">file-inclusion-attempt</span></td>
+    <td>Unsuccessful attempt to include files in the system under attack by using file inclusion techniques.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">hosting-malware-webpage</span></td>
+    <td>Web page disseminating one or various types of malware.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">hosting-phishing-sites</span></td>
+    <td>Hosting web sites for phishing purposes.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">illegitimate-use-name</span></td>
+    <td>Using the name of an institution without permission to do so.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">illegitimate-use-resources</span></td>
+    <td>Use of institutional resources for purposes other than those intended.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">infected-by-known-malware</span></td>
+    <td>The presence of any of the types of malware was detected in a system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">insufficient-data</span></td>
+    <td>Not enough data is available to assess this event.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">known-malware</span></td>
+    <td>This incident involves a known type of malware. Events and incidents **SHOULD** be related to a Malware object, but organizations may choose not to share the details on this malware.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">lame-delegations</span></td>
+    <td>Lame delegations occur as a result of expired name server domains allowing attackers to take control of the domain resolution by re-registering this expired name server domain.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">major</span></td>
+    <td>The incident is classified as major based on the internal criteria within the organization or due to external reporting requirements.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">misconfiguration</span></td>
+    <td>A false positive where this event was triggered by a misconfiguration.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">modification-information</span></td>
+    <td>Unauthorized changes to a specific set of information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">natural</span></td>
+    <td>The event was due to natural causes such as an earthquake or hurricane.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">negotiation</span></td>
+    <td>Negotiation of a deal or payment amount.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">network-scanning</span></td>
+    <td>Scanning a network aimed at identifying systems which are active in the same network.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">no-apt</span></td>
+    <td>It is not believed that this incident involved an advanced persistent threat.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">packet-flood</span></td>
+    <td>Mass mailing of requests (network packets, emails, etc…​) from various sources to a specific service, aimed at affecting its normal functioning.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">password-cracking-attempt</span></td>
+    <td>Attempt to acquire access credentials by breaking the protective cryptographic keys.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">policy-violation</span></td>
+    <td>The event or incident was a violation of organizational or regulatory policy.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ransomware</span></td>
+    <td>This incident involved malware that encrypted data with a demand that a ransom is paid to regain access to it.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ransomware-payment</span></td>
+    <td>The event or incident associated with actually paying a ransom.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">refuted</span></td>
+    <td>The event was previously suspected to have achieved a goal, but this has since been refuted.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">scan-probe</span></td>
+    <td>Event was triggered based on scanning activity</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">silently-discarded</span></td>
+    <td>The event was silently discarded due to resource constraints, information types or external reasons.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">spam</span></td>
+    <td>Sending an email message that was unsolicited or unwanted by the recipient.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">sql-injection</span></td>
+    <td>Manipulation or reading of information contained in a database by using the SQL injection technique.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">sql-injection-attempt</span></td>
+    <td>Unsuccessful attempt to manipulate or read the information of a database by using the SQL injection technique.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">successful</span></td>
+    <td>The event is believed to have succeeded in its goal.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">supply-chain-customer</span></td>
+    <td>This incident used a vendor further up in the supply chain where the target was a customer.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">supply-chain-vendor</span></td>
+    <td>This incident targeted a system or product that is supplied to others to enable further attacks.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">system-probe</span></td>
+    <td>Single system scan searching for open ports or services using these ports for responding.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">theft-access-credentials</span></td>
+    <td>Unauthorized access to a system or component by using stolen access credentials.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unattributed</span></td>
+    <td>This event or incident has not been attributed. It is unclear if it is tied to a specific advanced persistent threat group.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unauthorized-access-information</span></td>
+    <td>Unauthorized access to a set of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unauthorized-access-system</span></td>
+    <td>Unauthorized access to a system or component.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unauthorized-equipment</span></td>
+    <td>Usage of unauthorized devices as part of the incident</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unauthorized-release</span></td>
+    <td>The unauthorized release of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unauthorized-use</span></td>
+    <td>The usage of information that falls outside of official purposes</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">undetermined</span></td>
+    <td>Field aimed at the classification of unprocessed events, which have remained undetermined from the beginning.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unintentional</span></td>
+    <td>The event was due to unintentional activity.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown-apt</span></td>
+    <td>This incident is believed to involve an advanced persistent threat, but the specific APT is unknown.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unspecified</span></td>
+    <td>Other unlisted events.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">vandalism</span></td>
+    <td>Logical and physical activities which - although they are not aimed at causing damage to information or at preventing its transmission among systems - have this effect.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">wiretapping</span></td>
+    <td>Logical or physical interception of communications.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">worm-spreading</span></td>
+    <td>System infected by a worm trying to infect other systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">xss</span></td>
+    <td>Attacks performed with the use of cross-site scripting techniques.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">xss-attempt</span></td>
+    <td>Unsuccessful attempts to perform attacks by using cross-site scripting techniques.</td>
+</tr>
+
+</table>
+
 
 ## 10.11 Extension Type Enumeration <a id="extension-type-enumeration"></a>
 
@@ -12618,15 +13335,41 @@ The Extensions Type enumeration is used in the Extension meta-object.
 
 **Type Name:** <span class="stixtype">external-impact-ov</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| economic | This incident is expected to have national or international economic impacts. |
-| emergency-services | This incident impacts emergency services. |
-| foreign-relations | This incident impacts international politics. |
-| national-security | This incident impacts the national security of one or more nations. |
-| public-confidence | This incident impacts the confidence in public or private institutions. |
-| public-health | This incident impacts the public health of one or more nations. |
-| public-safety | This incident impacts the public safety of individuals in one or more nations. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">economic</span>, <span class="stixliteral">emergency-services</span>, <span class="stixliteral">foreign-relations</span>, <span class="stixliteral">national-security</span>, <span class="stixliteral">public-confidence</span>, <span class="stixliteral">public-health</span>, <span class="stixliteral">public-safety</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">economic</span></td>
+    <td>This incident is expected to have national or international economic impacts.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">emergency-services</span></td>
+    <td>This incident impacts emergency services.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">foreign-relations</span></td>
+    <td>This incident impacts international politics.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">national-security</span></td>
+    <td>This incident impacts the national security of one or more nations.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">public-confidence</span></td>
+    <td>This incident impacts the confidence in public or private institutions.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">public-health</span></td>
+    <td>This incident impacts the public health of one or more nations.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">public-safety</span></td>
+    <td>This incident impacts the public safety of individuals in one or more nations.</td>
+</tr>
+
+</table>
+
 
 ## 10.13 Grouping Context Vocabulary <a id="grouping-context-vocabulary"></a>
 
@@ -12895,36 +13638,93 @@ This is a non-exhaustive, open vocabulary that covers common programming languag
 
 **Type Name:** incident-confidentiality-loss-enum
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| confirmed-loss | Information has been exfiltrated and is now available to the attacker, but it is unknown if it has been misused. |
-| contained | Information’s confidentiality was compromised, but the spill was within an environment that allowed it to be effectively contained. For example: a sensitive data spill occurred within a controlled network allowing it to be resolved before information exited the organization. |
-| exploited-loss | Information has been exfiltrated and has been actively misused by the attacker. |
-| none | This information type was not compromised based on the investigation that was performed. This option should be used to affirmatively supply this information when necessary. |
-| suspected-loss | It is suspected but not confirmed that the attacker may have gained access to this information. |
-| unknown | It is unknown if the attacker may have gained access to this information. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">confirmed-loss</span>, <span class="stixliteral">contained</span>, <span class="stixliteral">exploited-loss</span>, <span class="stixliteral">none</span>, <span class="stixliteral">suspected-loss</span>, <span class="stixliteral">unknown</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">confirmed-loss</span></td>
+    <td>Information has been exfiltrated and is now available to the attacker, but it is unknown if it has been misused.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">contained</span></td>
+    <td>Information’s confidentiality was compromised, but the spill was within an environment that allowed it to be effectively contained. For example: a sensitive data spill occurred within a controlled network allowing it to be resolved before information exited the organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exploited-loss</span></td>
+    <td>Information has been exfiltrated and has been actively misused by the attacker.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">none</span></td>
+    <td>This information type was not compromised based on the investigation that was performed. This option should be used to affirmatively supply this information when necessary.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">suspected-loss</span></td>
+    <td>It is suspected but not confirmed that the attacker may have gained access to this information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown</span></td>
+    <td>It is unknown if the attacker may have gained access to this information.</td>
+</tr>
+
+</table>
+
 
 ## 10.18 Incident Determination Enumeration <a id='incident-determination-enumeration'></a>
 
 **Type Name:** <span class="stixtype">incident-determination-enum</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| blocked | The incident had no or minimal impact due to pre-emptive measures including rate limiting or spam filters. |
-| confirmed | An incident has been determined to have caused at least some harm or violated a policy. |
-| failed-attempt | The incident had no or minimal impact but not due to any affirmative defense for example a password guesser failed but was also not rate limited. |
-| false-positive | An incident was determined to have been triggered by a false alert and no action including automatically performed automated actions were needed to remediate the issue. This should not be used when an incident was flagged correctly, but is of no importance. For findings of that nature low-value should be used. |
-| suspected | An incident is suspected, but not yet confirmed. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">blocked</span>, <span class="stixliteral">confirmed</span>, <span class="stixliteral">failed-attempt</span>, <span class="stixliteral">false-positive</span>, <span class="stixliteral">suspected</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">blocked</span></td>
+    <td>The incident had no or minimal impact due to pre-emptive measures including rate limiting or spam filters.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">confirmed</span></td>
+    <td>An incident has been determined to have caused at least some harm or violated a policy.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">failed-attempt</span></td>
+    <td>The incident had no or minimal impact but not due to any affirmative defense for example a password guesser failed but was also not rate limited.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">false-positive</span></td>
+    <td>An incident was determined to have been triggered by a false alert and no action including automatically performed automated actions were needed to remediate the issue. This should not be used when an incident was flagged correctly, but is of no importance. For findings of that nature low-value should be used.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">suspected</span></td>
+    <td>An incident is suspected, but not yet confirmed.</td>
+</tr>
+
+</table>
+
 
 ## 10.19 Incident Investigation Open Vocabulary <a id='incident-investigation-vocabulary'></a>
 
 **Type Name:** <span class="stixtype">incident-investigation-ov</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| closed | All victim/defender work on this incident has been concluded. Blue teams may use a closed incident as a starting point for their work, by creating child Incidents of the closed Incident. In these cases, it is appropriate to mark an initial Incident as closed if the related child incidents that track this work are still open. |
-| new | A new incident which the victim/defender has not begun formal work on. |
-| open | Victim/Defender work is in underway for this Incident. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">closed</span>, <span class="stixliteral">new</span>, <span class="stixliteral">open</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">closed</span></td>
+    <td>All victim/defender work on this incident has been concluded. Blue teams may use a closed incident as a starting point for their work, by creating child Incidents of the closed Incident. In these cases, it is appropriate to mark an initial Incident as closed if the related child incidents that track this work are still open.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">new</span></td>
+    <td>A new incident which the victim/defender has not begun formal work on.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">open</span></td>
+    <td>Victim/Defender work is in underway for this Incident.</td>
+</tr>
+
+</table>
+
 
 ## 10.20 Indicator Type Vocabulary <a id="indicator-type-vocabulary"></a>
 
@@ -13148,19 +13948,57 @@ Industry sector is an open vocabulary that describes industrial and commercial s
 
 **Type Name:** <span class="stixtype">information-type-ov</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| classified-material | Data classified based on relevant government authorities. |
-| communication | Communication records including emails, chats and instant messages. |
-| credentials-admin | Administrative credential data. |
-| credentials-user | User credential data. |
-| financial | Financial records including purchasing activity and planned activities. |
-| legal | Legal records that are not yet public including contracts under negotiation and documents protected under legal privilege. |
-| payment | Payment information. |
-| phi | Protected Health Information. |
-| pii | Personally Identifiable Information. |
-| proprietary | Proprietary information e.g., intellectual property. |
-| system | Information necessary to keep a system operational. The destruction or encryption of this data can cause availability impacts. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">classified-material</span>, <span class="stixliteral">communication</span>, <span class="stixliteral">credentials-admin</span>, <span class="stixliteral">credentials-user</span>, <span class="stixliteral">financial</span>, <span class="stixliteral">legal</span>, <span class="stixliteral">payment</span>, <span class="stixliteral">phi</span>, <span class="stixliteral">pii</span>, <span class="stixliteral">proprietary</span>, <span class="stixliteral">system</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">classified-material</span></td>
+    <td>Data classified based on relevant government authorities.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">communication</span></td>
+    <td>Communication records including emails, chats and instant messages.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">credentials-admin</span></td>
+    <td>Administrative credential data.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">credentials-user</span></td>
+    <td>User credential data.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">financial</span></td>
+    <td>Financial records including purchasing activity and planned activities.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">legal</span></td>
+    <td>Legal records that are not yet public including contracts under negotiation and documents protected under legal privilege.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">payment</span></td>
+    <td>Payment information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">phi</span></td>
+    <td>Protected Health Information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">pii</span></td>
+    <td>Personally Identifiable Information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">proprietary</span></td>
+    <td>Proprietary information e.g., intellectual property.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">system</span></td>
+    <td>Information necessary to keep a system operational. The destruction or encryption of this data can cause availability impacts.</td>
+</tr>
+
+</table>
+
 
 ## 10.23 Infrastructure Type Vocabulary <a id="infrastructure-type-vocabulary"></a>
 
@@ -13251,16 +14089,45 @@ A non-exhaustive enumeration of infrastructure types.
 
 **Type Name:** integrity-alteration-enum
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| potential-destruction | Information may have been destroyed within the system. |
-| potential-modification | Information may have been modified within the system. |
-| partial-destruction | Some data of this type has been destroyed, but sufficient data remains to allow partial functionality. |
-| partial-modification | Some data in the system has been modified, but the remaining data is of an acceptable level of integrity for operations to continue. |
-| full-destruction | Sufficient data of this type was destroyed to render the system inoperable until recovery can be completed. |
-| full-modification | Sufficient data of this type was modified to render the system inoperable until recovery can be completed. |
-| none | There is no evidence of destruction or modification of this data type in the system. |
-| unknown | It is unknown if destruction or modification of this data type in the system has occurred. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">full-destruction</span>, <span class="stixliteral">full-modification</span>, <span class="stixliteral">none</span>, <span class="stixliteral">partial-destruction</span>, <span class="stixliteral">partial-modification</span>, <span class="stixliteral">potential-destruction</span>, <span class="stixliteral">potential-modification</span>, <span class="stixliteral">unknown</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">full-destruction</span></td>
+    <td>Sufficient data of this type was destroyed to render the system inoperable until recovery can be completed.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">full-modification</span></td>
+    <td>Sufficient data of this type was modified to render the system inoperable until recovery can be completed.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">none</span></td>
+    <td>There is no evidence of destruction or modification of this data type in the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">partial-destruction</span></td>
+    <td>Some data of this type has been destroyed, but sufficient data remains to allow partial functionality.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">partial-modification</span></td>
+    <td>Some data in the system has been modified, but the remaining data is of an acceptable level of integrity for operations to continue.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">potential-destruction</span></td>
+    <td>Information may have been destroyed within the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">potential-modification</span></td>
+    <td>Information may have been modified within the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown</span></td>
+    <td>It is unknown if destruction or modification of this data type in the system has occurred.</td>
+</tr>
+
+</table>
+
 
 ## 10.25 Malware Capabilities Vocabulary <a id="malware-capabilities-vocabulary"></a>
 
@@ -13794,13 +14661,33 @@ This is a non-exhaustive, open vocabulary that covers common pattern languages a
 
 **Type Name:** <span class="stixtype">physical-impact-enum</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| damaged-functional | The property, asset or system was damaged but still remains functional and repair may be possible. |
-| damaged-nonfunctional | The property, asset or system was damaged and does not remain functional, but repair may be possible. |
-| destruction | The property, asset or system was destroyed, cannot be repaired and no longer functions. In some cases destroyed assets can be rebuilt, but doing so involves a similar amount of effort as the original construction. |
-| none | No damage or destruction has occurred. |
-| unknown | The degree of damage has not been determined yet. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">damaged-functional</span>, <span class="stixliteral">damaged-nonfunctional</span>, <span class="stixliteral">destruction</span>, <span class="stixliteral">none</span>, <span class="stixliteral">unknown</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">damaged-functional</span></td>
+    <td>The property, asset or system was damaged but still remains functional and repair may be possible.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">damaged-nonfunctional</span></td>
+    <td>The property, asset or system was damaged and does not remain functional, but repair may be possible.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">destruction</span></td>
+    <td>The property, asset or system was destroyed, cannot be repaired and no longer functions. In some cases destroyed assets can be rebuilt, but doing so involves a similar amount of effort as the original construction.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">none</span></td>
+    <td>No damage or destruction has occurred.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown</span></td>
+    <td>The degree of damage has not been determined yet.</td>
+</tr>
+
+</table>
+
 
 ## 10.33 Processor Architecture Vocabulary <a id="processor-architecture-vocabulary"></a>
 
@@ -13863,13 +14750,33 @@ This is a non-exhaustive, open vocabulary that covers common processor architect
 
 **Type Name:** <span class="stixtype">recoverability-enum</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| extended | Time to recovery is unpredictable; additional resources and outside help are necessary. |
-| not-applicable | No recovery is necessary. |
-| not-recoverable | Recovery from the incident is not possible. |
-| regular | Time to recovery is predictable with existing resources. |
-| supplemented | Time to recovery is predictable with additional resources. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">extended</span>, <span class="stixliteral">not-applicable</span>, <span class="stixliteral">not-recoverable</span>, <span class="stixliteral">regular</span>, <span class="stixliteral">supplemented</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">extended</span></td>
+    <td>Time to recovery is unpredictable; additional resources and outside help are necessary.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">not-applicable</span></td>
+    <td>No recovery is necessary.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">not-recoverable</span></td>
+    <td>Recovery from the incident is not possible.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">regular</span></td>
+    <td>Time to recovery is predictable with existing resources.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">supplemented</span></td>
+    <td>Time to recovery is predictable with additional resources.</td>
+</tr>
+
+</table>
+
 
 ## 10.35 Region Vocabulary <a id="region-vocabulary"></a><a id='region-ov'></a>
 
@@ -14089,55 +14996,169 @@ Report type is an open vocabulary to describe the primary purpose or subject of 
 
 **Type Name:** <span class="stixtype">state-change-type-ov</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| caused | This task or event is the primary cause of the resulting object. |
-| contributed-to | This task or event is a contributing factor to the result occurring. |
-| input | This task or event took in a group as an input for automated or playbook activities. If this is selected the **initial_ref** property **MUST** be populated. |
-| mitigated | This task or event lessened the severity of the initial object. |
-| output | This task or event produced a group as an output as part of automated or playbook activities. If this is selected the **result_ref** property **MUST** be populated.. |
-| resolved | This task or event resolved the initial object. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">caused</span>, <span class="stixliteral">contributed-to</span>, <span class="stixliteral">input</span>, <span class="stixliteral">mitigated</span>, <span class="stixliteral">output</span>, <span class="stixliteral">resolved</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">caused</span></td>
+    <td>This task or event is the primary cause of the resulting object.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">contributed-to</span></td>
+    <td>This task or event is a contributing factor to the result occurring.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">input</span></td>
+    <td>This task or event took in a group as an input for automated or playbook activities. If this is selected the **initial_ref** property **MUST** be populated.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">mitigated</span></td>
+    <td>This task or event lessened the severity of the initial object.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">output</span></td>
+    <td>This task or event produced a group as an output as part of automated or playbook activities. If this is selected the **result_ref** property **MUST** be populated..</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">resolved</span></td>
+    <td>This task or event resolved the initial object.</td>
+</tr>
+
+</table>
+
 
 ## 10.38 Task Outcome Enumeration <a id='task-outcome-enumeration'></a>
 
 **Type Name:** <span class="stixtype">task-outcome-enum</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| cancelled | The task was planned or started, but later cancelled or discarded. |
-| failed | The task has been completed, but failed. |
-| ongoing | The task is still taking place. |
-| pending | The task has not yet been started, but is currently planned. |
-| successful | The task was completed successfully. |
-| unknown | The status of this task is currently unknown. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">cancelled</span>, <span class="stixliteral">failed</span>, <span class="stixliteral">ongoing</span>, <span class="stixliteral">pending</span>, <span class="stixliteral">successful</span>, <span class="stixliteral">unknown</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">cancelled</span></td>
+    <td>The task was planned or started, but later cancelled or discarded.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">failed</span></td>
+    <td>The task has been completed, but failed.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ongoing</span></td>
+    <td>The task is still taking place.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">pending</span></td>
+    <td>The task has not yet been started, but is currently planned.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">successful</span></td>
+    <td>The task was completed successfully.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown</span></td>
+    <td>The status of this task is currently unknown.</td>
+</tr>
+
+</table>
+
 
 ## 10.39 Task Type Vocabulary <a id='task-type-vocabulary'></a><a id='task-type-ov'></a>
 
 **Type Name:** <span class="stixtype">task-type-ov</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| administrative | Perform an administrative action such as the introduction or change of a policy. |
-| attribution | Perform an administrative action such as the introduction or change of a policy. |
-| containment | The containment phase of incident response |
-| declared | When this was officially declared an incident. |
-| detected | When the incident was detected. |
-| eradication | The eradication phase of incident response. |
-| escalated | When the incident was escalated to a major incident. |
-| exercised-control | Attempted to use a security control that was already in place within the environment. |
-| external-intelligence | Used external intelligence information. |
-| external-outreach | Reaching out to an external organization to gain support or information. |
-| external-support | Acquire support from an external organization. |
-| implemented-control | Implemented a security control within the environment. |
-| investigation | Performed an investigation into an event or incident. |
-| negotiation | Negotiation of a deal or payment amount. |
-| playbook-execution | Executing an automated playbook. If the playbook is stored outside of STIX it should be included as an [external-reference](#external-reference). |
-| playbook-step-execution | Executing a step in an automated playbook. If the playbook is stored outside of STIX both the playbook and step stored in separate [external-reference](#external-reference) objects. If playbook steps feed each other information that is designed to be passed as STIX it **SHOULD** be referenced as a [grouping](#grouping) as either the **initial_ref** or **result_ref** of a [state-change](#state-change). |
-| ransom-payment | An actual payment of a ransom. |
-| recovery | The recovery phase of incident response. |
-| reported | When the incident was reported externally. |
-| routine-updates | Performed a routine update in the environment including patching. |
-| victim-notification | Notified victims, potentially impacted individuals or organizations about the incident. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">administrative</span>, <span class="stixliteral">attribution</span>, <span class="stixliteral">containment</span>, <span class="stixliteral">declared</span>, <span class="stixliteral">detected</span>, <span class="stixliteral">eradication</span>, <span class="stixliteral">escalated</span>, <span class="stixliteral">exercised-control</span>, <span class="stixliteral">external-intelligence</span>, <span class="stixliteral">external-outreach</span>, <span class="stixliteral">external-support</span>, <span class="stixliteral">implemented-control</span>, <span class="stixliteral">investigation</span>, <span class="stixliteral">negotiation</span>, <span class="stixliteral">playbook-execution</span>, <span class="stixliteral">playbook-step-execution</span>, <span class="stixliteral">ransom-payment</span>, <span class="stixliteral">recovery</span>, <span class="stixliteral">reported</span>, <span class="stixliteral">routine-updates</span>, <span class="stixliteral">victim-notification</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">administrative</span></td>
+    <td>Perform an administrative action such as the introduction or change of a policy.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">attribution</span></td>
+    <td>Perform an administrative action such as the introduction or change of a policy.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">containment</span></td>
+    <td>The containment phase of incident response</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">declared</span></td>
+    <td>When this was officially declared an incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">detected</span></td>
+    <td>When the incident was detected.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">eradication</span></td>
+    <td>The eradication phase of incident response.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">escalated</span></td>
+    <td>When the incident was escalated to a major incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exercised-control</span></td>
+    <td>Attempted to use a security control that was already in place within the environment.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">external-intelligence</span></td>
+    <td>Used external intelligence information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">external-outreach</span></td>
+    <td>Reaching out to an external organization to gain support or information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">external-support</span></td>
+    <td>Acquire support from an external organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">implemented-control</span></td>
+    <td>Implemented a security control within the environment.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">investigation</span></td>
+    <td>Performed an investigation into an event or incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">negotiation</span></td>
+    <td>Negotiation of a deal or payment amount.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">playbook-execution</span></td>
+    <td>Executing an automated playbook. If the playbook is stored outside of STIX it should be included as an [external-reference](#external-reference).</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">playbook-step-execution</span></td>
+    <td>Executing a step in an automated playbook. If the playbook is stored outside of STIX both the playbook and step stored in separate [external-reference](#external-reference) objects. If playbook steps feed each other information that is designed to be passed as STIX it **SHOULD** be referenced as a [grouping](#grouping) as either the **initial_ref** or **result_ref** of a [state-change](#state-change).</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ransom-payment</span></td>
+    <td>An actual payment of a ransom.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">recovery</span></td>
+    <td>The recovery phase of incident response.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">reported</span></td>
+    <td>When the incident was reported externally.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">routine-updates</span></td>
+    <td>Performed a routine update in the environment including patching.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">victim-notification</span></td>
+    <td>Notified victims, potentially impacted individuals or organizations about the incident.</td>
+</tr>
+
+</table>
+
 
 ## 10.40 Threat Actor Role Vocabulary <a id="threat-actor-role-vocabulary"></a>
 
@@ -14327,14 +15348,37 @@ Threat actor type is an open vocabulary used to describe what type of threat act
 
 **Type Name:** <span class="stixtype">timestamp-fidelity-enum</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| day | The associated timestamp should be considered to represent a time within the one day period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for this activity. |
-| hour | The associated timestamp should be considered to represent a time within the one hour period starting with the provided timestamp. |
-| minute | The associated timestamp should be considered to represent a time within the one minute period starting with the provided timestamp. |
-| month | The associated timestamp should be considered to represent a time within the one month period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for the activity. The day should always be listed as the first or the last day of the previous month if in a timezone that is offset before UTC. |
-| second | The associated timestamp should be considered to represent a time within the one second period starting with the provided timestamp. |
-| year | The associated timestamp should be considered to represent a time within the one year period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for the activity. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">day</span>, <span class="stixliteral">hour</span>, <span class="stixliteral">minute</span>, <span class="stixliteral">month</span>, <span class="stixliteral">second</span>, <span class="stixliteral">year</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">day</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one day period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for this activity.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">hour</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one hour period starting with the provided timestamp.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">minute</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one minute period starting with the provided timestamp.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">month</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one month period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for the activity. The day should always be listed as the first or the last day of the previous month if in a timezone that is offset before UTC.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">second</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one second period starting with the provided timestamp.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">year</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one year period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for the activity.</td>
+</tr>
+
+</table>
+
 
 ## 10.44 Tool Type Vocabulary <a id="tool-type-vocabulary"></a><a id='tool-type-ov'></a>
 
@@ -14397,12 +15441,29 @@ Tool types describe the categories of tools that can be used to perform attacks.
 
 **Type Name:** <span class="stixtype">traceability-enum</span>
 
-| **Vocabulary Value** | **Description** |
-| --- | --- |
-| accountability-lost | Traces used to retrieve accountability are lost or do not exist. |
-| partial-accountability | Traces are present, but insufficient to have provable accountability. |
-| provable-accountability | Accountability can be ensured from the traces that are present. |
-| unknown-accountability | Accountability is unknown. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">accountability-lost</span>, <span class="stixliteral">partial-accountability</span>, <span class="stixliteral">provable-accountability</span>, <span class="stixliteral">unknown-accountability</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">accountability-lost</span></td>
+    <td>Traces used to retrieve accountability are lost or do not exist.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">partial-accountability</span></td>
+    <td>Traces are present, but insufficient to have provable accountability.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">provable-accountability</span></td>
+    <td>Accountability can be ensured from the traces that are present.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown-accountability</span></td>
+    <td>Accountability is unknown.</td>
+</tr>
+
+</table>
+
 
 ## 10.46 Windows™ Integrity Level Enumeration <a id="windows-integrity-level-enumeration"></a>
 
