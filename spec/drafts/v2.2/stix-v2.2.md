@@ -2625,80 +2625,80 @@ An Event is an activity that has a harmful effect or which will be investigated 
 
   <tr>
     <td><strong>status</strong> (required)</td>
-    <td><a href="#event-status-enumeration" style="stixtype">event-status-enumeration</a></td>
-    <td>The current status of the event. The values of this property <strong>MUST</strong> come from the <a href="#event-status-enumeration" style="stixtype">event-status-enumeration</a> enumeration.</td>
+    <td><a href="#event-status-enumeration" class="stixtype">event-status-enumeration</a></td>
+    <td>The current status of the event. The values of this property <strong>MUST</strong> come from the <a href="#event-status-enumeration" class="stixtype">event-status-enumeration</a> enumeration.</td>
 </tr>
 
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>The value of this property <strong>MUST</strong> be set to event.</td>
 </tr>
 
   <tr>
     <td><strong>changed_objects</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">list</a> of type <a href="#state-change" style="stixtype">state-change</a></td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#state-change" class="stixtype">state-change</a></td>
     <td>A list of changes that this event has caused. This is typically used to indicate how an event has affected impacts.</td>
 </tr>
 
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>A description of event that occurred.</td>
 </tr>
 
   <tr>
     <td><strong>end_time</strong> (optional)</td>
-    <td><a href="#timestamp" style="stixtype">timestamp</a></td>
+    <td><a href="#timestamp" class="stixtype">timestamp</a></td>
     <td>The date and time the event was last recorded. If this is not present it is assumed to be unknown. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
 </tr>
 
   <tr>
     <td><strong>end_time_fidelity</strong> (optional)</td>
-    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
-    <td>The level of fidelity that the <strong>end_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>end_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
 </tr>
 
   <tr>
     <td><strong>event_types</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">list</a> of type <a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
-    <td>High level types for the event to enable aggregation and summarization. The values of this property <strong>SHOULD</strong> come from the <a href="#event-type-vocabulary" style="stixtype">event-type-ov</a> open vocabulary.</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>High level types for the event to enable aggregation and summarization. The values of this property <strong>SHOULD</strong> come from the <a href="#event-type-vocabulary" class="stixtype">event-type-ov</a> open vocabulary.</td>
 </tr>
 
   <tr>
     <td><strong>goal</strong> (optional)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>The assumed goal, objective, desired outcome, or intended effect of this event. Not all events have goals.</td>
 </tr>
 
   <tr>
     <td><strong>name</strong> (optional)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>A name for the event.</td>
 </tr>
 
   <tr>
     <td><strong>next_event_refs</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">list</a> of type <a href="#identifier" style="stixtype">identifier</a></td>
-    <td>The <a href="#event" style="stixtype">event</a> objects to follow. They <strong>MUST</strong> be of type <a href="#event" style="stixtype">event</a>. There can be more than one if they take place in parallel.</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#identifier" class="stixtype">identifier</a></td>
+    <td>The <a href="#event" class="stixtype">event</a> objects to follow. They <strong>MUST</strong> be of type <a href="#event" class="stixtype">event</a>. There can be more than one if they take place in parallel.</td>
 </tr>
 
   <tr>
     <td><strong>sighting_refs</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">list</a> of type <a href="#identifier" style="stixtype">identifier</a></td>
-    <td>A list of <a href="#sighting" style="stixtype">sighting</a> objects that were related to this event. Sightings referenced in this <strong>SHOULD</strong> be based on <a href="#attack-pattern" style="stixtype">attack-pattern</a>, <a href="#indicator" style="stixtype">indicator</a>, or <a href="#malware" style="stixtype">malware</a> SDOs. The <strong>sighting_refs</strong> property <strong>SHOULD</strong> be used to relate an <a href="#event" style="stixtype">event</a> to an SDO, instead of using right an SRO. In some cases observed data may be present, but no <a href="#indicator" style="stixtype">indicator</a> can be created. In these cases it is recommended to use an <a href="#attack-pattern" style="stixtype">attack-pattern</a> using the name or description of the behavior or rule that triggered the sighting.</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#identifier" class="stixtype">identifier</a></td>
+    <td>A list of <a href="#sighting" class="stixtype">sighting</a> objects that were related to this event. Sightings referenced in this <strong>SHOULD</strong> be based on <a href="#attack-pattern" class="stixtype">attack-pattern</a>, <a href="#indicator" class="stixtype">indicator</a>, or <a href="#malware" class="stixtype">malware</a> SDOs. The <strong>sighting_refs</strong> property <strong>SHOULD</strong> be used to relate an <a href="#event" class="stixtype">event</a> to an SDO, instead of using right an SRO. In some cases observed data may be present, but no <a href="#indicator" class="stixtype">indicator</a> can be created. In these cases it is recommended to use an <a href="#attack-pattern" class="stixtype">attack-pattern</a> using the name or description of the behavior or rule that triggered the sighting.</td>
 </tr>
 
   <tr>
     <td><strong>start_time</strong> (optional)</td>
-    <td><a href="#timestamp" style="stixtype">timestamp</a></td>
+    <td><a href="#timestamp" class="stixtype">timestamp</a></td>
     <td>The date and time the event was first recorded. If this is not present it is assumed to be unknown. This property <strong>SHOULD</strong> be populated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
 </tr>
 
   <tr>
     <td><strong>start_time_fidelity</strong> (optional)</td>
-    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
-    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
 </tr>
 
 </table>
@@ -3130,80 +3130,80 @@ Because these extensions are used to specify very different types of impacts, pr
 
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>The value of this property <strong>MUST</strong> be set to impact.</td>
 </tr>
 
   <tr>
     <td><strong>criticality</strong> (optional)</td>
-    <td><a href="#integer" style="stixtype">integer</a></td>
-    <td>The criticality of this impact. If present, this value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#relationship-summary-table" style="stixtype">Appendix B</a>.</td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
+    <td>The criticality of this impact. If present, this value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#relationship-summary-table" class="stixtype">Appendix B</a>.</td>
 </tr>
 
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>Additional details about this impact</td>
 </tr>
 
   <tr>
     <td><strong>end_time</strong> (optional)</td>
-    <td><a href="#timestamp" style="stixtype">timestamp</a></td>
+    <td><a href="#timestamp" class="stixtype">timestamp</a></td>
     <td>The date and time the impact was last recorded. This property <strong>SHOULD</strong> be populated if this impact is resolved or mitigated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value. If the <strong>superseded_by_ref</strong> property is included this <strong>MUST</strong> be included.</td>
 </tr>
 
   <tr>
     <td><strong>end_time_fidelity</strong> (optional)</td>
-    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
-    <td>The level of fidelity that the <strong>end_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>end_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
 </tr>
 
   <tr>
     <td><strong>impact_category</strong> (optional)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>The category to which the impact belongs. If one of the defined extensions (see section 2.3.2) is used it <strong>MUST</strong> correspond to the value of this property. If there is insufficient information about the category, this property is not populated and no extension will be specified. The value <strong>MUST</strong> be specified without the "-ext" suffix which is used to indicate the extension used.</td>
 </tr>
 
   <tr>
     <td><strong>impacted_entity_counts</strong> (optional)</td>
-    <td><a href="#entity-count" style="stixtype">entity-count</a></td>
+    <td><a href="#entity-count" class="stixtype">entity-count</a></td>
     <td>A list of the entity types, along with the number of each type impacted. If this property is not present it should be assumed that this information is not being shared, not that there were no impacted entities. To affirmatively state no entities of a given class were impacted they should be included in the list with the number of entities impacted set to 0.</td>
 </tr>
 
   <tr>
     <td><strong>impacted_refs</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">list</a> of type <a href="#identifier" style="stixtype">identifier</a></td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#identifier" class="stixtype">identifier</a></td>
     <td>A list of all impacted entities or infrastructure. The values of this property MUST be the identifier for an SDO or SCO.</td>
 </tr>
 
   <tr>
     <td><strong>recoverability</strong> (optional)</td>
-    <td><a href="#recoverability-enumeration" style="stixtype">recoverability-enumeration</a></td>
-    <td>The recoverability of this particular impact with respect to feasibility and required time and resources. The value of this property <strong>MUST</strong> come from the <a href="#recoverability-enumeration" style="stixtype">recoverability-enumeration</a> enumeration.</td>
+    <td><a href="#recoverability-enumeration" class="stixtype">recoverability-enumeration</a></td>
+    <td>The recoverability of this particular impact with respect to feasibility and required time and resources. The value of this property <strong>MUST</strong> come from the <a href="#recoverability-enumeration" class="stixtype">recoverability-enumeration</a> enumeration.</td>
 </tr>
 
   <tr>
     <td><strong>start_time</strong> (optional)</td>
-    <td><a href="#timestamp" style="stixtype">timestamp</a></td>
+    <td><a href="#timestamp" class="stixtype">timestamp</a></td>
     <td>The date and time this impact was first recorded. This property <strong>SHOULD</strong> be populated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
 </tr>
 
   <tr>
     <td><strong>start_time_fidelity</strong> (optional)</td>
-    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
-    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
 </tr>
 
   <tr>
     <td><strong>sub_impact_refs</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">list</a> of type <a href="#identifier" style="stixtype">identifier</a></td>
-    <td>The <a href="#impact" style="stixtype">impact</a> objects to that are part of this impact. They <strong>MUST</strong> be of type <a href="#impact" style="stixtype">impact</a>.</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#identifier" class="stixtype">identifier</a></td>
+    <td>The <a href="#impact" class="stixtype">impact</a> objects to that are part of this impact. They <strong>MUST</strong> be of type <a href="#impact" class="stixtype">impact</a>.</td>
 </tr>
 
   <tr>
     <td><strong>superseded_by_ref</strong> (optional)</td>
-    <td><a href="#identifier" style="stixtype">identifier</a></td>
-    <td>The referenced <a href="#impact" style="stixtype">impact</a> supersedes the <strong>end_time</strong> for the current impact. This allows capturing how the severity of this impact changes over time. When this property is populated this impact <strong>MUST</strong> have an <strong>end_time</strong> and and the <strong>superseded_by_ref</strong> value <strong>MUST</strong> reference an <a href="#impact" style="stixtype">impact</a> of the same as the category specified in the <strong>impact_category</strong> property.</td>
+    <td><a href="#identifier" class="stixtype">identifier</a></td>
+    <td>The referenced <a href="#impact" class="stixtype">impact</a> supersedes the <strong>end_time</strong> for the current impact. This allows capturing how the severity of this impact changes over time. When this property is populated this impact <strong>MUST</strong> have an <strong>end_time</strong> and and the <strong>superseded_by_ref</strong> value <strong>MUST</strong> reference an <a href="#impact" class="stixtype">impact</a> of the same as the category specified in the <strong>impact_category</strong> property.</td>
 </tr>
 
 </table>
@@ -3223,8 +3223,8 @@ Because these extensions are used to specify very different types of impacts, pr
 
   <tr>
     <td><strong>availability_impact</strong> (required)</td>
-    <td><a href="#integer" style="stixtype">integer</a></td>
-    <td>The availability / functional impact of the related incident on the objects referenced in <strong>impacted_refs</strong>. If no objects are referenced, the impact should be treated as the overall availability impact for the related <a href="#incident" style="stixtype">incident</a>. This value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#confidence-scales" style="stixtype">Appendix A</a>.</td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
+    <td>The availability / functional impact of the related incident on the objects referenced in <strong>impacted_refs</strong>. If no objects are referenced, the impact should be treated as the overall availability impact for the related <a href="#incident" class="stixtype">incident</a>. This value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#confidence-scales" class="stixtype">Appendix A</a>.</td>
 </tr>
 
 </table>
@@ -3244,25 +3244,25 @@ Because these extensions are used to specify very different types of impacts, pr
 
   <tr>
     <td><strong>information_type</strong> (optional)</td>
-    <td><a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
-    <td>The type of information that had its confidentiality compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property <strong>SHOULD</strong> come from the <a href="#information-type-vocabulary" style="stixtype">information-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the loss_type is not none. Otherwise, including an entry with loss_type of none and no information_type indicates that no information had its confidentiality impacted by the related incident.</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>The type of information that had its confidentiality compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property <strong>SHOULD</strong> come from the <a href="#information-type-vocabulary" class="stixtype">information-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the loss_type is not none. Otherwise, including an entry with loss_type of none and no information_type indicates that no information had its confidentiality impacted by the related incident.</td>
 </tr>
 
   <tr>
     <td><strong>loss_type</strong> (required)</td>
-    <td><a href="#incident-confidentiality-loss-enumeration" style="stixtype">incident-confidentiality-loss-enumeration</a></td>
-    <td>The type of loss that occurred with respect to the relevant information. The values of this property <strong>MUST</strong> come from the <a href="#incident-confidentiality-loss-enumeration" style="stixtype">incident-confidentiality-loss-enumeration</a> enumeration.</td>
+    <td><a href="#incident-confidentiality-loss-enumeration" class="stixtype">incident-confidentiality-loss-enumeration</a></td>
+    <td>The type of loss that occurred with respect to the relevant information. The values of this property <strong>MUST</strong> come from the <a href="#incident-confidentiality-loss-enumeration" class="stixtype">incident-confidentiality-loss-enumeration</a> enumeration.</td>
 </tr>
 
   <tr>
     <td><strong>record_count</strong> (optional)</td>
-    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
     <td>The number of records of this information type that were compromised. The value of this property <strong>MUST NOT</strong> be negative.</td>
 </tr>
 
   <tr>
     <td><strong>record_size</strong> (optional)</td>
-    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
     <td>The amount of data that was compromised in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
 </tr>
 
@@ -3283,8 +3283,8 @@ Because these extensions are used to specify very different types of impacts, pr
 
   <tr>
     <td><strong>impact_type</strong> (required)</td>
-    <td><a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
-    <td>The type of impact outside of the targeted organization. The value of this property <strong>SHOULD</strong> come from the <a href="#external-impact-vocabulary" style="stixtype">external-impact-ov</a> open vocabulary.</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>The type of impact outside of the targeted organization. The value of this property <strong>SHOULD</strong> come from the <a href="#external-impact-vocabulary" class="stixtype">external-impact-ov</a> open vocabulary.</td>
 </tr>
 
 </table>
@@ -3304,25 +3304,25 @@ Because these extensions are used to specify very different types of impacts, pr
 
   <tr>
     <td><strong>alteration</strong> (required)</td>
-    <td><a href="#integrity-alteration-enumeration" style="stixtype">integrity-alteration-enumeration</a></td>
-    <td>The type of alteration affecting integrity of the information. The value of this property <strong>MUST</strong> come from the <a href="#integrity-alteration-enumeration" style="stixtype">integrity-alteration-enumeration</a> enumeration.</td>
+    <td><a href="#integrity-alteration-enumeration" class="stixtype">integrity-alteration-enumeration</a></td>
+    <td>The type of alteration affecting integrity of the information. The value of this property <strong>MUST</strong> come from the <a href="#integrity-alteration-enumeration" class="stixtype">integrity-alteration-enumeration</a> enumeration.</td>
 </tr>
 
   <tr>
     <td><strong>information_type</strong> (optional)</td>
-    <td><a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
-    <td>The type of information that had its integrity compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property <strong>SHOULD</strong> come from the <a href="#information-type-vocabulary" style="stixtype">information-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the alternation is not none. Otherwise, including an entry that with an alteration of none and no information_type provided indicates that no information had its integrity impacted by the related incident.</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>The type of information that had its integrity compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property <strong>SHOULD</strong> come from the <a href="#information-type-vocabulary" class="stixtype">information-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the alternation is not none. Otherwise, including an entry that with an alteration of none and no information_type provided indicates that no information had its integrity impacted by the related incident.</td>
 </tr>
 
   <tr>
     <td><strong>record_count</strong> (optional)</td>
-    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
     <td>The number of records of this type that were compromised. The value of this property <strong>MUST NOT</strong> be negative.</td>
 </tr>
 
   <tr>
     <td><strong>record_size</strong> (optional)</td>
-    <td><a href="#integer" style="stixtype">integer</a></td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
     <td>The amount of data that was compromised in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
 </tr>
 
@@ -3343,44 +3343,44 @@ Because these extensions are used to specify very different types of impacts, pr
 
   <tr>
     <td><strong>conversion_rate</strong> (optional)</td>
-    <td><a href="#float" style="stixtype">float</a></td>
+    <td><a href="#float" class="stixtype">float</a></td>
     <td>The conversion rate between the <strong>currency</strong> and <strong>currency_actual</strong> properties. This <strong>MUST NOT</strong> be included if the <strong>currency_actual</strong> property is not included. This <strong>MUST</strong> be included if the <strong>currency_actual</strong> property is included. This value <strong>MUST</strong> be greater than zero. If this property is provided, the <strong>conversion_time</strong> property must also be provided.</td>
 </tr>
 
   <tr>
     <td><strong>conversion_time</strong> (optional)</td>
-    <td><a href="#timestamp" style="stixtype">timestamp</a></td>
+    <td><a href="#timestamp" class="stixtype">timestamp</a></td>
     <td>The timestamp corresponding to the conversion rate from the <strong>currency</strong> property to the <strong>currency_actual</strong> property. This <strong>MUST</strong> be included if a <strong>conversion_rate</strong> property is included.</td>
 </tr>
 
   <tr>
     <td><strong>currency</strong> (optional)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>The currency used for reporting the <strong>max_amount</strong> and <strong>min_amount</strong> properties values. This <strong>SHOULD</strong> be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency. This <strong>SHOULD</strong> match the currency of the organization or the government producing the report. This value <strong>MUST</strong> be included if the <strong>min_amount</strong> property is included.</td>
 </tr>
 
   <tr>
     <td><strong>currency_actual</strong> (optional)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>The currency that the impact actually used. For ransom demands this should be the currency of the demand. If this is not included it should be assumed to be the same value as the <strong>currency</strong> property. If this is included then the <strong>currency</strong> property <strong>MUST</strong> be included. This <strong>SHOULD</strong> be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency.</td>
 </tr>
 
   <tr>
     <td><strong>max_amount</strong> (optional)</td>
-    <td><a href="#float" style="stixtype">float</a></td>
+    <td><a href="#float" class="stixtype">float</a></td>
     <td>The maximum economic amount of the impact using the currency specified in the <strong>currency</strong> property. This value <strong>MUST</strong> be greater than zero. This value <strong>MUST</strong> be included if the <strong>min_amount</strong> property is included. If <strong>min_amount</strong> and <strong>max_amount</strong> properties are both defined, then <strong>max_amount</strong> value <strong>MUST</strong> be greater than or equal to the <strong>min_amount</strong> value.</td>
 </tr>
 
   <tr>
     <td><strong>min_amount</strong> (optional)</td>
-    <td><a href="#float" style="stixtype">float</a></td>
+    <td><a href="#float" class="stixtype">float</a></td>
     <td>The maximum economic amount of the impact using the currency specified in the <strong>currency</strong> property. This value <strong>MUST</strong> be greater than zero. This value <strong>MUST</strong> be included if the <strong>max_amount</strong> property is included. If <strong>min_amount</strong> and <strong>max_amount</strong> properties are both defined, then <strong>max_amount</strong> value <strong>MUST</strong> be greater than or equal to the <strong>min_amount</strong> value.</td>
 </tr>
 
   <tr>
     <td><strong>variety</strong> (required)</td>
-    <td><a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
-    <td>The variety of this economic impact. The value of this property <strong>SHOULD</strong> come from the <a href="#economic-impact-type-vocabulary" style="stixtype">economic-impact-type-ov</a> open vocabulary.</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>The variety of this economic impact. The value of this property <strong>SHOULD</strong> come from the <a href="#economic-impact-type-vocabulary" class="stixtype">economic-impact-type-ov</a> open vocabulary.</td>
 </tr>
 
 </table>
@@ -3400,14 +3400,14 @@ Because these extensions are used to specify very different types of impacts, pr
 
   <tr>
     <td><strong>asset_type</strong> (optional)</td>
-    <td><a href="#stix-open-vocabularies-and-enumerations" style="stixtype">open-vocab</a></td>
-    <td>The type of property or system that was affected by this impact. The value of this property <strong>SHOULD</strong> come from the <a href="#asset-type-vocabulary" style="stixtype">asset-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the <strong>impact_type</strong> is not none . Otherwise, including an entry with an <strong>impact_type</strong> of none and no asset_type indicates that no physical damage was caused by the related incident.</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>The type of property or system that was affected by this impact. The value of this property <strong>SHOULD</strong> come from the <a href="#asset-type-vocabulary" class="stixtype">asset-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the <strong>impact_type</strong> is not none . Otherwise, including an entry with an <strong>impact_type</strong> of none and no asset_type indicates that no physical damage was caused by the related incident.</td>
 </tr>
 
   <tr>
     <td><strong>impact_type</strong> (required)</td>
-    <td><a href="#physical-impact-enumeration" style="stixtype">physical-impact-enumeration</a></td>
-    <td>The type of physical impact that has occurred. The value of this property <strong>MUST</strong> come from the <a href="#physical-impact-enumeration" style="stixtype">physical-impact-enumeration</a> enumeration.</td>
+    <td><a href="#physical-impact-enumeration" class="stixtype">physical-impact-enumeration</a></td>
+    <td>The type of physical impact that has occurred. The value of this property <strong>MUST</strong> come from the <a href="#physical-impact-enumeration" class="stixtype">physical-impact-enumeration</a> enumeration.</td>
 </tr>
 
 </table>
@@ -3427,8 +3427,8 @@ Because these extensions are used to specify very different types of impacts, pr
 
   <tr>
     <td><strong>traceability_impact</strong> (required)</td>
-    <td><a href="#traceability-enumeration" style="stixtype">traceability-enumeration</a></td>
-    <td>The impact on a system or organization’s ability to perform audits or provide non-repudiation. The value of this property <strong>MUST</strong> come from the <a href="#traceability-enumeration" style="stixtype">traceability-enumeration</a> enumeration.</td>
+    <td><a href="#traceability-enumeration" class="stixtype">traceability-enumeration</a></td>
+    <td>The impact on a system or organization’s ability to perform audits or provide non-repudiation. The value of this property <strong>MUST</strong> come from the <a href="#traceability-enumeration" class="stixtype">traceability-enumeration</a> enumeration.</td>
 </tr>
 
 </table>
@@ -5829,92 +5829,92 @@ A Task is an activity that is performed by or for the victim/defender to respond
 
   <tr>
     <td><strong>outcome</strong> (required)</td>
-    <td><a href="#task-outcome-enumeration" style="stixtype">task-outcome-enumeration</a></td>
-    <td>The outcome of the task. The value of this property <strong>MUST</strong> come from the <a href="#task-outcome-enumeration" style="stixtype">task-outcome-enumeration</a> enumeration.</td>
+    <td><a href="#task-outcome-enumeration" class="stixtype">task-outcome-enumeration</a></td>
+    <td>The outcome of the task. The value of this property <strong>MUST</strong> come from the <a href="#task-outcome-enumeration" class="stixtype">task-outcome-enumeration</a> enumeration.</td>
 </tr>
 
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>The value of this property <strong>MUST</strong> be set to task.</td>
 </tr>
 
   <tr>
     <td><strong>affected_entity_counts</strong> (optional)</td>
-    <td><a href="#entity-count" style="stixtype">entity-count</a></td>
+    <td><a href="#entity-count" class="stixtype">entity-count</a></td>
     <td>A list of affected entity types, along with the number of each type affected. This property is used primarily to capture victim notification information.</td>
 </tr>
 
   <tr>
     <td><strong>changed_objects</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">list</a> of type <a href="#state-change" style="stixtype">state-change</a></td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#state-change" class="stixtype">state-change</a></td>
     <td>A list of changes that this task has caused. This is typically used to indicate how a task has affected impacts.</td>
 </tr>
 
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>A description of the task.</td>
 </tr>
 
   <tr>
     <td><strong>due_date</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">timestamp</a></td>
+    <td><a href="#list" class="stixtype">timestamp</a></td>
     <td>The date and time the task is/was due to be completed. The value of due_date <strong>MAY</strong> be unrelated to the values of <strong>start_time</strong> and <strong>end_time</strong>, i.e., there is no requirement that a <strong>due_date</strong> be between those values.</td>
 </tr>
 
   <tr>
     <td><strong>end_time</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">timestamp</a></td>
+    <td><a href="#list" class="stixtype">timestamp</a></td>
     <td>The date and time the task was last recorded. If this is not present it is assumed to be unknown. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
 </tr>
 
   <tr>
     <td><strong>end_time_fidelity</strong> (optional)</td>
-    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
-    <td>The level of fidelity that the <strong>end_time</strong> fidelity is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>end_time</strong> fidelity is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
 </tr>
 
   <tr>
     <td><strong>error</strong> (optional)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>Details about any failures or deviations that occurred in the task.</td>
 </tr>
 
   <tr>
     <td><strong>name</strong> (optional)</td>
-    <td><a href="#string" style="stixtype">string</a></td>
+    <td><a href="#string" class="stixtype">string</a></td>
     <td>A name used to identify the task.</td>
 </tr>
 
   <tr>
     <td><strong>next_task_refs</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">list</a> of type <a href="#identifier" style="stixtype">identifier</a></td>
-    <td>The <a href="#task" style="stixtype">task</a> objects to follow. They <strong>MUST</strong> be of type <a href="#task" style="stixtype">task</a>. There can be more than one if they take place in parallel.</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#identifier" class="stixtype">identifier</a></td>
+    <td>The <a href="#task" class="stixtype">task</a> objects to follow. They <strong>MUST</strong> be of type <a href="#task" class="stixtype">task</a>. There can be more than one if they take place in parallel.</td>
 </tr>
 
   <tr>
     <td><strong>priority</strong> (optional)</td>
-    <td><a href="#integer" style="stixtype">integer</a></td>
-    <td>The priority or importance of the task. This value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#relationship-summary-table" style="stixtype">Appendix B</a>.</td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
+    <td>The priority or importance of the task. This value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#relationship-summary-table" class="stixtype">Appendix B</a>.</td>
 </tr>
 
   <tr>
     <td><strong>start_time</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">timestamp</a></td>
+    <td><a href="#list" class="stixtype">timestamp</a></td>
     <td>The date and time the task was first recorded. If this is not present it is assumed to be unknown. This property <strong>SHOULD</strong> be populated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
 </tr>
 
   <tr>
     <td><strong>start_time_fidelity</strong> (optional)</td>
-    <td><a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a></td>
-    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" style="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
 </tr>
 
   <tr>
     <td><strong>task_types</strong> (optional)</td>
-    <td><a href="#list" style="stixtype">list</a> of type <a href="#open-vocabulary" style="stixtype">open-vocabulary</a></td>
-    <td>A list of high level types for the task in order to enable aggregation and summaries. The values of this property <strong>SHOULD</strong> come from the <a href="#task-type-vocabulary" style="stixtype">task-type-ov</a> open vocabulary.</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#open-vocabulary" class="stixtype">open-vocabulary</a></td>
+    <td>A list of high level types for the task in order to enable aggregation and summaries. The values of this property <strong>SHOULD</strong> come from the <a href="#task-type-vocabulary" class="stixtype">task-type-ov</a> open vocabulary.</td>
 </tr>
 
 </table>

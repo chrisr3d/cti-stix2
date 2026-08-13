@@ -118,8 +118,8 @@ def _object_property_table(markdown_text):
 
         property_match = property_pattern.match(parts[1].strip())
         property_name = f"<strong>{property_match[1]}</strong> ({property_match[2]})"
-        type_name = type_pattern.sub('<a href="\\2" style="stixtype">\\1</a>', parts[2].strip())
-        description = type_pattern.sub('<a href="\\2" style="stixtype">\\1</a>', parts[3].strip())
+        type_name = type_pattern.sub('<a href="\\2" class="stixtype">\\1</a>', parts[2].strip())
+        description = type_pattern.sub('<a href="\\2" class="stixtype">\\1</a>', parts[3].strip())
         description = bold_pattern.sub("<strong>\\1</strong>", description)
 
         if property_match[2] == "required":
@@ -179,8 +179,8 @@ def _extension_property_table(markdown_text):
 
         property_match = property_pattern.match(parts[1].strip())
         property_name = f"<strong>{property_match[1]}</strong> ({property_match[2]})"
-        type_name = type_pattern.sub('<a href="\\2" style="stixtype">\\1</a>', parts[2].strip())
-        description = type_pattern.sub('<a href="\\2" style="stixtype">\\1</a>', parts[3].strip())
+        type_name = type_pattern.sub('<a href="\\2" class="stixtype">\\1</a>', parts[2].strip())
+        description = type_pattern.sub('<a href="\\2" class="stixtype">\\1</a>', parts[3].strip())
         description = bold_pattern.sub("<strong>\\1</strong>", description)
 
         if property_match[1] == "(Required)":
