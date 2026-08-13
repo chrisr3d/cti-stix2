@@ -110,7 +110,8 @@ if __name__ == "__main__":
     errors.extend(validate_table_of_contents(content))
     if len(errors) > 0:
         for error in errors:
-            print(error)
+            print("\033[91m" + error + "\033[0m")
         exit(1)
 
+    print("\033[92mNo errors found\033[0m")
     exit(0)

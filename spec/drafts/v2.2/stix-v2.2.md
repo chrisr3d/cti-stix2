@@ -2713,30 +2713,102 @@ Relationships are not restricted to those listed below. Relationships can be cre
 
 To relate [events](#event) to an [incident](#incident) the **event_refs** property **SHOULD** be used. Using these embedded relationships ensures that an incomplete sequence cannot be shared accidentally (avoiding potential confusion or misunderstandings when processing STIX data.)
 
-| **Common Relationships** |
-| --- |
-| derived-from, duplicate-of, related-to |
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class='stixtr'>Common Relationships</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">duplicate-of</span>, <span class="stixliteral">derived-from</span>, <span class="stixliteral">related-to</span></td>
+  </tr>
+</table>
 
 
-| **Source** | **Type** | **Target** | **Description** |
-| --- | --- | --- | --- |
-| [event](#event) | causes | [impact](#impact) | The event caused the impact. |
-| [event](#event) | affects | [identity](#identity) | The identity is affected by this event. |
-| [event](#event) | led-to | [task](#task) | The event led to performing the task. |
-| [event](#event) | impacts | [infrastructure](#infrastructure), [<All STIX Cyber-observable Objects>](#stix-cyber-observable-objects) | An event has an impact on specific infrastructure. While not all SCO types will make sense in this relationship, allowing any type of SCO prevents artificially restricting what could be used. |
-| [event](#event) | located-at | [location](#location) | The event occurred at a specific location. |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>causes</span></td>
+    <td><a class='stixtype' href='#impact'>impact</a></td>
+    <td>The event caused the impact.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>affects</span></td>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td>The identity is affected by this event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>led-to</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>The event led to performing the task.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>impacts</span></td>
+    <td><a class='stixtype' href='#infrastructure'>infrastructure</a>,  <a class='stixtype' href='#stix-cyber-observable-objects'>&lt;All STIX Cyber-observable Objects&gt;</a></td>
+    <td>An event has an impact on specific infrastructure. While not all SCO types will make sense in this relationship, allowing any type of SCO prevents artificially restricting what could be used.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>located-at</span></td>
+    <td><a class='stixtype' href='#location'>location</a></td>
+    <td>The event occurred at a specific location.</td>
+  </tr>
+</table>
 
-| **Reverse Relationships** |
-| -- |
-
-| **Source** | **Type** | **Target** | **Description** |
-| --- | --- | --- | --- |
-| [identity](#identity) | performed | [event](#event) | An identity performed a specific event. |
-| [indicator](#indicator) | based-on | [event](#event) | An indicator is based on an event. |
-| [malware](#malware) | performed | [event](#event) | Malware performed a specific event. |
-| [tool](#tool) | performed | [event](#event) | A tool performed a specific event. |
-| [task](#task) | blocks | [event](#event) | A task was performed to block a potential event. |
-| [task](#task) | causes | [event](#event) | A task was performed that caused an event, usually due to an error. |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
+  </tr>
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>performed</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>An identity performed a specific event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#indicator'>indicator</a></td>
+    <td><span class='stixliteral'>based-on</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>An indicator is based on an event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#malware'>malware</a></td>
+    <td><span class='stixliteral'>performed</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>Malware performed a specific event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#tool'>tool</a></td>
+    <td><span class='stixliteral'>performed</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A tool performed a specific event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>blocks</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A task was performed to block a potential event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>causes</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A task was performed that caused an event, usually due to an error.</td>
+  </tr>
+</table>
 
 **Example**
 
@@ -3439,12 +3511,88 @@ There are no relationships explicitly defined between the Impact object and othe
 
 The reverse relationships section illustrates the relationships targeting this object type from another object type.
 
-Relationships are not restricted to those listed below. Relationships can be created between any objects using the related-to relationship type or, as with open vocabularies, user-defined names.
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th colspan='2'><span class='stixtr'>Embedded Relationships</span></th>
+  </tr>
+  <tr>
+    <td width="50%"><strong>created_by_ref</strong></td>
+    <td width="50%"><span class="stixtype">identifier</span> (of type <span class="stixtype">identity</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>event_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">event</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>sub_impact_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">impact</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>object_marking_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">marking-definition</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>superseded_by_ref</strong></td>
+    <td><span class="stixtype"><span class="stixtype">identifier</span> (of type <span class="stixtype">impact</span>)</td>
+  </tr>
+</table>
 
-| **Reverse Relationships** |
-| --- | --- | --- | --- |
-| **Source** | **Type** | **Target** | **Description** |
-| [event](#event) | causes | [impact](#impact) | An event causes an impact. |
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td><span class='stixliteral'>led-to</span></td>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td>One incident led to another.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td><span class='stixliteral'>impacts</span></td>
+    <td><a class='stixtype' href='#identity'>identity</a>, <a class='stixtype' href='#infrastructure'>infrastructure</a></td>
+    <td>The incident has an impact on the victim or specific infrastructure.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td><span class='stixliteral'>attributed-to</span></td>
+    <td><a class='stixtype' href='#intrusion-set'>intrusion-set</a>, <a class='stixtype' href='#threat-actor'>threat-actor</a></td>
+    <td>The incident has been attributed to the intrusion set or threat actor.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td><span class='stixliteral'>targets</span></td>
+    <td><a class='stixtype' href='#identity'>identity</a>, <a class='stixtype' href='#infrastructure'>infrastructure</a></td>
+    <td>The incident targets the identity or infrastructure.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td><span class='stixliteral'>located-at</span></td>
+    <td><a class='stixtype' href='#location'>location</a></td>
+    <td>The incident occurred at a specific location.</td>
+  </tr>
+</table>
+  
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
+  </tr>
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>causes</span></td>
+    <td><a class='stixtype' href='#impact'>impact</a></td>
+    <td>An event causes an impact.</td>
+  </tr>
+</table>
 
 ## 4.8 Incident <a id="incident"></a>
 
@@ -3578,8 +3726,6 @@ These are the relationships explicitly defined between the Incident object and o
 
 Relationships are not restricted to those listed below. Relationships can be created between any objects using the <span class="stixliteral">related-to</span> relationship type or, as with open vocabularies, user-defined names.
 
-This table is left intentionally blank and will be fleshed out in a future release.
-
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
     <th colspan='2'><span class='stixtr'>Embedded Relationships</span></th>
@@ -3589,8 +3735,20 @@ This table is left intentionally blank and will be fleshed out in a future relea
     <td width="50%"><span class="stixtype">identifier</span> (of type <span class="stixtype">identity</span>)</td>
   </tr>
   <tr>
+    <td><strong>event_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">event</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>impact_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">impact</span>)</td>
+  </tr>
+  <tr>
     <td><strong>object_marking_refs</strong></td>
     <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">marking-definition</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>task_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">task</span>)</td>
   </tr>
 </table>
 
@@ -3615,6 +3773,36 @@ This table is left intentionally blank and will be fleshed out in a future relea
     <td>—</td>
     <td>—</td>
     <td>—</td>
+  </tr>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
+  </tr>
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#campaign'>campaign</a></td>
+    <td><span class='stixliteral'>associated-with</span></td>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td>The incident is associated with the campaign.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>contact-for</span></td>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td>The identity should be considered a point of contact for an incident. This relationship is different from the <strong>created_by_ref</strong> property, which is the creator of the STIX Incident object. Additionally, this can be used to supplement the <strong>created_by_ref</strong> property in cases where external authorship would prevent using it for this purpose.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#indicator'>indicator</a></td>
+    <td><span class='stixliteral'>detected</span></td>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td>The indicator detected the incident.</td>
   </tr>
 </table>
 
@@ -5929,27 +6117,136 @@ Relationships are not restricted to those listed below. Relationships can be cre
 
 To relate [tasks](#task) to an [incident](#incident) the **task_refs** property **SHOULD** be used. Using these embedded relationships ensures that an incomplete sequence cannot be shared accidentally (avoiding potential confusion or misunderstandings when processing STIX data.)
 
-| **Common Relationships** |
-| --- | --- | --- | --- |
-| derived-from, duplicate-of, related-to |
-| **Source** | **Type** | **Target** | **Description** |
-| [task](#task) | uses | [course-of-action](#threat-actor) | An task uses a particular course of action. |
-| [task](#task) | blocks | [event](#event) | A task was performed to block a potential event. |
-| [task](#task) | causes | [event](#event) | A task was performed that caused an event, usually due to an error. |
-| [task](#task) | detects | [event](#event) | A task was used to detect an event. |
-| [task](#task) | creates | [indicator](#indicator) | A task was performed that created an indicator. |
-| [task](#task) | impacts | [infrastructure](#infrastructure), [<All STIX Cyber-observable Objects>](#stix-cyber-observable-objects) | A task has an impact on specific infrastructure. |
-| [task](#task) | located-at | [location](#location) | The task occurred at a specific location. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th colspan='2'><span class='stixtr'>Embedded Relationships</span></th>
+  </tr>
+  <tr>
+    <td width="50%"><strong>created_by_ref</strong></td>
+    <td width="50%"><span class="stixtype">identifier</span> (of type <span class="stixtype">identity</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>object_marking_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">marking-definition</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>object_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type STIX Object)</td>
+  </tr>
+  <tr>
+    <td><strong>next_task_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type Task Object)</td>
+  </tr>
+</table>
 
-| **Reverse Relationships** |
-| --- | --- | --- | --- |
-| **Source** | **Type** | **Target** | **Description** |
-| [event](#event) | led-to | [task](#task) | The event led to performing the task. |
-| [identity](#identity) | assigned | [task](#task) | An identity has been assigned the task |
-| [identity](#identity) | poc-for | [task](#task) | An identity is a point of contact for this task. |
-| [identity](#identity) | participated-in | [task](#task) | An identity participated in a specific task, but as not the primary performer |
-| [identity](#identity) | performed | [task](#task) | An identity performed a specific task. |
-| [tool](#tool) | performed | [task](#task) | A tool performed a specific task. |
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class='stixtr'>Common Relationships</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">duplicate-of</span>, <span class="stixliteral">derived-from</span>, <span class="stixliteral">related-to</span></td>
+  </tr>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>uses</span></td>
+    <td><a class='stixtype' href='#threat-actor'>course-of-action</a></td>
+    <td>An task uses a particular course of action.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>blocks</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A task was performed to block a potential event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>causes</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A task was performed that caused an event, usually due to an error.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>detects</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A task was used to detect an event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>creates</span></td>
+    <td><a class='stixtype' href='#indicator'>indicator</a></td>
+    <td>A task was performed that created an indicator.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>impacts</span></td>
+    <td><a class='stixtype' href='#infrastructure'>infrastructure</a>,  <a class='stixtype' href='#stix-cyber-observable-objects'>&lt;All STIX Cyber-observable Objects&gt;</a></td>
+    <td>A task has an impact on specific infrastructure.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>located-at</span></td>
+    <td><a class='stixtype' href='#location'>location</a></td>
+    <td>The task occurred at a specific location.</td>
+  </tr>
+</table>
+
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
+  </tr>
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>led-to</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>The event led to performing the task.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>assigned</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>An identity has been assigned the task</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>poc-for</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>An identity is a point of contact for this task.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>participated-in</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>An identity participated in a specific task, but as not the primary performer</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>performed</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>An identity performed a specific task.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#tool'>tool</a></td>
+    <td><span class='stixliteral'>performed</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>A tool performed a specific task.</td>
+  </tr>
+</table>
 
 **Example**
 
