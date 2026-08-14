@@ -1,24 +1,22 @@
 ![OASIS Logo](https://docs.oasis-open.org/templates/OASISLogo-v3.0.png)
 
+<link rel="stylesheet" href="../css/stix.css" />
+
 ---
 
-# STIX Version 2.1 Errata 01
+# STIX Version 2.2 GitHub Draft
 
-## Oasis Standard incorporating Draft 01 of Errata 01
-
-### 02 April 2025
+### See Commit for Date
 
 #### This stage:
+
+TBD
+
+#### Previous stage:
 
 https://docs.oasis-open.org/cti/stix/v2.1/errata01/csd01/stix-v2.1-errata01-csd01-complete.md (Authoritative) \
 https://docs.oasis-open.org/cti/stix/v2.1/errata01/csd01/stix-v2.1-errata01-csd01-complete.html \
 https://docs.oasis-open.org/cti/stix/v2.1/errata01/csd01/stix-v2.1-errata01-csd01-complete.pdf
-
-#### Previous stage:
-
-https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.docx (Authoritative) \
-https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html \
-https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.pdf
 
 #### Latest stage:
 
@@ -42,7 +40,7 @@ Emily Ratliff (<emily.ratliff@ibm.com>), [IBM](http://www.ibm.com/)
 Stephan Relitz (<stephan.relitz@peraton.com>), [Peraton](https://www.peraton.com/)  
 Christian Studer (<christian.studer@circl.lu>), [CIRCL](https://www.circl.lu/)
 
-#### Related work:
+#### Related work: <a id="related-work"></a>
 
 This specification replaces or supersedes:
 
@@ -50,7 +48,7 @@ This specification replaces or supersedes:
 
 This specification is related to:
 
-- *TAXII Version 2.1.* Edited by Bret Jordan and Drew Varner. Latest stage: <https://docs.oasis-open.org/cti/taxii/v2.1/taxii-v2.1.html>.
+- *TAXII Version 2.2.* Edited by Bret Jordan and Drew Varner. Latest stage: <https://docs.oasis-open.org/cti/taxii/v2.1/taxii-v2.1.html>.
 - *STIX/TAXII 2.0 Interoperability Test Document: Part 1 Version 1.1.* Edited by Allan Thomson and Jason Keirstead. Latest stage: <https://docs.oasis-open.org/cti/stix-taxii-2-interop-p1/v1.1/stix-taxii-2-interop-p1-v1.1.html>.
 - *STIX/TAXII 2.0 Interoperability Test Document: Part 2 Version 1.0.* Edited by Allan Thomson and Jason Keirstead. Latest stage: <https://docs.oasis-open.org/cti/stix-taxii-2-interop-p2/v1.0/stix-taxii-2-interop-p2-v1.0.html>.
 
@@ -124,28 +122,33 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
     - 1.2.11 [Transporting STIX](#transporting-stix)
     - 1.2.12 [JSON Schemas](#json-schemas)
   - 1.3 [Changes From Earlier Version](#changes-from-earlier-version)
-    - 1.3.1 [STIX 2.1 Errata 01 Changes from earlier version](#stix-21-errata-01-changes-from-earlier-version)
+    - 1.3.1 [STIX 2.1 Errata 01 Changes From Earlier Version](#stix-21-errata-01-changes-from-earlier-version)
   - 1.4 [Glossary](#glossary)
 - 2. [Common Data Types](#common-data-types)
   - 2.1 [Binary](#binary)
   - 2.2 [Boolean](#boolean)
   - 2.3 [Dictionary](#dictionary)
-  - 2.4 [Enum](#enum)
-  - 2.5 [External Reference](#external-reference)
-    - 2.5.1 [Properties](#external-reference-properties)
-    - 2.5.2 [Requirements](#external-reference-requirements)
-  - 2.6 [Float](#float)
-  - 2.7 [Hashes](#hashes)
-  - 2.8 [Hexadecimal](#hexadecimal)
-  - 2.9 [Identifier](#identifier)
-  - 2.10 [Integer](#integer)
-  - 2.11 [Kill Chain Phase](#kill-chain-phase)
-  - 2.12 [List](#list)
-  - 2.13 [Observable Container (deprecated)](#observable-container)
-  - 2.14 [Open Vocabulary](#open-vocabulary)
-  - 2.15 [String](#string)
-  - 2.16 [Timestamp](#timestamp)
-    - 2.16.1 [Requirements](#timestamp-requirements)
+  - 2.4 [Entity Count](#entity-count)
+  - 2.5 [Enum](#enum)
+  - 2.6 [External Reference](#external-reference)
+    - 2.6.1 [Properties](#external-reference-properties)
+    - 2.6.2 [Requirements](#external-reference-requirements)
+  - 2.7 [Float](#float)
+  - 2.8 [Hashes](#hashes)
+  - 2.9 [Hexadecimal](#hexadecimal)
+  - 2.10 [Identifier](#identifier)
+  - 2.11 [Integer](#integer)
+  - 2.12 [Kill Chain Phase](#kill-chain-phase)
+  - 2.13 [List](#list)
+  - 2.14 [Observable Container (deprecated)](#observable-container)
+  - 2.15 [Open Vocabulary](#open-vocabulary)
+  - 2.16 [Score](#score)
+    - 2.16.1 [Properties](#score-properties)
+  - 2.17 [State Change](#state-change)
+    - 2.17.1 [Properties](#state-change-properties)
+  - 2.18 [String](#string)
+  - 2.19 [Timestamp](#timestamp)
+    - 2.19.1 [Requirements](#timestamp-requirements)
 - 3. [STIX General Concepts](#stix-general-concepts)
   - 3.1 [Property Names and String Literals](#property-names-and-string-literals)
   - 3.2 [Common Properties](#common-properties)
@@ -170,54 +173,77 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
   - 4.3 [Course of Action](#course-of-action)
     - 4.3.1 [Properties](#course-of-action-properties)
     - 4.3.2 [Relationships](#course-of-action-relationships)
-  - 4.4 [Grouping](#grouping)
-    - 4.4.1 [Properties](#grouping-properties)
-    - 4.4.2 [Relationships](#grouping-relationships)
-  - 4.5 [Identity](#identity)
-    - 4.5.1 [Properties](#identity-properties)
-    - 4.5.2 [Relationships](#identity-relationships)
-  - 4.6 [Incident](#incident)
-    - 4.6.1 [Properties](#incident-properties)
-    - 4.6.2 [Relationships](#incident-relationships)
-  - 4.7 [Indicator](#indicator)
-    - 4.7.1 [Properties](#indicator-properties)
-    - 4.7.2 [Relationships](#indicator-relationships)
-  - 4.8 [Infrastructure](#infrastructure)
-    - 4.8.1 [Properties](#infrastructure-properties)
-    - 4.8.2 [Relationships](#infrastructure-relationships)
-  - 4.9 [Intrusion Set](#intrusion-set)
-    - 4.9.1 [Properties](#intrusion-set-properties)
-    - 4.9.2 [Relationships](#intrusion-set-relationships)
-  - 4.10 [Location](#location)
-    - 4.10.1 [Properties](#location-properties)
-    - 4.10.2 [Relationships](#location-relationships)
-  - 4.11 [Malware](#malware)
-    - 4.11.1 [Properties](#malware-properties)
-    - 4.11.2 [Relationships](#malware-relationships)
-  - 4.12 [Malware Analysis](#malware-analysis)
-    - 4.12.1 [Properties](#malware-analysis-properties)
-    - 4.12.2 [Relationships](#malware-analysis-relationships)
-  - 4.13 [Note](#note)
-    - 4.13.1 [Properties](#note-properties)
-    - 4.13.2 [Relationships](#note-relationships)
-  - 4.14 [Observed Data](#observed-data)
-    - 4.14.1 [Properties](#observed-data-properties)
-    - 4.14.2 [Relationships](#observed-data-relationships)
-  - 4.15 [Opinion](#opinion)
-    - 4.15.1 [Properties](#opinion-properties)
-    - 4.15.2 [Relationships](#opinion-relationships)
-  - 4.16 [Report](#report)
-    - 4.16.1 [Properties](#report-properties)
-    - 4.16.2 [Relationships](#report-relationships)
-  - 4.17 [Threat Actor](#threat-actor)
-    - 4.17.1 [Properties](#threat-actor-properties)
-    - 4.17.2 [Relationships](#threat-actor-relationships)
-  - 4.18 [Tool](#tool)
-    - 4.18.1 [Properties](#tool-properties)
-    - 4.18.2 [Relationships](#tool-relationships)
-  - 4.19 [Vulnerability](#vulnerability)
-    - 4.19.1 [Properties](#vulnerability-properties)
-    - 4.19.2 [Relationships](#vulnerability-relationships)
+  - 4.4 [Event](#event)
+    - 4.4.1 [Properties](#event-properties)
+    - 4.4.2 [Relationships](#event-relationships)
+  - 4.5 [Grouping](#grouping)
+    - 4.5.1 [Properties](#grouping-properties)
+    - 4.5.2 [Relationships](#grouping-relationships)
+  - 4.6 [Identity](#identity)
+    - 4.6.1 [Properties](#identity-properties)
+    - 4.6.2 [Relationships](#identity-relationships)
+  - 4.7 [Impact](#impact)
+    - 4.7.1 [Properties](#impact-properties)
+    - 4.7.2 [Availability Impact Extension](#availability-impact-extension)
+      - 4.7.2.1 [Properties](#availability-impact-extension-properties)
+    - 4.7.3 [Confidentiality Impact Extension](#confidentiality-impact-extension)
+      - 4.7.3.1 [Properties](#confidentiality-impact-extension-properties)
+    - 4.7.4 [External Impact Extension](#external-impact-extension)
+      - 4.7.4.1 [Properties](#external-impact-extension-properties)
+    - 4.7.5 [Integrity Impact Extension](#integrity-impact-extension)
+      - 4.7.5.1 [Properties](#integrity-impact-extension-properties)
+    - 4.7.6 [Economic Impact Extension](#economic-impact-extension)
+      - 4.7.6.1 [Properties](#economic-impact-extension-properties)
+    - 4.7.7 [Physical Impact Extension](#physical-impact-extension)
+      - 4.7.7.1 [Properties](#physical-impact-extension-properties)
+    - 4.7.8 [Traceability Impact Extension](#traceability-impact-extension)
+      - 4.7.8.1 [Properties](#traceability-impact-extension-properties)
+    - 4.7.9 [Relationships](#impact-relationships)
+  - 4.8 [Incident](#incident)
+    - 4.8.1 [Properties](#incident-properties)
+    - 4.8.2 [Relationships](#incident-relationships)
+  - 4.9 [Indicator](#indicator)
+    - 4.9.1 [Properties](#indicator-properties)
+    - 4.9.2 [Relationships](#indicator-relationships)
+  - 4.10 [Infrastructure](#infrastructure)
+    - 4.10.1 [Properties](#infrastructure-properties)
+    - 4.10.2 [Relationships](#infrastructure-relationships)
+  - 4.11 [Intrusion Set](#intrusion-set)
+    - 4.11.1 [Properties](#intrusion-set-properties)
+    - 4.11.2 [Relationships](#intrusion-set-relationships)
+  - 4.12 [Location](#location)
+    - 4.12.1 [Properties](#location-properties)
+    - 4.12.2 [Relationships](#location-relationships)
+  - 4.13 [Malware](#malware)
+    - 4.13.1 [Properties](#malware-properties)
+    - 4.13.2 [Relationships](#malware-relationships)
+  - 4.14 [Malware Analysis](#malware-analysis)
+    - 4.14.1 [Properties](#malware-analysis-properties)
+    - 4.14.2 [Relationships](#malware-analysis-relationships)
+  - 4.15 [Note](#note)
+    - 4.15.1 [Properties](#note-properties)
+    - 4.15.2 [Relationships](#note-relationships)
+  - 4.16 [Observed Data](#observed-data)
+    - 4.16.1 [Properties](#observed-data-properties)
+    - 4.16.2 [Relationships](#observed-data-relationships)
+  - 4.17 [Opinion](#opinion)
+    - 4.17.1 [Properties](#opinion-properties)
+    - 4.17.2 [Relationships](#opinion-relationships)
+  - 4.18 [Report](#report)
+    - 4.18.1 [Properties](#report-properties)
+    - 4.18.2 [Relationships](#report-relationships)
+  - 4.19 [Task](#task)
+    - 4.19.1 [Properties](#task-properties)
+    - 4.19.2 [Relationships](#task-relationships)
+  - 4.20 [Threat Actor](#threat-actor)
+    - 4.20.1 [Properties](#threat-actor-properties)
+    - 4.20.2 [Relationships](#threat-actor-relationships)
+  - 4.21 [Tool](#tool)
+    - 4.21.1 [Properties](#tool-properties)
+    - 4.21.2 [Relationships](#tool-relationships)
+  - 4.22 [Vulnerability](#vulnerability)
+    - 4.22.1 [Properties](#vulnerability-properties)
+    - 4.22.2 [Relationships](#vulnerability-relationships)
 - 5. [STIX Relationship Objects](#stix-relationship-objects)
   - 5.1 [Relationship](#relationship)
     - 5.1.1 [Specification-Defined Relationships Summary](#specification-defined-relationships-summary)
@@ -253,10 +279,10 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
       - 6.7.4.1 [Properties](#pdf-file-extension-properties)
     - 6.7.5 [Raster Image File Extension](#raster-image-file-extension)
       - 6.7.5.1 [Properties](#raster-image-file-extension-properties)
-    - 6.7.6 [Windows PE Binary File Extension](#windows-pe-binary-file-extension)
+    - 6.7.6 [Windows™ PE Binary File Extension](#windows-pe-binary-file-extension)
       - 6.7.6.1 [Properties](#windows-pe-binary-file-extension-properties)
-      - 6.7.6.2 [Windows PE Optional Header Type](#windows-pe-optional-header-type)
-      - 6.7.6.3 [Windows PE Section Type](#windows-pe-section-type)
+      - 6.7.6.2 [Windows™ PE Optional Header Type](#windows-pe-optional-header-type)
+      - 6.7.6.3 [Windows™ PE Section Type](#windows-pe-section-type)
   - 6.8 [IPv4 Address Object](#ipv4-address-object)
     - 6.8.1 [Properties](#ipv4-address-object-properties)
     - 6.8.2 [Relationships](#ipv4-address-object-relationships)
@@ -279,9 +305,9 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
       - 6.12.5.1 [Properties](#tcp-extension-properties)
   - 6.13 [Process Object](#process-object)
     - 6.13.1 [Properties](#process-object-properties)
-    - 6.13.2 [Windows Process Extension](#windows-process-extension)
+    - 6.13.2 [Windows™ Process Extension](#windows-process-extension)
       - 6.13.2.1 [Properties](#windows-process-extension-properties)
-    - 6.13.3 [Windows Service Extension](#windows-service-extension)
+    - 6.13.3 [Windows™ Service Extension](#windows-service-extension)
       - 6.13.3.1 [Properties](#windows-service-extension-properties)
   - 6.14 [Software Object](#software-object)
     - 6.14.1 [Properties](#software-object-properties)
@@ -289,11 +315,11 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
     - 6.15.1 [Properties](#url-object-properties)
   - 6.16 [User Account Object](#user-account-object)
     - 6.16.1 [Properties](#user-account-object-properties)
-    - 6.16.2 [UNIX Account Extension](#unix-account-extension)
+    - 6.16.2 [UNIX™ Account Extension](#unix-account-extension)
       - 6.16.2.1 [Properties](#unix-account-extension-properties)
-  - 6.17 [Windows Registry Key Object](#windows-registry-key-object)
+  - 6.17 [Windows™ Registry Key Object](#windows-registry-key-object)
     - 6.17.1 [Properties](#windows-registry-key-object-properties)
-    - 6.17.2 [Windows Registry Value Type](#windows-registry-value-type)
+    - 6.17.2 [Windows™ Registry Value Type](#windows-registry-value-type)
       - 6.17.2.1 [Properties](#windows-registry-value-type-properties)
   - 6.18 [X.509 Certificate Object](#x509-certificate-object)
     - 6.18.1 [Properties](#x509-certificate-object-properties)
@@ -342,37 +368,56 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
   - 9.8 [Examples](#examples)
 - 10. [STIX Vocabularies](#stix-vocabularies)
   - 10.1 [Account Type Vocabulary](#account-type-vocabulary)
-  - 10.2 [Attack Motivation Vocabulary](#attack-motivation-vocabulary)
-  - 10.3 [Attack Resource Level Vocabulary](#attack-resource-level-vocabulary)
-  - 10.4 [Encryption Algorithm Enumeration](#encryption-algorithm-enumeration)
-  - 10.5 [Extension Type Enumeration](#extension-type-enumeration)
-  - 10.6 [Grouping Context Vocabulary](#grouping-context-vocabulary)
-  - 10.7 [Hashing Algorithm Vocabulary](#hashing-algorithm-vocabulary)
-  - 10.8 [Identity Class Vocabulary](#identity-class-vocabulary)
-  - 10.9 [Implementation Language Vocabulary](#implementation-language-vocabulary)
-  - 10.10 [Indicator Type Vocabulary](#indicator-type-vocabulary)
-  - 10.11 [Industry Sector Vocabulary](#industry-sector-vocabulary)
-  - 10.12 [Infrastructure Type Vocabulary](#infrastructure-type-vocabulary)
-  - 10.13 [Malware Capabilities Vocabulary](#malware-capabilities-vocabulary)
-  - 10.14 [Malware Result Vocabulary](#malware-result-vocabulary)
-  - 10.15 [Malware Type Vocabulary](#malware-type-vocabulary)
-  - 10.16 [Network Socket Address Family Enumeration](#network-socket-address-family-enumeration)
-  - 10.17 [Network Socket Type Enumeration](#network-socket-type-enumeration)
-  - 10.18 [Opinion Enumeration](#opinion-enumeration)
-  - 10.19 [Pattern Type Vocabulary](#pattern-type-vocabulary)
-  - 10.20 [Processor Architecture Vocabulary](#processor-architecture-vocabulary)
-  - 10.21 [Region Vocabulary](#region-vocabulary)
-  - 10.22 [Report Type Vocabulary](#report-type-vocabulary)
-  - 10.23 [Threat Actor Type Vocabulary](#threat-actor-type-vocabulary)
-  - 10.24 [Threat Actor Role Vocabulary](#threat-actor-role-vocabulary)
-  - 10.25 [Threat Actor Sophistication Vocabulary](#threat-actor-sophistication-vocabulary)
-  - 10.26 [Tool Type Vocabulary](#tool-type-vocabulary)
-  - 10.27 [Windows™ Integrity Level Enumeration](#windows-integrity-level-enumeration)
-  - 10.28 [Windows™ PE Binary Vocabulary](#windows-pe-binary-vocabulary)
-  - 10.29 [Windows™ Registry Datatype Enumeration](#windows-registry-datatype-enumeration)
-  - 10.30 [Windows™ Service Start Type Enumeration](#windows-service-start-type-enumeration)
-  - 10.31 [Windows™ Service Type Enumeration](#windows-service-type-enumeration)
-  - 10.32 [Windows™ Service Status Enumeration](#windows-service-status-enumeration)
+  - 10.2 [Asset Type Vocabulary](#asset-type-vocabulary)
+  - 10.3 [Attack Motivation Vocabulary](#attack-motivation-vocabulary)
+  - 10.4 [Attack Resource Level Vocabulary](#attack-resource-level-vocabulary)
+  - 10.5 [Detection Method Vocabulary](#detection-method-vocabulary)
+  - 10.6 [Economic Impact Type Vocabulary](#economic-impact-type-vocabulary)
+  - 10.7 [Encryption Algorithm Enumeration](#encryption-algorithm-enumeration)
+  - 10.8 [Entity Type Vocabulary](#entity-type-vocabulary)
+  - 10.9 [Event Status Enumeration](#event-status-enumeration)
+  - 10.10 [Event Type Vocabulary](#event-type-vocabulary)
+  - 10.11 [Extension Type Enumeration](#extension-type-enumeration)
+  - 10.12 [External Impact Vocabulary](#external-impact-vocabulary)
+  - 10.13 [Grouping Context Vocabulary](#grouping-context-vocabulary)
+  - 10.14 [Hashing Algorithm Vocabulary](#hashing-algorithm-vocabulary)
+  - 10.15 [Identity Class Vocabulary](#identity-class-vocabulary)
+  - 10.16 [Implementation Language Vocabulary](#implementation-language-vocabulary)
+  - 10.17 [Incident Confidentiality Loss Enumeration](#incident-confidentiality-loss-enumeration)
+  - 10.18 [Incident Determination Enumeration](#incident-determination-enumeration)
+  - 10.19 [Incident Investigation Open Vocabulary](#incident-investigation-vocabulary)
+  - 10.20 [Indicator Type Vocabulary](#indicator-type-vocabulary)
+  - 10.21 [Industry Sector Vocabulary](#industry-sector-vocabulary)
+  - 10.22 [Information Type Vocabulary](#information-type-vocabulary)
+  - 10.23 [Infrastructure Type Vocabulary](#infrastructure-type-vocabulary)
+  - 10.24 [Integrity Alteration Enumeration](#integrity-alteration-enumeration)
+  - 10.25 [Malware Capabilities Vocabulary](#malware-capabilities-vocabulary)
+  - 10.26 [Malware Result Vocabulary](#malware-result-vocabulary)
+  - 10.27 [Malware Type Vocabulary](#malware-type-vocabulary)
+  - 10.28 [Network Socket Address Family Enumeration](#network-socket-address-family-enumeration)
+  - 10.29 [Network Socket Type Enumeration](#network-socket-type-enumeration)
+  - 10.30 [Opinion Enumeration](#opinion-enumeration)
+  - 10.31 [Pattern Type Vocabulary](#pattern-type-vocabulary)
+  - 10.32 [Physical Impact Enumeration](#physical-impact-enumeration)
+  - 10.33 [Processor Architecture Vocabulary](#processor-architecture-vocabulary)
+  - 10.34 [Recoverability Enumeration](#recoverability-enumeration)
+  - 10.35 [Region Vocabulary](#region-vocabulary)
+  - 10.36 [Report Type Vocabulary](#report-type-vocabulary)
+  - 10.37 [State Change Type Vocabulary](#state-change-type-vocabulary)
+  - 10.38 [Task Outcome Enumeration](#task-outcome-enumeration)
+  - 10.39 [Task Type Vocabulary](#task-type-vocabulary)
+  - 10.40 [Threat Actor Role Vocabulary](#threat-actor-role-vocabulary)
+  - 10.41 [Threat Actor Sophistication Vocabulary](#threat-actor-sophistication-vocabulary)
+  - 10.42 [Threat Actor Type Vocabulary](#threat-actor-type-vocabulary)
+  - 10.43 [Timestamp Fidelity Enumeration](#timestamp-fidelity-enumeration)
+  - 10.44 [Tool Type Vocabulary](#tool-type-vocabulary)
+  - 10.45 [Traceability Enumeration](#traceability-enumeration)
+  - 10.46 [Windows™ Integrity Level Enumeration](#windows-integrity-level-enumeration)
+  - 10.47 [Windows™ PE Binary Vocabulary](#windows-pe-binary-vocabulary)
+  - 10.48 [Windows™ Registry Datatype Enumeration](#windows-registry-datatype-enumeration)
+  - 10.49 [Windows™ Service Start Type Enumeration](#windows-service-start-type-enumeration)
+  - 10.50 [Windows™ Service Status Enumeration](#windows-service-status-enumeration)
+  - 10.51 [Windows™ Service Type Enumeration](#windows-service-type-enumeration)
 - 11. [Customizing STIX (Deprecated)](#customizing-stix)
   - 11.1 [Custom Properties (Deprecated)](#custom-properties)
     - 11.1.1 [Requirements (Deprecated)](#custom-properties-requirements)
@@ -409,17 +454,19 @@ The name "OASIS" is a trademark of [OASIS](https://www.oasis-open.org/), the own
     - C.2.3 [Adding properties to an existing STIX relationship object instance](#adding-properties-to-an-existing-stix-relationship-object-instance)
     - C.2.4 [Adding properties to an existing STIX marking definition object instance](#adding-properties-to-an-existing-stix-marking-definition-object-instance)
     - C.2.5 [Adding properties to an existing STIX language content object instance](#adding-properties-to-an-existing-stix-language-content-object-instance)
-- Appendix D: [IANA Considerations](#iana-considerations)
-- Appendix E: [References](#references)
-  - E.1 [Normative References](#normative-references)
-  - E.2 [Informative References](#informative-references)
-- Appendix F: [Acknowledgments](#acknowledgments)
-- Appendix G: [Revision History](#revision-history)
-- Appendix H: [Notices](#notices)
+- Appendix D: [Incident Availability Impact Mapping](#availability-impact-mapping)
+- Appendix E: [Criticality Mapping](#criticality-mapping)
+- Appendix F: [IANA Considerations](#iana-considerations)
+- Appendix G: [References](#references)
+  - G.1 [Normative References](#normative-references)
+  - G.2 [Informative References](#informative-references)
+- Appendix H: [Acknowledgments](#acknowledgments)
+- Appendix I: [Revision History](#revision-history)
+- Appendix J: [Notices](#notices)
 
 ---
 
-# 1. Introduction <a id='introduction'></a>
+# 1 Introduction <a id='introduction'></a>
 
 Structured Threat Information Expression (STIX) is a language and serialization format used to exchange cyber threat intelligence (CTI).
 STIX enables organizations to share CTI with one another in a consistent and machine-readable manner, allowing security communities to better understand what computer-based attacks they are most likely to see and to anticipate and/or respond to those attacks faster and more effectively.
@@ -830,7 +877,42 @@ Empty dictionaries are prohibited in STIX and **MUST NOT** be used as a substitu
 
 <span class="stixtype">dictionary</span> values **MUST** be valid property base types 
 
-## 2.4 Enum <a id='enum'></a>
+## 2.4 Entity Count <a id='entity-count'></a>
+
+**Type Name:** entity-count
+
+The Entity Count type represents the count of one or more entity types. The name of each entity type **MUST** be specified as a key in the dictionary and **MUST** identify the count of the entity that corresponds to the value. Each key **SHOULD** come from [entity-type-ov](#entity-type-vocabulary) open vocabulary. This value **MUST** be an [integer](#integer) that is equal to or greater than zero.
+
+**Examples:**
+
+*100 individuals, 70 employees, 30 customers*
+
+```
+{
+    "individual": 100,
+    "employee": 70,
+    "customer-individual": 30
+}
+```
+
+*1000 systems, 10 organizations*
+
+```
+{
+    "organization": 10,
+    "system": 1000
+}
+```
+
+*0 individuals*
+
+```
+{
+    "individual": 0
+}
+```
+
+## 2.5 Enum <a id='enum'></a>
 
 **Type Name:** <span class="stixtype">enum</span>
 
@@ -838,7 +920,7 @@ The <span class="stixtype">enum</span> type is a hardcoded list of terms that is
 
 The JSON MTI serialization uses the JSON String type \[[RFC8259](#rfc8259)\] when representing <span class="stixtype">enum</span> enumeration.
 
-## 2.5 External Reference <a id='external-reference'></a>
+## 2.6 External Reference <a id='external-reference'></a>
 
 **Type Name:** <span class="stixtype">external-reference</span>
 
@@ -846,17 +928,17 @@ External references are used to describe pointers to information represented out
 
 The JSON MTI serialization uses the JSON Object type \[[RFC8259](#rfc8259)\] when representing <span class="stixtype">external-reference</span>.
 
-### 2.5.1 Properties <a id='external-reference-properties'></a>
+### 2.6.1 Properties <a id='external-reference-properties'></a>
 
 | **<span class="stixtr">Property Name</span>** | **<span class="stixtr">Type</span>** | **<span class="stixtr">Description</span>** |
 |----|----|----|
 | **source_name** (required) | <span class="stixtype">string</span> | The name of the source that the <span class="stixtype">external-reference</span> is defined within (system, registry, organization, etc.). |
 | **description** (optional) | <span class="stixtype">string</span> | A human readable description. |
 | **url** (optional) | <span class="stixtype">string</span> | A URL reference to an external resource \[[RFC3986](#rfc3986)\] |
-| **hashes** (optional) | <span class="stixtype">hashes</span> | Specifies a dictionary of hashes for the contents of the **url**. This **SHOULD** be provided when the **url** property is present.<br><br>Dictionary keys **MUST** come from one of the entries listed in the [<span class="stixtype">hash-algorithm-ov</span>](#hashing-algorithm-vocabulary) open vocabulary.<br><br>As stated in [section 2.7](#hashes), to ensure interoperability, a SHA-256 hash **SHOULD** be included when possible. |
+| **hashes** (optional) | <span class="stixtype">hashes</span> | Specifies a dictionary of hashes for the contents of the **url**. This **SHOULD** be provided when the **url** property is present.<br /><br />Dictionary keys **MUST** come from one of the entries listed in the [<span class="stixtype">hash-algorithm-ov</span>](#hashing-algorithm-vocabulary) open vocabulary.<br /><br />As stated in [section 2.7](#hashes), to ensure interoperability, a SHA-256 hash **SHOULD** be included when possible. |
 | **external_id** (optional) | <span class="stixtype">string</span> | An identifier for the external reference content. |
 
-### 2.5.2 Requirements <a id='external-reference-requirements'></a>
+### 2.6.2 Requirements <a id='external-reference-requirements'></a>
 
 - In addition to the **source_name** property, at least one of the **description**, **url** or **external_id** properties **MUST** be present.
 
@@ -959,7 +1041,7 @@ An <span class="stixtype">external-reference</span> to an offline threat report 
 }
 ```
 
-## 2.6 Float <a id='float'></a>
+## 2.7 Float <a id='float'></a>
 
 **Type Name:** <span class="stixtype">float</span>
 
@@ -977,7 +1059,7 @@ In the JSON MTI serialization, floating point values are represented by the JSON
 }
 ```
 
-## 2.7 Hashes <a id='hashes'></a>
+## 2.8 Hashes <a id='hashes'></a>
 
 **Type Name:** <span class="stixtype">hashes</span>
 
@@ -999,7 +1081,7 @@ To enhance compatibility, the SHA-256 hash **SHOULD** be used whenever possible.
 }
 ```
 
-## 2.8 Hexadecimal <a id='hexadecimal'></a>
+## 2.9 Hexadecimal <a id='hexadecimal'></a>
 
 **Type Name:** <span class="stixtype">hex</span>
 
@@ -1015,7 +1097,7 @@ The <span class="stixtype">hex</span> data type encodes an array of octets (8-bi
 }
 ```
 
-## 2.9 Identifier <a id='identifier'></a>
+## 2.10 Identifier <a id='identifier'></a>
 
 **Type Name:** <span class="stixtype">identifier</span>
 
@@ -1078,7 +1160,7 @@ The JSON MTI serialization uses the JSON String type \[[RFC8259](#rfc8259)\] whe
 }
 ```
 
-## 2.10 Integer <a id='integer'></a>
+## 2.11 Integer <a id='integer'></a>
 
 **Type Name:** <span class="stixtype">integer</span>
 
@@ -1096,7 +1178,7 @@ In the JSON MTI serialization, integers are represented by the JSON Number type 
 }
 ```
 
-## 2.11 Kill Chain Phase <a id='kill-chain-phase'></a>
+## 2.12 Kill Chain Phase <a id='kill-chain-phase'></a>
 
 **Type Name:** <span class="stixtype">kill-chain-phase</span>
 
@@ -1112,12 +1194,12 @@ The JSON MTI serialization uses the JSON Object type \[[RFC8259](#rfc8259)\] whe
   </tr>
   <tr>
     <td><strong>kill_chain_name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The name of the kill chain. The value of this property <strong>SHOULD</strong> be all lowercase and <strong>SHOULD</strong> use hyphens instead of spaces or underscores as word separators.</td>
   </tr>
   <tr>
     <td><strong>phase_name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The name of the phase in the kill chain. The value of this property <strong>SHOULD</strong> be all lowercase and <strong>SHOULD</strong> use hyphens instead of spaces or underscores as word separators.</td>
   </tr>
 </table>
@@ -1156,7 +1238,7 @@ Example specifying the "pre-attack" phase from the "foo" kill-chain
 }
 ```
 
-## 2.12 List <a id='list'></a>
+## 2.13 List <a id='list'></a>
 
 **Type Name:** <span class="stixtype">list</span>
 
@@ -1180,7 +1262,7 @@ The JSON MTI serialization uses the JSON Array type \[[RFC8259](#rfc8259)\], whi
 }
 ```
 
-## 2.13 Observable Container (deprecated) <a id='observable-container'></a>
+## 2.14 Observable Container (deprecated) <a id='observable-container'></a>
 
 **Type Name:** <span class="stixtype">observable-container</span>
 
@@ -1241,7 +1323,7 @@ Resolving a reference is the process of identifying all of the objects in an obs
 }
 ```
 
-## 2.14 Open Vocabulary <a id='open-vocabulary'></a>
+## 2.15 Open Vocabulary <a id='open-vocabulary'></a>
 
 **Type Name:** <span class="stixtype">open-vocab</span>
 
@@ -1273,7 +1355,47 @@ Example using a user-defined value. In this example, for the same Threat Actor *
 }
 ```
 
-## 2.15 String <a id='string'></a>
+## 2.16 Score <a id='score'></a>
+
+**Type Name:** score
+
+The <span class="stixtype">score</span> data type represents a numeric score that can be applied to STIX objects to allows for a narrative description that can be supplied by analytical processes or tools.
+
+### 2.16.1 Properties  <a id='score-properties'></a>
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **name** (required) | [string](#string) | The name of the score. This is normally a system or process name or some combination of these such as "<Tool Name> Automated Exposure Score". |
+| **value** (required) | [float](#float) | The numeric score. |
+| **description** (optional) | [string](#string) | A description of how this score was calculated by the system, if that information is provided. |
+
+**Examples**
+
+```
+{
+    "name": "ExampleSystem Automated Exposure Score",
+    "value": 75.5,
+    "description": "The score is calculated based on the severity of the incident and the potential impact on the organization."
+}
+```
+
+## 2.17 State Change <a id='state-change'></a>
+
+**Type Name:** state-change
+
+The <span class="stixtype">state-change</span> data type captures a relationship where the parent object such as a <span class="stixtype">task</span> or <span class="stixtype">event</span> causes some other object such as an <span class="stixtype">impact</span> to to come into existance, be alter in severity, be resolved.
+
+### 2.17.1 Properties  <a id='state-change-properties'></a>
+
+The **initial_ref** or **result_ref** property **MUST** be populated.
+
+| **Property Name** | **Type** | **Description** |
+| --- | --- | --- |
+| **state_change_type** (required) | [open-vocabulary](#open-vocabulary) | How this activity influenced the change in state between the **initial_ref** and **result_ref**. The value of this property **SHOULD** come from the [state-change-type-ov](#state-change-type-vocabulary) open vocabulary. |
+| **initial_ref** (optional) | [identifier](#identifier) | The initial object state that this event affected. It **MUST** be an SDO. To capture a changing SCO, the Observed Data SDO must be used. If the **result_ref** property is not populated then this **MUST** be populated. If there is no result state this typically means that this event/task removed or resolved the initial object. For example, a task resolved a network outage. If both are present this indicates a transition between these states. For example, a confidentiality impact was made worse as the information was shared further. If the **result_ref** property is populated this **MUST** reference the same type of SDO. |
+| **result_ref** (optional) | [identifier](#identifier) | The final state that this event influenced. If the **initial_ref** property is not populated then this **MUST** be populated. If there is no initial state it typically means that this event/task caused or created the result. For example, an event causing a network outage. If the **initial_ref** property is populated this **MUST** reference the same type of SDO. |
+
+## 2.18 String <a id='string'></a>
 
 **Type Name:** <span class="stixtype">string</span>
 
@@ -1291,7 +1413,7 @@ The JSON MTI serialization uses the JSON String type \[[RFC8259](#rfc8259)\], wh
 }
 ```
 
-## 2.16 Timestamp <a id='timestamp'></a>
+## 2.19 Timestamp <a id='timestamp'></a>
 
 **Type Name:** <span class="stixtype">timestamp</span>
 
@@ -1299,7 +1421,7 @@ The <span class="stixtype">timestamp</span> type defines how dates and times are
 
 The JSON MTI serialization uses the JSON String type \[[RFC8259](#rfc8259)\] when representing <span class="stixtype">timestamp</span>.
 
-### 2.16.1 Requirements <a id='timestamp-requirements'></a>
+### 2.19.1 Requirements <a id='timestamp-requirements'></a>
 
 - The <span class="stixtype">timestamp</span> property **MUST** be a valid RFC 3339-formatted timestamp \[[RFC3339](#rfc3339)\] using the format <span class="stixalt">YYYY-MM-DDTHH:mm:ss\[.s+\]Z</span> where the "s+" represents 1 or more sub-second values. The brackets denote that sub-second precision is optional, and that if no digits are provided, the decimal place **MUST NOT** be present.
 - The timestamp **MUST** be represented in the UTC timezone and **MUST** use the "Z" designation to indicate this.
@@ -1721,7 +1843,7 @@ This section describes an example workflow where a consumer receives multiple up
   "created": "2016-05-01T06:13:14.000Z",
   "modified": "2016-05-06T06:23:45.000Z"
 }</code></pre></td>
-    <td>Consumer ignores this object because they already have a newer version of the object.<br><br>Note: consumer might choose to store meta-information about received objects, including versions that were received out-of-order. The consumer also may choose to store a copy for reference.</td>
+    <td>Consumer ignores this object because they already have a newer version of the object.<br /><br />Note: consumer might choose to store meta-information about received objects, including versions that were received out-of-order. The consumer also may choose to store a copy for reference.</td>
   </tr>
   <tr>
     <td>4</td>
@@ -1758,7 +1880,7 @@ This section describes an example workflow where an object creator publishes mul
   </tr>
   <tr>
     <td>1</td>
-    <td>N/A - STIX is not involved in this scenario.<br><br>(Tools <em>could</em> choose to create and track STIX versions for internal changes, but it is not required by the specification.)</td>
+    <td>N/A - STIX is not involved in this scenario.<br /><br />(Tools <em>could</em> choose to create and track STIX versions for internal changes, but it is not required by the specification.)</td>
     <td>User clicks a create button in the user interface, creates an SDO, then clicks save. This action causes information to be stored in the product’s database.</td>
   </tr>
   <tr>
@@ -1773,7 +1895,7 @@ This section describes an example workflow where an object creator publishes mul
   </tr>
   <tr>
     <td>3</td>
-    <td>N/A - STIX is not involved in this scenario.<br><br>(Tools <em>could</em> choose to create and track STIX versions for internal changes, but it is not required by the specification.)</td>
+    <td>N/A - STIX is not involved in this scenario.<br /><br />(Tools <em>could</em> choose to create and track STIX versions for internal changes, but it is not required by the specification.)</td>
     <td>The user performs additional analysis within the STIX implementation, performing multiple modifications and saving their work multiple times.</td>
   </tr>
   <tr>
@@ -1814,19 +1936,19 @@ Each SDO and SCO has its own set of relationship types that are specified in the
     <td><span class="stixliteral">derived-from</span></td>
     <td><span class="stixtype">&lt;SDO or SCO of same type as target&gt;</span></td>
     <td><span class="stixtype">&lt;SDO or SCO of same type as source&gt;</span></td>
-    <td>The information in the target object is based on information from the source object.<br><br><span class="stixliteral">derived-from</span> is an explicit relationship between two separate objects. It is not a substitute for the versioning process defined in <a href="#versioning">Section 3.6</a>.</td>
+    <td>The information in the target object is based on information from the source object.<br /><br /><span class="stixliteral">derived-from</span> is an explicit relationship between two separate objects. It is not a substitute for the versioning process defined in <a href="#versioning">Section 3.6</a>.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">duplicate-of</span></td>
     <td><span class="stixtype">&lt;SDO or SCO of same type as target&gt;</span></td>
     <td><span class="stixtype">&lt;SDO or SCO of same type as source&gt;</span></td>
-    <td>The referenced source and target objects are semantically duplicates of each other.<br><br>This specification does not address whether the source or the target object is the duplicate object or what action, if any, a consumer should take when receiving an instance of this relationship.<br><br>As an example, a Campaign object from one organization could be marked as a <span class="stixliteral">duplicate-of</span> a Campaign object from another organization if they both described the same campaign.</td>
+    <td>The referenced source and target objects are semantically duplicates of each other.<br /><br />This specification does not address whether the source or the target object is the duplicate object or what action, if any, a consumer should take when receiving an instance of this relationship.<br /><br />As an example, a Campaign object from one organization could be marked as a <span class="stixliteral">duplicate-of</span> a Campaign object from another organization if they both described the same campaign.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">related-to</span></td>
     <td><span class="stixtype">&lt;SDO or SCO of any type&gt;</span></td>
     <td><span class="stixtype">&lt;SDO or SCO of any type&gt;</span></td>
-    <td>Asserts a non-specific relationship between two SDOs. This relationship can be used when none of the other predefined relationships are appropriate, and a user-defined one is not needed.<br><br>As an example, a Malware object describing a piece of malware could be marked as <span class="stixliteral">related-to</span> a Tool if they are commonly used together. That relationship is not common enough to standardize but may be useful to some analysts.</td>
+    <td>Asserts a non-specific relationship between two SDOs. This relationship can be used when none of the other predefined relationships are appropriate, and a user-defined one is not needed.<br /><br />As an example, a Malware object describing a piece of malware could be marked as <span class="stixliteral">related-to</span> a Tool if they are commonly used together. That relationship is not common enough to standardize but may be useful to some analysts.</td>
   </tr>
 </table>
 
@@ -1878,7 +2000,7 @@ Each Predefined Object Extension can be defined at most once on a given STIX Obj
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--1b40e321-ae73-5637-bd97-33c35a86b80d",
   "hashes": {
     "MD5": "3773a88f65a5e780c8dff9cdc3a056f3"
@@ -1946,7 +2068,7 @@ The Attack Pattern SDO contains textual descriptions of the pattern along with r
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">attack-pattern</span>.</td>
   </tr>
   <tr>
@@ -1956,12 +2078,12 @@ The Attack Pattern SDO contains textual descriptions of the pattern along with r
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name used to identify the Attack Pattern.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Attack Pattern, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
@@ -2008,27 +2130,27 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class='stixtype'>attack-pattern</span></td>
+    <td><a class="stixtype" href="#attack-pattern">attack-pattern</a></td>
     <td><span class='stixliteral'>delivers</span></td>
-    <td><span class='stixtype'>malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>This Relationship describes that this Attack Pattern is used to deliver this malware instance (or family).</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>attack-pattern</span></td>
+    <td><a class="stixtype" href="#attack-pattern">attack-pattern</a></td>
     <td><span class='stixliteral'>targets</span></td>
     <td><span class='stixtype'>identity</span>, <span class='stixtype'>location</span>, <span class='stixtype'>vulnerability</span></td>
-    <td>This Relationship describes that this Attack Pattern typically targets the type of victim, location, or vulnerability represented by the related Identity, Location, or Vulnerability object.<br><br> For example, a <span class='stixliteral'>targets</span> Relationship linking an Attack Pattern for SQL injection to an Identity object representing domain administrators means that the form of SQL injection characterized by the Attack Pattern targets domain administrators in order to achieve its objectives.<br><br>Another example is a Relationship linking an Attack Pattern for SQL injection to a Vulnerability in blogging software means that the particular SQL injection attack exploits that vulnerability.</td>
+    <td>This Relationship describes that this Attack Pattern typically targets the type of victim, location, or vulnerability represented by the related Identity, Location, or Vulnerability object.<br /><br /> For example, a <span class='stixliteral'>targets</span> Relationship linking an Attack Pattern for SQL injection to an Identity object representing domain administrators means that the form of SQL injection characterized by the Attack Pattern targets domain administrators in order to achieve its objectives.<br /><br />Another example is a Relationship linking an Attack Pattern for SQL injection to a Vulnerability in blogging software means that the particular SQL injection attack exploits that vulnerability.</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>attack-pattern</span></td>
+    <td><a class="stixtype" href="#attack-pattern">attack-pattern</a></td>
     <td><span class='stixliteral'>uses</span></td>
     <td><span class='stixtype'>malware</span>, <span class='stixtype'>tool</span></td>
-    <td>This Relationship describes that the related Malware or Tool is used to perform the behavior identified in the Attack Pattern.<br><br>For example, a <span class='stixliteral'>uses</span> Relationship linking an Attack Pattern for a distributed denial of service (DDoS) to a Tool for Low Orbit Ion Cannon (LOIC) indicates that the tool can be used to perform those DDoS attacks.</td>
+    <td>This Relationship describes that the related Malware or Tool is used to perform the behavior identified in the Attack Pattern.<br /><br />For example, a <span class='stixliteral'>uses</span> Relationship linking an Attack Pattern for a distributed denial of service (DDoS) to a Tool for Low Orbit Ion Cannon (LOIC) indicates that the tool can be used to perform those DDoS attacks.</td>
   </tr>
 </table>
 
@@ -2038,20 +2160,20 @@ Relationships are not restricted to those listed below. Relationships can be cre
   </tr>
   <tr>
     <td width="20%"><span class='stixtype'>indicator</span></td>
-    <td width="20%""><span class='stixliteral'>indicates</span></td>
+    <td width="20%"><span class='stixliteral'>indicates</span></td>
     <td width="20%"><span class='stixtype'>attack-pattern</span></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>course-of-action</span></td>
+    <td><a class="stixtype" href="#course-of-action">course-of-action</a></td>
     <td><span class='stixliteral'>mitigates</span></td>
-    <td><span class='stixtype'>attack-pattern</span></td>
+    <td><a class="stixtype" href="#attack-pattern">attack-pattern</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
     <td><span class='stixtype'>campaign</span>, <span class='stixtype'>intrusion-set</span>, <span class='stixtype'>malware</span>, <span class='stixtype'>threat-actor</span></td>
     <td><span class='stixliteral'>uses</span></td>
-    <td><span class='stixtype'>attack-pattern</span></td>
+    <td><a class="stixtype" href="#attack-pattern">attack-pattern</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
 </table>
@@ -2063,7 +2185,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "attack-pattern",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "attack-pattern--0c7b5b88-8ff7-4a4d-aa9d-feb398cd0061",
   "created": "2016-05-12T08:17:27.000Z",
   "modified": "2016-05-12T08:17:27.000Z",
@@ -2084,7 +2206,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 [
   {
     "type": "attack-pattern",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "attack-pattern--7e33a43e-e34b-40ec-89da-36c9bb2cacd5",
     "created": "2016-05-12T08:17:27.000Z",
     "modified": "2016-05-12T08:17:27.000Z",
@@ -2099,7 +2221,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--57b56a43-b8b0-4cba-9deb-34e3e1faed9e",
     "created": "2016-05-12T08:17:27.000Z",
     "modified": "2016-05-12T08:17:27.000Z",
@@ -2109,7 +2231,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "intrusion-set",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "intrusion-set--0c7e22ad-b099-4dc3-b0df-2ea3f49ae2e6",
     "created": "2016-05-12T08:17:27.000Z",
     "modified": "2016-05-12T08:17:27.000Z",
@@ -2167,17 +2289,17 @@ For example, a Campaign could be used to describe a crime syndicate’s attack u
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">campaign</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name used to identify the Campaign.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Campaign, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
@@ -2187,17 +2309,17 @@ For example, a Campaign could be used to describe a crime syndicate’s attack u
   </tr>
   <tr>
     <td><strong>first_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The time that this Campaign was first seen.<br><br>A summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are earlier than the first seen timestamp, the object may be updated to account for the new data.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The time that this Campaign was first seen.<br /><br />A summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are earlier than the first seen timestamp, the object may be updated to account for the new data.</td>
   </tr>
   <tr>
     <td><strong>last_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The time that this Campaign was last seen.<br><br>A summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are later than the last seen timestamp, the object may be updated to account for the new data.<br><br>If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The time that this Campaign was last seen.<br /><br />A summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are later than the last seen timestamp, the object may be updated to account for the new data.<br /><br />If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
   </tr>
   <tr>
     <td><strong>objective</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The Campaign’s primary goal, objective, desired outcome, or intended effect — what the Threat Actor or Intrusion Set hopes to accomplish with this Campaign.</td>
   </tr>
 </table>
@@ -2234,39 +2356,39 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class='stixtype'>campaign</span></td>
+    <td><a class="stixtype" href="#campaign">campaign</a></td>
     <td><span class='stixliteral'>attributed-to</span></td>
     <td><span class='stixtype'>intrusion-set</span>, <span class='stixtype'>threat-actor</span></td>
-    <td>This Relationship describes that the Intrusion Set or Threat Actor that is involved in carrying out the Campaign.<br><br>For example, an <span class='stixliteral'>attributed-to</span> Relationship from the Glass Gazelle Campaign to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Campaign.</td>
+    <td>This Relationship describes that the Intrusion Set or Threat Actor that is involved in carrying out the Campaign.<br /><br />For example, an <span class='stixliteral'>attributed-to</span> Relationship from the Glass Gazelle Campaign to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Campaign.</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>campaign</span></td>
+    <td><a class="stixtype" href="#campaign">campaign</a></td>
     <td><span class='stixliteral'>compromises</span></td>
-    <td><span class='stixtype'>infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>This Relationship describes that the Campaign compromises the related Infrastructure.</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>campaign</span></td>
+    <td><a class="stixtype" href="#campaign">campaign</a></td>
     <td><span class='stixliteral'>originates-from</span></td>
-    <td><span class='stixtype'>location</span></td>
-    <td>This Relationship describes that the Campaign originates from the related Location.<br><br>For example, an <span class='stixliteral'>originates-from</span> Relationship from the Glass Gazelle Campaign to a Location representing North America means that Glass Gazelle appears to originate from or is located in North America.</td>
+    <td><a class="stixtype" href="#location">location</a></td>
+    <td>This Relationship describes that the Campaign originates from the related Location.<br /><br />For example, an <span class='stixliteral'>originates-from</span> Relationship from the Glass Gazelle Campaign to a Location representing North America means that Glass Gazelle appears to originate from or is located in North America.</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>campaign</span></td>
+    <td><a class="stixtype" href="#campaign">campaign</a></td>
     <td><span class='stixliteral'>targets</span></td>
     <td><span class='stixtype'>identity</span>, <span class='stixtype'>location</span>, <span class='stixtype'>vulnerability</span></td>
-    <td>This Relationship describes that the Campaign uses exploits of the related Vulnerability or targets the type of victims described by the related Identity or Location.<br><br>For example, a <span class='stixliteral'>targets</span> Relationship from the Glass Gazelle Campaign to a Vulnerability in a blogging platform indicates that attacks performed as part of Glass Gazelle often exploit that Vulnerability.<br><br>Similarly, a <span class='stixliteral'>targets</span> Relationship from the Glass Gazelle Campaign to an Identity describing the energy sector in the United States means that the Campaign typically carries out attacks against targets in that sector.</td>
+    <td>This Relationship describes that the Campaign uses exploits of the related Vulnerability or targets the type of victims described by the related Identity or Location.<br /><br />For example, a <span class='stixliteral'>targets</span> Relationship from the Glass Gazelle Campaign to a Vulnerability in a blogging platform indicates that attacks performed as part of Glass Gazelle often exploit that Vulnerability.<br /><br />Similarly, a <span class='stixliteral'>targets</span> Relationship from the Glass Gazelle Campaign to an Identity describing the energy sector in the United States means that the Campaign typically carries out attacks against targets in that sector.</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>campaign</span></td>
+    <td><a class="stixtype" href="#campaign">campaign</a></td>
     <td><span class='stixliteral'>uses</span></td>
     <td><span class='stixtype'>attack-pattern</span>, <span class='stixtype'>infrastructure</span>, <span class='stixtype'>malware</span>, <span class='stixtype'>tool</span></td>
-    <td>This Relationship describes that attacks carried out as part of the Campaign typically use the related Attack Pattern, Infrastructure, Malware, or Tool.<br><br>For example, a <span class='stixliteral'>uses</span> Relationship from the Glass Gazelle Campaign to the xInject Malware indicates that xInject is often used during attacks attributed to that Campaign.<br><br>A campaign, threat actor, intrusion set, malware, or tool takes infrastructure and compromises and/or uses it for their own.</td>
+    <td>This Relationship describes that attacks carried out as part of the Campaign typically use the related Attack Pattern, Infrastructure, Malware, or Tool.<br /><br />For example, a <span class='stixliteral'>uses</span> Relationship from the Glass Gazelle Campaign to the xInject Malware indicates that xInject is often used during attacks attributed to that Campaign.<br /><br />A campaign, threat actor, intrusion set, malware, or tool takes infrastructure and compromises and/or uses it for their own.</td>
   </tr>
 </table>
 
@@ -2276,7 +2398,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   </tr>
   <tr>
     <td width="20%"><span class='stixtype'>indicator</span></td>
-    <td width="20%""><span class='stixliteral'>indicates</span></td>
+    <td width="20%"><span class='stixliteral'>indicates</span></td>
     <td width="20%"><span class='stixtype'>campaign</span></td>
     <td>See forward relationship for definition.</td>
   </tr>
@@ -2287,7 +2409,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "campaign",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "campaign--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:00.000Z",
@@ -2344,17 +2466,17 @@ The Course of Action SDO contains a textual description of the action; a reserve
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">course-of-action</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name used to identify the Course of Action.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Course of Action, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
@@ -2396,24 +2518,24 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class='stixtype'>course-of-action</span></td>
+    <td><a class="stixtype" href="#course-of-action">course-of-action</a></td>
     <td><span class='stixliteral'>investigates</span></td>
-    <td><span class='stixtype'>indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
     <td>This Relationship describes that the Course of Action can be used to investigate the Indicator.</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>course-of-action</span></td>
+    <td><a class="stixtype" href="#course-of-action">course-of-action</a></td>
     <td><span class='stixliteral'>mitigates</span></td>
     <td><span class='stixtype'>attack-pattern</span>, <span class='stixtype'>indicator</span>, <span class='stixtype'>malware</span>, <span class='stixtype'>tool</span>, <span class='stixtype'>vulnerability</span></td>
-    <td>This Relationship describes that the Course of Action can mitigate (e.g. respond to a threat) the related Attack Pattern, Indicator, Malware, Vulnerability, or Tool.<br><br> For example, a <span class='stixliteral'>mitigates</span> Relationship from a Course of Action object to a Malware object indicates that the course of action mitigates the malware.</td>
+    <td>This Relationship describes that the Course of Action can mitigate (e.g. respond to a threat) the related Attack Pattern, Indicator, Malware, Vulnerability, or Tool.<br /><br /> For example, a <span class='stixliteral'>mitigates</span> Relationship from a Course of Action object to a Malware object indicates that the course of action mitigates the malware.</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>course-of-action</span></td>
+    <td><a class="stixtype" href="#course-of-action">course-of-action</a></td>
     <td><span class='stixliteral'>remediates</span></td>
     <td><span class='stixtype'>malware</span>, <span class='stixtype'>vulnerability</span></td>
     <td>This Relationship describes that the Course of Action can be used to remediate (e.g. clean up) the malware or vulnerability</td>
@@ -2426,7 +2548,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   </tr>
   <tr>
     <td width="20%">—</td>
-    <td width="20%"">—</td>
+    <td width="20%">—</td>
     <td width="20%">—</td>
     <td>—</td>
   </tr>
@@ -2438,7 +2560,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 [
   {
     "type": "course-of-action",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "course-of-action--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:03:48.000Z",
@@ -2448,7 +2570,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--44298a74-ba52-4f0c-87a3-1824e67d7fad",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:07:10.000Z",
@@ -2459,7 +2581,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--31b940d4-6f7f-459a-80ea-9c1f17b5891b",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:07:09.000Z",
@@ -2470,7 +2592,264 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ]
 ```
 
-## 4.4 Grouping <a id="grouping"></a>
+## 4.4 Event <a id="event"></a>
+
+An Event is an activity that has a harmful effect or which will be investigated or already has been investigated as potentially having a harmful effect. The activity is not necessarily performed by an attacker. For example, an event could result from a user or system administrator’s mistake. Events can be used to further enrich and explain Sightings by allowing analysts to indicate if these sightings are part of a potential threat, and if so how they connects to a larger incident. Some activity, described in an Event, will be found to be not harmful when investigated.
+
+### 4.4.1 Properties <a id="event-properties"></a>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Required Common Properties</span></th>
+  </tr>
+  <tr><td>created, id, modified, spec_version, type</td></tr>
+  <tr>
+    <th><span class="stixtr">Optional Common Properties</span></th>
+  </tr>
+  <tr><td>created_by_ref, revoked, labels, confidence, lang, external_references, object_marking_refs, granular_markings, extensions</td></tr>
+  <tr>
+<th><span class="stixtr">Not Applicable Common Properties</span></th>
+</tr>
+  <tr><td>defanged</td></tr>
+  <tr>
+<th><span class="stixtr">Object Specific Properties</span></th>
+</tr>
+  <tr><td></td></tr>
+</table>
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+
+  <tr>
+    <td><strong>status</strong> (required)</td>
+    <td><a href="#event-status-enumeration" class="stixtype">event-status-enumeration</a></td>
+    <td>The current status of the event. The values of this property <strong>MUST</strong> come from the <a href="#event-status-enumeration" class="stixtype">event-status-enumeration</a> enumeration.</td>
+</tr>
+
+  <tr>
+    <td><strong>type</strong> (required)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>The value of this property <strong>MUST</strong> be set to event.</td>
+</tr>
+
+  <tr>
+    <td><strong>changed_objects</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#state-change" class="stixtype">state-change</a></td>
+    <td>A list of changes that this event has caused. This is typically used to indicate how an event has affected impacts.</td>
+</tr>
+
+  <tr>
+    <td><strong>description</strong> (optional)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>A description of event that occurred.</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time</strong> (optional)</td>
+    <td><a href="#timestamp" class="stixtype">timestamp</a></td>
+    <td>The date and time the event was last recorded. If this is not present it is assumed to be unknown. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>end_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+  <tr>
+    <td><strong>event_types</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>High level types for the event to enable aggregation and summarization. The values of this property <strong>SHOULD</strong> come from the <a href="#event-type-vocabulary" class="stixtype">event-type-ov</a> open vocabulary.</td>
+</tr>
+
+  <tr>
+    <td><strong>goal</strong> (optional)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>The assumed goal, objective, desired outcome, or intended effect of this event. Not all events have goals.</td>
+</tr>
+
+  <tr>
+    <td><strong>name</strong> (optional)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>A name for the event.</td>
+</tr>
+
+  <tr>
+    <td><strong>next_event_refs</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#identifier" class="stixtype">identifier</a></td>
+    <td>The <a href="#event" class="stixtype">event</a> objects to follow. They <strong>MUST</strong> be of type <a href="#event" class="stixtype">event</a>. There can be more than one if they take place in parallel.</td>
+</tr>
+
+  <tr>
+    <td><strong>sighting_refs</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#identifier" class="stixtype">identifier</a></td>
+    <td>A list of <a href="#sighting" class="stixtype">sighting</a> objects that were related to this event. Sightings referenced in this <strong>SHOULD</strong> be based on <a href="#attack-pattern" class="stixtype">attack-pattern</a>, <a href="#indicator" class="stixtype">indicator</a>, or <a href="#malware" class="stixtype">malware</a> SDOs. The <strong>sighting_refs</strong> property <strong>SHOULD</strong> be used to relate an <a href="#event" class="stixtype">event</a> to an SDO, instead of using right an SRO. In some cases observed data may be present, but no <a href="#indicator" class="stixtype">indicator</a> can be created. In these cases it is recommended to use an <a href="#attack-pattern" class="stixtype">attack-pattern</a> using the name or description of the behavior or rule that triggered the sighting.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time</strong> (optional)</td>
+    <td><a href="#timestamp" class="stixtype">timestamp</a></td>
+    <td>The date and time the event was first recorded. If this is not present it is assumed to be unknown. This property <strong>SHOULD</strong> be populated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+</table>
+
+### 4.4.2 Relationships  <a id="event-relationships"></a>
+
+These are the relationships explicitly defined between the Event object and other STIX Objects. The table identifies the relationships that can be made from this object type to another object type by way of the Relationship object.
+
+The reverse relationships section illustrates the relationships targeting this object type from another object type.
+
+Relationships are not restricted to those listed below. Relationships can be created between any objects using the related-to relationship type or, as with open vocabularies, user-defined names.
+
+To relate [events](#event) to an [incident](#incident) the **event_refs** property **SHOULD** be used. Using these embedded relationships ensures that an incomplete sequence cannot be shared accidentally (avoiding potential confusion or misunderstandings when processing STIX data.)
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class='stixtr'>Common Relationships</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">duplicate-of</span>, <span class="stixliteral">derived-from</span>, <span class="stixliteral">related-to</span></td>
+  </tr>
+</table>
+
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>causes</span></td>
+    <td><a class='stixtype' href='#impact'>impact</a></td>
+    <td>The event caused the impact.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>affects</span></td>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td>The identity is affected by this event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>led-to</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>The event led to performing the task.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>impacts</span></td>
+    <td><a class='stixtype' href='#infrastructure'>infrastructure</a>,  <a class='stixtype' href='#stix-cyber-observable-objects'>&lt;All STIX Cyber-observable Objects&gt;</a></td>
+    <td>An event has an impact on specific infrastructure. While not all SCO types will make sense in this relationship, allowing any type of SCO prevents artificially restricting what could be used.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>located-at</span></td>
+    <td><a class='stixtype' href='#location'>location</a></td>
+    <td>The event occurred at a specific location.</td>
+  </tr>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
+  </tr>
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>performed</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>An identity performed a specific event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#indicator'>indicator</a></td>
+    <td><span class='stixliteral'>based-on</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>An indicator is based on an event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#malware'>malware</a></td>
+    <td><span class='stixliteral'>performed</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>Malware performed a specific event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#tool'>tool</a></td>
+    <td><span class='stixliteral'>performed</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A tool performed a specific event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>blocks</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A task was performed to block a potential event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>causes</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A task was performed that caused an event, usually due to an error.</td>
+  </tr>
+</table>
+
+**Example**
+
+```
+{
+    "type": "event",
+    "id": "event--68e1e976-7e3b-4233-8bde-1a5dbb17a9a6",
+    "created": "2023-11-22T15:30:00.000Z",
+    "modified": "2023-11-22T15:30:00.000Z",
+    "spec_version": "2.2",
+    "status": "ongoing",
+    "changed_objects": [
+        {
+            "state_change_type": "escalation",
+            "initial_ref": "impact--d1e4f6c7-3b1a-4b5c-8a5a-9e7b8a9a5b6c",
+            "result_ref": "impact--c1f2d3e4-5b6c-4a8d-9e0a-1b2c3d4e5f6d"
+        }
+    ],
+    "description": "Phishing attack on company email accounts.",
+    "end_time": "2023-11-22T15:30:00Z",
+    "end_time_fidelity": "minute",
+    "event_types": [
+        "phishing"
+    ],
+    "goal": "Gain unauthorized access to sensitive information.",
+    "name": "Phishing Attack",
+    "next_events_refs": [
+        "event--193a3ea2-32ae-4bfd-b353-16836ab70788",
+        "event--d263f0f6-4c6c-4f77-a7fd-10368f0cb50a"
+    ],
+    "start_time": "2023-11-22T14:30:00Z",
+    "start_time_fidelity": "minute",
+    "extensions": {
+        "extension-definition--4ca6de00-5b0d-45ef-a1dc-ea7279ea910e": {
+            "extension_type": "new-sdo"
+        }
+    }
+}
+```
+
+## 4.5 Grouping <a id="grouping"></a>
 
 **Type Name:** <span class="stixtype">grouping</span>
 
@@ -2478,7 +2857,7 @@ A Grouping object explicitly asserts that the referenced STIX Objects have a sha
 
 A STIX Grouping object might represent a set of data that, in time, given sufficient analysis, would mature to convey an incident or threat report as a STIX Report object. For example, a Grouping could be used to characterize an ongoing investigation into a security event or incident. A Grouping object could also be used to assert that the referenced STIX Objects are related to an ongoing analysis process, such as when a threat analyst is collaborating with others in their trust community to examine a series of Campaigns and Indicators. The Grouping SDO contains a list of references to SDOs, SCOs, SROs, and SMOs, along with an explicit statement of the context shared by the content, a textual description, and the name of the grouping.
 
-### 4.4.1 Properties <a id="grouping-properties"></a>
+### 4.5.1 Properties <a id="grouping-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -2515,23 +2894,23 @@ A STIX Grouping object might represent a set of data that, in time, given suffic
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">grouping</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name used to identify the Grouping.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Grouping, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
     <td><strong>context</strong> (required)</td>
-    <td><span class="stixtype">open-vocab</span></td>
-    <td>A short descriptor of the particular context shared by the content referenced by the Grouping.<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#grouping-context-vocabulary"><span class="stixvocab">grouping-context-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>A short descriptor of the particular context shared by the content referenced by the Grouping.<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#grouping-context-vocabulary"><span class="stixvocab">grouping-context-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>object_refs</strong> (required)</td>
@@ -2540,7 +2919,7 @@ A STIX Grouping object might represent a set of data that, in time, given suffic
   </tr>
 </table>
 
-### 4.4.2 Relationships <a id="grouping-relationships"></a>
+### 4.5.2 Relationships <a id="grouping-relationships"></a>
 
 There are no relationships explicitly defined between the Grouping object and other STIX Objects, other than those defined as common relationships. The first section lists the embedded relationships by property name along with their corresponding target.
 
@@ -2576,7 +2955,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
@@ -2595,7 +2974,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "grouping",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "grouping--84e4d88f-44ea-4bcd-bbf3-b2c1c320bcb3",
   "created_by_ref": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
   "created": "2015-12-21T19:59:11.000Z",
@@ -2612,7 +2991,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.5 Identity <a id="identity"></a>
+## 4.6 Identity <a id="identity"></a>
 
 **Type Name:** <span class="stixtype">identity</span>
 
@@ -2620,7 +2999,7 @@ Identities can represent actual individuals, organizations, or groups (e.g., ACM
 
 The Identity SDO can capture basic identifying information, contact information, and the sectors that the Identity belongs to. Identity is used in STIX to represent, among other things, targets of attacks, information sources, object creators, and threat actor identities.
 
-### 4.5.1 Properties <a id="identity-properties"></a>
+### 4.6.1 Properties <a id="identity-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -2657,17 +3036,17 @@ The Identity SDO can capture basic identifying information, contact information,
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">identity</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name used to identify the Identity.  When referring to a specific entity (e.g., an individual or organization), this property <strong>SHOULD</strong> contain the canonical name of the specific entity.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Identity, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
@@ -2677,22 +3056,22 @@ The Identity SDO can capture basic identifying information, contact information,
   </tr>
   <tr>
     <td><strong>identity_class</strong> (optional)</td>
-    <td><span class="stixtype">open-vocab</span></td>
-    <td>The type of entity that this Identity describes, e.g., an individual or organization.<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#identity-class-vocabulary"><span class="stixvocab">identity-class-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>The type of entity that this Identity describes, e.g., an individual or organization.<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#identity-class-vocabulary"><span class="stixvocab">identity-class-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>sectors</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>The list of industry sectors that this Identity belongs to.<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#industry-sector-vocabulary"><span class="stixvocab">industry-sector-ov</span></a> open vocabulary.</td>
+    <td>The list of industry sectors that this Identity belongs to.<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#industry-sector-vocabulary"><span class="stixvocab">industry-sector-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>contact_information</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The contact information (e-mail, phone number, etc.) for this Identity. No format for this information is currently defined by this specification.</td>
   </tr>
 </table>
 
-### 4.5.2 Relationships <a id="identity-relationships"></a>
+### 4.6.2 Relationships <a id="identity-relationships"></a>
 
 These are the relationships explicitly defined between the Identity object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -2724,15 +3103,15 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class='stixtype'>identity</span></td>
+    <td><a class="stixtype" href="#identity">identity</a></td>
     <td><span class='stixliteral'>located-at</span></td>
-    <td><span class='stixtype'>location</span></td>
-    <td>This Relationship describes that the Identity is located at or in the related Location.<br><br>For example, a located-at relationship from the ACME Corporation to a Location representing the United States means that ACME Corporation is located in the United States.</td>
+    <td><a class="stixtype" href="#location">location</a></td>
+    <td>This Relationship describes that the Identity is located at or in the related Location.<br /><br />For example, a located-at relationship from the ACME Corporation to a Location representing the United States means that ACME Corporation is located in the United States.</td>
   </tr>
 </table>
 
@@ -2741,15 +3120,15 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
   </tr>
   <tr>
-    <td width="20%"><span class='stixtype'>attack-pattern</span>, <span class='stixtype'>campaign</span>, <span class='stixtype'>intrusion-set</span>, <span class='stixtype'>malware</span>, <span class='stixtype'>threat-actor</span>, <span class='stixtype'>tool</td>
-    <td width="20%""><span class='stixliteral'>targets</span></td>
+    <td width="20%"><span class='stixtype'>attack-pattern</span>, <span class='stixtype'>campaign</span>, <span class='stixtype'>intrusion-set</span>, <span class='stixtype'>malware</span>, <span class='stixtype'>threat-actor</span>, <span class='stixtype'>tool</span></td>
+    <td width="20%"><span class='stixliteral'>targets</span></td>
     <td width="20%"><span class='stixtype'>identity</span></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class='stixliteral'>attributed-to</span>, <span class='stixliteral'>impersonates</span></td>
-    <td><span class='stixtype'>identity</span></td>
+    <td><a class="stixtype" href="#identity">identity</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
 </table>
@@ -2761,7 +3140,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "identity",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "identity--023d105b-752e-4e3c-941c-7d3f3cb15e9e",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:00.000Z",
@@ -2776,7 +3155,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "identity",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "identity--e5f1b90a-d9b6-40ab-81a9-8a29df4b6b65",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:00.000Z",
@@ -2786,13 +3165,444 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.6 Incident <a id="incident"></a>
+## 4.7 Impact <a id="impact"></a>
+
+An Impact is the result of the Incident on the victim, captured in the **impact_ref** property of the Incident object. Impacts can have many categories: availability of resources, confidentiality of data, integrity of data or resources, economic, physical damage, damage to others and traceability (auditing).
+
+There are many categories of impacts, each with its own unique properties, therefore the Impact SDO emulates the File SCO through the use of STIX (sub-types) Extensions to provide the granular details of specific categories of impacts. Seven extensions are available to further define the impact on a related Incident. If there is insufficient information about the impact that is related to one of these categories, then no extension will be specified. If one of the defined extensions is used it **MUST** correspond to the value of the **impact_category** property. This allows consumers to quickly validate their ability to process this category of impact and then load all of its specific details.
+
+Because these extensions are used to specify very different types of impacts, producers **SHOULD** use one and only one of these extensions per Impact object. However, additional extensions might be proposed in the future and might be used in conjunction with one of these.
+
+### 4.7.1 Properties <a id="impact-properties"></a>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Required Common Properties</span></th>
+  </tr>
+  <tr><td>created, id, modified, spec_version, type</td></tr>
+  <tr>
+    <th><span class="stixtr">Optional Common Properties</span></th>
+  </tr>
+  <tr><td>created_by_ref, revoked, labels, confidence, lang, external_references, object_marking_refs, granular_markings, extensions</td></tr>
+  <tr>
+<th><span class="stixtr">Not Applicable Common Properties</span></th>
+</tr>
+  <tr><td>defanged</td></tr>
+  <tr>
+<th><span class="stixtr">Object Specific Properties</span></th>
+</tr>
+  <tr><td></td></tr>
+</table>
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+
+  <tr>
+    <td><strong>type</strong> (required)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>The value of this property <strong>MUST</strong> be set to impact.</td>
+</tr>
+
+  <tr>
+    <td><strong>criticality</strong> (optional)</td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
+    <td>The criticality of this impact. If present, this value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#relationship-summary-table" class="stixtype">Appendix B</a>.</td>
+</tr>
+
+  <tr>
+    <td><strong>description</strong> (optional)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>Additional details about this impact</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time</strong> (optional)</td>
+    <td><a href="#timestamp" class="stixtype">timestamp</a></td>
+    <td>The date and time the impact was last recorded. This property <strong>SHOULD</strong> be populated if this impact is resolved or mitigated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value. If the <strong>superseded_by_ref</strong> property is included this <strong>MUST</strong> be included.</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>end_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+  <tr>
+    <td><strong>impact_category</strong> (optional)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>The category to which the impact belongs. If one of the defined extensions (see section 2.3.2) is used it <strong>MUST</strong> correspond to the value of this property. If there is insufficient information about the category, this property is not populated and no extension will be specified. The value <strong>MUST</strong> be specified without the "-ext" suffix which is used to indicate the extension used.</td>
+</tr>
+
+  <tr>
+    <td><strong>impacted_entity_counts</strong> (optional)</td>
+    <td><a href="#entity-count" class="stixtype">entity-count</a></td>
+    <td>A list of the entity types, along with the number of each type impacted. If this property is not present it should be assumed that this information is not being shared, not that there were no impacted entities. To affirmatively state no entities of a given class were impacted they should be included in the list with the number of entities impacted set to 0.</td>
+</tr>
+
+  <tr>
+    <td><strong>impacted_refs</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#identifier" class="stixtype">identifier</a></td>
+    <td>A list of all impacted entities or infrastructure. The values of this property MUST be the identifier for an SDO or SCO.</td>
+</tr>
+
+  <tr>
+    <td><strong>recoverability</strong> (optional)</td>
+    <td><a href="#recoverability-enumeration" class="stixtype">recoverability-enumeration</a></td>
+    <td>The recoverability of this particular impact with respect to feasibility and required time and resources. The value of this property <strong>MUST</strong> come from the <a href="#recoverability-enumeration" class="stixtype">recoverability-enumeration</a> enumeration.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time</strong> (optional)</td>
+    <td><a href="#timestamp" class="stixtype">timestamp</a></td>
+    <td>The date and time this impact was first recorded. This property <strong>SHOULD</strong> be populated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+  <tr>
+    <td><strong>sub_impact_refs</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#identifier" class="stixtype">identifier</a></td>
+    <td>The <a href="#impact" class="stixtype">impact</a> objects to that are part of this impact. They <strong>MUST</strong> be of type <a href="#impact" class="stixtype">impact</a>.</td>
+</tr>
+
+  <tr>
+    <td><strong>superseded_by_ref</strong> (optional)</td>
+    <td><a href="#identifier" class="stixtype">identifier</a></td>
+    <td>The referenced <a href="#impact" class="stixtype">impact</a> supersedes the <strong>end_time</strong> for the current impact. This allows capturing how the severity of this impact changes over time. When this property is populated this impact <strong>MUST</strong> have an <strong>end_time</strong> and and the <strong>superseded_by_ref</strong> value <strong>MUST</strong> reference an <a href="#impact" class="stixtype">impact</a> of the same as the category specified in the <strong>impact_category</strong> property.</td>
+</tr>
+
+</table>
+
+### 4.7.2 Availability Impact Extension <a id="availability-impact-extension"></a>
+
+**Type Name:** availability-ext
+
+#### 4.7.2.1 Properties <a id="availability-impact-extension-properties"></a>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+
+  <tr>
+    <td><strong>availability_impact</strong> (required)</td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
+    <td>The availability / functional impact of the related incident on the objects referenced in <strong>impacted_refs</strong>. If no objects are referenced, the impact should be treated as the overall availability impact for the related <a href="#incident" class="stixtype">incident</a>. This value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#confidence-scales" class="stixtype">Appendix A</a>.</td>
+</tr>
+
+</table>
+
+### 4.7.3 Confidentiality Impact Extension <a id="confidentiality-impact-extension"></a>
+
+**Type Name:** confidentiality-ext
+
+#### 4.7.3.1 Properties <a id="confidentiality-impact-extension-properties"></a>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+
+  <tr>
+    <td><strong>information_type</strong> (optional)</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>The type of information that had its confidentiality compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property <strong>SHOULD</strong> come from the <a href="#information-type-vocabulary" class="stixtype">information-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the loss_type is not none. Otherwise, including an entry with loss_type of none and no information_type indicates that no information had its confidentiality impacted by the related incident.</td>
+</tr>
+
+  <tr>
+    <td><strong>loss_type</strong> (required)</td>
+    <td><a href="#incident-confidentiality-loss-enumeration" class="stixtype">incident-confidentiality-loss-enumeration</a></td>
+    <td>The type of loss that occurred with respect to the relevant information. The values of this property <strong>MUST</strong> come from the <a href="#incident-confidentiality-loss-enumeration" class="stixtype">incident-confidentiality-loss-enumeration</a> enumeration.</td>
+</tr>
+
+  <tr>
+    <td><strong>record_count</strong> (optional)</td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
+    <td>The number of records of this information type that were compromised. The value of this property <strong>MUST NOT</strong> be negative.</td>
+</tr>
+
+  <tr>
+    <td><strong>record_size</strong> (optional)</td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
+    <td>The amount of data that was compromised in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
+</tr>
+
+</table>
+
+### 4.7.4 External Impact Extension <a id="external-impact-extension"></a>
+
+**Type Name:** external-ext
+
+#### 4.7.4.1 Properties <a id="external-impact-extension-properties"></a>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+
+  <tr>
+    <td><strong>impact_type</strong> (required)</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>The type of impact outside of the targeted organization. The value of this property <strong>SHOULD</strong> come from the <a href="#external-impact-vocabulary" class="stixtype">external-impact-ov</a> open vocabulary.</td>
+</tr>
+
+</table>
+
+### 4.7.5 Integrity Impact Extension <a id="integrity-impact-extension"></a>
+
+**Type Name:** integrity-ext
+
+#### 4.7.5.1 Properties <a id="integrity-impact-extension-properties"></a>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+
+  <tr>
+    <td><strong>alteration</strong> (required)</td>
+    <td><a href="#integrity-alteration-enumeration" class="stixtype">integrity-alteration-enumeration</a></td>
+    <td>The type of alteration affecting integrity of the information. The value of this property <strong>MUST</strong> come from the <a href="#integrity-alteration-enumeration" class="stixtype">integrity-alteration-enumeration</a> enumeration.</td>
+</tr>
+
+  <tr>
+    <td><strong>information_type</strong> (optional)</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>The type of information that had its integrity compromised. This can include information about control systems and other processes that can result in other impacts. The value of this property <strong>SHOULD</strong> come from the <a href="#information-type-vocabulary" class="stixtype">information-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the alternation is not none. Otherwise, including an entry that with an alteration of none and no information_type provided indicates that no information had its integrity impacted by the related incident.</td>
+</tr>
+
+  <tr>
+    <td><strong>record_count</strong> (optional)</td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
+    <td>The number of records of this type that were compromised. The value of this property <strong>MUST NOT</strong> be negative.</td>
+</tr>
+
+  <tr>
+    <td><strong>record_size</strong> (optional)</td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
+    <td>The amount of data that was compromised in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
+</tr>
+
+</table>
+
+### 4.7.6 Economic Impact Extension <a id="economic-impact-extension"></a>
+
+**Type Name:** economic-ext
+
+#### 4.7.6.1 Properties <a id="economic-impact-extension-properties"></a>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+
+  <tr>
+    <td><strong>conversion_rate</strong> (optional)</td>
+    <td><a href="#float" class="stixtype">float</a></td>
+    <td>The conversion rate between the <strong>currency</strong> and <strong>currency_actual</strong> properties. This <strong>MUST NOT</strong> be included if the <strong>currency_actual</strong> property is not included. This <strong>MUST</strong> be included if the <strong>currency_actual</strong> property is included. This value <strong>MUST</strong> be greater than zero. If this property is provided, the <strong>conversion_time</strong> property must also be provided.</td>
+</tr>
+
+  <tr>
+    <td><strong>conversion_time</strong> (optional)</td>
+    <td><a href="#timestamp" class="stixtype">timestamp</a></td>
+    <td>The timestamp corresponding to the conversion rate from the <strong>currency</strong> property to the <strong>currency_actual</strong> property. This <strong>MUST</strong> be included if a <strong>conversion_rate</strong> property is included.</td>
+</tr>
+
+  <tr>
+    <td><strong>currency</strong> (optional)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>The currency used for reporting the <strong>max_amount</strong> and <strong>min_amount</strong> properties values. This <strong>SHOULD</strong> be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency. This <strong>SHOULD</strong> match the currency of the organization or the government producing the report. This value <strong>MUST</strong> be included if the <strong>min_amount</strong> property is included.</td>
+</tr>
+
+  <tr>
+    <td><strong>currency_actual</strong> (optional)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>The currency that the impact actually used. For ransom demands this should be the currency of the demand. If this is not included it should be assumed to be the same value as the <strong>currency</strong> property. If this is included then the <strong>currency</strong> property <strong>MUST</strong> be included. This <strong>SHOULD</strong> be an ISO 4217 alpha currency code or the official currency code for the relevant cryptocurrency.</td>
+</tr>
+
+  <tr>
+    <td><strong>max_amount</strong> (optional)</td>
+    <td><a href="#float" class="stixtype">float</a></td>
+    <td>The maximum economic amount of the impact using the currency specified in the <strong>currency</strong> property. This value <strong>MUST</strong> be greater than zero. This value <strong>MUST</strong> be included if the <strong>min_amount</strong> property is included. If <strong>min_amount</strong> and <strong>max_amount</strong> properties are both defined, then <strong>max_amount</strong> value <strong>MUST</strong> be greater than or equal to the <strong>min_amount</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>min_amount</strong> (optional)</td>
+    <td><a href="#float" class="stixtype">float</a></td>
+    <td>The maximum economic amount of the impact using the currency specified in the <strong>currency</strong> property. This value <strong>MUST</strong> be greater than zero. This value <strong>MUST</strong> be included if the <strong>max_amount</strong> property is included. If <strong>min_amount</strong> and <strong>max_amount</strong> properties are both defined, then <strong>max_amount</strong> value <strong>MUST</strong> be greater than or equal to the <strong>min_amount</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>variety</strong> (required)</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>The variety of this economic impact. The value of this property <strong>SHOULD</strong> come from the <a href="#economic-impact-type-vocabulary" class="stixtype">economic-impact-type-ov</a> open vocabulary.</td>
+</tr>
+
+</table>
+
+### 4.7.7 Physical Impact Extension <a id="physical-impact-extension"></a>
+
+**Type Name:** physical-ext
+
+#### 4.7.7.1 Properties <a id="physical-impact-extension-properties"></a>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+
+  <tr>
+    <td><strong>asset_type</strong> (optional)</td>
+    <td><a href="#stix-open-vocabularies-and-enumerations" class="stixtype">open-vocab</a></td>
+    <td>The type of property or system that was affected by this impact. The value of this property <strong>SHOULD</strong> come from the <a href="#asset-type-vocabulary" class="stixtype">asset-type-ov</a> open vocabulary. This value <strong>MUST</strong> be included if the <strong>impact_type</strong> is not none . Otherwise, including an entry with an <strong>impact_type</strong> of none and no asset_type indicates that no physical damage was caused by the related incident.</td>
+</tr>
+
+  <tr>
+    <td><strong>impact_type</strong> (required)</td>
+    <td><a href="#physical-impact-enumeration" class="stixtype">physical-impact-enumeration</a></td>
+    <td>The type of physical impact that has occurred. The value of this property <strong>MUST</strong> come from the <a href="#physical-impact-enumeration" class="stixtype">physical-impact-enumeration</a> enumeration.</td>
+</tr>
+
+</table>
+
+### 4.7.8 Traceability Impact Extension <a id="traceability-impact-extension"></a>
+
+**Type Name:** traceability-ext
+
+#### 4.7.8.1 Properties <a id="traceability-impact-extension-properties"></a>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+
+  <tr>
+    <td><strong>traceability_impact</strong> (required)</td>
+    <td><a href="#traceability-enumeration" class="stixtype">traceability-enumeration</a></td>
+    <td>The impact on a system or organization’s ability to perform audits or provide non-repudiation. The value of this property <strong>MUST</strong> come from the <a href="#traceability-enumeration" class="stixtype">traceability-enumeration</a> enumeration.</td>
+</tr>
+
+</table>
+
+### 4.7.9 Relationships <a id="impact-relationships"></a>
+
+There are no relationships explicitly defined between the Impact object and other STIX Objects, other than those defined as common relationships (duplicate-of, derived-from, related-to, and the embedded relationships defined by the common SDO properties.)
+
+The reverse relationships section illustrates the relationships targeting this object type from another object type.
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th colspan='2'><span class='stixtr'>Embedded Relationships</span></th>
+  </tr>
+  <tr>
+    <td width="50%"><strong>created_by_ref</strong></td>
+    <td width="50%"><span class="stixtype">identifier</span> (of type <span class="stixtype">identity</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>event_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">event</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>sub_impact_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">impact</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>object_marking_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">marking-definition</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>superseded_by_ref</strong></td>
+    <td><span class="stixtype"><span class="stixtype">identifier</span> (of type <span class="stixtype">impact</span>)</td>
+  </tr>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td><span class='stixliteral'>led-to</span></td>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td>One incident led to another.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td><span class='stixliteral'>impacts</span></td>
+    <td><a class='stixtype' href='#identity'>identity</a>, <a class='stixtype' href='#infrastructure'>infrastructure</a></td>
+    <td>The incident has an impact on the victim or specific infrastructure.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td><span class='stixliteral'>attributed-to</span></td>
+    <td><a class='stixtype' href='#intrusion-set'>intrusion-set</a>, <a class='stixtype' href='#threat-actor'>threat-actor</a></td>
+    <td>The incident has been attributed to the intrusion set or threat actor.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td><span class='stixliteral'>targets</span></td>
+    <td><a class='stixtype' href='#identity'>identity</a>, <a class='stixtype' href='#infrastructure'>infrastructure</a></td>
+    <td>The incident targets the identity or infrastructure.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td><span class='stixliteral'>located-at</span></td>
+    <td><a class='stixtype' href='#location'>location</a></td>
+    <td>The incident occurred at a specific location.</td>
+  </tr>
+</table>
+  
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
+  </tr>
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>causes</span></td>
+    <td><a class='stixtype' href='#impact'>impact</a></td>
+    <td>An event causes an impact.</td>
+  </tr>
+</table>
+
+## 4.8 Incident <a id="incident"></a>
 
 **Type Name:** <span class="stixtype">incident</span>
 
-> NOTE: The Incident object in STIX 2.1 is a stub. It is included to support basic use cases but does not contain properties to represent metadata about incidents. Future STIX 2 releases will expand it to include these capabilities. It is suggested that it is used as an extension point for an Incident object defined using the extension facility described in [section 7.3](#extension-definition).
+Incident objects represent cases composed of <span class='stixtype'>events</span> and <span class='stixtype'>tasks</span> as well as actual or potential <span class='stixtype'>impacts</span>. An <span class='stixtype'>Incident</span> can be created prior to a formal determination that the incident has an impact as a way to logically track case work in an attempt to investigate events or lower level alerts.
 
-### 4.6.1 Properties <a id="incident-properties"></a>
+The Incident object should have sufficient properties to represent the current state of the investigation while serving as an anchor point to record both related activities and the impact to an organization.
+
+### 4.8.1 Properties <a id="incident-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -2817,7 +3627,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <th><span class='stixtr'>Incident Specific Properties</span></th>
   </tr>
   <tr>
-    <td><strong>name</strong>, <strong>description</strong></td>
+    <td><strong>criticality</strong>, <strong>description</strong>, <strong>detection_methods</strong>, <strong>determination</strong>, <strong>investigation_status</strong>, <strong>event_refs</strong>, <strong>impact_refs</strong>, <strong>name</strong>, <strong>recoverability</strong>, <strong>scores</strong>, <strong>task_refs</strong></td>
   </tr>
 </table>
 
@@ -2829,28 +3639,92 @@ Relationships are not restricted to those listed below. Relationships can be cre
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">incident</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name used to identify the Incident.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Incident, potentially including its purpose and its key characteristics.</td>
+  </tr>
+  <tbody>
+  <tr>
+    <td><strong>determination</strong> (required)</td>
+    <td><span class="stixtype"><a href="#incident-determination-enumeration">incident-determination-enum</a></span></td>
+    <td>A high-level determination on the status of this incident.
+    The value of this property <strong>SHOULD</strong> be <span class="stixliteral">suspected</span> until enough information is available to provide a well researched result.
+    Some automated tools may flag results as <span class="stixliteral">blocked</span> or <span class="stixliteral">low-value</span> automatically depending on the tool type or activity.
+    For example, a tool that blocks a series of phishing emails may create an incident with a <span class="stixliteral">blocked</span> determination automatically.
+    The values of this property <strong>MUST</strong> come from the <span class="stixtype"><a href="#incident-determination-enumeration">incident-determination-enum</a></span> enumeration.</td>
+  </tr>
+  <tr>
+    <td><strong>investigation_status</strong> (required)</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>The current status of the incident investigation.
+    The values of this property <strong>SHOULD</strong> come from the <span class="stixtype"><a href="#incident-investigation-vocabulary">incident-investigation-vocabulary</a></span> open vocabulary.</td>
+  </tr>
+  <tr>
+    <td><strong>criticality</strong> (optional)</td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
+    <td>The criticality of the incident.
+    If present, this value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#relationship-summary-table">Appendix B</a>.</td>
+  </tr>
+  <tr>
+    <td><strong>detection_methods</strong> (optional)</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>A list of strings corresponding to the methods used to detect the activity, e.g., commercial tool names, techniques associated with proprietary solutions, human review, external sources, or other methods.
+    These values <strong>SHOULD</strong> be selected from the <span class="stixtype"><a href="#detection-method-vocabulary">detection-method-ov</a></span> open vocabulary.</td>
+  </tr>
+  <tr>
+    <td><strong>event_refs</strong> (optional)</td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></td>
+    <td>A list of events tied to this incident.
+    It <strong>MUST</strong> contain references to one or more <span class="stixtype"><a href="#event">event</a></span> objects.
+    Events can be grouped into sequences based on the <strong>next_events_refs</strong> property of the relevant <span class="stixtype"><a href="#event">event</a></span> objects. Events that are the first in a sequence are not referenced by the <strong>next_event_refs</strong> property of any other <span class="stixtype"><a href="#event">event</a></span> object.</td>
+  </tr>
+  <tr>
+    <td><strong>impact_refs</strong> (optional)</td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></td>
+    <td>A list of the impacts of this incident.
+    All objects referenced in this list <strong>MUST</strong> be an <span class="stixtype"><a href="#impact">impact</a></span> object.</td>
+  </tr>
+  <tr>
+    <td><strong>incident_types</strong> (optional)</td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></td>
+    <td>A list of incident types of incident that occurred, if applicable.
+    The values of this property <strong>SHOULD</strong> come from the <span class="stixtype"><a href="#event-type-vocabulary">event-type-vocabulary</a></span> open vocabulary.</td>
+  </tr>
+  <tr>
+    <td><strong>recoverability</strong> (optional)</td>
+    <td><span class="stixtype"><a href="#recoverability-enumeration">recoverability-enum</a></span></td>
+    <td>The recoverability of this particular Incident with respect to feasibility and required time and resources.
+    The value of this property <strong>MUST</strong> come from the <span class="stixtype"><a href="#recoverability-enumeration">recoverability-enum</a></span>
+    enumeration.</td>
+  </tr>
+  <tr>
+    <td><strong>scores</strong> (optional)</td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype"><a href="#score">score</a></span></td>
+    <td>A list of scores from various automated or manual mechanisms along with optional descriptions.</td> 
+  </tr>
+  <tr>
+    <td><strong>task_refs</strong> (optional)</td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></td>
+    <td>A list of tasks tied to this incident.
+    It <strong>MUST</strong> contain references to one or more <span class="stixtype"><a href="#task">task</a></span> objects.
+    Tasks can be grouped into sequences based on the <strong>next_tasks_refs</strong> property of the relevant <span class="stixtype"><a href="#task">task</a></span>  objects. Tasks that are the first in a sequence are not referenced by the <strong>next_tasks_refs</strong> property of any other <span class="stixtype"><a href="#task">task</a></span> object.</td>
   </tr>
 </table>
 
-### 4.6.2 Relationships <a id="incident-relationships"></a>
+### 4.8.2 Relationships <a id="incident-relationships"></a>
 
 These are the relationships explicitly defined between the Incident object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
 Relationships are not restricted to those listed below. Relationships can be created between any objects using the <span class="stixliteral">related-to</span> relationship type or, as with open vocabularies, user-defined names.
-
-This table is left intentionally blank and will be fleshed out in a future release.
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -2861,8 +3735,20 @@ This table is left intentionally blank and will be fleshed out in a future relea
     <td width="50%"><span class="stixtype">identifier</span> (of type <span class="stixtype">identity</span>)</td>
   </tr>
   <tr>
+    <td><strong>event_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">event</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>impact_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">impact</span>)</td>
+  </tr>
+  <tr>
     <td><strong>object_marking_refs</strong></td>
     <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">marking-definition</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>task_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">task</span>)</td>
   </tr>
 </table>
 
@@ -2878,7 +3764,7 @@ This table is left intentionally blank and will be fleshed out in a future relea
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
@@ -2890,22 +3776,54 @@ This table is left intentionally blank and will be fleshed out in a future relea
   </tr>
 </table>
 
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
+  </tr>
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#campaign'>campaign</a></td>
+    <td><span class='stixliteral'>associated-with</span></td>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td>The incident is associated with the campaign.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>contact-for</span></td>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td>The identity should be considered a point of contact for an incident. This relationship is different from the <strong>created_by_ref</strong> property, which is the creator of the STIX Incident object. Additionally, this can be used to supplement the <strong>created_by_ref</strong> property in cases where external authorship would prevent using it for this purpose.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#indicator'>indicator</a></td>
+    <td><span class='stixliteral'>detected</span></td>
+    <td><a class='stixtype' href='#incident'>incident</a></td>
+    <td>The indicator detected the incident.</td>
+  </tr>
+</table>
+
 **Example**
 
 ```JSON
 {
   "type": "incident",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "incident--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:48.000Z",
   "modified": "2016-04-06T20:03:48.000Z",
   "name": "Incident 43",
+  "determination": "suspected",
+  "investigation_status": "ongoing",
   "description": "This incident addresses APT 28 ..."
 }
 ```
 
-## 4.7 Indicator <a id="indicator"></a>
+## 4.9 Indicator <a id="indicator"></a>
 
 **Type Name:** <span class="stixtype">indicator</span>
 
@@ -2915,7 +3833,7 @@ The Indicator SDO contains a simple textual description, the Kill Chain Phases t
 
 Relationships from the Indicator can describe the malicious or suspicious behavior that it directly detects (Malware, Tool, and Attack Pattern). In addition, it may also imply the presence of a Campaigns, Intrusion Sets, and Threat Actors, etc.
 
-### 4.7.1 Properties <a id="indicator-properties"></a>
+### 4.9.1 Properties <a id="indicator-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -2952,48 +3870,48 @@ Relationships from the Indicator can describe the malicious or suspicious behavi
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">indicator</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>A name used to identify the Indicator.<br><br>Producers <strong>SHOULD</strong> provide this property to help products and analysts understand what this Indicator actually does.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>A name used to identify the Indicator.<br /><br />Producers <strong>SHOULD</strong> provide this property to help products and analysts understand what this Indicator actually does.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>A description that provides more details and context about the Indicator, potentially including its purpose and its key characteristics.<br><br>Producers <strong>SHOULD</strong> provide this property to help products and analysts understand what this Indicator actually does.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>A description that provides more details and context about the Indicator, potentially including its purpose and its key characteristics.<br /><br />Producers <strong>SHOULD</strong> provide this property to help products and analysts understand what this Indicator actually does.</td>
   </tr>
   <tr>
     <td><strong>indicator_types</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>A set of categorizations for this indicator.<br><br>The values for this property SHOULD come from the <a href="#indicator-type-vocabulary"><span class="stixvocab">indicator-type-ov</span></a> open vocabulary.</td>
+    <td>A set of categorizations for this indicator.<br /><br />The values for this property SHOULD come from the <a href="#indicator-type-vocabulary"><span class="stixvocab">indicator-type-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>pattern</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The detection pattern for this Indicator <strong>MAY</strong> be expressed as a STIX Pattern as specified in <a href="#stix-patterning">section 9</a> or another appropriate language such as SNORT, YARA, etc.</td>
   </tr>
   <tr>
     <td><strong>pattern_type</strong> (required)</td>
-    <td><span class="stixtype">open-vocab</span></td>
-    <td>The pattern language used in this indicator.<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#pattern-type-vocabulary"><span class="stixvocab">pattern-type-ov</span></a> open vocabulary.<br><br>The value of this property MUST match the type of pattern data included in the pattern property.</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>The pattern language used in this indicator.<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#pattern-type-vocabulary"><span class="stixvocab">pattern-type-ov</span></a> open vocabulary.<br /><br />The value of this property MUST match the type of pattern data included in the pattern property.</td>
   </tr>
   <tr>
     <td><strong>pattern_version</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>The version of the pattern language that is used for the data in the <strong>pattern</strong> property which <strong>MUST</strong> match the type of pattern data included in the <strong>pattern</strong> property.<br><br>For patterns that do not have a formal specification, the build or code version that the pattern is known to work with <strong>SHOULD</strong> be used.<br><br>For the STIX Pattern language, the default value is determined by the specification version of the object.<br><br>For other languages, the default value <strong>SHOULD</strong> be the latest version of the patterning language at the time of this object’s creation.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>The version of the pattern language that is used for the data in the <strong>pattern</strong> property which <strong>MUST</strong> match the type of pattern data included in the <strong>pattern</strong> property.<br /><br />For patterns that do not have a formal specification, the build or code version that the pattern is known to work with <strong>SHOULD</strong> be used.<br /><br />For the STIX Pattern language, the default value is determined by the specification version of the object.<br /><br />For other languages, the default value <strong>SHOULD</strong> be the latest version of the patterning language at the time of this object’s creation.</td>
   </tr>
   <tr>
     <td><strong>valid_from</strong> (required)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>The time from which this Indicator is considered a valid indicator of the behaviors it is related or represents.</td>
   </tr>
   <tr>
     <td><strong>valid_until</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The time at which this Indicator should no longer be considered a valid indicator of the behaviors it is related to or represents.<br><br>If the <strong>valid_until</strong> property is omitted, then there is no constraint on the latest time for which the Indicator is valid.<br><br>This <strong>MUST</strong> be greater than the timestamp in the <strong>valid_from</strong> property.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The time at which this Indicator should no longer be considered a valid indicator of the behaviors it is related to or represents.<br /><br />If the <strong>valid_until</strong> property is omitted, then there is no constraint on the latest time for which the Indicator is valid.<br /><br />This <strong>MUST</strong> be greater than the timestamp in the <strong>valid_from</strong> property.</td>
   </tr>
   <tr>
     <td><strong>kill_chain_phases</strong> (optional)</td>
@@ -3002,7 +3920,7 @@ Relationships from the Indicator can describe the malicious or suspicious behavi
   </tr>
 </table>
 
-### 4.7.2 Relationships <a id="indicator-relationships"></a>
+### 4.9.2 Relationships <a id="indicator-relationships"></a>
 
 These are the relationships explicitly defined between the Indicator object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -3034,21 +3952,21 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class='stixtype'>indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
     <td><span class='stixliteral'>indicates</span></td>
     <td><span class='stixtype'>attack-pattern</span>, <span class='stixtype'>campaign</span>, <span class='stixtype'>infrastructure</span>, <span class='stixtype'>intrusion-set</span>, <span class='stixtype'>malware</span>, <span class='stixtype'>threat-actor</span>, <span class='stixtype'>tool</span></td>
-    <td>This Relationship describes that the Indicator can detect evidence of the related Attack Pattern, Campaign, Infrastructure, Intrusion Set, Malware, Threat Actor, or Tool. This evidence may not be direct: for example, the Indicator may detect secondary evidence of the Campaign, such as malware or behavior commonly used by that Campaign.<br><br>For example, an <span class='stixliteral'>indicates</span> Relationship from an Indicator to a Campaign object representing Glass Gazelle means that the Indicator is capable of detecting evidence of Glass Gazelle, such as command and control IPs commonly used by that Campaign.</td>
+    <td>This Relationship describes that the Indicator can detect evidence of the related Attack Pattern, Campaign, Infrastructure, Intrusion Set, Malware, Threat Actor, or Tool. This evidence may not be direct: for example, the Indicator may detect secondary evidence of the Campaign, such as malware or behavior commonly used by that Campaign.<br /><br />For example, an <span class='stixliteral'>indicates</span> Relationship from an Indicator to a Campaign object representing Glass Gazelle means that the Indicator is capable of detecting evidence of Glass Gazelle, such as command and control IPs commonly used by that Campaign.</td>
   </tr>
   <tr>
-    <td><span class='stixtype'>indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
     <td><span class='stixliteral'>based-on</span></td>
-    <td><span class='stixtype'>observed-data</span></td>
-    <td>This relationship describes that the indicator was created based on information from an <span class='stixtype'>observed-data</span> object.<br><br>For example, an indicator may be created based upon the observation of a spearphishing email or created based upon analysis performed on a piece of malware or adversary infrastructure.</td>
+    <td><a class="stixtype" href="#observed-data">observed-data</a></td>
+    <td>This relationship describes that the indicator was created based on information from an <span class='stixtype'>observed-data</span> object.<br /><br />For example, an indicator may be created based upon the observation of a spearphishing email or created based upon analysis performed on a piece of malware or adversary infrastructure.</td>
   </tr>
 </table>
 
@@ -3057,8 +3975,8 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
   </tr>
   <tr>
-    <td width="20%"><span class='stixtype'>course-of-action</td>
-    <td width="20%""><span class='stixliteral'>investigates</span>, <span class='stixliteral'>mitigates</span></td>
+    <td width="20%"><span class='stixtype'>course-of-action</span></td>
+    <td width="20%"><span class='stixliteral'>investigates</span>, <span class='stixliteral'>mitigates</span></td>
     <td width="20%"><span class='stixtype'>indicastor</span></td>
     <td>See forward relationship for definition.</td>
   </tr>
@@ -3072,7 +3990,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 [
   {
     "type": "indicator",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "indicator--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:03:48.000Z",
@@ -3086,7 +4004,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--44298a74-ba52-4f0c-87a3-1824e67d7fad",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:06:37.000Z",
@@ -3097,7 +4015,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--31b940d4-6f7f-459a-80ea-9c1f17b5891b",
     "is_family": true,
     "created": "2016-04-06T20:07:09.000Z",
@@ -3109,14 +4027,14 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ]
 ```
 
-## 4.8 Infrastructure <a id="infrastructure"></a>
+## 4.10 Infrastructure <a id="infrastructure"></a>
 
 **Type Name:** <span class="stixtype">infrastructure</span>
 
 The Infrastructure SDO represents a type of TTP and describes any systems, software services and any associated physical or virtual resources intended to support some purpose (e.g., C2 servers used as part of an attack, device or server that are part of defense, database servers targeted by an attack, etc.).
 While elements of an attack can be represented by other SDOs or SCOs, the Infrastructure SDO represents a named group of related data that constitutes the infrastructure.
 
-### 4.8.1 Properties <a id="infrastructure-properties"></a>
+### 4.10.1 Properties <a id="infrastructure-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -3153,23 +4071,23 @@ While elements of an attack can be represented by other SDOs or SCOs, the Infras
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">infrastructure</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name or characterizing text used to identify the Infrastructure.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Infrastructure, potentially including its purpose, how it is being used, how it relates to other intelligence activities captured in related objects, and its key characteristics.</td>
   </tr>
   <tr>
     <td><strong>infrastructure_types</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>The type of infrastructure being described.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#infrastructure-type-vocabulary"><span class="stixvocab">infrastructure-type-ov</span></a> open vocabulary.</td>
+    <td>The type of infrastructure being described.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="#infrastructure-type-vocabulary"><span class="stixvocab">infrastructure-type-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>aliases</strong> (optional)</td>
@@ -3183,17 +4101,17 @@ While elements of an attack can be represented by other SDOs or SCOs, the Infras
   </tr>
   <tr>
     <td><strong>first_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>The time that this Infrastructure was first seen performing malicious activities.</td>
   </tr>
   <tr>
     <td><strong>last_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The time that this Infrastructure was last seen performing malicious activities.<br><br>If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The time that this Infrastructure was last seen performing malicious activities.<br /><br />If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
   </tr>
 </table>
 
-### 4.8.2 Relationships <a id="infrastructure-relationships"></a>
+### 4.10.2 Relationships <a id="infrastructure-relationships"></a>
 
 These are the relationships explicitly defined between the Infrastructure object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -3225,56 +4143,56 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">communicates-with</span></td>
     <td><span class="stixtype">infrastructure</span>, <span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span>, <span class="stixtype">domain-name</span>, <span class="stixtype">url</span></td>
-    <td>This Relationship documents that this infrastructure instance communicates with the defined network addressable resource.<br><br>For example, a botnet could communicate with a crypto-currency mining pool. This does not mean that the pool is a part of this infrastructure.</td>
+    <td>This Relationship documents that this infrastructure instance communicates with the defined network addressable resource.<br /><br />For example, a botnet could communicate with a crypto-currency mining pool. This does not mean that the pool is a part of this infrastructure.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">consists-of</span></td>
-    <td><span class="stixtype">infrastructure</span>, <span class="stixtype">observed-data</span>, <span class="stixtype">&lt;All <em>STIX Cyber-observable Objects</em>&gt</span></td>
-    <td>This Relationship documents the objects that are used to make up an infrastructure instance, such as <span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span>, <span class="stixtype">domain-name</span>, <span class="stixtype">url</span>. An infrastructure instance consists of zero or more objects.<br><br>While not all SCO types will make sense as infrastructure, allowing any type of SCO prevents artificially restricting what could be used.</td>
+    <td><span class="stixtype">infrastructure</span>, <span class="stixtype">observed-data</span>, <span class="stixtype">&lt;All <em>STIX Cyber-observable Objects</em>&gt;</span></td>
+    <td>This Relationship documents the objects that are used to make up an infrastructure instance, such as <span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span>, <span class="stixtype">domain-name</span>, <span class="stixtype">url</span>. An infrastructure instance consists of zero or more objects.<br /><br />While not all SCO types will make sense as infrastructure, allowing any type of SCO prevents artificially restricting what could be used.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">controls</span></td>
     <td><span class="stixtype">infrastructure</span>, <span class="stixtype">malware</span></td>
     <td>This Relationship describes that this infrastructure controls some other infrastructure or a malware instance (or family).</td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">delivers</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>This Relationship describes that this infrastructure is used to actively deliver a malware instance (or family).</td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">has</span></td>
-    <td><span class="stixtype">vulnerability</span></td>
-    <td>This Relationship describes that this specific Infrastructure has this specific Vulnerability.<br><br>For example, a web server may not have been patched and currently is impacted by a CVE.</td>
+    <td><a class="stixtype" href="#vulnerability">vulnerability</a></td>
+    <td>This Relationship describes that this specific Infrastructure has this specific Vulnerability.<br /><br />For example, a web server may not have been patched and currently is impacted by a CVE.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">hosts</span></td>
     <td><span class="stixtype">tool</span>, <span class="stixtype">malware</span></td>
-    <td>This Relationship describes that this infrastructure has a tool running on it or is used to passively host the tool / malware.<br><br>For example, an SSH server may be hosted on a piece of infrastructure.</td>
+    <td>This Relationship describes that this infrastructure has a tool running on it or is used to passively host the tool / malware.<br /><br />For example, an SSH server may be hosted on a piece of infrastructure.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">located-at</span></td>
-    <td><span class="stixtype">location</span></td>
-    <td>This Relationship describes that the infrastructure originates from the related location.<br><br>For example, a <span class="stixliteral">located-at</span> relationship from the Red Orca C2 infrastructure to a Location representing North America means that the Red Orca C2 Infrastructure appears to originate from or is located in North America.</td>
+    <td><a class="stixtype" href="#location">location</a></td>
+    <td>This Relationship describes that the infrastructure originates from the related location.<br /><br />For example, a <span class="stixliteral">located-at</span> relationship from the Red Orca C2 infrastructure to a Location representing North America means that the Red Orca C2 Infrastructure appears to originate from or is located in North America.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">uses</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>This Relationship describes that this infrastructure uses this other infrastructure to achieve its objectives.</td>
   </tr>
 </table>
@@ -3290,39 +4208,39 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">beacons-to</span>, <span class="stixliteral">exfiltrates-to</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
     <td><span class="stixtype">intrusion-set</span>, <span class="stixtype">threat-actor</span></td>
     <td><span class="stixliteral">hosts</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
     <td><span class="stixliteral">indicates</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
     <td><span class="stixtype">intrusion-set</span>, <span class="stixtype">threat-actor</span></td>
     <td><span class="stixliteral">owns</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
     <td><span class="stixtype">malware</span>, <span class="stixtype">tool</span></td>
     <td><span class="stixliteral">targets</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
     <td><span class="stixtype">campaign</span>, <span class="stixtype">intrusion-set</span>, <span class="stixtype">malware</span>, <span class="stixtype">threat-actor</span>, <span class="stixtype">tool</span></td>
     <td><span class="stixliteral">uses</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
 </table>
@@ -3337,7 +4255,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 [
   {
     "type":"infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id":"infrastructure--38c47d93-d984-4fd9-b87b-d69d0841628d",
     "created":"2016-05-07T11:22:30.000Z",
     "modified":"2016-05-07T11:22:30.000Z",
@@ -3346,7 +4264,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--7aebe2f0-28d6-48a2-9c3e-b0aaa60266ed",
     "created": "2016-05-09T08:17:27.000Z",
     "modified": "2016-05-09T08:17:27.000Z",
@@ -3356,7 +4274,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--16f4f3f9-1b68-4abb-bb66-7639d49f1e30",
     "created": "2016-05-08T14:31:09.000Z",
     "modified": "2016-05-08T14:31:09.000Z",
@@ -3368,7 +4286,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--7aebe2f0-28d6-48a2-9c3e-b0aaa60266ef",
     "created": "2016-05-09T08:17:27.000Z",
     "modified": "2016-05-09T08:17:27.000Z",
@@ -3378,7 +4296,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--b82b2819-3b86-4bd5-afb3-fa36cfbc3f18",
     "created": "2016-05-09T08:17:27.000Z",
     "modified": "2016-05-09T08:17:27.000Z",
@@ -3388,20 +4306,20 @@ Relationships are not restricted to those listed below. Relationships can be cre
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
     "value": "198.51.100.3"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--055987b7-7d94-5326-8e20-c3dad8241976",
     "value": "198.52.200.4"
   }
 ]
 ```
 
-## 4.9 Intrusion Set <a id="intrusion-set"></a>
+## 4.11 Intrusion Set <a id="intrusion-set"></a>
 
 **Type Name:** <span class="stixtype">intrusion-set</span>
 
@@ -3411,7 +4329,7 @@ Where a Campaign is a set of attacks over a period of time against a specific se
 
 While sometimes an Intrusion Set is not active, or changes focus, it is usually difficult to know if it has truly disappeared or ended. Analysts may have varying level of fidelity on attributing an Intrusion Set back to Threat Actors.
 
-### 4.9.1 Properties <a id="intrusion-set-properties"></a>
+### 4.11.1 Properties <a id="intrusion-set-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -3448,17 +4366,17 @@ While sometimes an Intrusion Set is not active, or changes focus, it is usually 
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">intrusion-set</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name or characterizing text used to identify the Intrusion Set.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Intrusion Set, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
@@ -3468,37 +4386,37 @@ While sometimes an Intrusion Set is not active, or changes focus, it is usually 
   </tr>
   <tr>
     <td><strong>first_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The time that this Intrusion Set was first seen.<br><br>A summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are earlier than the first seen timestamp, the object may be updated to account for the new data.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The time that this Intrusion Set was first seen.<br /><br />A summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are earlier than the first seen timestamp, the object may be updated to account for the new data.</td>
   </tr>
   <tr>
     <td><strong>last_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The time that this Intrusion Set was last seen.<br><br>This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are later than the last seen timestamp, the object may be updated to account for the new data.<br><br>If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The time that this Intrusion Set was last seen.<br /><br />This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are later than the last seen timestamp, the object may be updated to account for the new data.<br /><br />If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
   </tr>
   <tr>
     <td><strong>goals</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">string</span></span></td>
-    <td>The high-level goals of this Intrusion Set, namely, <em>what</em> are they trying to do. For example, they may be motivated by personal gain, but their goal is to steal credit card numbers. To do this, they may execute specific Campaigns that have detailed objectives like compromising point of sale systems at a large retailer.<br><br>Another example: to gain information about latest merger and IPO information from ACME Bank.</td>
+    <td>The high-level goals of this Intrusion Set, namely, <em>what</em> are they trying to do. For example, they may be motivated by personal gain, but their goal is to steal credit card numbers. To do this, they may execute specific Campaigns that have detailed objectives like compromising point of sale systems at a large retailer.<br /><br />Another example: to gain information about latest merger and IPO information from ACME Bank.</td>
   </tr>
   <tr>
     <td><strong>resource_level</strong> (optional)</td>
-    <td><span class="stixtype">open-vocab</span></td>
-    <td>This property specifies the organizational level at which this Intrusion Set typically works, which in turn determines the resources available to this Intrusion Set for use in an attack.<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#attack-resource-level-vocabulary"><span class="stixvocab">attack-resource-level-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>This property specifies the organizational level at which this Intrusion Set typically works, which in turn determines the resources available to this Intrusion Set for use in an attack.<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#attack-resource-level-vocabulary"><span class="stixvocab">attack-resource-level-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>primary_motivation</strong> (optional)</td>
-    <td><span class="stixtype">open-vocab</span></td>
-    <td>The primary reason, motivation, or purpose behind this Intrusion Set. The motivation is <em>why</em> the Intrusion Set wishes to achieve the goal (what they are trying to achieve).<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#attack-motivation-vocabulary"><span class="stixvocab">attack-motivation-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>The primary reason, motivation, or purpose behind this Intrusion Set. The motivation is <em>why</em> the Intrusion Set wishes to achieve the goal (what they are trying to achieve).<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#attack-motivation-vocabulary"><span class="stixvocab">attack-motivation-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>secondary_motivations</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>The secondary reasons, motivations, or purposes behind this Intrusion Set. These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. The position in the list has no significance.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#attack-motivation-vocabulary"><span class="stixvocab">attack-motivation-ov</span></a> open vocabulary.</td>
+    <td>The secondary reasons, motivations, or purposes behind this Intrusion Set. These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. The position in the list has no significance.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="#attack-motivation-vocabulary"><span class="stixvocab">attack-motivation-ov</span></a> open vocabulary.</td>
   </tr>
 </table>
 
-### 4.9.2 Relationships <a id="intrusion-set-relationships"></a>
+### 4.11.2 Relationships <a id="intrusion-set-relationships"></a>
 
 These are the relationships explicitly defined between the Intrusion Set object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -3530,45 +4448,45 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">attributed-to</span></td>
-    <td><span class="stixtype">threat-actor</span></td>
-    <td>This Relationship describes that the related Threat Actor is involved in carrying out the Intrusion Set.<br><br>For example, an <span class="stixliteral">attributed-to</span> Relationship from the Red Orca Intrusion Set to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Intrusion Set.</td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
+    <td>This Relationship describes that the related Threat Actor is involved in carrying out the Intrusion Set.<br /><br />For example, an <span class="stixliteral">attributed-to</span> Relationship from the Red Orca Intrusion Set to the Urban Fowl Threat Actor means that the actor carried out or was involved in some of the activity described by the Intrusion Set.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">compromises</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>This Relationship describes that the Intrusion Set compromises the related Infrastructure.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">hosts</span>, <span class="stixliteral">owns</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>This Relationship describes that the Intrusion Set hosts or owns the related Infrastructure (e.g. an actor that rents botnets to other threat actors).</td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">originates-from</span></td>
-    <td><span class="stixtype">location</span></td>
-    <td>This Relationship describes that the Intrusion Set originates from the related location and <strong>SHOULD NOT</strong> be used to define attribution.<br><br>For example, an <span class="stixliteral">originates-from</span> relationship from the Red Orca Intrusion Set to a Location representing North America means that the Red Orca Intrusion Set appears to originate from or is located in North America.</td>
+    <td><a class="stixtype" href="#location">location</a></td>
+    <td>This Relationship describes that the Intrusion Set originates from the related location and <strong>SHOULD NOT</strong> be used to define attribution.<br /><br />For example, an <span class="stixliteral">originates-from</span> relationship from the Red Orca Intrusion Set to a Location representing North America means that the Red Orca Intrusion Set appears to originate from or is located in North America.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">targets</span></td>
     <td><span class="stixtype">identity</span>, <span class="stixtype">location</span>, <span class="stixtype">vulnerability</span></td>
-    <td>This Relationship describes that the Intrusion Set uses exploits of the related Vulnerability or targets the type of victims described by the related Identity or Location.<br><br>For example, a <span class="stixliteral">targets</span> Relationship from the Red Orca Intrusion Set to a Vulnerability in a blogging platform indicates that attacks performed as part of Red Orca often exploit that Vulnerability.<br><br>Similarly, a <span class="stixliteral">targets</span> Relationship from the Red Orca Intrusion Set to an Identity describing the energy sector in the United States means that the Intrusion Set typically carries out attacks against targets in that sector.</td>
+    <td>This Relationship describes that the Intrusion Set uses exploits of the related Vulnerability or targets the type of victims described by the related Identity or Location.<br /><br />For example, a <span class="stixliteral">targets</span> Relationship from the Red Orca Intrusion Set to a Vulnerability in a blogging platform indicates that attacks performed as part of Red Orca often exploit that Vulnerability.<br /><br />Similarly, a <span class="stixliteral">targets</span> Relationship from the Red Orca Intrusion Set to an Identity describing the energy sector in the United States means that the Intrusion Set typically carries out attacks against targets in that sector.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">uses</span></td>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">malware</span>, <span class="stixtype">tool</span></td>
-    <td>This Relationship describes that attacks carried out as part of the Intrusion Set typically use the related Attack Pattern, Infrastructure, Malware, or Tool.<br><br>For example, a <span class="stixliteral">uses</span> Relationship from the Red Orca Intrusion Set to the xInject Malware indicates that xInject is often used during attacks attributed to that Intrusion Set.</td>
+    <td>This Relationship describes that attacks carried out as part of the Intrusion Set typically use the related Attack Pattern, Infrastructure, Malware, or Tool.<br /><br />For example, a <span class="stixliteral">uses</span> Relationship from the Red Orca Intrusion Set to the xInject Malware indicates that xInject is often used during attacks attributed to that Intrusion Set.</td>
   </tr>
 </table>
 
@@ -3583,15 +4501,15 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">authored-by</span></td>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
     <td><span class="stixliteral">indicates</span></td>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
 </table>
@@ -3601,7 +4519,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "intrusion-set",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "intrusion-set--4e78f46f-a023-4e5f-bc24-71b3ca22ec29",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:48.000Z",
@@ -3613,7 +4531,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.10 Location <a id="location"></a>
+## 4.12 Location <a id="location"></a>
 
 **Type Name:** <span class="stixtype">location</span>
 
@@ -3633,7 +4551,7 @@ When a combination of properties is provided (e.g. a **region** and a **latitude
 
 If precision is specified, then the datum for **latitude** and **longitude** **MUST** be [WGS 84](#wgs84). Organizations specifying a designated location using **latitude** and **longitude** **SHOULD** specify the precision which is appropriate for the scope of the location being identified. The scope is defined by the boundary as outlined by the precision around the coordinates.
 
-### 4.10.1 Properties <a id="location-properties"></a>
+### 4.12.1 Properties <a id="location-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -3670,67 +4588,67 @@ If precision is specified, then the datum for **latitude** and **longitude** **M
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">location</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name used to identify the Location.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A textual description of the Location.</td>
   </tr>
   <tr>
     <td><strong>latitude</strong> (optional)</td>
-    <td><span class="stixtype">float</span></td>
-    <td>The latitude of the Location in decimal degrees. Positive numbers describe latitudes north of the equator, and negative numbers describe latitudes south of the equator. The value of this property <strong>MUST</strong> be between -90.0 and 90.0, inclusive.<br><br>If the <strong>longitude</strong> property is present, this property <strong>MUST</strong> be present.</td>
+    <td><a class="stixtype" href="#float">float</a></td>
+    <td>The latitude of the Location in decimal degrees. Positive numbers describe latitudes north of the equator, and negative numbers describe latitudes south of the equator. The value of this property <strong>MUST</strong> be between -90.0 and 90.0, inclusive.<br /><br />If the <strong>longitude</strong> property is present, this property <strong>MUST</strong> be present.</td>
   </tr>
   <tr>
     <td><strong>longitude</strong> (optional)</td>
-    <td><span class="stixtype">float</span></td>
-    <td>The longitude of the Location in decimal degrees. Positive numbers describe longitudes east of the prime meridian and negative numbers describe longitudes west of the prime meridian. The value of this property <strong>MUST</strong> be between -180.0 and 180.0, inclusive.<br><br>If the <strong>latitude</strong> property is present, this property <strong>MUST</strong> be present.</td>
+    <td><a class="stixtype" href="#float">float</a></td>
+    <td>The longitude of the Location in decimal degrees. Positive numbers describe longitudes east of the prime meridian and negative numbers describe longitudes west of the prime meridian. The value of this property <strong>MUST</strong> be between -180.0 and 180.0, inclusive.<br /><br />If the <strong>latitude</strong> property is present, this property <strong>MUST</strong> be present.</td>
   </tr>
   <tr>
     <td><strong>precision</strong> (optional)</td>
-    <td><span class="stixtype">float</span></td>
-    <td>Defines the precision of the coordinates specified by the <strong>latitude</strong> and <strong>longitude</strong> properties. This is measured in meters. The actual Location may be anywhere up to <strong>precision</strong> meters from the defined point.<br><br>If this property is not present, then the precision is unspecified.<br><br>If this property is present, the <strong>latitude</strong> and <strong>longitude</strong> properties <strong>MUST</strong> be present.</td>
+    <td><a class="stixtype" href="#float">float</a></td>
+    <td>Defines the precision of the coordinates specified by the <strong>latitude</strong> and <strong>longitude</strong> properties. This is measured in meters. The actual Location may be anywhere up to <strong>precision</strong> meters from the defined point.<br /><br />If this property is not present, then the precision is unspecified.<br /><br />If this property is present, the <strong>latitude</strong> and <strong>longitude</strong> properties <strong>MUST</strong> be present.</td>
   </tr>
   <tr>
     <td><strong>region</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">open-vocab</span></span></td>
-    <td>The region that this Location describes.<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#region-vocabulary"><span class="stixvocab">region-ov</span></a> open vocabulary.</td>
+    <td>The region that this Location describes.<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#region-vocabulary"><span class="stixvocab">region-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>country</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The country that this Location describes. This property <strong>SHOULD</strong> contain a valid ISO 3166-1 ALPHA-2 Code [<a href="#iso3166-1">ISO3166-1</a>].</td>
   </tr>
   <tr>
     <td><strong>administrative_area</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>The state, province, or other sub-national administrative area that this Location describes.<br><br>This property SHOULD contain a valid ISO 3166-2 Code [<a href="#iso3166-2">ISO3166-2</a>].</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>The state, province, or other sub-national administrative area that this Location describes.<br /><br />This property SHOULD contain a valid ISO 3166-2 Code [<a href="#iso3166-2">ISO3166-2</a>].</td>
   </tr>
   <tr>
     <td><strong>city</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The city that this Location describes.</td>
   </tr>
   <tr>
     <td><strong>street_address</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The street address that this Location describes. This property includes all aspects or parts of the street address. For example, some addresses may have multiple lines including a mailstop or apartment number.</td>
   </tr>
   <tr>
     <td><strong>postal_code</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The postal code for the Location.</td>
   </tr>
 </table>
 
-### 4.10.2 Relationships <a id="location-relationships"></a>
+### 4.12.2 Relationships <a id="location-relationships"></a>
 
 These are the relationships explicitly defined between the Location object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -3762,7 +4680,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
@@ -3787,13 +4705,13 @@ Relationships are not restricted to those listed below. Relationships can be cre
   <tr>
     <td><span class="stixtype">campaign</span>, <span class="stixtype">intrusion-set</span>, <span class="stixtype">malware</span></td>
     <td><span class="stixliteral">originates-from</span></td>
-    <td><span class="stixtype">location</span></td>
+    <td><a class="stixtype" href="#location">location</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">campaign</span>, <span class="stixtype">intrusion-set</span>, <span class="stixtype">malware</span>, <span class="stixtype">threat-actor</span>, <span class="stixtype">tool</span></td>
     <td><span class="stixliteral">targets</span></td>
-    <td><span class="stixtype">location</span></td>
+    <td><a class="stixtype" href="#location">location</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
 </table>
@@ -3804,7 +4722,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   [
     {
     "type": "location",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "location--a6e9345f-5a15-4c29-8bb3-7dcc5d168d64",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:03:00.000Z",
@@ -3813,7 +4731,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   }
   {
     "type": "location",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "location--a6e9345f-5a15-4c29-8bb3-7dcc5d168d64",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:03:00.000Z",
@@ -3825,7 +4743,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   }
   {
     "type": "location",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "location--a6e9345f-5a15-4c29-8bb3-7dcc5d168d64",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:03:00.000Z",
@@ -3836,7 +4754,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ]
 ```
 
-## 4.11 Malware <a id="malware"></a>
+## 4.13 Malware <a id="malware"></a>
 
 **Type Name:** <span class="stixtype">malware</span>
 
@@ -3848,7 +4766,7 @@ The Indicator SDO provides intelligence producers with the ability to define, us
 
 To minimize the risk of a consumer compromising their system in parsing malware samples, producers **SHOULD** consider sharing defanged content (archive and password-protected samples) instead of raw, base64-encoded malware samples.
 
-### 4.11.1 Properties <a id="malware-properties"></a>
+### 4.13.1 Properties <a id="malware-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -3885,27 +4803,27 @@ To minimize the risk of a consumer compromising their system in parsing malware 
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">malware</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name used to identify the Malware instance or family, as specified by the producer of the SDO. For a malware family the name <strong>MUST</strong> be defined. If a name for a malware instance is not available, the SHA-256 hash value or sample’s filename <strong>MAY</strong> be used instead.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Malware instance or family, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
     <td><strong>malware_types</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>A set of categorizations for the malware being described.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="malware-type-vocabulary"><span class="stixvocab">malware-type-ov</span></a> open vocabulary.</td>
+    <td>A set of categorizations for the malware being described.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="malware-type-vocabulary"><span class="stixvocab">malware-type-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>is_family</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Whether the object represents a malware family (if <span class="stixliteral">true</span>) or a malware instance (if <span class="stixliteral">false</span>).</td>
   </tr>
   <tr>
@@ -3920,42 +4838,42 @@ To minimize the risk of a consumer compromising their system in parsing malware 
   </tr>
   <tr>
     <td><strong>first_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The time that the malware instance or family was first seen.<br><br>This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are earlier than the first seen timestamp, the object may be updated to account for the new data.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The time that the malware instance or family was first seen.<br /><br />This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are earlier than the first seen timestamp, the object may be updated to account for the new data.</td>
   </tr>
   <tr>
     <td><strong>last_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The time that the malware family or malware instance was last seen.<br><br>This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are later than the <strong>last_seen</strong> timestamp, the object may be updated to account for the new data.<br><br>If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The time that the malware family or malware instance was last seen.<br /><br />This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are later than the <strong>last_seen</strong> timestamp, the object may be updated to account for the new data.<br /><br />If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
   </tr>
   <tr>
     <td><strong>operating_system_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></td>
-    <td>The operating systems that the malware family or malware instance is executable on. This applies to virtualized operating systems as well as those running on bare metal.<br><br>The value of this property <strong>MUST</strong> be the <span class="stixtype">identifier</span> for a SCO <span class="stixtype">software</span> object.</td>
+    <td>The operating systems that the malware family or malware instance is executable on. This applies to virtualized operating systems as well as those running on bare metal.<br /><br />The value of this property <strong>MUST</strong> be the <span class="stixtype">identifier</span> for a SCO <span class="stixtype">software</span> object.</td>
   </tr>
   <tr>
     <td><strong>architecture_execution_envs</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></td>
-    <td>The processor architectures (e.g., x86, ARM, etc.) that the malware instance or family is executable on.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#processor-architecture-vocabulary"><span class="stixvocab">processor-architecture-ov</span></a> open vocabulary.</td>
+    <td>The processor architectures (e.g., x86, ARM, etc.) that the malware instance or family is executable on.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="#processor-architecture-vocabulary"><span class="stixvocab">processor-architecture-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>implementation_languages</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></td>
-    <td>The programming language(s) used to implement the malware instance or family.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#implementation-language-vocabulary"><span class="stixvocab">implementation-language-ov</span></a> open vocabulary.</td>
+    <td>The programming language(s) used to implement the malware instance or family.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="#implementation-language-vocabulary"><span class="stixvocab">implementation-language-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>capabilities</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></td>
-    <td>Any of the capabilities identified for the malware instance or family.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#malware-capabilities-vocabulary"><span class="stixvocab">malware-capabilities-ov</span></a> open vocabulary.</td>
+    <td>Any of the capabilities identified for the malware instance or family.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="#malware-capabilities-vocabulary"><span class="stixvocab">malware-capabilities-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>sample_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></td>
-    <td>The <strong>sample_refs</strong> property specifies a list of <span class="stixtype">identifiers</span> of the SCO <span class="stixtype">file</span> or <span class="stixtype">artifact</span> objects associated with this malware instance(s) or family.<br><br>If <strong>is_family</strong> is <span class="stixliteral">false</span>, then all samples listed in <strong>sample_refs MUST</strong> refer to the same binary data.</td>
+    <td>The <strong>sample_refs</strong> property specifies a list of <span class="stixtype">identifiers</span> of the SCO <span class="stixtype">file</span> or <span class="stixtype">artifact</span> objects associated with this malware instance(s) or family.<br /><br />If <strong>is_family</strong> is <span class="stixliteral">false</span>, then all samples listed in <strong>sample_refs MUST</strong> refer to the same binary data.</td>
   </tr>
 </table>
 
-### 4.11.2 Relationships <a id="malware-relationships"></a>
+### 4.13.2 Relationships <a id="malware-relationships"></a>
 
 These are the relationships explicitly defined between the Malware object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -3993,70 +4911,70 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">authored-by</span></td>
     <td><span class="stixtype">threat-actor</span>, <span class="stixtype">intrusion-set</span></td>
     <td>This Relationship describes that the malware instance or family was developed by the related threat actor or intrusion set.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">beacons-to</span>, <span class="stixliteral">exfiltrates-to</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>This Relationship describes that the malware instance or family beacons to or exfiltrates data to the related Infrastructure.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">communicates-with</span></td>
     <td><span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span>, <span class="stixtype">domain-name</span>, <span class="stixtype">url</span></td>
     <td>This Relationship documents that this malware instance (or family) communicates with (beacons to, connects to, or exfiltrated data to) the defined network addressable resource.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">controls</span></td>
-    <td><span class="stixtype">malware</span></td>
-    <td>This Relationship documents that this malware instance (or family) can control other malware which may be resident on the same system on which it is executing.<br><br>Note that this is not meant to imply or state that the malware instance or family drops other malware (which is covered by the <span class="stixliteral">drops</span> relationship).
+    <td><a class="stixtype" href="#malware">malware</a></td>
+    <td>This Relationship documents that this malware instance (or family) can control other malware which may be resident on the same system on which it is executing.<br /><br />Note that this is not meant to imply or state that the malware instance or family drops other malware (which is covered by the <span class="stixliteral">drops</span> relationship).
 Rather, it is meant to state that the malware instance or family is able to subvert or control other malware to achieve its goals.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">downloads</span>, <span class="stixliteral">drops</span></td>
     <td><span class="stixtype">malware</span>, <span class="stixtype">tool</span>, <span class="stixtype">file</span></td>
     <td>These Relationships document that this malware instance (or family) downloads or drops another malware instance, tool or file. This is especially common with "first-stage" malware instances such as downloaders and droppers.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">exploits</span></td>
-    <td><span class="stixtype">vulnerability</span></td>
-    <td>This Relationship documents that this malware instance or family exploits or attempts to exploit a particular vulnerability.<br><br>For example, an <span class="stixliteral">exploits</span> Relationship linking a malware instance or family representing a downloader to a Vulnerability for CVE-2016-0001 means that the malware instance or family exploits that vulnerability.</td>
+    <td><a class="stixtype" href="#vulnerability">vulnerability</a></td>
+    <td>This Relationship documents that this malware instance or family exploits or attempts to exploit a particular vulnerability.<br /><br />For example, an <span class="stixliteral">exploits</span> Relationship linking a malware instance or family representing a downloader to a Vulnerability for CVE-2016-0001 means that the malware instance or family exploits that vulnerability.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">originates-from</span></td>
-    <td><span class="stixtype">location</span></td>
+    <td><a class="stixtype" href="#location">location</a></td>
     <td>This Relationship documents that this malware instance or family originates from a particular location.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">targets</span></td>
     <td><span class="stixtype">identity</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">location</span>, <span class="stixtype">vulnerability</span></td>
-    <td>This Relationship documents that a malware instance or family is being used to target an Identity, Infrastructure, or Location. For malware families, this can be used to capture the full set of identities, infrastructures, or locations targeted by the family.<br><br>Similarly, a <span class="stixliteral">targets</span> Relationship linking a malware instance or family representing a downloader to an Identity representing the energy sector means that downloader is typically used against targets in the energy sector.</td>
+    <td>This Relationship documents that a malware instance or family is being used to target an Identity, Infrastructure, or Location. For malware families, this can be used to capture the full set of identities, infrastructures, or locations targeted by the family.<br /><br />Similarly, a <span class="stixliteral">targets</span> Relationship linking a malware instance or family representing a downloader to an Identity representing the energy sector means that downloader is typically used against targets in the energy sector.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">uses</span></td>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">malware</span>, <span class="stixtype">tool</span></td>
-    <td>This Relationship documents that this malware instance or family uses the attack pattern, infrastructure, malware, or tool to achieve its objectives.<br><br>For example, a <span class="stixliteral">uses</span> Relationship from the jay-sm17h Threat Actor to the xInject Malware indicates that xInject is often used by jay-sm17h.</td>
+    <td>This Relationship documents that this malware instance or family uses the attack pattern, infrastructure, malware, or tool to achieve its objectives.<br /><br />For example, a <span class="stixliteral">uses</span> Relationship from the jay-sm17h Threat Actor to the xInject Malware indicates that xInject is often used by jay-sm17h.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">variant-of</span></td>
-    <td><span class="stixtype">malware</span></td>
-    <td>This Relationship is used to document that one malware instance or family is a variant of another malware instance or family.<br><br>Only the following uses of this relationship are valid:<br><br>Malware instance → Malware family: a Malware instance is a variant of a Malware family. For example, a particular Zeus version 2 sample is a variant of the broader Zeus family.<br><br>Malware family → Malware family: a Malware family is a variant of another Malware family. For example, the Gameover Zeus family is a variant of the broader Zeus family.<br><br>Malware instance → Malware instance: a Malware instance is a variant of another Malware instance. For example, a particular Cryptolocker instance that is based on an another Cryptolocker instance with minor changes.<br><br>Malware family → Malware instance: this relationship <strong>MUST NOT</strong> be used as it is not semantically valid.</td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
+    <td>This Relationship is used to document that one malware instance or family is a variant of another malware instance or family.<br /><br />Only the following uses of this relationship are valid:<br /><br />Malware instance → Malware family: a Malware instance is a variant of a Malware family. For example, a particular Zeus version 2 sample is a variant of the broader Zeus family.<br /><br />Malware family → Malware family: a Malware family is a variant of another Malware family. For example, the Gameover Zeus family is a variant of the broader Zeus family.<br /><br />Malware instance → Malware instance: a Malware instance is a variant of another Malware instance. For example, a particular Cryptolocker instance that is based on an another Cryptolocker instance with minor changes.<br /><br />Malware family → Malware instance: this relationship <strong>MUST NOT</strong> be used as it is not semantically valid.</td>
   </tr>
 </table>
 
@@ -4071,39 +4989,39 @@ Rather, it is meant to state that the malware instance or family is able to subv
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
     <td><span class="stixliteral">indicates</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">course-of-action</span></td>
+    <td><a class="stixtype" href="#course-of-action">course-of-action</a></td>
     <td><span class="stixliteral">mitigates</span>, <span class="stixliteral">remediates</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">campaign</span>, <span class="stixtype">intrusion-set</span>, <span class="stixtype">threat-actor</span></td>
     <td><span class="stixliteral">uses</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">drops</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">controls</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware-analysis</span></td>
+    <td><a class="stixtype" href="#malware-analysis">malware-analysis</a></td>
     <td><span class="stixliteral">characterizes</span>, <span class="stixliteral">av-analysis-of</span>, <span class="stixliteral">static-analysis-of</span>, <span class="stixliteral">dynamic-analysis-of</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
 </table>
@@ -4113,7 +5031,7 @@ Rather, it is meant to state that the malware instance or family is able to subv
 ```JSON
 {
   "type": "malware",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "malware--0c7b5b88-8ff7-4a4d-aa9d-feb398cd0061",
   "created": "2016-05-12T08:17:27.000Z",
   "modified": "2016-05-12T08:17:27.000Z",
@@ -4124,14 +5042,14 @@ Rather, it is meant to state that the malware instance or family is able to subv
 }
 ```
 
-## 4.12 Malware Analysis <a id="malware-analysis"></a>
+## 4.14 Malware Analysis <a id="malware-analysis"></a>
 
 **Type Name:** <span class="stixtype">malware-analysis</span>
 
 Malware Analysis captures the metadata and results of a particular static or dynamic analysis performed on a malware instance or family.
 One of **result** or **analysis_sco_refs** properties **MUST** be provided.
 
-### 4.12.1 Properties <a id="malware-analysis-properties"></a>
+### 4.14.1 Properties <a id="malware-analysis-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4168,78 +5086,78 @@ One of **result** or **analysis_sco_refs** properties **MUST** be provided.
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">malware-analysis</span>.</td>
   </tr>
   <tr>
     <td><strong>product</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>The name of the analysis engine or product that was used. Product names <strong>SHOULD</strong> be all lowercase with words separated by a dash "-".<br><br>For cases where the name of a product cannot be specified, a value of "anonymized" <strong>MUST</strong> be used.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>The name of the analysis engine or product that was used. Product names <strong>SHOULD</strong> be all lowercase with words separated by a dash "-".<br /><br />For cases where the name of a product cannot be specified, a value of "anonymized" <strong>MUST</strong> be used.</td>
   </tr>
   <tr>
     <td><strong>version</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The version of the analysis product that was used to perform the analysis.</td>
   </tr>
   <tr>
     <td><strong>host_vm_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>A description of the virtual machine environment used to host the guest operating system (if applicable) that was used for the dynamic analysis of the malware instance or family.<br><br>If this value is not included in conjunction with the <strong>operating_system_ref</strong> property, this means that the dynamic analysis may have been performed on bare metal (i.e. without virtualization) or the information was redacted.<br><br>The value of this property <strong>MUST</strong> be the <span class="stixtype">identifier</span> for a SCO <span class="stixtype">software</span> object.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>A description of the virtual machine environment used to host the guest operating system (if applicable) that was used for the dynamic analysis of the malware instance or family.<br /><br />If this value is not included in conjunction with the <strong>operating_system_ref</strong> property, this means that the dynamic analysis may have been performed on bare metal (i.e. without virtualization) or the information was redacted.<br /><br />The value of this property <strong>MUST</strong> be the <span class="stixtype">identifier</span> for a SCO <span class="stixtype">software</span> object.</td>
   </tr>
   <tr>
     <td><strong>operating_system_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>The operating system used for the dynamic analysis of the malware instance or family. This applies to virtualized operating systems as well as those running on bare metal.<br><br>The value of this property <strong>MUST</strong> be the <span class="stixtype">identifier</span> for a SCO <span class="stixtype">software</span> object.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>The operating system used for the dynamic analysis of the malware instance or family. This applies to virtualized operating systems as well as those running on bare metal.<br /><br />The value of this property <strong>MUST</strong> be the <span class="stixtype">identifier</span> for a SCO <span class="stixtype">software</span> object.</td>
   </tr>
   <tr>
     <td><strong>installed_software_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Any non-standard software installed on the operating system (specified through the <span class="stixliteral">operating-system</span> value) used for the dynamic analysis of the malware instance or family.<br><br>The value of this property <strong>MUST</strong> be the <span class="stixtype">identifier</span> for a SCO <span class="stixtype">software</span> object.</td>
+    <td>Any non-standard software installed on the operating system (specified through the <span class="stixliteral">operating-system</span> value) used for the dynamic analysis of the malware instance or family.<br /><br />The value of this property <strong>MUST</strong> be the <span class="stixtype">identifier</span> for a SCO <span class="stixtype">software</span> object.</td>
   </tr>
   <tr>
     <td><strong>configuration_version</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>The named configuration of additional product configuration parameters for this analysis run.<br><br>For example, when a product is configured to do full depth analysis of Window™ PE files. This configuration may have a named version and that named version can be captured in this property. This will ensure additional runs can be configured in the same way.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>The named configuration of additional product configuration parameters for this analysis run.<br /><br />For example, when a product is configured to do full depth analysis of Window™ PE files. This configuration may have a named version and that named version can be captured in this property. This will ensure additional runs can be configured in the same way.</td>
   </tr>
   <tr>
     <td><strong>modules</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">string</span></span></td>
-    <td>The specific analysis modules that were used and configured in the product during this analysis run.<br><br>For example, configuring a product to support analysis of Dridex.</td>
+    <td>The specific analysis modules that were used and configured in the product during this analysis run.<br /><br />For example, configuring a product to support analysis of Dridex.</td>
   </tr>
   <tr>
     <td><strong>analysis_engine_version</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The version of the analysis engine or product (including AV engines) that was used to perform the analysis.</td>
   </tr>
   <tr>
     <td><strong>analysis_definition_version</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The version of the analysis definitions used by the analysis tool (including AV tools).</td>
   </tr>
   <tr>
     <td><strong>submitted</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>The date and time that the malware was first submitted for scanning or analysis. This value will stay constant while the scanned date can change. For example, when Malware was submitted to a virus analysis tool.</td>
   </tr>
   <tr>
     <td><strong>analysis_started</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>The date and time that the malware analysis was initiated.</td>
   </tr>
   <tr>
     <td><strong>analysis_ended</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>The date and time that the malware analysis ended.</td>
   </tr>
   <tr>
     <td><strong>result_name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The classification result or name assigned to the malware instance by the scanner tool.</td>
   </tr>
   <tr>
     <td><strong>result</strong> (optional)</td>
-    <td><span class="stixtype">open-vocab</span></td>
-    <td>The classification result as determined by the scanner or tool analysis process.<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#malware-result-vocabulary"><span class="stixvocab">malware-result-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>The classification result as determined by the scanner or tool analysis process.<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#malware-result-vocabulary"><span class="stixvocab">malware-result-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>analysis_sco_refs</strong> (optional)</td>
@@ -4248,12 +5166,12 @@ One of **result** or **analysis_sco_refs** properties **MUST** be provided.
   </tr>
   <tr>
     <td><strong>sample_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>This property contains the reference to the SCO file, network traffic or artifact object that this malware analysis was performed against.<br><br>Caution should be observed when creating an SRO between Malware and Malware Analysis objects when the Malware <strong>sample_refs</strong> property does not contain the SCO that is included in the Malware Analysis <strong>sample_ref</strong> property.<br><br>Note, this property can also contain a reference to an SCO which is not associated with Malware (i.e., some SCO which was scanned and found to be benign.)</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>This property contains the reference to the SCO file, network traffic or artifact object that this malware analysis was performed against.<br /><br />Caution should be observed when creating an SRO between Malware and Malware Analysis objects when the Malware <strong>sample_refs</strong> property does not contain the SCO that is included in the Malware Analysis <strong>sample_ref</strong> property.<br /><br />Note, this property can also contain a reference to an SCO which is not associated with Malware (i.e., some SCO which was scanned and found to be benign.)</td>
   </tr>
 </table>
 
-### 4.12.2 Relationships <a id="malware-analysis-relationships"></a>
+### 4.14.2 Relationships <a id="malware-analysis-relationships"></a>
 
 These are the relationships explicitly defined between the Malware Analysis object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -4310,27 +5228,27 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <th><span class="stixtr"><strong>Description</strong></span></th>
   </tr>
   <tr>
-    <td><span class="stixtype">malware-analysis</span></td>
+    <td><a class="stixtype" href="#malware-analysis">malware-analysis</a></td>
     <td><span class="stixliteral">characterizes</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>This Relationship describes that the malware analysis describes the related malware.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware-analysis</span></td>
+    <td><a class="stixtype" href="#malware-analysis">malware-analysis</a></td>
     <td><span class="stixliteral">av-analysis-of</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>This Relationship describes that the malware analysis is results for the related malware.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware-analysis</span></td>
+    <td><a class="stixtype" href="#malware-analysis">malware-analysis</a></td>
     <td><span class="stixliteral">static-analysis-of</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>This Relationship describes that the malware analysis is static analysis results for the related malware.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware-analysis</span></td>
+    <td><a class="stixtype" href="#malware-analysis">malware-analysis</a></td>
     <td><span class="stixliteral">dynamic-analysis-of</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>This Relationship describes that the malware analysis is dynamic analysis results for the related malware.</td>
   </tr>
 </table>
@@ -4340,9 +5258,9 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
   </tr>
   <tr>
-    <td width="20%">—</span></td>
-    <td width="20%">—</span></td>
-    <td width="20%">—</span></td>
+    <td width="20%">—</td>
+    <td width="20%">—</td>
+    <td width="20%">—</td>
     <td>—</td>
   </tr>
 </table>
@@ -4353,7 +5271,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 [
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--8bcf14e9-2ba2-44ef-9e32-fbbc9d2608b2",
     "created": "2020-01-16T18:52:24.277Z",
     "modified": "2020-01-16T18:52:24.277Z",
@@ -4368,7 +5286,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   }
   {
     "type": "malware-analysis",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware-analysis--d25167b7-fed0-4068-9ccd-a73dd2c5b07c",
     "created": "2020-01-16T18:52:24.277Z",
     "modified": "2020-01-16T18:52:24.277Z",
@@ -4381,7 +5299,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   }
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--014841f8-eb38-4673-9904-70f67c92dd8b",
     "created": "2020-01-16T18:52:24.277Z",
     "modified": "2020-01-16T18:52:24.277Z",
@@ -4392,7 +5310,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   {
     "type": "file",
     "id": "file--ba8965d8-e4ec-5f9c-a4df-1c460994ca58",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "hashes": {
       "MD5": "a92e5b2bae0b4b3a3d81c85610b95cd4",
       "SHA-1": "5374e08903744ceeaedd8f5e1bfc06b2c4688e76"
@@ -4404,13 +5322,13 @@ Relationships are not restricted to those listed below. Relationships can be cre
   {
     "type": "directory",
     "id": "directory--ab82f84a-5afc-5ea7-8d98-9fcbc277eda6",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "path": "C:\\"
   }
 ]
 ```
 
-## 4.13 Note <a id="note"></a>
+## 4.15 Note <a id="note"></a>
 
 **Type Name:** <span class="stixtype">note</span>
 
@@ -4420,7 +5338,7 @@ For example, an analyst may add a Note to a Campaign object created by another o
 
 Because Notes are typically (though not always) created by human analysts and are comprised of human-oriented text, they contain an additional property to capture the analyst(s) that created the Note. This is distinct from the **created_by_ref** property, which is meant to capture the organization that created the object.
 
-### 4.13.1 Properties <a id="note-properties"></a>
+### 4.15.1 Properties <a id="note-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4457,17 +5375,17 @@ Because Notes are typically (though not always) created by human analysts and ar
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">note</span>.</td>
   </tr>
   <tr>
     <td><strong>abstract</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A brief summary of the note content.</td>
   </tr>
   <tr>
     <td><strong>content</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The content of the note.</td>
   </tr>
   <tr>
@@ -4482,7 +5400,7 @@ Because Notes are typically (though not always) created by human analysts and ar
   </tr>
 </table>
 
-### 4.13.2 Relationships <a id="note-relationships"></a>
+### 4.15.2 Relationships <a id="note-relationships"></a>
 
 There are no relationships explicitly defined between the Note object and other STIX Objects, other than the embedded relationships listed below.
 These embedded relationships are listed by property name along with their corresponding target.
@@ -4512,7 +5430,7 @@ These embedded relationships are listed by property name along with their corres
 ```JSON
 {
   "type": "note",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "note--0c7b5b88-8ff7-4a4d-aa9d-feb398cd0061",
   "created": "2016-05-12T08:17:27.000Z",
   "modified": "2016-05-12T08:17:27.000Z",
@@ -4529,7 +5447,7 @@ These embedded relationships are listed by property name along with their corres
 }
 ```
 
-## 4.14 Observed Data <a id="observed-data"></a>
+## 4.16 Observed Data <a id="observed-data"></a>
 
 **Type Name:** <span class="stixtype">observed-data</span>
 
@@ -4543,7 +5461,7 @@ Observed Data may also be related to other SDOs to represent raw data that is re
 
 To support backwards compatibility, related SCOs can still be specified using the **objects** properties, either the **objects** property or the **object_refs** property **MUST** be provided, but both **MUST NOT** be present at the same time.
 
-### 4.14.1 Properties <a id="observed-data-properties"></a>
+### 4.16.1 Properties <a id="observed-data-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4580,37 +5498,37 @@ To support backwards compatibility, related SCOs can still be specified using th
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">observed-data</span>.</td>
   </tr>
   <tr>
     <td><strong>first_observed</strong> (required)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>The beginning of the time window during which the data was seen.</td>
   </tr>
   <tr>
     <td><strong>last_observed</strong> (required)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The end of the time window during which the data was seen.<br><br>This <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_observed</strong> property.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The end of the time window during which the data was seen.<br /><br />This <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_observed</strong> property.</td>
   </tr>
   <tr>
     <td><strong>number_observed</strong> (required)</td>
-    <td><span class="stixtype">integer</span></td>
-    <td>The number of times that each Cyber-observable object represented in the <strong>objects</strong> or <strong>object_refs</strong> property was seen. If present, this <strong>MUST</strong> be an integer between 1 and 999,999,999 inclusive.<br><br>If the <strong>number_observed</strong> property is greater than 1, the data contained in the <strong>objects</strong> or <strong>object_refs</strong> property was seen multiple times. In these cases, object creators <strong>MAY</strong> omit properties of the SCO (such as timestamps) that are specific to a single instance of that observed data.</td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
+    <td>The number of times that each Cyber-observable object represented in the <strong>objects</strong> or <strong>object_refs</strong> property was seen. If present, this <strong>MUST</strong> be an integer between 1 and 999,999,999 inclusive.<br /><br />If the <strong>number_observed</strong> property is greater than 1, the data contained in the <strong>objects</strong> or <strong>object_refs</strong> property was seen multiple times. In these cases, object creators <strong>MAY</strong> omit properties of the SCO (such as timestamps) that are specific to a single instance of that observed data.</td>
   </tr>
   <tr>
     <td><strong>objects</strong> (optional - deprecated)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">observable-container</span></span></td>
-    <td>A dictionary of SCO representing the observation. The dictionary <strong>MUST</strong> contain at least one object.<br><br>The cyber observable content <strong>MAY</strong> include multiple objects if those objects are related as part of a single observation. Multiple objects not related to each other via cyber observable Relationships <strong>MUST NOT</strong> be contained within the same Observed Data instance.<br><br>This property <strong>MUST NOT</strong> be present if <strong>object_refs</strong> is provided.<br><br>For example, a Network Traffic object and two IPv4 Address objects related via the <strong>src_ref</strong> and <strong>dst_ref</strong> properties can be contained in the same Observed Data because they are all related and used to characterize that single entity.<br><br>NOTE: this property is now deprecated in favor of object_refs and will be removed in a future version.</td>
+    <td>A dictionary of SCO representing the observation. The dictionary <strong>MUST</strong> contain at least one object.<br /><br />The cyber observable content <strong>MAY</strong> include multiple objects if those objects are related as part of a single observation. Multiple objects not related to each other via cyber observable Relationships <strong>MUST NOT</strong> be contained within the same Observed Data instance.<br /><br />This property <strong>MUST NOT</strong> be present if <strong>object_refs</strong> is provided.<br /><br />For example, a Network Traffic object and two IPv4 Address objects related via the <strong>src_ref</strong> and <strong>dst_ref</strong> properties can be contained in the same Observed Data because they are all related and used to characterize that single entity.<br /><br />NOTE: this property is now deprecated in favor of object_refs and will be removed in a future version.</td>
   </tr>
   <tr>
     <td><strong>object_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>A list of SCOs and SROs representing the observation. The <strong>object_refs MUST</strong> contain at least one SCO reference if defined.<br><br>The <strong>object_refs MAY</strong> include multiple SCOs and their corresponding SROs, if those SCOs are related as part of a single observation.<br><br>For example, a Network Traffic object and two IPv4 Address objects related via the <strong>src_ref</strong> and <strong>dst_ref</strong> properties can be contained in the same Observed Data because they are all related and used to characterize that single entity.<br><br>This property <strong>MUST NOT</strong> be present if <strong>objects</strong> is provided.</td>
+    <td>A list of SCOs and SROs representing the observation. The <strong>object_refs MUST</strong> contain at least one SCO reference if defined.<br /><br />The <strong>object_refs MAY</strong> include multiple SCOs and their corresponding SROs, if those SCOs are related as part of a single observation.<br /><br />For example, a Network Traffic object and two IPv4 Address objects related via the <strong>src_ref</strong> and <strong>dst_ref</strong> properties can be contained in the same Observed Data because they are all related and used to characterize that single entity.<br /><br />This property <strong>MUST NOT</strong> be present if <strong>objects</strong> is provided.</td>
   </tr>
 </table>
 
-### 4.14.2 Relationships <a id="observed-data-relationships"></a>
+### 4.16.2 Relationships <a id="observed-data-relationships"></a>
 
 There are no forward relationships explicitly defined between the Observed Data object and other STIX Objects, other than those defined as common relationships. The first section lists the embedded relationships by property name along with their corresponding target. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -4648,7 +5566,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
@@ -4671,9 +5589,9 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">consists-of</span></td>
-    <td><span class="stixtype">observed-data</span></td>
+    <td><a class="stixtype" href="#observed-data">observed-data</a></td>
     <td>See forward relationship for definition</td>
   </tr>
 </table>
@@ -4685,7 +5603,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "observed-data",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "observed-data--b67d30ff-02ac-498a-92f9-32f845f448cf",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T19:58:16.000Z",
@@ -4700,20 +5618,20 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 {
   "type": "domain-name",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "domain-name--bedb4899-d24b-5401-bc86-8f6b4cc18ec7",
   "value": "example.com",
   "resolves_to_refs": ["ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4"]
 }
 {
   "type": "ipv4-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
   "value": "198.51.100.3"
 }
 ```
 
-## 4.15 Opinion <a id="opinion"></a>
+## 4.17 Opinion <a id="opinion"></a>
 
 **Type Name**: <span class="stixtype">opinion</span>
 
@@ -4723,7 +5641,7 @@ For example, an analyst from a consuming organization might say that they "stron
 
 Because Opinions are typically (though not always) created by human analysts and are comprised of human-oriented text, they contain an additional property to capture the analyst(s) that created the Opinion. This is distinct from the **created_by_ref** property, which is meant to capture the organization that created the object.
 
-### 4.15.1 Properties <a id="opinion-properties"></a>
+### 4.17.1 Properties <a id="opinion-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4760,12 +5678,12 @@ Because Opinions are typically (though not always) created by human analysts and
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">opinion</span>.</td>
   </tr>
   <tr>
     <td><strong>explanation</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>An explanation of why the producer has this Opinion. For example, if an Opinion of strongly-disagree is given, the explanation can contain an explanation of why the Opinion producer disagrees and what evidence they have for their disagreement.</td>
   </tr>
   <tr>
@@ -4775,8 +5693,8 @@ Because Opinions are typically (though not always) created by human analysts and
   </tr>
   <tr>
     <td><strong>opinion</strong> (required)</td>
-    <td><span class="stixtype">enum</span></td>
-    <td>The opinion that the producer has about all of the STIX Object(s) listed in the <strong>object_refs</strong> property.<br><br>The values of this property <strong>MUST</strong> come from the <a href="#opinion-enumeration"><span class="stixvocab">opinion-enum</span></a> enumeration.</td>
+    <td><a class="stixtype" href="#enum">enum</a></td>
+    <td>The opinion that the producer has about all of the STIX Object(s) listed in the <strong>object_refs</strong> property.<br /><br />The values of this property <strong>MUST</strong> come from the <a href="#opinion-enumeration"><span class="stixvocab">opinion-enum</span></a> enumeration.</td>
   </tr>
   <tr>
     <td><strong>object_refs</strong> (required)</td>
@@ -4785,7 +5703,7 @@ Because Opinions are typically (though not always) created by human analysts and
   </tr>
 </table>
 
-### 4.15.2 Relationships <a id="opinion-relationships"></a>
+### 4.17.2 Relationships <a id="opinion-relationships"></a>
 
 There are no relationships explicitly defined between the Opinion object and other STIX Objects, other than those defined as common relationships. The first section lists the embedded relationships by property name along with their corresponding target.
 
@@ -4821,7 +5739,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
@@ -4838,7 +5756,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "opinion",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "opinion--b01efc25-77b4-4003-b18b-f6e24b5cd9f7",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-05-12T08:17:27.000Z",
@@ -4849,7 +5767,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.16 Report <a id="report"></a>
+## 4.18 Report <a id="report"></a>
 
 **Type Name:** <span class="stixtype">report</span>
 
@@ -4859,7 +5777,7 @@ The Report SDO contains a list of references to STIX Objects (the CTI objects in
 
 For example, a threat report produced by ACME Defense Corp. discussing the Glass Gazelle campaign should be represented using Report. The Report itself would contain the narrative of the report while the Campaign SDO and any related SDOs (e.g., Indicators for the Campaign, Malware it uses, and the associated Relationships) would be referenced in the report contents.
 
-### 4.16.1 Properties <a id="report-properties"></a>
+### 4.18.1 Properties <a id="report-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -4896,28 +5814,28 @@ For example, a threat report produced by ACME Defense Corp. discussing the Glass
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">report</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name or characterizing text used to identify the Report.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Report, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
     <td><strong>report_types</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>The primary type(s) of content found in this report.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#report-type-vocabulary"><span class="stixvocab">report-type-ov</span></a> open vocabulary.</td>
+    <td>The primary type(s) of content found in this report.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="#report-type-vocabulary"><span class="stixvocab">report-type-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
-    <td><strong>published</strong> (required)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The date that this Report object was officially published by the creator of this report.<br><br>The publication date (public release, legal release, etc.) may be different than the date the report was created or shared internally (the date in the <strong>created</strong> property).</td>
+    <td><strong>published</strong> (optional)</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The date that this Report object was officially published by the creator of this report.<br /><br />The publication date (public release, legal release, etc.) may be different than the date the report was created or shared internally (the date in the <strong>created</strong> property).</td>
   </tr>
   <tr>
     <td><strong>object_refs</strong> (required)</td>
@@ -4926,7 +5844,7 @@ For example, a threat report produced by ACME Defense Corp. discussing the Glass
   </tr>
 </table>
 
-### 4.16.2 Relationships <a id="report-relationships"></a>
+### 4.18.2 Relationships <a id="report-relationships"></a>
 
 There are no relationships explicitly defined between the Report object and other STIX Objects, other than those defined as common relationships. The first section lists the embedded relationships by property name along with their corresponding target.
 
@@ -4962,7 +5880,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
@@ -4981,7 +5899,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "report",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "report--84e4d88f-44ea-4bcd-bbf3-b2c1c320bcb3",
   "created_by_ref": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
   "created": "2015-12-21T19:59:11.000Z",
@@ -5007,7 +5925,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
   "objects": [
     {
       "type": "identity",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
       "created": "2015-01-21T19:59:17.000Z",
       "modified": "2015-01-21T19:59:17.000Z",
@@ -5015,7 +5933,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
     },
     {
       "type": "report",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "report--84e4d88f-44ea-4bcd-bbf3-b2c1c320bcbd",
       "created_by_ref": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
       "created": "2015-12-21T19:59:11.000Z",
@@ -5032,7 +5950,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
     },
     {
       "type": "indicator",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "indicator--26ffb872-1dd9-446e-b6f5-d58527e5b5d2",
       "created": "2015-12-21T19:59:17.000Z",
       "modified": "2016-05-21T19:59:17.000Z",
@@ -5044,7 +5962,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
     },
     {
       "type": "campaign",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "campaign--83422c77-904c-4dc1-aff5-5c38f3a2c55c",
       "created_by_ref": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
       "created": "2015-12-21T19:59:17.000Z",
@@ -5053,7 +5971,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
     },
     {
       "type": "relationship",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "relationship--f82356ae-fe6c-437c-9c24-6b64314ae68a",
       "created_by_ref": "identity--a463ffb3-1bd9-4d94-b02d-74e4f1658283",
       "created": "2015-12-21T19:59:17.000Z",
@@ -5066,7 +5984,305 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.17 Threat Actor <a id="threat-actor"></a>
+## 4.19 Task <a id="task"></a>
+
+A Task is an activity that is performed by or for the victim/defender to respond to the related incident.
+
+### 4.19.1 Properties <a id="task-properties"></a>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Required Common Properties</span></th>
+  </tr>
+  <tr><td>created, id, modified, spec_version, type</td></tr>
+  <tr>
+    <th><span class="stixtr">Optional Common Properties</span></th>
+  </tr>
+  <tr><td>created_by_ref, revoked, labels, confidence, lang, external_references, object_marking_refs, granular_markings, extensions</td></tr>
+  <tr>
+<th><span class="stixtr">Not Applicable Common Properties</span></th>
+</tr>
+  <tr><td>defanged</td></tr>
+  <tr>
+<th><span class="stixtr">Object Specific Properties</span></th>
+</tr>
+  <tr><td></td></tr>
+</table>
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th><span class="stixtr">Property Name</span></th>
+    <th><span class="stixtr">Type</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+
+  <tr>
+    <td><strong>outcome</strong> (required)</td>
+    <td><a href="#task-outcome-enumeration" class="stixtype">task-outcome-enumeration</a></td>
+    <td>The outcome of the task. The value of this property <strong>MUST</strong> come from the <a href="#task-outcome-enumeration" class="stixtype">task-outcome-enumeration</a> enumeration.</td>
+</tr>
+
+  <tr>
+    <td><strong>type</strong> (required)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>The value of this property <strong>MUST</strong> be set to task.</td>
+</tr>
+
+  <tr>
+    <td><strong>affected_entity_counts</strong> (optional)</td>
+    <td><a href="#entity-count" class="stixtype">entity-count</a></td>
+    <td>A list of affected entity types, along with the number of each type affected. This property is used primarily to capture victim notification information.</td>
+</tr>
+
+  <tr>
+    <td><strong>changed_objects</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#state-change" class="stixtype">state-change</a></td>
+    <td>A list of changes that this task has caused. This is typically used to indicate how a task has affected impacts.</td>
+</tr>
+
+  <tr>
+    <td><strong>description</strong> (optional)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>A description of the task.</td>
+</tr>
+
+  <tr>
+    <td><strong>due_date</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">timestamp</a></td>
+    <td>The date and time the task is/was due to be completed. The value of due_date <strong>MAY</strong> be unrelated to the values of <strong>start_time</strong> and <strong>end_time</strong>, i.e., there is no requirement that a <strong>due_date</strong> be between those values.</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">timestamp</a></td>
+    <td>The date and time the task was last recorded. If this is not present it is assumed to be unknown. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>end_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>end_time</strong> fidelity is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+  <tr>
+    <td><strong>error</strong> (optional)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>Details about any failures or deviations that occurred in the task.</td>
+</tr>
+
+  <tr>
+    <td><strong>name</strong> (optional)</td>
+    <td><a href="#string" class="stixtype">string</a></td>
+    <td>A name used to identify the task.</td>
+</tr>
+
+  <tr>
+    <td><strong>next_task_refs</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#identifier" class="stixtype">identifier</a></td>
+    <td>The <a href="#task" class="stixtype">task</a> objects to follow. They <strong>MUST</strong> be of type <a href="#task" class="stixtype">task</a>. There can be more than one if they take place in parallel.</td>
+</tr>
+
+  <tr>
+    <td><strong>priority</strong> (optional)</td>
+    <td><a href="#integer" class="stixtype">integer</a></td>
+    <td>The priority or importance of the task. This value <strong>MUST</strong> be an integer between 0 and 100. This can be translated into qualitative values as described in <a href="#relationship-summary-table" class="stixtype">Appendix B</a>.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">timestamp</a></td>
+    <td>The date and time the task was first recorded. If this is not present it is assumed to be unknown. This property <strong>SHOULD</strong> be populated. If <strong>start_time</strong> and <strong>end_time</strong> properties are both defined, then <strong>end_time</strong> value <strong>MUST</strong> be the same or later than the <strong>start_time</strong> value.</td>
+</tr>
+
+  <tr>
+    <td><strong>start_time_fidelity</strong> (optional)</td>
+    <td><a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a></td>
+    <td>The level of fidelity that the <strong>start_time</strong> property is recorded in. This value <strong>MUST</strong> come from <a href="#timestamp-fidelity-enumeration" class="stixtype">timestamp-fidelity-enumeration</a> enumeration. If no value is provided the timestamp should be considered to be accurate up to the number of decimal digits it includes.</td>
+</tr>
+
+  <tr>
+    <td><strong>task_types</strong> (optional)</td>
+    <td><a href="#list" class="stixtype">list</a> of type <a href="#open-vocabulary" class="stixtype">open-vocabulary</a></td>
+    <td>A list of high level types for the task in order to enable aggregation and summaries. The values of this property <strong>SHOULD</strong> come from the <a href="#task-type-vocabulary" class="stixtype">task-type-ov</a> open vocabulary.</td>
+</tr>
+
+</table>
+
+### 4.19.2 Relationships <a id="task-relationships"></a>
+
+These are the relationships explicitly defined between the Task object and other STIX Objects. The table identifies the relationships that can be made from this object type to another object type by way of the Relationship object.
+
+The reverse relationships section illustrates the relationships targeting this object type from another object type.
+
+Relationships are not restricted to those listed below. Relationships can be created between any objects using the related-to relationship type or, as with open vocabularies, user-defined names.
+
+To relate [tasks](#task) to an [incident](#incident) the **task_refs** property **SHOULD** be used. Using these embedded relationships ensures that an incomplete sequence cannot be shared accidentally (avoiding potential confusion or misunderstandings when processing STIX data.)
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th colspan='2'><span class='stixtr'>Embedded Relationships</span></th>
+  </tr>
+  <tr>
+    <td width="50%"><strong>created_by_ref</strong></td>
+    <td width="50%"><span class="stixtype">identifier</span> (of type <span class="stixtype">identity</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>object_marking_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type <span class="stixtype">marking-definition</span>)</td>
+  </tr>
+  <tr>
+    <td><strong>object_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type STIX Object)</td>
+  </tr>
+  <tr>
+    <td><strong>next_task_refs</strong></td>
+    <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span> (of type Task Object)</td>
+  </tr>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class='stixtr'>Common Relationships</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">duplicate-of</span>, <span class="stixliteral">derived-from</span>, <span class="stixliteral">related-to</span></td>
+  </tr>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>uses</span></td>
+    <td><a class='stixtype' href='#threat-actor'>course-of-action</a></td>
+    <td>An task uses a particular course of action.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>blocks</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A task was performed to block a potential event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>causes</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A task was performed that caused an event, usually due to an error.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>detects</span></td>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td>A task was used to detect an event.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>creates</span></td>
+    <td><a class='stixtype' href='#indicator'>indicator</a></td>
+    <td>A task was performed that created an indicator.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>impacts</span></td>
+    <td><a class='stixtype' href='#infrastructure'>infrastructure</a>,  <a class='stixtype' href='#stix-cyber-observable-objects'>&lt;All STIX Cyber-observable Objects&gt;</a></td>
+    <td>A task has an impact on specific infrastructure.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td><span class='stixliteral'>located-at</span></td>
+    <td><a class='stixtype' href='#location'>location</a></td>
+    <td>The task occurred at a specific location.</td>
+  </tr>
+</table>
+
+
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th colspan='4'><span class='stixtr'>Reverse Relationships</span></th>
+  </tr>
+  <tr>
+    <th width="20%"><span class='stixtr'>Source</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Target</span></th>
+    <th><span class='stixtr'>Description</span></th>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#event'>event</a></td>
+    <td><span class='stixliteral'>led-to</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>The event led to performing the task.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>assigned</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>An identity has been assigned the task</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>poc-for</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>An identity is a point of contact for this task.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>participated-in</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>An identity participated in a specific task, but as not the primary performer</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#identity'>identity</a></td>
+    <td><span class='stixliteral'>performed</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>An identity performed a specific task.</td>
+  </tr>
+  <tr>
+    <td><a class='stixtype' href='#tool'>tool</a></td>
+    <td><span class='stixliteral'>performed</span></td>
+    <td><a class='stixtype' href='#task'>task</a></td>
+    <td>A tool performed a specific task.</td>
+  </tr>
+</table>
+
+**Example**
+
+```
+{
+    "type": "task",
+    "id": "task--4e1e2a5a-6b3c-4d5e-8f6a-9e7b8a9a5b6c",
+    "created": "2023-11-22T15:30:00.529Z",
+    "modified": "2023-11-22T15:30:00.811Z",
+    "spec_version": "2.2",
+    "outcome": "successful",
+    "changed_objects": [
+        {
+            "state_change_type": "mitigated",
+            "initial_ref": "impact--f3e1a6f3-1a95-457a-84a7-887c2d9e5e7c",
+            "result_ref": "impact--c1f2d3e4-5b6c-4a8d-9e0a-1b2c3d4e5f62"
+        }
+    ],
+    "description": "Mitigated the impact of the phishing attack.",
+    "due_date": "2023-11-30T00:00:00Z",
+    "end_time": "2023-11-22T16:30:00Z",
+    "end_time_fidelity": "minute",
+    "task_types": [
+        "blocked"
+    ],
+    "name": "Mitigation Task",
+    "next_tasks_refs": [
+        "task--1cb3fbba-3216-4fd7-a1c2-b33473d20ed7"
+    ],
+    "priority": 80,
+    "start_time": "2023-11-22T15:30:00Z",
+    "start_time_fidelity": "minute"
+}
+```
+
+## 4.20 Threat Actor <a id="threat-actor"></a>
 
 **Type Name:** <span class="stixtype">threat-actor</span>
 
@@ -5076,7 +6292,7 @@ Threat Actors leverage their resources, and possibly the resources of an Intrusi
 
 Threat Actors can be characterized by their motives, capabilities, goals, sophistication level, past activities, resources they have access to, and their role in the organization.
 
-### 4.17.1 Properties <a id="threat-actor-properties"></a>
+### 4.20.1 Properties <a id="threat-actor-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -5113,23 +6329,23 @@ Threat Actors can be characterized by their motives, capabilities, goals, sophis
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">threat-actor</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name or characterizing text used to identify the Threat Actor or Threat Actor group.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Threat Actor, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
     <td><strong>threat_actor_types</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>The type(s) of this threat actor.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#threat-actor-type-vocabulary"><span class="stixvocab">threat-actor-type-ov</span></a> open vocabulary.</td>
+    <td>The type(s) of this threat actor.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="#threat-actor-type-vocabulary"><span class="stixvocab">threat-actor-type-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>aliases</strong> (optional)</td>
@@ -5138,18 +6354,18 @@ Threat Actors can be characterized by their motives, capabilities, goals, sophis
   </tr>
   <tr>
     <td><strong>first_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The time that this Threat Actor was first seen.<br><br>This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are earlier than the first seen timestamp, the object may be updated to account for the new data.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The time that this Threat Actor was first seen.<br /><br />This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are earlier than the first seen timestamp, the object may be updated to account for the new data.</td>
   </tr>
   <tr>
     <td><strong>last_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The time that this Threat Actor was last seen.<br><br>This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are later than the last seen timestamp, the object may be updated to account for the new data. If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The time that this Threat Actor was last seen.<br /><br />This property is a summary property of data from sightings and other data that may or may not be available in STIX. If new sightings are received that are later than the last seen timestamp, the object may be updated to account for the new data. If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
   </tr>
   <tr>
     <td><strong>roles</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>A list of roles the Threat Actor plays.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#threat-actor-role-vocabulary"><span class="stixvocab">threat-actor-role-ov</span></a> open vocabulary.</td>
+    <td>A list of roles the Threat Actor plays.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="#threat-actor-role-vocabulary"><span class="stixvocab">threat-actor-role-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>goals</strong> (optional)</td>
@@ -5158,32 +6374,32 @@ Threat Actors can be characterized by their motives, capabilities, goals, sophis
   </tr>
   <tr>
     <td><strong>sophistication</strong> (optional)</td>
-    <td><span class="stixtype">open-vocab</span></td>
-    <td>The skill, specific knowledge, special training, or expertise a Threat Actor must have to perform the attack.<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#threat-actor-sophistication-vocabulary"><span class="stixvocab">threat-actor-sophistication-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>The skill, specific knowledge, special training, or expertise a Threat Actor must have to perform the attack.<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#threat-actor-sophistication-vocabulary"><span class="stixvocab">threat-actor-sophistication-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>resource_level</strong> (optional)</td>
-    <td><span class="stixtype">open-vocab</span></td>
-    <td>The organizational level at which this Threat Actor typically works, which in turn determines the resources available to this Threat Actor for use in an attack. This attribute is linked to the <strong>sophistication</strong> property — a specific resource level implies that the Threat Actor has access to at least a specific sophistication level.<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#attack-resource-level-vocabulary"><span class="stixvocab">attack-resource-level-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>The organizational level at which this Threat Actor typically works, which in turn determines the resources available to this Threat Actor for use in an attack. This attribute is linked to the <strong>sophistication</strong> property — a specific resource level implies that the Threat Actor has access to at least a specific sophistication level.<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#attack-resource-level-vocabulary"><span class="stixvocab">attack-resource-level-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>primary_motivation</strong> (optional)</td>
-    <td><span class="stixtype">open-vocab</span></td>
-    <td>The primary reason, motivation, or purpose behind this Threat Actor. The motivation is *why* the Threat Actor wishes to achieve the goal (what they are trying to achieve).<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#attack-motivation-vocabulary"><span class="stixvocab">attack-motivation-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
+    <td>The primary reason, motivation, or purpose behind this Threat Actor. The motivation is *why* the Threat Actor wishes to achieve the goal (what they are trying to achieve).<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#attack-motivation-vocabulary"><span class="stixvocab">attack-motivation-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>secondary_motivations</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>This property specifies the secondary reasons, motivations, or purposes behind this Threat Actor.<br><br>These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. The position in the list has no significance.<br><br>The value for this property <strong>SHOULD</strong> come from the <a href="#attack-motivation-vocabulary"><span class="stixvocab">attack-motivation-ov</span></a> open vocabulary.</td>
+    <td>This property specifies the secondary reasons, motivations, or purposes behind this Threat Actor.<br /><br />These motivations can exist as an equal or near-equal cause to the primary motivation. However, it does not replace or necessarily magnify the primary motivation, but it might indicate additional context. The position in the list has no significance.<br /><br />The value for this property <strong>SHOULD</strong> come from the <a href="#attack-motivation-vocabulary"><span class="stixvocab">attack-motivation-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>personal_motivations</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>The personal reasons, motivations, or purposes of the Threat Actor regardless of organizational goals.<br><br>Personal motivation, which is independent of the organization's goals, describes what impels an individual to carry out an attack. Personal motivation may align with the organization's motivation — as is common with activists — but more often it supports personal goals. For example, an individual analyst may join a Data Miner corporation because his or her skills may align with the corporation's objectives. But the analyst most likely performs his or her daily work toward those objectives for personal reward in the form of a paycheck. The motivation of personal reward may be even stronger for Threat Actors who commit illegal acts, as it is more difficult for someone to cross that line purely for altruistic reasons. The position in the list has no significance.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#attack-motivation-vocabulary"><span class="stixvocab">attack-motivation-ov</span></a> open vocabulary.</td>
+    <td>The personal reasons, motivations, or purposes of the Threat Actor regardless of organizational goals.<br /><br />Personal motivation, which is independent of the organization's goals, describes what impels an individual to carry out an attack. Personal motivation may align with the organization's motivation — as is common with activists — but more often it supports personal goals. For example, an individual analyst may join a Data Miner corporation because his or her skills may align with the corporation's objectives. But the analyst most likely performs his or her daily work toward those objectives for personal reward in the form of a paycheck. The motivation of personal reward may be even stronger for Threat Actors who commit illegal acts, as it is more difficult for someone to cross that line purely for altruistic reasons. The position in the list has no significance.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="#attack-motivation-vocabulary"><span class="stixvocab">attack-motivation-ov</span></a> open vocabulary.</td>
   </tr>
 </table>
 
-### 4.17.2 Relationships <a id="threat-actor-relationships"></a>
+### 4.20.2 Relationships <a id="threat-actor-relationships"></a>
 
 These are the relationships explicitly defined between the Threat Actor object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -5215,51 +6431,51 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">attributed-to</span></td>
-    <td><span class="stixtype">identity</span></td>
-    <td>This Relationship describes that the Threat Actor's real identity is the related Identity.<br><br>For example, an <span class="stixliteral">attributed-to</span> Relationship from the jay-sm17h Threat Actor to the John Smith Identity means that the actor known as jay-sm17h is John Smith.</td>
+    <td><a class="stixtype" href="#identity">identity</a></td>
+    <td>This Relationship describes that the Threat Actor's real identity is the related Identity.<br /><br />For example, an <span class="stixliteral">attributed-to</span> Relationship from the jay-sm17h Threat Actor to the John Smith Identity means that the actor known as jay-sm17h is John Smith.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">compromises</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>This Relationship describes that the Threat Actor compromises the related Infrastructure.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">hosts</span>, <span class="stixliteral">owns</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>This Relationship describes that the Threat Actor hosts or owns the related Infrastructure (e.g. an actor that rents botnets to other threat actors).</td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">impersonates</span></td>
-    <td><span class="stixtype">identity</span></td>
-    <td>This Relationship describes that the Threat Actor impersonates the related Identity.<br><br>For example, an <span class="stixliteral">impersonates</span> Relationship from the gh0st Threat Actor to the ACME Corp. Identity means that the actor known as gh0st impersonates ACME Corp.</td>
+    <td><a class="stixtype" href="#identity">identity</a></td>
+    <td>This Relationship describes that the Threat Actor impersonates the related Identity.<br /><br />For example, an <span class="stixliteral">impersonates</span> Relationship from the gh0st Threat Actor to the ACME Corp. Identity means that the actor known as gh0st impersonates ACME Corp.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">located-at</span></td>
-    <td><span class="stixtype">location</span></td>
-    <td>This Relationship describes that the Threat Actor is located at or in the related Location.<br><br>For example, a <span class="stixliteral">located-at</span> relationship from the gh0st Threat Actor to a Location representing the United States means that ACME Corporation is located in the United States.</td>
+    <td><a class="stixtype" href="#location">location</a></td>
+    <td>This Relationship describes that the Threat Actor is located at or in the related Location.<br /><br />For example, a <span class="stixliteral">located-at</span> relationship from the gh0st Threat Actor to a Location representing the United States means that ACME Corporation is located in the United States.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">targets</span></td>
     <td><span class="stixtype">identity</span>, <span class="stixtype">location</span>, <span class="stixtype">vulnerability</span></td>
-    <td>This Relationship describes that the Threat Actor uses exploits of the related Vulnerability or targets the type of victims described by the related Identity or Location.<br><br>For example, a <span class="stixliteral">targets</span> Relationship from the jay-sm17h Threat Actor to a Vulnerability in a blogging platform indicates that attacks performed by John Smith often exploit that Vulnerability.<br><br>Similarly, a <span class="stixliteral">targets</span> Relationship from the jay-sm17h Threat Actor to an Identity describing the energy sector in the United States means that John Smith often carries out attacks against targets in that sector.</td>
+    <td>This Relationship describes that the Threat Actor uses exploits of the related Vulnerability or targets the type of victims described by the related Identity or Location.<br /><br />For example, a <span class="stixliteral">targets</span> Relationship from the jay-sm17h Threat Actor to a Vulnerability in a blogging platform indicates that attacks performed by John Smith often exploit that Vulnerability.<br /><br />Similarly, a <span class="stixliteral">targets</span> Relationship from the jay-sm17h Threat Actor to an Identity describing the energy sector in the United States means that John Smith often carries out attacks against targets in that sector.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">uses</span></td>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">malware</span>, <span class="stixtype">tool</span></td>
-    <td>This Relationship describes that attacks carried out as part of the Threat Actor typically use the related Attack Pattern, Infrastructure, Malware, or Tool.<br><br>For example, a <span class="stixliteral">uses</span> Relationship from the jay-sm17h Threat Actor to the xInject Malware indicates that xInject is often used by John Smith.<br><br>A campaign, threat actor, intrusion set, malware, or tool takes infrastructure and compromises and/or uses it for their own.</td>
+    <td>This Relationship describes that attacks carried out as part of the Threat Actor typically use the related Attack Pattern, Infrastructure, Malware, or Tool.<br /><br />For example, a <span class="stixliteral">uses</span> Relationship from the jay-sm17h Threat Actor to the xInject Malware indicates that xInject is often used by John Smith.<br /><br />A campaign, threat actor, intrusion set, malware, or tool takes infrastructure and compromises and/or uses it for their own.</td>
   </tr>
 </table>
 
@@ -5274,15 +6490,15 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">authored-by</span></td>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
     <td><span class="stixliteral">indicates</span></td>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
 </table>
@@ -5292,7 +6508,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "threat-actor",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "threat-actor--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:48.000Z",
@@ -5309,7 +6525,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.18 Tool <a id="tool"></a>
+## 4.21 Tool <a id="tool"></a>
 
 **Type Name:** <span class="stixtype">tool</span>
 
@@ -5319,7 +6535,7 @@ The Tool SDO characterizes the properties of these software tools and can be use
 
 This SDO **MUST NOT** be used to characterize malware. Further, Tool **MUST NOT** be used to characterize tools used as part of a course of action in response to an attack.
 
-### 4.18.1 Properties <a id="tool-properties"></a>
+### 4.21.1 Properties <a id="tool-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -5356,23 +6572,23 @@ This SDO **MUST NOT** be used to characterize malware. Further, Tool **MUST NOT*
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">tool</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name or characterizing text used to identify the Tool.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Tool, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
     <td><strong>tool_types</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">open-vocab</span></span></td>
-    <td>The kind(s) of tool(s) being described.<br><br>The values for this property <strong>SHOULD</strong> come from the <a href="#tool-type-vocabulary"><span class="stixvocab">tool-type-ov</span></a> open vocabulary.</td>
+    <td>The kind(s) of tool(s) being described.<br /><br />The values for this property <strong>SHOULD</strong> come from the <a href="#tool-type-vocabulary"><span class="stixvocab">tool-type-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>aliases</strong> (optional)</td>
@@ -5386,12 +6602,12 @@ This SDO **MUST NOT** be used to characterize malware. Further, Tool **MUST NOT*
   </tr>
   <tr>
     <td><strong>tool_version</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The version identifier associated with the Tool.</td>
   </tr>
 </table>
 
-### 4.18.2 Relationships <a id="tool-relationships"></a>
+### 4.21.2 Relationships <a id="tool-relationships"></a>
 
 These are the relationships explicitly defined between the Tool object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -5423,38 +6639,38 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">delivers</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>This Relationship describes that this Tool is used to deliver a malware instance (or family).</td>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">drops</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td>This Relationship documents that this Tool drops a malware instance (or family).</td>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">has</span></td>
-    <td><span class="stixtype">vulnerability</span></td>
-    <td>This Relationship describes that this specific Tool has this specific Vulnerability.<br><br>For example, a tool may not have been patched and currently is impacted by a CVE.</td>
+    <td><a class="stixtype" href="#vulnerability">vulnerability</a></td>
+    <td>This Relationship describes that this specific Tool has this specific Vulnerability.<br /><br />For example, a tool may not have been patched and currently is impacted by a CVE.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">targets</span></td>
     <td><span class="stixtype">identity</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">location</span>, <span class="stixtype">vulnerability</span></td>
-    <td>This Relationship documents that this Tool is being used to target this Identity, Infrastructure, Location, or exploit the Vulnerability.<br><br>For example, a <span class="stixliteral">targets</span> Relationship linking an exploit Tool to a Vulnerability for CVE-2016-0001 means that the tool exploits that vulnerability.<br><br>Similarly, a <span class="stixliteral">targets</span> Relationship linking a DDoS Tool to an Identity representing the energy sector means that Tool is typically used against targets in the energy sector.</td>
+    <td>This Relationship documents that this Tool is being used to target this Identity, Infrastructure, Location, or exploit the Vulnerability.<br /><br />For example, a <span class="stixliteral">targets</span> Relationship linking an exploit Tool to a Vulnerability for CVE-2016-0001 means that the tool exploits that vulnerability.<br /><br />Similarly, a <span class="stixliteral">targets</span> Relationship linking a DDoS Tool to an Identity representing the energy sector means that Tool is typically used against targets in the energy sector.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">uses</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td>This Relationship describes that this Tool uses the related Infrastructure.</td>
   </tr>
 </table>
@@ -5470,27 +6686,27 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">downloads</span>, <span class="stixliteral">drops</span></td>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td>See forward relationship for definition</td>
   </tr>
   <tr>
-    <td><span class="stixtype">indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
     <td><span class="stixliteral">indicates</span></td>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td>See forward relationship for definition</td>
   </tr>
   <tr>
-    <td><span class="stixtype">course-of-action</span></td>
+    <td><a class="stixtype" href="#course-of-action">course-of-action</a></td>
     <td><span class="stixliteral">mitigates</span></td>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td>See forward relationship for definition</td>
   </tr>
   <tr>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">campaign</span>, <span class="stixtype">intrusion-set</span>, <span class="stixtype">malware</span>, <span class="stixtype">threat-actor</span></td>
     <td><span class="stixliteral">uses</span></td>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td>See forward relationship for definition</td>
   </tr>
 </table>
@@ -5500,7 +6716,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "tool",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "tool--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:03:48.000Z",
@@ -5510,7 +6726,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 }
 ```
 
-## 4.19 Vulnerability <a id="vulnerability"></a>
+## 4.22 Vulnerability <a id="vulnerability"></a>
 
 **Type Name:** <span class="stixtype">vulnerability</span>
 
@@ -5520,7 +6736,7 @@ CVE is a list of information security vulnerabilities and exposures that provide
 
 The Vulnerability SDO is primarily used to link to external definitions of vulnerabilities or to describe 0-day vulnerabilities that do not yet have an external definition. Typically, other SDOs assert relationships to Vulnerability objects when a specific vulnerability is targeted and exploited as part of malicious cyber activity. As such, Vulnerability objects can be used as a linkage to the asset management and compliance process.
 
-### 4.19.1 Properties <a id="vulnerability-properties"></a>
+### 4.22.1 Properties <a id="vulnerability-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -5557,7 +6773,7 @@ The Vulnerability SDO is primarily used to link to external definitions of vulne
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">vulnerability</span>.</td>
   </tr>
   <tr>
@@ -5567,17 +6783,17 @@ The Vulnerability SDO is primarily used to link to external definitions of vulne
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name or characterizing text used to identify the Vulnerability.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Vulnerability, potentially including its purpose and its key characteristics.</td>
   </tr>
 </table>
 
-### 4.19.2 Relationships <a id="vulnerability-relationships"></a>
+### 4.22.2 Relationships <a id="vulnerability-relationships"></a>
 
 These are the relationships explicitly defined between the Vulnerability object and other STIX Objects. The first section lists the embedded relationships by property name along with their corresponding target. The rest of the table identifies the relationships that can be made from this object type to another object type by way of the Relationship object. The reverse relationships section illustrates the relationships targeting this object type from another object type. They are included here for convenience. For their definitions, please see the "Source" object.
 
@@ -5609,7 +6825,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
@@ -5632,21 +6848,21 @@ Relationships are not restricted to those listed below. Relationships can be cre
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">exploits</span></td>
-    <td><span class="stixtype">vulnerability</span></td>
+    <td><a class="stixtype" href="#vulnerability">vulnerability</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">course-of-action</span></td>
+    <td><a class="stixtype" href="#course-of-action">course-of-action</a></td>
     <td><span class="stixliteral">mitigates</span>, <span class="stixliteral">remediates</span></td>
-    <td><span class="stixtype">vulnerability</span></td>
+    <td><a class="stixtype" href="#vulnerability">vulnerability</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">has</span></td>
-    <td><span class="stixtype">vulnerability</span></td>
+    <td><a class="stixtype" href="#vulnerability">vulnerability</a></td>
     <td>See forward relationship for definition.</td>
   </tr>
 </table>
@@ -5656,7 +6872,7 @@ Relationships are not restricted to those listed below. Relationships can be cre
 ```JSON
 {
   "type": "vulnerability",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "vulnerability--0c7b5b88-8ff7-4a4d-aa9d-feb398cd0061",
   "created": "2016-05-12T08:17:27.000Z",
   "modified": "2016-05-12T08:17:27.000Z",
@@ -5730,38 +6946,38 @@ A relationship summary table for all specification-defined relationships can be 
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">relationship</span>.</td>
   </tr>
   <tr>
     <td><strong>relationship_type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The name used to identify the type of Relationship. This value <strong>SHOULD</strong> be an exact value listed in the relationships for the source and target SDO, but <strong>MAY</strong> be any string. The value of this property <strong>MUST</strong> be in ASCII and is limited to characters a-z (lowercase ASCII), 0-9, and hyphen (-).</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Relationship, potentially including its purpose and its key characteristics.</td>
   </tr>
   <tr>
     <td><strong>source_ref</strong> (required)</td>
-    <td><span class="stixtype">identifier</span></td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
     <td>The <strong>id</strong> of the source (from) object. The value <strong>MUST</strong> be an ID reference to an SDO or SCO (i.e., it cannot point to an SRO, Bundle, Language Content, or Marking Definition).</td>
   </tr>
   <tr>
     <td><strong>target_ref</strong> (required)</td>
-    <td><span class="stixtype">identifier</span></td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
     <td>The <strong>id</strong> of the target (to) object. The value <strong>MUST</strong> be an ID reference to an SDO or SCO (i.e., it cannot point to an SRO, Bundle, Language Content, or Marking Definition).</td>
   </tr>
   <tr>
     <td><strong>start_time</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>This optional timestamp represents the earliest time at which the Relationship between the objects exists. If this property is a future timestamp, at the time the <strong>start_time</strong> property is defined, then this represents an estimate by the producer of the intelligence of the earliest time at which relationship will be asserted to be true.<br><br>If it is not specified, then the earliest time at which the relationship between the objects exists is not defined.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>This optional timestamp represents the earliest time at which the Relationship between the objects exists. If this property is a future timestamp, at the time the <strong>start_time</strong> property is defined, then this represents an estimate by the producer of the intelligence of the earliest time at which relationship will be asserted to be true.<br /><br />If it is not specified, then the earliest time at which the relationship between the objects exists is not defined.</td>
   </tr>
   <tr>
     <td><strong>stop_time</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The latest time at which the Relationship between the objects exists. If this property is a future timestamp, at the time the <strong>stop_time</strong> property is defined, then this represents an estimate by the producer of the intelligence of the latest time at which relationship will be asserted to be true.<br><br>If <strong>start_time</strong> and <strong>stop_time</strong> are both defined, then <strong>stop_time MUST</strong> be later than the <strong>start_time</strong> value.<br><br>If <strong>stop_time</strong> is not specified, then the latest time at which the relationship between the objects exists is either not known, not disclosed, or has no defined stop time.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The latest time at which the Relationship between the objects exists. If this property is a future timestamp, at the time the <strong>stop_time</strong> property is defined, then this represents an estimate by the producer of the intelligence of the latest time at which relationship will be asserted to be true.<br /><br />If <strong>start_time</strong> and <strong>stop_time</strong> are both defined, then <strong>stop_time MUST</strong> be later than the <strong>start_time</strong> value.<br /><br />If <strong>stop_time</strong> is not specified, then the latest time at which the relationship between the objects exists is either not known, not disclosed, or has no defined stop time.</td>
   </tr>
 </table>
 
@@ -5842,47 +7058,47 @@ Sighting is distinct from Observed Data in that Sighting is an intelligence asse
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">sighting</span>.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A description that provides more details and context about the Sighting.</td>
   </tr>
   <tr>
     <td><strong>first_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>The beginning of the time window during which the SDO referenced by the <strong>sighting_of_ref</strong> property was sighted.</td>
   </tr>
   <tr>
     <td><strong>last_seen</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>The end of the time window during which the SDO referenced by the <strong>sighting_of_ref</strong> property was sighted.<br><br>If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>The end of the time window during which the SDO referenced by the <strong>sighting_of_ref</strong> property was sighted.<br /><br />If this property and the <strong>first_seen</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>first_seen</strong> property.</td>
   </tr>
   <tr>
     <td><strong>count</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
-    <td>If present, this <strong>MUST</strong> be an integer between 0 and 999,999,999 inclusive and represents the number of times the SDO referenced by the <strong>sighting_of_ref</strong> property was sighted.<br><br>Observed Data has a similar property called <strong>number_observed</strong>, which refers to the number of times the data was observed. These counts refer to different concepts and are distinct.<br><br>For example, a single sighting of a DDoS bot might have many millions of observations of the network traffic that it generates. Thus, the Sighting <strong>count</strong> would be 1 (the bot was observed once) but the Observed Data <strong>number_observed</strong> would be much higher.<br><br>As another example, a sighting with a count of 0 can be used to express that an indicator was not seen at all.</td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
+    <td>If present, this <strong>MUST</strong> be an integer between 0 and 999,999,999 inclusive and represents the number of times the SDO referenced by the <strong>sighting_of_ref</strong> property was sighted.<br /><br />Observed Data has a similar property called <strong>number_observed</strong>, which refers to the number of times the data was observed. These counts refer to different concepts and are distinct.<br /><br />For example, a single sighting of a DDoS bot might have many millions of observations of the network traffic that it generates. Thus, the Sighting <strong>count</strong> would be 1 (the bot was observed once) but the Observed Data <strong>number_observed</strong> would be much higher.<br /><br />As another example, a sighting with a count of 0 can be used to express that an indicator was not seen at all.</td>
   </tr>
   <tr>
     <td><strong>sighting_of_ref</strong> (required)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>An ID reference to the SDO that was sighted (e.g., Indicator or Malware).<br><br>For example, if this is a Sighting of an Indicator, that Indicator’s ID would be the value of this property.<br><br>This property <strong>MUST</strong> reference only an SDO.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>An ID reference to the SDO that was sighted (e.g., Indicator or Malware).<br /><br />For example, if this is a Sighting of an Indicator, that Indicator’s ID would be the value of this property.<br /><br />This property <strong>MUST</strong> reference only an SDO.</td>
   </tr>
   <tr>
     <td><strong>observed_data_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>A list of ID references to the Observed Data objects that contain the raw cyber data for this Sighting.<br><br>For example, a Sighting of an Indicator with an IP address could include the Observed Data for the network connection that the Indicator was used to detect.<br><br>This property <strong>MUST</strong> reference only Observed Data SDOs.</td>
+    <td>A list of ID references to the Observed Data objects that contain the raw cyber data for this Sighting.<br /><br />For example, a Sighting of an Indicator with an IP address could include the Observed Data for the network connection that the Indicator was used to detect.<br /><br />This property <strong>MUST</strong> reference only Observed Data SDOs.</td>
   </tr>
   <tr>
     <td><strong>where_sighted_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>A list of ID references to the Identity or Location objects describing the entities or types of entities that saw the sighting.<br><br>Omitting the <strong>where_sighted_refs</strong> property does not imply that the sighting was seen by the object creator. To indicate that the sighting was seen by the object creator, an Identity representing the object creator should be listed in <strong>where_sighted_refs</strong>.<br><br>This property <strong>MUST</strong> reference only Identity or Location SDOs.</td>
+    <td>A list of ID references to the Identity or Location objects describing the entities or types of entities that saw the sighting.<br /><br />Omitting the <strong>where_sighted_refs</strong> property does not imply that the sighting was seen by the object creator. To indicate that the sighting was seen by the object creator, an Identity representing the object creator should be listed in <strong>where_sighted_refs</strong>.<br /><br />This property <strong>MUST</strong> reference only Identity or Location SDOs.</td>
   </tr>
   <tr>
     <td><strong>summary</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The <strong>summary</strong> property indicates whether the Sighting should be considered summary data. Summary data is an aggregation of previous Sightings reports and should not be considered primary source data. Default value is <span class="stixliteral">false</span>.</td>
   </tr>
 </table>
@@ -5926,7 +7142,7 @@ The only type of relationship that can point to a Sighting Object is the embedde
 ```JSON
 {
   "type": "sighting",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "sighting--ee20065d-2555-424f-ad9e-0f8428623c75",
   "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
   "created": "2016-04-06T20:08:31.000Z",
@@ -5941,7 +7157,7 @@ The only type of relationship that can point to a Sighting Object is the embedde
 [
   {
     "type": "sighting",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "sighting--ee20065d-2555-424f-ad9e-0f8428623c75",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:08:31.000Z",
@@ -5955,7 +7171,7 @@ The only type of relationship that can point to a Sighting Object is the embedde
   },
   {
     "type": "observed-data",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "observed-data--b67d30ff-02ac-498a-92f9-32f845f448cf",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T19:58:16.000Z",
@@ -6011,7 +7227,7 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>hashes</strong>, <strong>payload_bin</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].</td>
+    <td><strong>hashes</strong>, <strong>payload_bin</strong><br /><br />If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].</td>
   </tr>
 </table>
 
@@ -6023,38 +7239,38 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">artifact</span>.</td>
   </tr>
   <tr>
     <td><strong>mime_type</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Whenever feasible, this value <strong>SHOULD</strong> be one of the values defined in the Template column in the IANA media type registry [<a href="#media-types">Media Types</a>]. Maintaining a comprehensive universal catalog of all extant file types is obviously not possible. When specifying a MIME Type not included in the IANA registry, implementers should use their best judgement so as to facilitate interoperability.</td>
   </tr>
   <tr>
     <td><strong>payload_bin</strong> (optional)</td>
-    <td><span class="stixtype">binary</span></td>
-    <td>Specifies the binary data contained in the artifact as a base64-encoded string.<br><br>This property <strong>MUST NOT</strong> be present if <strong>url</strong> is provided.</td>
+    <td><a class="stixtype" href="#binary">binary</a></td>
+    <td>Specifies the binary data contained in the artifact as a base64-encoded string.<br /><br />This property <strong>MUST NOT</strong> be present if <strong>url</strong> is provided.</td>
   </tr>
   <tr>
     <td><strong>url</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>The value of this property <strong>MUST</strong> be a valid URL that resolves to the unencoded content.<br><br>This property <strong>MUST NOT</strong> be present if <strong>payload_bin</strong> is provided.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>The value of this property <strong>MUST</strong> be a valid URL that resolves to the unencoded content.<br /><br />This property <strong>MUST NOT</strong> be present if <strong>payload_bin</strong> is provided.</td>
   </tr>
   <tr>
     <td><strong>hashes</strong> (optional)</td>
-    <td><span class="stixtype">hashes</span></td>
-    <td>Specifies a dictionary of hashes for the contents of the <strong>url</strong> or the <strong>payload_bin</strong>.<br><br>This property <strong>MUST</strong> be present when the <strong>url</strong> property is present.<br><br>Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#hashes">hashes</a></td>
+    <td>Specifies a dictionary of hashes for the contents of the <strong>url</strong> or the <strong>payload_bin</strong>.<br /><br />This property <strong>MUST</strong> be present when the <strong>url</strong> property is present.<br /><br />Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>encryption_algorithm</strong> (optional)</td>
-    <td><span class="stixtype">enum</span></td>
-    <td>If the artifact is encrypted, specifies the type of encryption algorithm the binary data (either via <strong>payload_bin</strong> or <strong>url</strong>) is encoded in.<br><br>The value of this property <strong>MUST</strong> come from the <a href="#encryption-algorithm-enumeration"><span class="stixvocab">encryption-algorithm-enum</span></a> enumeration.<br><br>If both <strong>mime_type</strong> and <strong>encryption_algorithm</strong> are included, this signifies that the artifact represents an encrypted archive.</td>
+    <td><a class="stixtype" href="#enum">enum</a></td>
+    <td>If the artifact is encrypted, specifies the type of encryption algorithm the binary data (either via <strong>payload_bin</strong> or <strong>url</strong>) is encoded in.<br /><br />The value of this property <strong>MUST</strong> come from the <a href="#encryption-algorithm-enumeration"><span class="stixvocab">encryption-algorithm-enum</span></a> enumeration.<br /><br />If both <strong>mime_type</strong> and <strong>encryption_algorithm</strong> are included, this signifies that the artifact represents an encrypted archive.</td>
   </tr>
   <tr>
     <td><strong>decryption_key</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies the decryption key for the encrypted binary data (either via <strong>payload_bin</strong> or <strong>url</strong>). For example, this may be useful in cases of sharing malware samples, which are often encoded in an encrypted archive.<br><br>This property <strong>MUST NOT</strong> be present when the <strong>encryption_algorithm</strong> property is absent.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies the decryption key for the encrypted binary data (either via <strong>payload_bin</strong> or <strong>url</strong>). For example, this may be useful in cases of sharing malware samples, which are often encoded in an encrypted archive.<br /><br />This property <strong>MUST NOT</strong> be present when the <strong>encryption_algorithm</strong> property is absent.</td>
   </tr>
 </table>
 
@@ -6065,7 +7281,7 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
 ```JSON
 {
   "type": "artifact",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "artifact--a785c567-cc53-52a1-abeb-026bb7ddf8ba",
   "mime_type": "image/jpeg",
   "payload_bin": "VBORw0KGgoAAAANSUhEUgAAADI== ..."
@@ -6077,7 +7293,7 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
 ```JSON
 {
   "type": "artifact",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "artifact--6be1fbcb-fd03-5ec3-b05f-4329746e9d2b",
   "mime_type": "application/zip",
   "payload_bin": "ZX7HIBWPQA99NSUhEUgAAADI== ...",
@@ -6135,22 +7351,22 @@ This object represents the properties of an Autonomous System (AS).
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">autonomous-system</span>.</td>
   </tr>
   <tr>
     <td><strong>number</strong> (required)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the number assigned to the AS. Such assignments are typically performed by a Regional Internet Registry (RIR).</td>
   </tr>
   <tr>
     <td><strong>name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the AS.</td>
   </tr>
   <tr>
     <td><strong>rir</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the Regional Internet Registry (RIR) that assigned the number to the AS.</td>
   </tr>
 </table>
@@ -6162,7 +7378,7 @@ This object represents the properties of an Autonomous System (AS).
 ```JSON
 {
   "type": "autonomous-system",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "autonomous-system--3aa27478-50b5-5ab8-9da9-cdc12b657fff",
   "number": 15139,
   "name": "Slime Industries",
@@ -6219,38 +7435,38 @@ The Directory object represents the properties common to a file system directory
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">directory</span>.</td>
   </tr>
   <tr>
     <td><strong>path</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the path, as originally observed, to the directory on the file system.</td>
   </tr>
   <tr>
     <td><strong>path_enc</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the observed encoding for the path. The value <strong>MUST</strong> be specified if the path is stored in a non-Unicode encoding. This value <strong>MUST</strong> be specified using the corresponding name from the 2013-12-20 revision of the IANA character set registry [<a href="#character-sets">Character Sets</a>]. If the preferred MIME name for a character set is defined, this value <strong>MUST</strong> be used; if it is not defined, then the Name value from the registry <strong>MUST</strong> be used instead.</td>
   </tr>
   <tr>
     <td><strong>ctime</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date/time the directory was created.</td>
   </tr>
   <tr>
     <td><strong>mtime</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date/time the directory was last written to/modified.</td>
   </tr>
   <tr>
     <td><strong>atime</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date/time the directory was last accessed.</td>
   </tr>
   <tr>
     <td><strong>contains_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies a list of references to other File and/or Directory objects contained within the directory.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">file</span> or <span class="stixtype">directory</span>.</td>
+    <td>Specifies a list of references to other File and/or Directory objects contained within the directory.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">file</span> or <span class="stixtype">directory</span>.</td>
   </tr>
 </table>
 
@@ -6261,7 +7477,7 @@ The Directory object represents the properties common to a file system directory
 ```JSON
 {
   "type": "directory",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "directory--0a58d0c1-59e6-5afd-8252-dcd3f13e5622",
   "path": "C:\\Windows\\System32"
 }
@@ -6316,18 +7532,18 @@ The Domain Name object represents the properties of a network domain name.
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">domain-name</span>.</td>
   </tr>
   <tr>
     <td><strong>value</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the value of the domain name. The value of this property <strong>MUST</strong> conform to [<a href="#rfc1034">RFC1034</a>], and each domain and sub-domain contained within the domain name <strong>MUST</strong> conform to [<a href="#rfc5890">RFC5890</a>].</td>
   </tr>
   <tr>
     <td><strong>resolves_to_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies a list of references to one or more IP addresses or domain names that the domain name resolves to.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">ipv4-addr</span> or <span class="stixtype">ipv6-addr</span> or <span class="stixtype">domain-name</span> (for cases such as CNAME records).</td>
+    <td>Specifies a list of references to one or more IP addresses or domain names that the domain name resolves to.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">ipv4-addr</span> or <span class="stixtype">ipv6-addr</span> or <span class="stixtype">domain-name</span> (for cases such as CNAME records).</td>
   </tr>
 </table>
 
@@ -6338,12 +7554,12 @@ These are the relationships explicitly defined between the Domain Name object an
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class="stixtype">domain-name</span></td>
+    <td><a class="stixtype" href="#domain-name-object">domain-name</a></td>
     <td><span class="stixliteral">resolves-to</span></td>
     <td><span class="stixtype">domain-name</span>, <span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span></td>
     <td>This Relationship describes that this Domain Name resolves to one or more IP addresses or domain names.</td>
@@ -6358,14 +7574,14 @@ These are the relationships explicitly defined between the Domain Name object an
 [
   {
     "type": "domain-name",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "domain-name--bedb4899-d24b-5401-bc86-8f6b4cc18ec7",
     "value": "example.com",
     "resolves_to_refs": ["ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4"]
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
     "value": "198.51.100.3"
   }
@@ -6421,23 +7637,23 @@ The Email Address object represents a single email address.
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">email-addr</span>.</td>
   </tr>
   <tr>
     <td><strong>value</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies the value of the email address. This <strong>MUST NOT</strong> include the display name.<br><br>This property corresponds to the addr-spec construction in section 3.4 of [<a href="#rfc5322">RFC5322</a>], for example, <span class="stixliteral">jane.smith@example.com</span>.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies the value of the email address. This <strong>MUST NOT</strong> include the display name.<br /><br />This property corresponds to the addr-spec construction in section 3.4 of [<a href="#rfc5322">RFC5322</a>], for example, <span class="stixliteral">jane.smith@example.com</span>.</td>
   </tr>
   <tr>
     <td><strong>display_name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies a single email display name, i.e., the name that is displayed to the human user of a mail application.<br><br>This property corresponds to the display-name construction in section 3.4 of [<a href="#rfc5322">RFC5322</a>], for example, <span class="stixliteral">Jane Smith.</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies a single email display name, i.e., the name that is displayed to the human user of a mail application.<br /><br />This property corresponds to the display-name construction in section 3.4 of [<a href="#rfc5322">RFC5322</a>], for example, <span class="stixliteral">Jane Smith.</span></td>
   </tr>
   <tr>
     <td><strong>belongs_to_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the user account that the email address belongs to, as a reference to a User Account object.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">user-account</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the user account that the email address belongs to, as a reference to a User Account object.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">user-account</span>.</td>
   </tr>
 </table>
 
@@ -6448,7 +7664,7 @@ The Email Address object represents a single email address.
 ```JSON
 {
   "type": "email-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "email-addr--7165e2a9-671f-585d-b1e1-ca59c671d934",
   "value": "john@example.com",
   "display_name": "John Doe"
@@ -6506,72 +7722,72 @@ Header field values that have been encoded as described in section 2 of \[[RFC20
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">email-message</span>.</td>
   </tr>
   <tr>
     <td><strong>is_multipart</strong> (required)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Indicates whether the email body contains multiple MIME parts.</td>
   </tr>
   <tr>
     <td><strong>date</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date/time that the email message was sent.</td>
   </tr>
   <tr>
     <td><strong>content_type</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the value of the "Content-Type" header of the email message.</td>
   </tr>
   <tr>
     <td><strong>from_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the value of the "From:" header of the email message. The "From:" field specifies the author of the message, that is, the mailbox(es) of the person or system responsible for the writing of the message.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">email-addr</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the value of the "From:" header of the email message. The "From:" field specifies the author of the message, that is, the mailbox(es) of the person or system responsible for the writing of the message.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">email-addr</span>.</td>
   </tr>
   <tr>
     <td><strong>sender_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the value of the "Sender" field of the email message. The "Sender:" field specifies the mailbox of the agent responsible for the actual transmission of the message.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">email-addr</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the value of the "Sender" field of the email message. The "Sender:" field specifies the mailbox of the agent responsible for the actual transmission of the message.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">email-addr</span>.</td>
   </tr>
   <tr>
     <td><strong>to_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies the mailboxes that are "To:" recipients of the email message.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">email-addr</span>.</td>
+    <td>Specifies the mailboxes that are "To:" recipients of the email message.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">email-addr</span>.</td>
   </tr>
   <tr>
     <td><strong>cc_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies the mailboxes that are "CC:" recipients of the email message.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">email-addr</span>.</td>
+    <td>Specifies the mailboxes that are "CC:" recipients of the email message.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">email-addr</span>.</td>
   </tr>
   <tr>
     <td><strong>bcc_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies the mailboxes that are "BCC:" recipients of the email message.<br><br>As per [<a href="#rfc5322">RFC5322</a>], the absence of this property should not be interpreted as semantically equivalent to an absent BCC header on the message being characterized.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">email-addr</span>.</td>
+    <td>Specifies the mailboxes that are "BCC:" recipients of the email message.<br /><br />As per [<a href="#rfc5322">RFC5322</a>], the absence of this property should not be interpreted as semantically equivalent to an absent BCC header on the message being characterized.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">email-addr</span>.</td>
   </tr>
   <tr>
     <td><strong>message_id</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the Message-ID field of the email message.</td>
   </tr>
   <tr>
     <td><strong>subject</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the subject of the email message.</td>
   </tr>
   <tr>
     <td><strong>received_lines</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">string</span></span></td>
-    <td>Specifies one or more "Received" header fields that may be included in the email headers.<br><br>List values <strong>MUST</strong> appear in the same order as present in the email message.</td>
+    <td>Specifies one or more "Received" header fields that may be included in the email headers.<br /><br />List values <strong>MUST</strong> appear in the same order as present in the email message.</td>
   </tr>
   <tr>
     <td><strong>additional_header_fields</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
-    <td>Specifies any other header fields (except for <strong>date</strong>, <strong>received_lines</strong>, <strong>content_type</strong>, <strong>from_ref</strong>, <strong>sender_ref</strong>, <strong>to_refs</strong>, <strong>cc_refs</strong>, <strong>bcc_refs</strong>, and <strong>subject</strong>) found in the email message, as a dictionary.<br><br>Each key/value pair in the dictionary represents the name/value of a single header field or names/values of a header field that occurs more than once. Each dictionary key <strong>SHOULD</strong> be a case-preserved version of the header field name. The corresponding value for each dictionary key <strong>MUST</strong> always be a <span class="stixtype">list</span> of type <span class="stixtype">string</span> to support when a header field is repeated.</td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
+    <td>Specifies any other header fields (except for <strong>date</strong>, <strong>received_lines</strong>, <strong>content_type</strong>, <strong>from_ref</strong>, <strong>sender_ref</strong>, <strong>to_refs</strong>, <strong>cc_refs</strong>, <strong>bcc_refs</strong>, and <strong>subject</strong>) found in the email message, as a dictionary.<br /><br />Each key/value pair in the dictionary represents the name/value of a single header field or names/values of a header field that occurs more than once. Each dictionary key <strong>SHOULD</strong> be a case-preserved version of the header field name. The corresponding value for each dictionary key <strong>MUST</strong> always be a <span class="stixtype">list</span> of type <span class="stixtype">string</span> to support when a header field is repeated.</td>
   </tr>
   <tr>
     <td><strong>body</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies a <span class="stixtype">string</span> containing the email body. This property <strong>MUST NOT</strong> be used if <strong>is_multipart</strong> is true.</td>
   </tr>
   <tr>
@@ -6581,8 +7797,8 @@ Header field values that have been encoded as described in section 2 of \[[RFC20
   </tr>
   <tr>
     <td><strong>raw_email_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the raw binary contents of the email message, including both the headers and body, as a reference to an Artifact object.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the raw binary contents of the email message, including both the headers and body, as a reference to an Artifact object.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span>.</td>
   </tr>
 </table>
 
@@ -6596,7 +7812,7 @@ There is no property to capture the value of the "Content-Transfer-Encoding" hea
 
 One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
 
-#### Properties <a id="email-mime-component-type-properties"></a>
+#### 6.6.2.1 Properties <a id="email-mime-component-type-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -6606,22 +7822,22 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   </tr>
   <tr>
     <td><strong>body</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies the contents of the MIME part if the <strong>content_type</strong> is not provided or starts with <span class="stixliteral">text/</span> (e.g., in the case of plain text or HTML email).<br><br>For inclusion in this property, the contents <strong>MUST</strong> be decoded to Unicode. Note that the charset provided in <strong>content_type</strong> is for informational usage and not for decoding of this property.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies the contents of the MIME part if the <strong>content_type</strong> is not provided or starts with <span class="stixliteral">text/</span> (e.g., in the case of plain text or HTML email).<br /><br />For inclusion in this property, the contents <strong>MUST</strong> be decoded to Unicode. Note that the charset provided in <strong>content_type</strong> is for informational usage and not for decoding of this property.</td>
   </tr>
   <tr>
     <td><strong>body_raw_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the contents of non-textual MIME parts, that is those whose <strong>content_type</strong> does not start with <span class="stixliteral">text/</span>, as a reference to an Artifact object or File object.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span> or <span class="stixtype">file</span>. For use cases where conveying the actual data contained in the MIME part is of primary importance, <span class="stixtype">artifact</span> <strong>SHOULD</strong> be used. Otherwise, for use cases where conveying metadata about the file-like properties of the MIME part is of primary importance, <span class="stixtype">file</span> <strong>SHOULD</strong> be used.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the contents of non-textual MIME parts, that is those whose <strong>content_type</strong> does not start with <span class="stixliteral">text/</span>, as a reference to an Artifact object or File object.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span> or <span class="stixtype">file</span>. For use cases where conveying the actual data contained in the MIME part is of primary importance, <span class="stixtype">artifact</span> <strong>SHOULD</strong> be used. Otherwise, for use cases where conveying metadata about the file-like properties of the MIME part is of primary importance, <span class="stixtype">file</span> <strong>SHOULD</strong> be used.</td>
   </tr>
   <tr>
     <td><strong>content_type</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies the value of the "Content-Type" header field of the MIME part.<br><br>Any additional "Content-Type" header field parameters such as <span class="stixliteral">charset</span> <strong>SHOULD</strong> be included in this property.<br><br>Example:<br><blockquote>text/html; charset=UTF-8</blockquote></td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies the value of the "Content-Type" header field of the MIME part.<br /><br />Any additional "Content-Type" header field parameters such as <span class="stixliteral">charset</span> <strong>SHOULD</strong> be included in this property.<br /><br />Example:<br /><blockquote>text/html; charset=UTF-8</blockquote></td>
   </tr>
   <tr>
     <td><strong>content_disposition</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the value of the "Content-Disposition" header field of the MIME part.</td>
   </tr>
 </table>
@@ -6634,7 +7850,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
 [
   {
     "type": "email-message",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-message--92fa1bfd-2c62-5a30-8b7c-5b91ea73cf29",
     "from_ref": "email-addr--6deb37bd-12b7-54ae-805f-5f7146f3d171",
     "to_refs": ["email-addr--2aeeb98c-9db4-525e-874d-221fdfe9f76e"],
@@ -6644,14 +7860,14 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--6deb37bd-12b7-54ae-805f-5f7146f3d171",
     "value": "jdoe@example.com",
     "display_name": "John Doe"
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--2aeeb98c-9db4-525e-874d-221fdfe9f76e",
     "value": "mary@example.com",
     "display_name": "Mary Smith"
@@ -6665,7 +7881,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
 [
   {
     "type": "email-message",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-message--0c57a381-2a17-5e61-8754-5ef96efb286c",
     "from_ref": "email-addr--9b7e29b3-fd8d-562e-b3f0-8fc8134f5dda",
     "to_refs": ["email-addr--3734e66b-c4e8-5d0b-bca9-befdd5699746"],
@@ -6681,14 +7897,14 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--9b7e29b3-fd8d-562e-b3f0-8fc8134f5dda",
     "value": "joe@example.com",
     "display_name": "Joe Smith"
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--3734e66b-c4e8-5d0b-bca9-befdd5699746",
     "value": "bob@example.com",
     "display_name": "Bob Smith"
@@ -6702,7 +7918,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
 [
   {
     "type": "email-message",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-message--d7d69ead-3347-5772-815a-7766dc29c72c",
     "is_multipart": true,
     "received_lines": [
@@ -6739,28 +7955,28 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--6deb37bd-12b7-54ae-805f-5f7146f3d171",
     "value": "jdoe@example.com",
     "display_name": "John Doe"
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--3734e66b-c4e8-5d0b-bca9-befdd5699746",
     "value": "bob@example.com",
     "display_name": "Bob Smith"
   },
   {
     "type": "email-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "email-addr--2aeeb98c-9db4-525e-874d-221fdfe9f76e",
     "value": "mary@example.com",
     "display_name": "Mary Smith"
   },
   {
     "type": "artifact",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "artifact--0682152c-646a-513b-bc07-e516494ed178"
     "mime_type": "image/jpeg",
     "payload_bin": "VBORw0KGgoAAAANSUhEUgAAADI== ...",
@@ -6770,7 +7986,7 @@ One of <strong>body</strong> OR <strong>body_raw_ref MUST</strong> be included.
   },
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--cfebcece-2336-51b0-baf1-d94daae5e1d1",
     "name": "tabby_pics.zip",
     "magic_number_hex": "504B0304",
@@ -6818,7 +8034,7 @@ The File object represents the properties of a file. A File object **MUST** cont
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>hashes</strong>, <strong>name</strong>, <strong>extensions</strong>, <strong>parent_directory_ref</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].</td>
+    <td><strong>hashes</strong>, <strong>name</strong>, <strong>extensions</strong>, <strong>parent_directory_ref</strong><br /><br />If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].</td>
   </tr>
 </table>
 
@@ -6830,73 +8046,73 @@ The File object represents the properties of a file. A File object **MUST** cont
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">file</span>.</td>
   </tr>
   <tr>
     <td><strong>extensions</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
-    <td>The File object defines the following extensions. In addition to these, producers <strong>MAY</strong> create their own.<br><br><span class="stixtype">ntfs-ext</span>, <span class="stixtype">raster-image-ext</span>, <span class="stixtype">pdf-ext</span>, <span class="stixtype">archive-ext</span>, <span class="stixtype">windows-pebinary-ext</span><br><br>Dictionary keys <strong>MUST</strong> use the specification defined name (examples above) or be the id of a STIX Extension object, depending on the type of extension being used.<br><br>The corresponding dictionary values <strong>MUST</strong> contain the contents of the extension instance.</td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
+    <td>The File object defines the following extensions. In addition to these, producers <strong>MAY</strong> create their own.<br /><br /><span class="stixtype">ntfs-ext</span>, <span class="stixtype">raster-image-ext</span>, <span class="stixtype">pdf-ext</span>, <span class="stixtype">archive-ext</span>, <span class="stixtype">windows-pebinary-ext</span><br /><br />Dictionary keys <strong>MUST</strong> use the specification defined name (examples above) or be the id of a STIX Extension object, depending on the type of extension being used.<br /><br />The corresponding dictionary values <strong>MUST</strong> contain the contents of the extension instance.</td>
   </tr>
   <tr>
     <td><strong>hashes</strong> (optional)</td>
-    <td><span class="stixtype">hashes</span></td>
-    <td>Specifies a dictionary of hashes for the file.<br><br>(When used with the Archive File Extension, this refers to the hash of the <strong>entire</strong> archive file, <strong>not</strong> its contents.)<br><br>Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#hashes">hashes</a></td>
+    <td>Specifies a dictionary of hashes for the file.<br /><br />(When used with the Archive File Extension, this refers to the hash of the <strong>entire</strong> archive file, <strong>not</strong> its contents.)<br /><br />Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>size</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the file, in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the file.</td>
   </tr>
   <tr>
     <td><strong>name_enc</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies the observed encoding for the name of the file. This value <strong>MUST</strong> be specified using the corresponding name from the 2013-12-20 revision of the IANA character set registry [<a href="#character-sets">Character Sets</a>]. If the value from the Preferred MIME Name column for a character set is defined, this value <strong>MUST</strong> be used; if it is not defined, then the value from the Name column in the registry <strong>MUST</strong> be used instead.<br><br>This property allows for the capture of the original text encoding for the file name, which may be forensically relevant; for example, a file on an NTFS volume whose name was created using the windows-1251 encoding, commonly used for languages based on Cyrillic script.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies the observed encoding for the name of the file. This value <strong>MUST</strong> be specified using the corresponding name from the 2013-12-20 revision of the IANA character set registry [<a href="#character-sets">Character Sets</a>]. If the value from the Preferred MIME Name column for a character set is defined, this value <strong>MUST</strong> be used; if it is not defined, then the value from the Name column in the registry <strong>MUST</strong> be used instead.<br /><br />This property allows for the capture of the original text encoding for the file name, which may be forensically relevant; for example, a file on an NTFS volume whose name was created using the windows-1251 encoding, commonly used for languages based on Cyrillic script.</td>
   </tr>
   <tr>
     <td><strong>magic_number_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the hexadecimal constant ("magic number") associated with a specific file format that corresponds to the file, if applicable.</td>
   </tr>
   <tr>
     <td><strong>mime_type</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies the MIME type name specified for the file, e.g., <span class="stixliteral">application/msword</span>.<br><br>Whenever feasible, this value <strong>SHOULD</strong> be one of the values defined in the Template column in the IANA media type registry [<a href="#media-types">Media Types</a>].<br><br>Maintaining a comprehensive universal catalog of all extant file types is obviously not possible. When specifying a MIME Type not included in the IANA registry, implementers should use their best judgement so as to facilitate interoperability.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies the MIME type name specified for the file, e.g., <span class="stixliteral">application/msword</span>.<br /><br />Whenever feasible, this value <strong>SHOULD</strong> be one of the values defined in the Template column in the IANA media type registry [<a href="#media-types">Media Types</a>].<br /><br />Maintaining a comprehensive universal catalog of all extant file types is obviously not possible. When specifying a MIME Type not included in the IANA registry, implementers should use their best judgement so as to facilitate interoperability.</td>
   </tr>
   <tr>
     <td><strong>ctime</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date/time the file was created.</td>
   </tr>
   <tr>
     <td><strong>mtime</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date/time the file was last written to/modified.</td>
   </tr>
   <tr>
     <td><strong>atime</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date/time the file was last accessed.</td>
   </tr>
   <tr>
     <td><strong>parent_directory_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the parent directory of the file, as a reference to a Directory object.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">directory</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the parent directory of the file, as a reference to a Directory object.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">directory</span>.</td>
   </tr>
   <tr>
     <td><strong>contains_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies a list of references to other Cyber-observable Objects contained within the file, such as another file that is appended to the end of the file, or an IP address that is contained somewhere in the file.<br><br>This is intended for use cases other than those targeted by the Archive extension.</td>
+    <td>Specifies a list of references to other Cyber-observable Objects contained within the file, such as another file that is appended to the end of the file, or an IP address that is contained somewhere in the file.<br /><br />This is intended for use cases other than those targeted by the Archive extension.</td>
   </tr>
   <tr>
     <td><strong>content_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the content of the file, represented as an Artifact object.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the content of the file, represented as an Artifact object.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span>.</td>
   </tr>
 </table>
 
@@ -6907,7 +8123,7 @@ The File object represents the properties of a file. A File object **MUST** cont
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--949eb97a-da1e-5292-8959-03c4249dc9f3",
   "hashes": {
     "SHA-256": "fe90a7e910cb3a4739bed9180e807e93fa70c90f25a8915476f5e4bfbac681db"
@@ -6922,7 +8138,7 @@ The File object represents the properties of a file. A File object **MUST** cont
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--7d1e3a18-89e7-5bc5-be36-9879f5b7f5c8",
   "hashes": {
     "SHA-256": "841a8921140aba50671ebb0770fecc4ee308c4952cfeff8de154ab14eeef4649"
@@ -6940,13 +8156,13 @@ In this example, the file name would have originally appeared using the bytes 71
 [
   {
     "type": "directory",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "directory--0a58d0c1-59e6-5afd-8252-dcd3f13e5622",
     "path": "C:\\Windows\\System32"
   },
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--39643577-13b7-5f21-9584-df7e7c33f357",
     "hashes": {
       "SHA-256": "ceafbfd424be2ca4a5f0402cae090dda2fb0526cf521b60b60077c0f622b285a"
@@ -6963,7 +8179,7 @@ In this example, the file name would have originally appeared using the bytes 71
 
 The Archive File extension specifies a default extension for capturing properties specific to archive files. The key for this extension when used in the **extensions** dictionary **MUST** be <span class="stixliteral">archive-ext</span>. Note that this predefined extension does not use the extension facility described in [section 7.3](#extension-definition).
 
-#### Properties <a id="archive-file-extension-properties"></a>
+#### 6.7.2.1 Properties <a id="archive-file-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -6974,11 +8190,11 @@ The Archive File extension specifies a default extension for capturing propertie
   <tr>
     <td><strong>contains_refs</strong> (required)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>This property specifies the files that are contained in the archive. It <strong>MUST</strong> contain references to one or more File objects.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">file</span> or <span class="stixtype">directory</span>.</td>
+    <td>This property specifies the files that are contained in the archive. It <strong>MUST</strong> contain references to one or more File objects.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">file</span> or <span class="stixtype">directory</span>.</td>
   </tr>
   <tr>
     <td><strong>comment</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies a comment included as part of the archive file.</td>
 </table>
 
@@ -6990,7 +8206,7 @@ The Archive File extension specifies a default extension for capturing propertie
 [
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--70221dbf-52fd-5377-9619-c0ce6b3ffc8c",
     "hashes": {
       "SHA-256": "ceafbfd424be2ca4a5f0402cae090dda2fb0526cf521b60b60077c0f622b285a"
@@ -6998,7 +8214,7 @@ The Archive File extension specifies a default extension for capturing propertie
   }
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--c0e2b1c9-232d-5b64-8b74-b6aee5bb9c47",
     "hashes": {
       "SHA-256": "19c549ec2628b989382f6b280cbd7bb836a0b461332c0fe53511ce7d584b89d3"
@@ -7006,7 +8222,7 @@ The Archive File extension specifies a default extension for capturing propertie
   }
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--5d0833b7-065e-571f-8bf2-657cb9569570",
     "hashes": {
       "SHA-256": "0969de02ecf8a5f003e3f6d063d848c8a193aada092623f8ce408c15bcb5f038"
@@ -7014,7 +8230,7 @@ The Archive File extension specifies a default extension for capturing propertie
   }
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--9a1f834d-2506-5367-baec-7aa63996ac43",
     "name": "foo.zip",
     "hashes": {
@@ -7042,7 +8258,7 @@ The NTFS File extension specifies a set of properties specific to files stored o
 
 An object using the NTFS File Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="ntfs-file-extension-properties"></a>
+#### 6.7.3.1 Properties <a id="ntfs-file-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -7052,7 +8268,7 @@ An object using the NTFS File Extension **MUST** contain at least one property f
   </tr>
   <tr>
     <td><strong>sid</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the security ID (SID) value assigned to the file.</td>
   </tr>
   <tr>
@@ -7061,7 +8277,7 @@ An object using the NTFS File Extension **MUST** contain at least one property f
     <td>Specifies a list of NTFS alternate data streams that exist for the file.</td>
 </table>
 
-#### Alternate Data Stream Type <a id="alternate-data-stream-type"></a>
+#### 6.7.3.2 Alternate Data Stream Type <a id="alternate-data-stream-type"></a>
 
 **Type Name**: <span class="stixtype">alternate-data-stream-type</span>
 
@@ -7077,17 +8293,17 @@ The Alternate Data Stream type represents an NTFS alternate data stream.
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the alternate data stream.</td>
   </tr>
   <tr>
     <td><strong>hashes</strong> (optional)</td>
-    <td><span class="stixtype">hashes</span></td>
-    <td>Specifies a dictionary of hashes for the data contained in the alternate data stream.<br><br>Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#hashes">hashes</a></td>
+    <td>Specifies a dictionary of hashes for the data contained in the alternate data stream.<br /><br />Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>size</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the alternate data stream, in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
 </table>
@@ -7099,7 +8315,7 @@ The Alternate Data Stream type represents an NTFS alternate data stream.
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--ba04c974-3cef-5f42-adc7-084d467874e2",
   "hashes": {
     "SHA-256": "35a01331e9ad96f751278b891b6ea09699806faedfa237d40513d92ad1b7100f"
@@ -7125,7 +8341,7 @@ The PDF file extension specifies a default extension for capturing properties sp
 
 An object using the PDF File Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="pdf-file-extension-properties"></a>
+#### 6.7.4.1 Properties <a id="pdf-file-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -7135,27 +8351,27 @@ An object using the PDF File Extension **MUST** contain at least one property fr
   </tr>
   <tr>
     <td><strong>version</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the decimal version number of the string from the PDF header that specifies the version of the PDF specification to which the PDF file conforms. E.g <span class="stixalt">1.4</span></td>
   </tr>
   <tr>
     <td><strong>is_optimized</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Specifies whether the PDF file has been optimized.</td>
   </tr>
   <tr>
     <td><strong>document_info_dict</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
     <td>Specifies details of the PDF document information dictionary (DID), which includes properties like the document creation date and producer, as a dictionary. Each key in the dictionary <strong>SHOULD</strong> be a case-preserved version of the corresponding entry in the document information dictionary without the prepended forward slash, e.g., Title. The corresponding value for the key <strong>MUST</strong> be the value specified for the document information dictionary entry, as a <span class="stixtype">string</span>.</td>
   </tr>
   <tr>
     <td><strong>pdfid0</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the first file identifier found for the PDF file.</td>
   </tr>
   <tr>
     <td><strong>pdfid1</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the second file identifier found for the PDF file.</td>
   </tr>
 </table>
@@ -7167,7 +8383,7 @@ An object using the PDF File Extension **MUST** contain at least one property fr
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--965aa96f-d90a-506a-8317-d38d44b235f9",
   "name": "example.pdf",
   "extensions": {
@@ -7195,7 +8411,7 @@ The Raster Image file extension specifies a default extension for capturing prop
 
 An object using the Raster Image File Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="raster-image-file-extension-properties"></a>
+#### 6.7.5.1 Properties <a id="raster-image-file-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -7205,22 +8421,22 @@ An object using the Raster Image File Extension **MUST** contain at least one pr
   </tr>
   <tr>
     <td><strong>image_height</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the height of the image in the image file, in pixels.</td>
   </tr>
   <tr>
     <td><strong>image_width</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the width of the image in the image file, in pixels.</td>
   </tr>
   <tr>
     <td><strong>bits_per_pixel</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the sum of bits used for each color channel in the image file, and thus the total number of pixels used for expressing the color depth of the image.</td>
   </tr>
   <tr>
     <td><strong>exif_tags</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
     <td>Specifies the set of EXIF tags found in the image file, as a dictionary. Each key/value pair in the dictionary represents the name/value of a single EXIF tag. Accordingly, each dictionary key <strong>MUST</strong> be a case-preserved version of the EXIF tag name, e.g., <span class="stixliteral">XResolution</span>. Each dictionary value <strong>MUST</strong> be either an <span class="stixtype">integer</span> (for int* EXIF datatypes) or a <span class="stixtype">string</span> (for all other EXIF datatypes).</td>
   </tr>
 </table>
@@ -7232,7 +8448,7 @@ An object using the Raster Image File Extension **MUST** contain at least one pr
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--66772174-3442-5e0d-b577-4bd7be55fb87",
   "name": "picture.jpg",
   "hashes": {
@@ -7259,7 +8475,7 @@ The Windows™ PE Binary File extension specifies a default extension for captur
 
 An object using the Windows™ PE Binary File Extension **MUST** contain at least one property other than the required **pe_type** property from this extension.
 
-#### Properties <a id="windows-pe-binary-file-extension-properties"></a>
+#### 6.7.6.1 Properties <a id="windows-pe-binary-file-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -7269,53 +8485,53 @@ An object using the Windows™ PE Binary File Extension **MUST** contain at leas
   </tr>
   <tr>
     <td><strong>pe_type</strong> (required)</td>
-    <td><span class="stixtype">open-vocab</span></td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
     <td>Specifies the type of the PE binary. This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#windows-pe-binary-vocabulary"><span class="stixvocab">windows-pebinary-type-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>imphash</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the special import hash, or 'imphash', calculated for the PE Binary based on its imported libraries and functions.</td>
   </tr>
   <tr>
     <td><strong>machine_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the type of target machine.</td>
   </tr>
   <tr>
     <td><strong>number_of_sections</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the number of sections in the PE binary, as a non-negative integer.</td>
   </tr>
   <tr>
     <td><strong>time_date_stamp</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the time when the PE binary was created. The timestamp value <strong>MUST</strong> be precise to the second.</td>
   </tr>
   <tr>
     <td><strong>pointer_to_symbol_table_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the file offset of the COFF symbol table.</td>
   </tr>
   <tr>
     <td><strong>number_of_symbols</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the number of entries in the symbol table of the PE binary, as a non-negative integer.</td>
   </tr>
   <tr>
     <td><strong>size_of_optional_header</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the optional header of the PE binary. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>characteristics_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the flags that indicate the file’s characteristics.</td>
   </tr>
   <tr>
     <td><strong>file_header_hashes</strong> (optional)</td>
-    <td><span class="stixtype">hashes</span></td>
-    <td>Specifies any hashes that were computed for the file header.<br><br>Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#hashes">hashes</a></td>
+    <td>Specifies any hashes that were computed for the file header.<br /><br />Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>optional_header</strong> (optional)</td>
@@ -7329,7 +8545,7 @@ An object using the Windows™ PE Binary File Extension **MUST** contain at leas
   </tr>
 </table>
 
-#### Windows™ PE Optional Header Type <a id="windows-pe-optional-header-type"></a>
+#### 6.7.6.2 Windows™ PE Optional Header Type <a id="windows-pe-optional-header-type"></a>
 
 **Type Name:** <span class="stixtype">windows-pe-optional-header-type</span>
 
@@ -7345,162 +8561,162 @@ The Windows PE Optional Header type represents the properties of the PE optional
   </tr>
   <tr>
     <td><strong>magic_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the hex value that indicates the type of the PE binary.</td>
   </tr>
   <tr>
     <td><strong>major_linker_version</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the linker major version number.</td>
   </tr>
   <tr>
     <td><strong>minor_linker_version</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the linker minor version number.</td>
   </tr>
   <tr>
     <td><strong>size_of_code</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the code (text) section. If there are multiple such sections, this refers to the sum of the sizes of each section. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>size_of_initialized_data</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the initialized data section. If there are multiple such sections, this refers to the sum of the sizes of each section. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>size_of_uninitialized_data</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the uninitialized data section. If there are multiple such sections, this refers to the sum of the sizes of each section. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>address_of_entry_point</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the address of the entry point relative to the image base when the executable is loaded into memory.</td>
   </tr>
   <tr>
     <td><strong>base_of_code</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the address that is relative to the image base of the beginning-of-code section when it is loaded into memory.</td>
   </tr>
   <tr>
     <td><strong>base_of_data</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the address that is relative to the image base of the beginning-of-data section when it is loaded into memory.</td>
   </tr>
   <tr>
     <td><strong>image_base</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the preferred address of the first byte of the image when loaded into memory.</td>
   </tr>
   <tr>
     <td><strong>section_alignment</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the alignment (in bytes) of PE sections when they are loaded into memory.</td>
   </tr>
   <tr>
     <td><strong>file_alignment</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the factor (in bytes) that is used to align the raw data of sections in the image file.</td>
   </tr>
   <tr>
     <td><strong>major_os_version</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the major version number of the required operating system.</td>
   </tr>
   <tr>
     <td><strong>minor_os_version</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the minor version number of the required operating system.</td>
   </tr>
   <tr>
     <td><strong>major_image_version</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the major version number of the image.</td>
   </tr>
   <tr>
     <td><strong>minor_image_version</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the minor version number of the image.</td>
   </tr>
   <tr>
     <td><strong>major_subsystem_version</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the major version number of the subsystem.</td>
   </tr>
   <tr>
     <td><strong>minor_subsystem_version</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the minor version number of the subsystem.</td>
   </tr>
   <tr>
     <td><strong>win32_version_value_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the reserved win32 version value.</td>
   </tr>
   <tr>
     <td><strong>size_of_image</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the image in bytes, including all headers, as the image is loaded in memory. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>size_of_headers</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the combined size of the MS-DOS, PE header, and section headers, rounded up to a multiple of the value specified in the file_alignment header. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>checksum_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the checksum of the PE binary.</td>
   </tr>
   <tr>
     <td><strong>subsystem_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the subsystem (e.g., GUI, device driver, etc.) that is required to run this image.</td>
   </tr>
   <tr>
     <td><strong>dll_characteristics_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the flags that characterize the PE binary.</td>
   </tr>
   <tr>
     <td><strong>size_of_stack_reserve</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the stack to reserve, in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>size_of_stack_commit</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the stack to commit, in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>size_of_heap_reserve</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the local heap space to reserve, in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>size_of_heap_commit</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the local heap space to commit, in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>loader_flags_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the reserved loader flags.</td>
   </tr>
   <tr>
     <td><strong>number_of_rva_and_sizes</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the number of data-directory entries in the remainder of the optional header.</td>
   </tr>
   <tr>
     <td><strong>hashes</strong> (optional)</td>
-    <td><span class="stixtype">hashes</span></td>
-    <td>Specifies any hashes that were computed for the optional header.<br><br>Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#hashes">hashes</a></td>
+    <td>Specifies any hashes that were computed for the optional header.<br /><br />Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
   </tr>
 </table>
 
-#### Windows™ PE Section Type <a id="windows-pe-section-type"></a>
+#### 6.7.6.3 Windows™ PE Section Type <a id="windows-pe-section-type"></a>
 
 **Type Name:** <span class="stixtype">windows-pe-section-type</span>
 
@@ -7516,23 +8732,23 @@ The Windows PE Section type specifies metadata about a PE file section.
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the section.</td>
   </tr>
   <tr>
     <td><strong>size</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the size of the section, in bytes. The value of this property <strong>MUST NOT</strong> be negative.</td>
   </tr>
   <tr>
     <td><strong>entropy</strong> (optional)</td>
-    <td><span class="stixtype">float</span></td>
+    <td><a class="stixtype" href="#float">float</a></td>
     <td>Specifies the calculated entropy for the section, as calculated using the Shannon algorithm [<a href="#shannon-entropy">Shannon Entropy</a>]. The size of each input character is defined as a byte, resulting in a possible range of 0 through 8.</td>
   </tr>
   <tr>
     <td><strong>hashes</strong> (optional)</td>
-    <td><span class="stixtype">hashes</span></td>
-    <td>Specifies any hashes computed over the section.<br><br>Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#hashes">hashes</a></td>
+    <td>Specifies any hashes computed over the section.<br /><br />Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
   </tr>
 </table>
 
@@ -7543,7 +8759,7 @@ The Windows PE Section type specifies metadata about a PE file section.
 ```JSON
 {
   "type": "file",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "file--9af228db-9a04-5787-ad43-ccadc137a0e2",
   "name": "example.exe",
   "extensions": {
@@ -7660,23 +8876,23 @@ The IPv4 Address object represents one or more IPv4 addresses expressed using CI
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixtype">ipv4-addr</span>.</td>
   </tr>
   <tr>
     <td><strong>value</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
-    <td> Specifies the values of one or more IPv4 addresses expressed using CIDR notation.<br><br>If a given IPv4 Address object represents a single IPv4 address, the CIDR /32 suffix <strong>MAY</strong> be omitted.<br><br>Example:<br><blockquote><p>10.2.4.5/24</p></blockquote></td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td> Specifies the values of one or more IPv4 addresses expressed using CIDR notation.<br /><br />If a given IPv4 Address object represents a single IPv4 address, the CIDR /32 suffix <strong>MAY</strong> be omitted.<br /><br />Example:<br /><blockquote><p>10.2.4.5/24</p></blockquote></td>
   </tr>
   <tr>
     <td><strong>resolves_to_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies a list of references to one or more Layer 2 Media Access Control (MAC) addresses that the IPv4 address resolves to.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">mac-addr</span></td>
+    <td>Specifies a list of references to one or more Layer 2 Media Access Control (MAC) addresses that the IPv4 address resolves to.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">mac-addr</span></td>
   </tr>
   <tr>
     <td><strong>belongs_to_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies a list of references to one or more autonomous systems (AS) that the IPv4 address belongs to.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">autonomous-system</span></td>
+    <td>Specifies a list of references to one or more autonomous systems (AS) that the IPv4 address belongs to.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">autonomous-system</span></td>
   </tr>
 </table>
 
@@ -7687,21 +8903,22 @@ These are the relationships explicitly defined between the IPv4 Address object a
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class="stixtype">ipv4-addr</span></td>
+    <td><a class="stixtype" href="#ipv4-address-object">ipv4-addr</a></td>
     <td><span class="stixliteral">resolves-to</span></td>
-    <td><span class="stixtype">mac-addr</span></td>
+    <td><a class="stixtype" href="#mac-address-object">mac-addr</a></td>
     <td>This Relationship describes that this IPv4 Address resolves to one or more Layer 2 Media Access Control (MAC) addresses.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">ipv4-addr</span></td>
+    <td><a class="stixtype" href="#ipv4-address-object">ipv4-addr</a></td>
     <td><span class="stixliteral">belongs-to</span></td>
-    <td><span class="stixtype">autonomous-system</span></td>
+    <td><a class="stixtype" href="#autonomous-system-as-object">autonomous-system</a></td>
     <td>This Relationship describes that this IPv4 Address belongs to one or more autonomous systems (AS).</td>
+  </tr>
 </table>
 
 **Examples**
@@ -7711,7 +8928,7 @@ These are the relationships explicitly defined between the IPv4 Address object a
 ```JSON
 {
   "type": "ipv4-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
   "value": "198.51.100.3"
 }
@@ -7722,7 +8939,7 @@ These are the relationships explicitly defined between the IPv4 Address object a
 ```JSON
 {
   "type": "ipv4-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "ipv4-addr--1ea47840-aa39-5aa8-b4a2-cd203eb6662a",
   "value": "198.51.100.0/24"
 }
@@ -7777,23 +8994,23 @@ The IPv6 Address object represents one or more IPv6 addresses expressed using CI
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixtype">ipv6-addr</span>.</td>
   </tr>
   <tr>
     <td><strong>value</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
-    <td> Specifies the values of one or more IPv6 addresses expressed using CIDR notation.<br><br>If a given IPv6 Address object represents a single IPv6 address, the CIDR /128 suffix <strong>MAY</strong> be omitted.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td> Specifies the values of one or more IPv6 addresses expressed using CIDR notation.<br /><br />If a given IPv6 Address object represents a single IPv6 address, the CIDR /128 suffix <strong>MAY</strong> be omitted.</td>
   </tr>
   <tr>
     <td><strong>resolves_to_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies a list of references to one or more Layer 2 Media Access Control (MAC) addresses that the IPv4 address resolves to.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">mac-addr</span></td>
+    <td>Specifies a list of references to one or more Layer 2 Media Access Control (MAC) addresses that the IPv4 address resolves to.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">mac-addr</span></td>
   </tr>
   <tr>
     <td><strong>belongs_to_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies a list of references to one or more autonomous systems (AS) that the IPv6 address belongs to.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">autonomous-system</span></td>
+    <td>Specifies a list of references to one or more autonomous systems (AS) that the IPv6 address belongs to.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">autonomous-system</span></td>
   </tr>
 </table>
 
@@ -7804,21 +9021,22 @@ These are the relationships explicitly defined between the IPv6 Address object a
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
     <th width="20%"><span class='stixtr'>Source</span></th>
-    <th width="20%""><span class='stixtr'>Relationship Type</span></th>
+    <th width="20%"><span class='stixtr'>Relationship Type</span></th>
     <th width="20%"><span class='stixtr'>Target</span></th>
     <th><span class='stixtr'>Description</span></th>
   </tr>
   <tr>
-    <td><span class="stixtype">ipv6-addr</span></td>
+    <td><a class="stixtype" href="#ipv6-address-object">ipv6-addr</a></td>
     <td><span class="stixliteral">resolves-to</span></td>
-    <td><span class="stixtype">mac-addr</span></td>
+    <td><a class="stixtype" href="#mac-address-object">mac-addr</a></td>
     <td>This Relationship describes that this IPv6 Address resolves to one or more Layer 2 Media Access Control (MAC) addresses.</td>
   </tr>
   <tr>
-    <td><span class="stixtype">ipv6-addr</span></td>
+    <td><a class="stixtype" href="#ipv6-address-object">ipv6-addr</a></td>
     <td><span class="stixliteral">belongs-to</span></td>
-    <td><span class="stixtype">autonomous-system</span></td>
+    <td><a class="stixtype" href="#autonomous-system-as-object">autonomous-system</a></td>
     <td>This Relationship describes that this IPv6 Address belongs to one or more autonomous systems (AS).</td>
+  </tr>
 </table>
 
 **Examples**
@@ -7828,7 +9046,7 @@ These are the relationships explicitly defined between the IPv6 Address object a
 ```JSON
 {
   "type": "ipv6-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "ipv6-addr--85a85a8c-ee99-5722-946d-3c3a3270fc6f",
   "value": "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
 }
@@ -7839,7 +9057,7 @@ These are the relationships explicitly defined between the IPv6 Address object a
 ```JSON
 {
   "type": "ipv6-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "ipv6-addr--084d3b4c-7785-568a-a569-0c61c95754ab",
   "value": "2001:0db8::/96"
 }
@@ -7894,13 +9112,13 @@ The MAC Address object represents a single Media Access Control (MAC) address.
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">mac-addr</span>.</td>
   </tr>
   <tr>
     <td><strong>value</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies the value of a single MAC address.<br><br>The MAC address value MUST be represented as a single colon-delimited, lowercase MAC-48 address, which MUST include leading zeros for each octet.<br><br>Example:<br><blockquote>00:00:ab:cd:ef:01</blockquote></td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies the value of a single MAC address.<br /><br />The MAC address value MUST be represented as a single colon-delimited, lowercase MAC-48 address, which MUST include leading zeros for each octet.<br /><br />Example:<br /><blockquote>00:00:ab:cd:ef:01</blockquote></td>
   </tr>
 </table>
 
@@ -7911,7 +9129,7 @@ The MAC Address object represents a single Media Access Control (MAC) address.
 ```JSON
 {
   "type": "mac-addr",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "mac-addr--757b1725-9903-54f5-a855-1240691d7659",
   "value": "d2:fb:49:24:37:18"
 }
@@ -7966,12 +9184,12 @@ The Mutex object represents the properties of a mutual exclusion (mutex) object.
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">mutex</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the mutex object.</td>
   </tr>
 </table>
@@ -7983,7 +9201,7 @@ The Mutex object represents the properties of a mutual exclusion (mutex) object.
 ```JSON
 {
   "type": "mutex",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "mutex--f93fe911-e545-5239-b9b0-597840d0c871",
   "name": "__CLEANSWEEP__"
 }
@@ -8040,98 +9258,98 @@ To allow for use cases where a source or destination address may be sensitive an
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">network-traffic</span>.</td>
   </tr>
   <tr>
     <td><strong>extensions</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
-    <td>The Network Traffic object defines the following extensions. In addition to these, producers <strong>MAY</strong> create their own.<br><br><span class="stixtype">http-request-ext</span>, <span class="stixtype">tcp-ext</span>, <span class="stixtype">icmp-ext</span>, <span class="stixtype">socket-ext</span><br><br>Dictionary keys <strong>MUST</strong> use the specification defined name (examples above) or be the id of a STIX Extension object, depending on the type of extension being used.<br><br>The corresponding dictionary values <strong>MUST</strong> contain the contents of the extension instance.</td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
+    <td>The Network Traffic object defines the following extensions. In addition to these, producers <strong>MAY</strong> create their own.<br /><br /><span class="stixtype">http-request-ext</span>, <span class="stixtype">tcp-ext</span>, <span class="stixtype">icmp-ext</span>, <span class="stixtype">socket-ext</span><br /><br />Dictionary keys <strong>MUST</strong> use the specification defined name (examples above) or be the id of a STIX Extension object, depending on the type of extension being used.<br /><br />The corresponding dictionary values <strong>MUST</strong> contain the contents of the extension instance.</td>
   </tr>
   <tr>
     <td><strong>start</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date/time the network traffic was initiated, if known.</td>
   </tr>
   <tr>
     <td><strong>end</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
-    <td>Specifies the date/time the network traffic ended, if known.<br><br>If the <strong>is_active</strong> property is true, then the <strong>end</strong> property <strong>MUST NOT</strong> be included.<br><br>If this property and the <strong>start</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>start</strong> property.</td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
+    <td>Specifies the date/time the network traffic ended, if known.<br /><br />If the <strong>is_active</strong> property is true, then the <strong>end</strong> property <strong>MUST NOT</strong> be included.<br /><br />If this property and the <strong>start</strong> property are both defined, then this property <strong>MUST</strong> be greater than or equal to the timestamp in the <strong>start</strong> property.</td>
   </tr>
   <tr>
     <td><strong>is_active</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
-    <td>Indicates whether the network traffic is still ongoing.<br><br>If the <strong>end</strong> property is provided, this property <strong>MUST</strong> be <span class="stixliteral">false</span>.</td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
+    <td>Indicates whether the network traffic is still ongoing.<br /><br />If the <strong>end</strong> property is provided, this property <strong>MUST</strong> be <span class="stixliteral">false</span>.</td>
   </tr>
   <tr>
     <td><strong>src_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the source of the network traffic, as a reference to a Cyber-observable Object.<br><br>The object referenced <strong>MUST</strong> be of type <span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span>, <span class="stixtype">mac-addr</span>, or <span class="stixtype">domain-name</span> (for cases where the IP address for a domain name is unknown).</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the source of the network traffic, as a reference to a Cyber-observable Object.<br /><br />The object referenced <strong>MUST</strong> be of type <span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span>, <span class="stixtype">mac-addr</span>, or <span class="stixtype">domain-name</span> (for cases where the IP address for a domain name is unknown).</td>
   </tr>
   <tr>
     <td><strong>dst_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the destination of the network traffic, as a reference to a Cyber-observable Object.<br><br>The object referenced <strong>MUST</strong> be of type <span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span>, <span class="stixtype">mac-addr</span>, or <span class="stixtype">domain-name</span> (for cases where the IP address for a domain name is unknown).</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the destination of the network traffic, as a reference to a Cyber-observable Object.<br /><br />The object referenced <strong>MUST</strong> be of type <span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span>, <span class="stixtype">mac-addr</span>, or <span class="stixtype">domain-name</span> (for cases where the IP address for a domain name is unknown).</td>
   </tr>
   <tr>
     <td><strong>src_port</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the source port used in the network traffic, as an integer. The port value <strong>MUST</strong> be in the range of 0 - 65535.</td>
   </tr>
   <tr>
     <td><strong>dst_port</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the destination port used in the network traffic, as an integer. The port value <strong>MUST</strong> be in the range of 0 - 65535.</td>
   </tr>
   <tr>
     <td><strong>protocols</strong> (required)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">string</span></span></td>
-    <td>Specifies the protocols observed in the network traffic, along with their corresponding state.<br><br>Protocols <strong>MUST</strong> be listed in low to high order, from outer to inner in terms of packet encapsulation. That is, the protocols in the outer level of the packet, such as IP, <strong>MUST</strong> be listed first.<br><br>The protocol names <strong>SHOULD</strong> come from the service names defined in the Service Name column of the IANA Service Name and Port Number Registry [<a href="#port-numbers">Port Numbers</a>]. In cases where there is variance in the name of a network protocol not included in the IANA Registry, content producers should exercise their best judgement, and it is recommended that lowercase names be used for consistency with the IANA registry.<br><br>If the protocol extension is present, the corresponding protocol value for that extension <strong>SHOULD</strong> be listed in this property.<br><br>Examples:<br><blockquote>ipv4, tcp, http<br>ipv4, udp<br>ipv6, tcp, http<br>ipv6, tcp, ssl, https</blockquote></td>
+    <td>Specifies the protocols observed in the network traffic, along with their corresponding state.<br /><br />Protocols <strong>MUST</strong> be listed in low to high order, from outer to inner in terms of packet encapsulation. That is, the protocols in the outer level of the packet, such as IP, <strong>MUST</strong> be listed first.<br /><br />The protocol names <strong>SHOULD</strong> come from the service names defined in the Service Name column of the IANA Service Name and Port Number Registry [<a href="#port-numbers">Port Numbers</a>]. In cases where there is variance in the name of a network protocol not included in the IANA Registry, content producers should exercise their best judgement, and it is recommended that lowercase names be used for consistency with the IANA registry.<br /><br />If the protocol extension is present, the corresponding protocol value for that extension <strong>SHOULD</strong> be listed in this property.<br /><br />Examples:<br /><blockquote>ipv4, tcp, http<br />ipv4, udp<br />ipv6, tcp, http<br />ipv6, tcp, ssl, https</blockquote></td>
   </tr>
   <tr>
     <td><strong>src_byte_count</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the number of bytes, as a positive integer, sent from the source to the destination.</td>
   </tr>
   <tr>
     <td><strong>dst_byte_count</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the number of bytes, as a positive integer, sent from the destination to the source.</td>
   </tr>
   <tr>
     <td><strong>src_packets</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the number of packets, as a positive integer, sent from the source to the destination.</td>
   </tr>
   <tr>
     <td><strong>dst_packets</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the number of packets, as a positive integer, sent from the destination to the source.</td>
   </tr>
   <tr>
     <td><strong>ipfix</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
     <td>Specifies any IP Flow Information Export [<a href="#ipfix">IPFIX</a>] data for the traffic, as a dictionary. Each key/value pair in the dictionary represents the name/value of a single IPFIX element. Accordingly, each dictionary key <strong>SHOULD</strong> be a case-preserved version of the IPFIX element name, e.g., octetDeltaCount. Each dictionary value <strong>MUST</strong> be either an <span class="stixtype">integer</span> or a <span class="stixtype">string</span>, as well as a valid IPFIX property.</td>
   </tr>
   <tr>
     <td><strong>src_payload_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the bytes sent from the source to the destination.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the bytes sent from the source to the destination.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span>.</td>
   </tr>
   <tr>
     <td><strong>dst_payload_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the bytes sent from the destination to the source.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the bytes sent from the destination to the source.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span>.</td>
   </tr>
   <tr>
     <td><strong>encapsulates_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Links to other <span class="stixtype">network-traffic</span> objects encapsulated by this <span class="stixtype">network-traffic</span> object.<br><br>The objects referenced in this property <strong>MUST</strong> be of type <span class="stixtype">network-traffic</span>.</td>
+    <td>Links to other <span class="stixtype">network-traffic</span> objects encapsulated by this <span class="stixtype">network-traffic</span> object.<br /><br />The objects referenced in this property <strong>MUST</strong> be of type <span class="stixtype">network-traffic</span>.</td>
   </tr>
   <tr>
     <td><strong>encapsulated_by_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Links to another <span class="stixtype">network-traffic</span> object which encapsulates this object.<br><br>The objects referenced in this property <strong>MUST</strong> be of type <span class="stixtype">network-traffic</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Links to another <span class="stixtype">network-traffic</span> object which encapsulates this object.<br /><br />The objects referenced in this property <strong>MUST</strong> be of type <span class="stixtype">network-traffic</span>.</td>
   </tr>
 </table>
 
@@ -8143,19 +9361,19 @@ To allow for use cases where a source or destination address may be sensitive an
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "value": "198.51.100.2"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
     "value": "198.51.100.3"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--6e0cb830-0305-57d4-8536-7be874d42005",
     "src_ref": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "dst_ref": "ipv4-addr--28bb3599-77cd-5a82-a950-b5bc3caf07c4",
@@ -8172,13 +9390,13 @@ To allow for use cases where a source or destination address may be sensitive an
 [
   {
     "type": "domain-name",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "domain-name--bedb4899-d24b-5401-bc86-8f6b4cc18ec7",
     "value": "example.com"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--c695ada6-5d5d-5446-a661-935874e1d058",
     "dst_ref": "domain-name--bedb4899-d24b-5401-bc86-8f6b4cc18ec7",
     "protocols": [
@@ -8196,19 +9414,19 @@ To allow for use cases where a source or destination address may be sensitive an
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
     "value": "203.0.113.1"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--826fe3cb-56b0-5620-9d30-4c17ed7b24e3",
     "value": "203.0.113.5"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--44eb3012-751d-5c12-b9ba-1506e42e26ef",
     "src_ref": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
     "dst_ref": "ipv4-addr--826fe3cb-56b0-5620-9d30-4c17ed7b24e3",
@@ -8232,25 +9450,25 @@ To allow for use cases where a source or destination address may be sensitive an
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "value": "198.51.100.2"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
     "value": "203.0.113.1"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--a2935766-2522-5939-9513-cc3536f212a3",
     "value": "203.0.113.2"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--372c0c73-777a-50de-bc3a-92cc72fcf7dd",
     "src_ref": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "dst_ref": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
@@ -8268,7 +9486,7 @@ To allow for use cases where a source or destination address may be sensitive an
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--8dce0dc4-f5ea-5313-8e6c-03646d419b6a",
     "src_ref": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "dst_ref": "ipv4-addr--a2935766-2522-5939-9513-cc3536f212a3",
@@ -8292,25 +9510,25 @@ To allow for use cases where a source or destination address may be sensitive an
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
     "value": "203.0.113.1"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--13cba85b-1780-5517-b600-7b6546cfd760",
     "value": "198.51.100.34"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--23476ffc-8715-5eee-bd37-2f204b7db486",
     "value": "198.51.100.54"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--fc1686c0-b36e-5041-9ce4-c8df9cf10d6d",
     "src_ref": "ipv4-addr--ad74bc22-43d2-52ed-890e-7d382f58e1eb",
     "dst_ref": "ipv4-addr--13cba85b-1780-5517-b600-7b6546cfd760",
@@ -8329,7 +9547,7 @@ To allow for use cases where a source or destination address may be sensitive an
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--27ed09d5-f85a-5a8e-8590-49a91d7e510e",
     "src_ref": "ipv4-addr--13cba85b-1780-5517-b600-7b6546cfd760",
     "dst_ref": "ipv4-addr--23476ffc-8715-5eee-bd37-2f204b7db486",
@@ -8354,7 +9572,7 @@ To allow for use cases where a source or destination address may be sensitive an
 
 The HTTP request extension specifies a default extension for capturing network traffic properties specific to HTTP requests. The key for this extension when used in the **extensions** dictionary **MUST** be <span class="stixliteral">http-request-ext</span>. Note that this predefined extension does not use the extension facility described in [section 7.3](#extension-definition). The corresponding protocol value for this extension is <span class="stixliteral">http</span>.
 
-#### Properties <a id="http-request-extension-properties"></a>
+#### 6.12.2.1 Properties <a id="http-request-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -8364,33 +9582,33 @@ The HTTP request extension specifies a default extension for capturing network t
   </tr>
   <tr>
     <td><strong>request_method</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the HTTP method portion of the HTTP request line, as a lowercase string.</td>
   </tr>
   <tr>
     <td><strong>request_value</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the value (typically a resource path) portion of the HTTP request line.</td>
   </tr>
   <tr>
     <td><strong>request_version</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the HTTP version portion of the HTTP request line, as a lowercase string.</td>
   </tr>
   <tr>
     <td><strong>request_header</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
-    <td>Specifies all of the HTTP header fields that may be found in the HTTP client request, as a dictionary.<br><br>Each key in the dictionary <strong>MUST</strong> be the name of the header field and <strong>SHOULD</strong> preserve case, e.g., <span class="stixalt">User-Agent</span>. The corresponding value for each dictionary key <strong>MUST</strong> always be a <span class="stixtype">list</span> of type <span class="stixtype">string</span> to support when a header field is repeated.</td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
+    <td>Specifies all of the HTTP header fields that may be found in the HTTP client request, as a dictionary.<br /><br />Each key in the dictionary <strong>MUST</strong> be the name of the header field and <strong>SHOULD</strong> preserve case, e.g., <span class="stixalt">User-Agent</span>. The corresponding value for each dictionary key <strong>MUST</strong> always be a <span class="stixtype">list</span> of type <span class="stixtype">string</span> to support when a header field is repeated.</td>
   </tr>
   <tr>
     <td><strong>message_body_length</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the length of the HTTP message body, if included, in bytes.</td>
   </tr>
   <tr>
     <td><strong>message_body_data_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the data contained in the HTTP message body, if included.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the data contained in the HTTP message body, if included.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">artifact</span>.</td>
   </tr>
 </table>
 
@@ -8402,14 +9620,14 @@ The HTTP request extension specifies a default extension for capturing network t
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--165070a8-c561-58a8-8659-fce2f255c2c0",
     "value": "198.51.100.53"
 
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--fdd6dbda-a206-52fe-b19b-64d908748850",
     "dst_ref": "ipv4-addr--165070a8-c561-58a8-8659-fce2f255c2c0",
     "protocols": [
@@ -8438,7 +9656,7 @@ The HTTP request extension specifies a default extension for capturing network t
 
 The ICMP extension specifies a default extension for capturing network traffic properties specific to ICMP. The key for this extension when used in the <strong>extensions</strong> dictionary <strong>MUST</strong> be <span class="stixliteral">icmp-ext</span>. Note that this predefined extension does not use the extension facility described in [section 7.3](#extension-definition). The corresponding protocol value for this extension is <span class="stixliteral">icmp</span>.
 
-#### Properties <a id="icmp-extension-properties"></a>
+#### 6.12.3.1 Properties <a id="icmp-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -8448,12 +9666,12 @@ The ICMP extension specifies a default extension for capturing network traffic p
   </tr>
   <tr>
     <td><strong>icmp_type_hex</strong> (required)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the ICMP type byte.</td>
   </tr>
   <tr>
     <td><strong>icmp_code_hex</strong> (required)</td>
-    <td><span class="stixtype">hex</span></td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
     <td>Specifies the ICMP code byte.</td>
   </tr>
 </table>
@@ -8466,19 +9684,19 @@ The ICMP extension specifies a default extension for capturing network traffic p
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--4b8ed646-46df-5a9c-b5a6-b3ae128f35a6",
     "value": "198.51.100.9"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--826fe3cb-56b0-5620-9d30-4c17ed7b24e3",
     "value": "203.0.113.5"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--4f156a67-4efc-58fb-b0a7-f2612927a37d",
     "src_ref": "ipv4-addr--4b8ed646-46df-5a9c-b5a6-b3ae128f35a6",
     "dst_ref": "ipv4-addr--826fe3cb-56b0-5620-9d30-4c17ed7b24e3",
@@ -8501,7 +9719,7 @@ The ICMP extension specifies a default extension for capturing network traffic p
 
 The Network Socket extension specifies a default extension for capturing network traffic properties associated with network sockets. The key for this extension when used in the extensions dictionary MUST be <span class="stixliteral">socket-ext</span>. Note that this predefined extension does not use the extension facility described in [section 7.3](#extension-definition).
 
-#### Properties <a id="network-socket-extension-properties"></a>
+#### 6.12.4.1 Properties <a id="network-socket-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -8511,37 +9729,37 @@ The Network Socket extension specifies a default extension for capturing network
   </tr>
   <tr>
     <td><strong>address_family</strong> (required)</td>
-    <td><span class="stixtype">enum</span></td>
-    <td>Specifies the address family (AF_*) that the socket is configured for.<br><br>The values of this property <strong>MUST</strong> come from the <a href="#network-socket-address-family-enumeration"><span class="stixvocab">network-socket-address-family-enum</span></a> enumeration.</td>
+    <td><a class="stixtype" href="#enum">enum</a></td>
+    <td>Specifies the address family (AF_*) that the socket is configured for.<br /><br />The values of this property <strong>MUST</strong> come from the <a href="#network-socket-address-family-enumeration"><span class="stixvocab">network-socket-address-family-enum</span></a> enumeration.</td>
   </tr>
   <tr>
     <td><strong>is_blocking</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Specifies whether the socket is in blocking mode.</td>
   </tr>
   <tr>
     <td><strong>is_listening</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Specifies whether the socket is in listening mode.</td>
   </tr>
   <tr>
     <td><strong>options</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
     <td>Specifies any options (e.g., SO_*) that may be used by the socket, as a dictionary. Each key in the dictionary <strong>SHOULD</strong> be a case-preserved version of the option name, e.g., <span class="stixalt">SO_ACCEPTCONN</span>. Each key value in the dictionary <strong>MUST</strong> be the value for the corresponding options key. Each dictionary value <strong>MUST</strong> be an <span class="stixtype">integer</span>. For <span class="stixalt">SO_RCVTIMEO</span>, <span class="stixalt">SO_SNDTIMEO</span> and <span class="stixalt">SO_LINGER</span> the value represents the number of milliseconds. If the <span class="stixalt">SO_LINGER</span> key is present, it indicates that the <span class="stixalt">SO_LINGER</span> option is active.</td>
   </tr>
   <tr>
     <td><strong>socket_type</strong> (optional)</td>
-    <td><span class="stixtype">enum</span></td>
-    <td>Specifies the type of the socket.<br><br>The values of this property <strong>MUST</strong> come from the <a href="#network-socket-type-enumeration"><span class="stixvocab">network-socket-type-enum</span></a> enumeration.</td>
+    <td><a class="stixtype" href="#enum">enum</a></td>
+    <td>Specifies the type of the socket.<br /><br />The values of this property <strong>MUST</strong> come from the <a href="#network-socket-type-enumeration"><span class="stixvocab">network-socket-type-enum</span></a> enumeration.</td>
   </tr>
   <tr>
     <td><strong>socket_descriptor</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the socket file descriptor value associated with the socket, as a non-negative integer.</td>
   </tr>
   <tr>
     <td><strong>socket_handle</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the handle or inode value associated with the socket.</td>
   </tr>
 </table>
@@ -8554,13 +9772,13 @@ The Network Socket extension specifies a default extension for capturing network
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "value": "198.51.100.2"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--59d8852c-0c68-5e0c-8ae2-f3c46bd7b1df",
     "src_ref": "ipv4-addr--9cf4a8ec-7640-5f40-a006-79942896168b",
     "src_port": 223,
@@ -8587,7 +9805,7 @@ The TCP extension specifies a default extension for capturing network traffic pr
 
 An object using the TCP Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="tcp-extension-properties"></a>
+#### 6.12.5.1 Properties <a id="tcp-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -8597,13 +9815,13 @@ An object using the TCP Extension **MUST** contain at least one property from th
   </tr>
   <tr>
     <td><strong>src_flags_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
-    <td>Specifies the source TCP flags, as the union of all TCP flags observed between the start of the traffic (as defined by the <strong>start</strong> property) and the end of the traffic (as defined by the <strong>end</strong> property).<br><br>If the start and end times of the traffic are not specified, this property <strong>SHOULD</strong> be interpreted as the union of all TCP flags observed over the entirety of the network traffic being reported upon.</td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
+    <td>Specifies the source TCP flags, as the union of all TCP flags observed between the start of the traffic (as defined by the <strong>start</strong> property) and the end of the traffic (as defined by the <strong>end</strong> property).<br /><br />If the start and end times of the traffic are not specified, this property <strong>SHOULD</strong> be interpreted as the union of all TCP flags observed over the entirety of the network traffic being reported upon.</td>
   </tr>
   <tr>
     <td><strong>dst_flags_hex</strong> (optional)</td>
-    <td><span class="stixtype">hex</span></td>
-    <td>Specifies the destination TCP flags, as the union of all TCP flags observed between the start of the traffic (as defined by the <strong>start</strong> property) and the end of the traffic (as defined by the <strong>end</strong> property).<br><br>If the start and end times of the traffic are not specified, this property <strong>SHOULD</strong> be interpreted as the union of all TCP flags observed over the entirety of the network traffic being reported upon.</td>
+    <td><a class="stixtype" href="#hexadecimal">hex</a></td>
+    <td>Specifies the destination TCP flags, as the union of all TCP flags observed between the start of the traffic (as defined by the <strong>start</strong> property) and the end of the traffic (as defined by the <strong>end</strong> property).<br /><br />If the start and end times of the traffic are not specified, this property <strong>SHOULD</strong> be interpreted as the union of all TCP flags observed over the entirety of the network traffic being reported upon.</td>
   </tr>
 </table>
 
@@ -8615,19 +9833,19 @@ An object using the TCP Extension **MUST** contain at least one property from th
 [
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--f85034be-e4ad-5153-aa6b-79c450eb25b3",
     "value": "198.51.100.5"
   },
   {
     "type": "ipv4-addr",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "ipv4-addr--72073c96-1246-5058-8e5c-6ca59d656dee",
     "value": "198.51.100.6"
   },
   {
     "type": "network-traffic",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "network-traffic--47b27c77-4272-563f-91ca-87e2a4afd6ef",
     "src_ref": "ipv4-addr--f85034be-e4ad-5153-aa6b-79c450eb25b3",
     "dst_ref": "ipv4-addr--72073c96-1246-5058-8e5c-6ca59d656dee",
@@ -8694,68 +9912,68 @@ The Process object represents common properties of an instance of a computer pro
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">process</span>.</td>
   </tr>
   <tr>
     <td><strong>extensions</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
-    <td>The Process object defines the following extensions. In addition to these, producers <strong>MAY</strong> create their own.<br><br><span class="stixtype">windows-process-ext</span>, <span class="stixtype">windows-service-ext</span><br><br>Dictionary keys <strong>MUST</strong> use the specification defined name (examples above) or be the id of a STIX Extension object, depending on the type of extension being used.<br><br>The corresponding dictionary values <strong>MUST</strong> contain the contents of the extension instance.</td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
+    <td>The Process object defines the following extensions. In addition to these, producers <strong>MAY</strong> create their own.<br /><br /><span class="stixtype">windows-process-ext</span>, <span class="stixtype">windows-service-ext</span><br /><br />Dictionary keys <strong>MUST</strong> use the specification defined name (examples above) or be the id of a STIX Extension object, depending on the type of extension being used.<br /><br />The corresponding dictionary values <strong>MUST</strong> contain the contents of the extension instance.</td>
   </tr>
   <tr>
     <td><strong>is_hidden</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Specifies whether the process is hidden.</td>
   </tr>
   <tr>
     <td><strong>pid</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the Process ID, or PID, of the process.</td>
   </tr>
   <tr>
     <td><strong>created_time</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date/time at which the process was created.</td>
   </tr>
   <tr>
     <td><strong>cwd</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the current working directory of the process.</td>
   </tr>
   <tr>
     <td><strong>command_line</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the full command line used in executing the process, including the process name (which may be specified individually via the image_ref.name property) and any arguments.</td>
   </tr>
   <tr>
     <td><strong>environment_variables</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
     <td>Specifies the list of environment variables associated with the process as a dictionary. Each key in the dictionary <strong>MUST</strong> be a case preserved version of the name of the environment variable, and each corresponding value <strong>MUST</strong> be the environment variable value as a <span class="stixtype">string</span>.</td>
   </tr>
   <tr>
     <td><strong>opened_connection_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies the list of network connections opened by the process, as a reference to one or more Network Traffic objects.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">network-traffic</span>.</td>
+    <td>Specifies the list of network connections opened by the process, as a reference to one or more Network Traffic objects.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">network-traffic</span>.</td>
   </tr>
   <tr>
     <td><strong>creator_user_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the user that created the process, as a reference to a User Account object.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">user-account</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the user that created the process, as a reference to a User Account object.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">user-account</span>.</td>
   </tr>
   <tr>
     <td><strong>image_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the executable binary that was executed as the process image, as a reference to a File object.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">file</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the executable binary that was executed as the process image, as a reference to a File object.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">file</span>.</td>
   </tr>
   <tr>
     <td><strong>parent_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies the other process that spawned (i.e. is the parent of) this one, as a reference to a Process object.<br><br>The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">process</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies the other process that spawned (i.e. is the parent of) this one, as a reference to a Process object.<br /><br />The object referenced in this property <strong>MUST</strong> be of type <span class="stixtype">process</span>.</td>
   </tr>
   <tr>
     <td><strong>child_refs</strong> (optional)</td>
     <td><span style="white-space: nowrap"><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></span></td>
-    <td>Specifies the other processes that were spawned by (i.e. children of) this process, as a reference to one or more other Process objects.<br><br>The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">process</span>.</td>
+    <td>Specifies the other processes that were spawned by (i.e. children of) this process, as a reference to one or more other Process objects.<br /><br />The objects referenced in this list <strong>MUST</strong> be of type <span class="stixtype">process</span>.</td>
   </tr>
 </table>
 
@@ -8767,7 +9985,7 @@ The Process object represents common properties of an instance of a computer pro
 [
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--3eb55c0e-fe96-588b-a7ab-10f55f7ec596",
     "name": "gedit-bin",
     "hashes": {
@@ -8776,7 +9994,7 @@ The Process object represents common properties of an instance of a computer pro
   },
   {
     "type": "process",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "process--8fac80fe-a220-4ba9-8ffe-4f43ce8edff8",
     "pid": 1221,
     "created_time": "2016-01-20T14:11:25.55Z",
@@ -8794,7 +10012,7 @@ The Windows Process extension specifies a default extension for capturing proper
 
 An object using the Windows Process Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="windows-process-extension-properties"></a>
+#### 6.13.2.1 Properties <a id="windows-process-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -8804,38 +10022,38 @@ An object using the Windows Process Extension **MUST** contain at least one prop
   </tr>
   <tr>
     <td><strong>aslr_enabled</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Specifies whether Address Space Layout Randomization (ASLR) is enabled for the process.</td>
   </tr>
   <tr>
     <td><strong>dep_enabled</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Specifies whether Data Execution Prevention (DEP) is enabled for the process.</td>
   </tr>
   <tr>
     <td><strong>priority</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the current priority class of the process in Windows. This value <strong>SHOULD</strong> be a string that ends in <span class="stixliteral">_CLASS</span>.</td>
   </tr>
   <tr>
     <td><strong>owner_sid</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the Security ID (SID) value of the owner of the process.</td>
   </tr>
   <tr>
     <td><strong>windows_title</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the title of the main window of the process.</td>
   </tr>
   <tr>
     <td><strong>startup_info</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
     <td>Specifies the STARTUP_INFO struct used by the process, as a dictionary. Each name/value pair in the struct <strong>MUST</strong> be represented as a key/value pair in the dictionary, where each key <strong>MUST</strong> be a case-preserved version of the original name. For example, given a name of "lpDesktop" the corresponding key would be lpDesktop.</td>
   </tr>
   <tr>
     <td><strong>integrity_level</strong> (optional)</td>
-    <td><span class="stixtype">enum</span></td>
-    <td>Specifies the Windows integrity level, or trustworthiness, of the process.<br><br>The values of this property <strong>MUST</strong> come from the <a href="#windows-integrity-level-enumeration"><span class="stixvocab">windows-integrity-level-enum</span></a> enumeration.</td>
+    <td><a class="stixtype" href="#enum">enum</a></td>
+    <td>Specifies the Windows integrity level, or trustworthiness, of the process.<br /><br />The values of this property <strong>MUST</strong> come from the <a href="#windows-integrity-level-enumeration"><span class="stixvocab">windows-integrity-level-enum</span></a> enumeration.</td>
   </tr>
 </table>
 
@@ -8846,7 +10064,7 @@ An object using the Windows Process Extension **MUST** contain at least one prop
 ```JSON
 {
   "type": "process",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "process--65a99d8a-e5b2-44bb-8311-963a580ee9a1",
   "pid": 314,
   "extensions": {
@@ -8868,7 +10086,7 @@ The Windows Service extension specifies a default extension for capturing proper
 
 As all properties of this extension are optional, at least one of the properties defined below **MUST** be included when using this extension.
 
-#### Properties <a id="windows-service-extension-properties"></a>
+#### 6.13.3.1 Properties <a id="windows-service-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -8878,7 +10096,7 @@ As all properties of this extension are optional, at least one of the properties
   </tr>
   <tr>
     <td><strong>service_name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the service.</td>
   </tr>
   <tr>
@@ -8888,33 +10106,33 @@ As all properties of this extension are optional, at least one of the properties
   </tr>
   <tr>
     <td><strong>display_name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the display name of the service in Windows GUI controls.</td>
   </tr>
   <tr>
     <td><strong>group_name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the load ordering group of which the service is a member.</td>
   </tr>
   <tr>
     <td><strong>start_type</strong> (optional)</td>
-    <td><span class="stixtype">enum</span></td>
-    <td>Specifies the start options defined for the service.<br><br>The values of this property <strong>MUST</strong> come from the <a href="#windows-service-start-type-enumeration"><span class="stixvocab">windows-service-start-type-enum</span></a> enumeration.</td>
+    <td><a class="stixtype" href="#enum">enum</a></td>
+    <td>Specifies the start options defined for the service.<br /><br />The values of this property <strong>MUST</strong> come from the <a href="#windows-service-start-type-enumeration"><span class="stixvocab">windows-service-start-type-enum</span></a> enumeration.</td>
   </tr>
   <tr>
     <td><strong>service_dll_refs</strong> (optional)</td>
     <td><span class="stixtype">list</span> of type <span class="stixtype">identifier</span></td>
-    <td>Specifies the DLLs loaded by the service, as a reference to one or more File objects.<br><br>The objects referenced in this property <strong>MUST</strong> be of type <span class="stixtype">file</span>.</td>
+    <td>Specifies the DLLs loaded by the service, as a reference to one or more File objects.<br /><br />The objects referenced in this property <strong>MUST</strong> be of type <span class="stixtype">file</span>.</td>
   </tr>
   <tr>
     <td><strong>service_type</strong> (optional)</td>
-    <td><span class="stixtype">enum</span></td>
-    <td>Specifies the type of the service.<br><br>The values of this property <strong>MUST</strong> come from the <a href="#windows-service-type-enumeration"><span class="stixvocab">windows-service-type-enum</span></a> enumeration.</td>
+    <td><a class="stixtype" href="#enum">enum</a></td>
+    <td>Specifies the type of the service.<br /><br />The values of this property <strong>MUST</strong> come from the <a href="#windows-service-type-enumeration"><span class="stixvocab">windows-service-type-enum</span></a> enumeration.</td>
   </tr>
   <tr>
     <td><strong>service_status</strong> (optional)</td>
-    <td><span class="stixtype">enum</span></td>
-    <td>Specifies the current status of the service.<br><br>The values of this property <strong>MUST</strong> come from the <a href="#windows-service-status-enumeration"><span class="stixvocab">windows-service-status-enum</span></a> enumeration.</td>
+    <td><a class="stixtype" href="#enum">enum</a></td>
+    <td>Specifies the current status of the service.<br /><br />The values of this property <strong>MUST</strong> come from the <a href="#windows-service-status-enumeration"><span class="stixvocab">windows-service-status-enum</span></a> enumeration.</td>
   </tr>
 </table>
 
@@ -8926,7 +10144,7 @@ As all properties of this extension are optional, at least one of the properties
 [
   {
     "type": "file",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "file--ca7d6a8a-b79e-5c3b-b736-8d48adcf0c97",
     "hashes": {
       "SHA-256": "bf07a7fbb825fc0aae7bf4a1177b2b31fcf8a3feeaf7092761e18c859ee52a9c"
@@ -8935,7 +10153,7 @@ As all properties of this extension are optional, at least one of the properties
   }
   {
     "type": "process",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "process--ab1ff083-dc96-4896-8c8d-4e623f6e145e",
     "pid": 2217,
     "command_line": "C:\\Windows\\System32\\sirvizio.exe /s",
@@ -9002,22 +10220,22 @@ The Software object represents high-level properties associated with software, i
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">software</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the software.</td>
   </tr>
   <tr>
     <td><strong>cpe</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies the Common Platform Enumeration (CPE) entry for the software, if available. The value for this property MUST be a CPE v2.3 entry from the official NVD CPE Dictionary [<a href="#nvd">NVD</a>].<br><br>While the CPE dictionary does not contain entries for <em>all</em> software, whenever it <em>does</em> contain an identifier for a given instance of software, this property <strong>SHOULD</strong> be present.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies the Common Platform Enumeration (CPE) entry for the software, if available. The value for this property MUST be a CPE v2.3 entry from the official NVD CPE Dictionary [<a href="#nvd">NVD</a>].<br /><br />While the CPE dictionary does not contain entries for <em>all</em> software, whenever it <em>does</em> contain an identifier for a given instance of software, this property <strong>SHOULD</strong> be present.</td>
   </tr>
   <tr>
     <td><strong>swid</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the Software Identification (SWID) Tags [<a href="#swid">SWID</a>] entry for the software, if available. The tag attribute, tagId, a globally unique identifier, <strong>SHOULD</strong> be used as a proxy identifier of the tagged product.</td>
   </tr>
   <tr>
@@ -9027,12 +10245,12 @@ The Software object represents high-level properties associated with software, i
   </tr>
   <tr>
     <td><strong>vendor</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the vendor of the software.</td>
   </tr>
   <tr>
     <td><strong>version</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the version of the software.</td>
   </tr>
 </table>
@@ -9044,7 +10262,7 @@ The Software object represents high-level properties associated with software, i
 ```JSON
 {
   "type": "software",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "software--710b0b41-d4d0-5d6c-a400-fc9254554ffc",
   "name": "Word",
   "cpe": "cpe:2.3:a:microsoft:word:2000:*:*:*:*:*:*:*",
@@ -9102,12 +10320,12 @@ The URL object represents the properties of a uniform resource locator (URL).
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">url</span>.</td>
   </tr>
   <tr>
     <td><strong>value</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the value of the URL. The value of this property <strong>MUST</strong> conform to [<a href="#rfc3986">RFC3986</a>], more specifically section 1.1.3 with reference to the definition for "Uniform Resource Locator".</td>
   </tr>
 </table>
@@ -9119,7 +10337,7 @@ The URL object represents the properties of a uniform resource locator (URL).
 ```JSON
 {
   "type": "url",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "url--47c3cf9a-5027-5bf0-997a-017c7edc7c55",
   "value": "https://example.com/research/index.html"
 }
@@ -9175,82 +10393,82 @@ As all properties of this object are optional, at least one of the properties de
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">user-account</span>.</td>
   </tr>
   <tr>
     <td><strong>extensions</strong> (optional)</td>
-    <td><span class="stixtype">dictionary</span></td>
-    <td>The User Account object defines the following extensions. In addition to these, producers <strong>MAY</strong> create their own.<br><br><span class="stixtype">unix-account-ext</span><br><br>Dictionary keys <strong>MUST</strong> use the specification defined name (examples above) or be the id of a STIX Extension object, depending on the type of extension being used.<br><br>The corresponding dictionary values <strong>MUST</strong> contain the contents of the extension instance.</td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
+    <td>The User Account object defines the following extensions. In addition to these, producers <strong>MAY</strong> create their own.<br /><br /><span class="stixtype">unix-account-ext</span><br /><br />Dictionary keys <strong>MUST</strong> use the specification defined name (examples above) or be the id of a STIX Extension object, depending on the type of extension being used.<br /><br />The corresponding dictionary values <strong>MUST</strong> contain the contents of the extension instance.</td>
   </tr>
   <tr>
     <td><strong>user_id</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the identifier of the account. The format of the identifier depends on the system the user account is maintained in, and may be a numeric ID, a GUID, an account name, an email address, etc. The <strong>user_id</strong> property should be populated with whatever field is the unique identifier for the system the account is a member of. For example, on UNIX systems it would be populated with the UID.</td>
   </tr>
   <tr>
     <td><strong>credential</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies a cleartext credential. This is <strong>only</strong> intended to be used in capturing metadata from malware analysis (e.g., a hard-coded domain administrator password that the malware attempts to use for lateral movement) and <strong>SHOULD NOT</strong> be used for sharing of PII.</td>
   </tr>
   <tr>
     <td><strong>account_login</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies the account login string, used in cases where the <strong>user_id</strong> property specifies something other than what a user would type when they login.<br><br>For example, in the case of a Unix account with user_id 0, the account_login might be "root".</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies the account login string, used in cases where the <strong>user_id</strong> property specifies something other than what a user would type when they login.<br /><br />For example, in the case of a Unix account with user_id 0, the account_login might be "root".</td>
   </tr>
   <tr>
     <td><strong>account_type</strong> (optional)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">open-vocab</span></span></td>
-    <td>Specifies the type of the account.<br><br>This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#account-type-vocabulary"><span class="stixvocab">account-type-ov</span></a> open vocabulary.</td>
+    <td>Specifies the type of the account.<br /><br />This is an open vocabulary and values <strong>SHOULD</strong> come from the <a href="#account-type-vocabulary"><span class="stixvocab">account-type-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>display_name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>Specifies the display name of the account, to be shown in user interfaces, if applicable.<br><br>On Unix, this is equivalent to the GECOS field.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>Specifies the display name of the account, to be shown in user interfaces, if applicable.<br /><br />On Unix, this is equivalent to the GECOS field.</td>
   </tr>
   <tr>
     <td><strong>is_service_account</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Indicates that the account is associated with a network service or system process (daemon), not a specific individual.</td>
   </tr>
   <tr>
     <td><strong>is_privileged</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Specifies that the account has elevated privileges (i.e., in the case of root on Unix or the Windows Administrator account).</td>
   </tr>
   <tr>
     <td><strong>can_escalate_privs</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Specifies that the account has the ability to escalate privileges (i.e., in the case of sudo on Unix or a Windows Domain Admin account)</td>
   </tr>
   <tr>
     <td><strong>is_disabled</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Specifies if the account is disabled.</td>
   </tr>
   <tr>
     <td><strong>account_created</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies when the account was created.</td>
   </tr>
   <tr>
     <td><strong>account_expires</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the expiration date of the account.</td>
   </tr>
   <tr>
     <td><strong>credential_last_changed</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies when the account credential was last changed.</td>
   </tr>
   <tr>
     <td><strong>account_first_login</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies when the account was first accessed.</td>
   </tr>
   <tr>
     <td><strong>account_last_login</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies when the account was last accessed.</td>
   </tr>
 </table>
@@ -9262,7 +10480,7 @@ As all properties of this object are optional, at least one of the properties de
 ```JSON
 {
   "type": "user-account",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "user-account--f94d689e-707d-58c3-b803-c720bb6ed096",
   "user_id": "1001",
   "account_login": "jdoe",
@@ -9283,7 +10501,7 @@ As all properties of this object are optional, at least one of the properties de
 ```JSON
 {
   "type": "user-account",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "user-account--f223e803-846b-591a-aefa-545e938f8a56",
   "user_id": "thegrugq_ebooks",
   "account_login": "thegrugq_ebooks",
@@ -9292,7 +10510,7 @@ As all properties of this object are optional, at least one of the properties de
 }
 ```
 
-### 6.16.2 UNIX™ Account Extension <a id=unix-account-extension></a>
+### 6.16.2 UNIX™ Account Extension <a id="unix-account-extension"></a>
 
 **Type Name:** <span class="stixtype">unix-account-ext</span>
 
@@ -9300,7 +10518,7 @@ The UNIX account extension specifies a default extension for capturing the addit
 
 An object using the UNIX Account Extension **MUST** contain at least one property from this extension.
 
-#### Properties <a id="unix-account-extension-properties"></a>
+#### 6.16.2.1 Properties <a id="unix-account-extension-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9310,7 +10528,7 @@ An object using the UNIX Account Extension **MUST** contain at least one propert
   </tr>
   <tr>
     <td><strong>gid</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the primary group ID of the account.</td>
   </tr>
   <tr>
@@ -9320,12 +10538,12 @@ An object using the UNIX Account Extension **MUST** contain at least one propert
   </tr>
   <tr>
     <td><strong>home_dir</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the home directory of the account.</td>
   </tr>
   <tr>
     <td><strong>shell</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the account’s command shell.</td>
   </tr>
 </table>
@@ -9337,7 +10555,7 @@ An object using the UNIX Account Extension **MUST** contain at least one propert
 ```JSON
 {
   "type": "user-account",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "user-account--f94d689e-707d-58c3-b803-c720bb6ed096",
   "user_id": "1001",
   "account_login": "jdoe",
@@ -9406,32 +10624,32 @@ The Registry Key object represents the properties of a Windows registry key. As 
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">windows-registry-key</span>.</td>
   </tr>
   <tr>
     <td><strong>key</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the full registry key including the hive.</td>
   </tr>
   <tr>
     <td><strong>values</strong> (optional)</td>
     <td><span class="stixtype">list</span> of type <span style="white-space: nowrap"><span class="stixtype">windows-registry-value-type</span></span></td>
-    <td>Specifies the values found under the registry key.<br><br>The value of the key, including the hive portion, <strong>SHOULD</strong> be case-preserved. The hive portion of the key <strong>MUST</strong> be fully expanded and not truncated; e.g., HKEY_LOCAL_MACHINE must be used instead of HKLM.</td>
+    <td>Specifies the values found under the registry key.<br /><br />The value of the key, including the hive portion, <strong>SHOULD</strong> be case-preserved. The hive portion of the key <strong>MUST</strong> be fully expanded and not truncated; e.g., HKEY_LOCAL_MACHINE must be used instead of HKLM.</td>
   </tr>
   <tr>
     <td><strong>modified_time</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the last date/time that the registry key was modified.</td>
   </tr>
   <tr>
     <td><strong>creator_user_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
-    <td>Specifies a reference to the user account that created the registry key.<br><br>The object referenced in this property MUST be of type <span class="stixtype">user-account</span>.</td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
+    <td>Specifies a reference to the user account that created the registry key.<br /><br />The object referenced in this property MUST be of type <span class="stixtype">user-account</span>.</td>
   </tr>
   <tr>
     <td><strong>number_of_subkeys</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the number of subkeys contained under the registry key.</td>
   </tr>
 </table>
@@ -9442,7 +10660,7 @@ The Registry Key object represents the properties of a Windows registry key. As 
 
 The Windows Registry Value type captures the properties of a Windows Registry Key Value. As all properties of this type are optional, at least one of the properties defined below **MUST** be included when using this type.
 
-#### Properties <a id="windows-registry-value-type-properties"></a>
+#### 6.17.2.1 Properties <a id="windows-registry-value-type-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9452,18 +10670,18 @@ The Windows Registry Value type captures the properties of a Windows Registry Ke
   </tr>
   <tr>
     <td><strong>name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the registry value. For specifying the default value in a registry key, an empty string <strong>MUST</strong> be used.</td>
   </tr>
   <tr>
     <td><strong>data</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the data contained in the registry value.</td>
   </tr>
   <tr>
     <td><strong>data_type</strong> (optional)</td>
-    <td><span class="stixtype">enum</span></td>
-    <td>Specifies the registry (REG_*) data type used in the registry value.<br><br>The values of this property <strong>MUST</strong> come from the <a href="#windows-registry-datatype-enumeration"><span class="stixvocab">windows-registry-datatype-enum</span></a> enumeration.</td>
+    <td><a class="stixtype" href="#enum">enum</a></td>
+    <td>Specifies the registry (REG_*) data type used in the registry value.<br /><br />The values of this property <strong>MUST</strong> come from the <a href="#windows-registry-datatype-enumeration"><span class="stixvocab">windows-registry-datatype-enum</span></a> enumeration.</td>
   </tr>
 </table>
 
@@ -9474,7 +10692,7 @@ The Windows Registry Value type captures the properties of a Windows Registry Ke
 ```JSON
 {
   "type": "windows-registry-key",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "windows-registry-key--1884b770-b679-522a-a9c7-45fadaaec7bb",
   "key": "HKEY_LOCAL_MACHINE\\System\\Foo\\Bar"
 }
@@ -9485,7 +10703,7 @@ The Windows Registry Value type captures the properties of a Windows Registry Ke
 ```JSON
 {
   "type": "windows-registry-key",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "windows-registry-key--f6a11ddf-fa2b-54c8-97ab-e7f28413095a",
   "key": "hkey_local_machine\\system\\bar\\foo",
   "values": [
@@ -9540,7 +10758,7 @@ The X.509 Certificate object represents the properties of an X.509 certificate, 
     <th><span class='stixtr'>ID Contributing Properties</span></th>
   </tr>
   <tr>
-    <td><strong>hashes</strong>, <strong>serial_number</strong><br><br>If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].</td>
+    <td><strong>hashes</strong>, <strong>serial_number</strong><br /><br />If the <strong>hashes</strong> property is present, include only one hash. The selected hash <strong>SHOULD</strong> come from this ordered list (based on the following order of preference) [ MD5, SHA-1, SHA-256, SHA-512 ].</td>
   </tr>
 </table>
 
@@ -9552,67 +10770,67 @@ The X.509 Certificate object represents the properties of an X.509 certificate, 
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">x509-certificate</span>.</td>
   </tr>
   <tr>
     <td><strong>is_self_signed</strong> (optional)</td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>Specifies whether the certificate is self-signed, i.e., whether it is signed by the same entity whose identity it certifies.</td>
   </tr>
   <tr>
     <td><strong>hashes</strong> (optional)</td>
-    <td><span class="stixtype">hashes</span></td>
-    <td>Specifies any hashes that were calculated for the entire contents of the certificate.<br><br>Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
+    <td><a class="stixtype" href="#hashes">hashes</a></td>
+    <td>Specifies any hashes that were calculated for the entire contents of the certificate.<br /><br />Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
   </tr>
   <tr>
     <td><strong>version</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the version of the encoded certificate.</td>
   </tr>
   <tr>
     <td><strong>serial_number</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the unique identifier for the certificate, as issued by a specific Certificate Authority.</td>
   </tr>
   <tr>
     <td><strong>signature_algorithm</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the algorithm used to sign the certificate.</td>
   </tr>
   <tr>
     <td><strong>issuer</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the Certificate Authority that issued the certificate.</td>
   </tr>
   <tr>
     <td><strong>validity_not_before</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date on which the certificate validity period begins.</td>
   </tr>
   <tr>
     <td><strong>validity_not_after</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date on which the certificate validity period ends.</td>
   </tr>
   <tr>
     <td><strong>subject</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the entity associated with the public key stored in the subject public key field of the certificate.</td>
   </tr>
   <tr>
     <td><strong>subject_public_key_algorithm</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the name of the algorithm with which to encrypt data being sent to the subject.</td>
   </tr>
   <tr>
     <td><strong>subject_public_key_modulus</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the modulus portion of the subject's public RSA key.</td>
   </tr>
   <tr>
     <td><strong>subject_public_key_exponent</strong> (optional)</td>
-    <td><span class="stixtype">integer</span></td>
+    <td><a class="stixtype" href="#integer">integer</a></td>
     <td>Specifies the exponent portion of the subject's public RSA key, as an integer.</td>
   </tr>
   <tr>
@@ -9630,7 +10848,7 @@ The X.509 v3 Extensions type captures properties associated with X.509 v3 extens
 
 Note that the use of the term "extensions" in this context refers to the X.509 v3 Extensions type and is not a STIX Cyber Observables extension. Therefore, it is a type that describes X.509 extensions.
 
-#### Properties <a id="x509-v3-extensions-type-properties"></a>
+#### 6.18.2.1 Properties <a id="x509-v3-extensions-type-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9640,82 +10858,82 @@ Note that the use of the term "extensions" in this context refers to the X.509 v
   </tr>
   <tr>
     <td><strong>basic_constraints</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies a multi-valued extension which indicates whether a certificate is a CA certificate. The first (mandatory) name is CA followed by TRUE or FALSE. If CA is TRUE, then an optional pathlen name followed by a non-negative value can be included. Also equivalent to the object ID (OID) value of 2.5.29.19.</td>
   </tr>
   <tr>
     <td><strong>name_constraints</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies a namespace within which all subject names in subsequent certificates in a certification path <strong>MUST</strong> be located. Also equivalent to the object ID (OID) value of 2.5.29.30.</td>
   </tr>
   <tr>
     <td><strong>policy_constraints</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies any constraints on path validation for certificates issued to CAs. Also equivalent to the object ID (OID) value of 2.5.29.36.</td>
   </tr>
   <tr>
     <td><strong>key_usage</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies a multi-valued extension consisting of a list of names of the permitted key usages. Also equivalent to the object ID (OID) value of 2.5.29.15.</td>
   </tr>
   <tr>
     <td><strong>extended_key_usage</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies a list of usages indicating purposes for which the certificate public key can be used for. Also equivalent to the object ID (OID) value of 2.5.29.37.</td>
   </tr>
   <tr>
     <td><strong>subject_key_identifier</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the identifier that provides a means of identifying certificates that contain a particular public key. Also equivalent to the object ID (OID) value of 2.5.29.14.</td>
   </tr>
   <tr>
     <td><strong>authority_key_identifier</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the identifier that provides a means of identifying the public key corresponding to the private key used to sign a certificate. Also equivalent to the object ID (OID) value of 2.5.29.35.</td>
   </tr>
   <tr>
     <td><strong>subject_alternative_name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the additional identities to be bound to the subject of the certificate. Also equivalent to the object ID (OID) value of 2.5.29.17.</td>
   </tr>
   <tr>
     <td><strong>issuer_alternative_name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the additional identities to be bound to the issuer of the certificate. Also equivalent to the object ID (OID) value of 2.5.29.18.</td>
   </tr>
   <tr>
     <td><strong>subject_directory_attributes</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the identification attributes (e.g., nationality) of the subject. Also equivalent to the object ID (OID) value of 2.5.29.9.</td>
   </tr>
   <tr>
     <td><strong>crl_distribution_points</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies how CRL information is obtained. Also equivalent to the object ID (OID) value of 2.5.29.31.</td>
   </tr>
   <tr>
     <td><strong>inhibit_any_policy</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies the number of additional certificates that may appear in the path before anyPolicy is no longer permitted. Also equivalent to the object ID (OID) value of 2.5.29.54.</td>
   </tr>
   <tr>
     <td><strong>private_key_usage_period_not_before</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date on which the validity period begins for the private key, if it is different from the validity period of the certificate.</td>
   </tr>
   <tr>
     <td><strong>private_key_usage_period_not_after</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>Specifies the date on which the validity period ends for the private key, if it is different from the validity period of the certificate.</td>
   </tr>
   <tr>
     <td><strong>certificate_policies</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies a sequence of one or more policy information terms, each of which consists of an object identifier (OID) and optional qualifiers. Also equivalent to the object ID (OID) value of 2.5.29.32.</td>
   </tr>
   <tr>
     <td><strong>policy_mappings</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>Specifies one or more pairs of OIDs; each pair includes an issuerDomainPolicy and a subjectDomainPolicy. The pairing indicates whether the issuing CA considers its issuerDomainPolicy equivalent to the subject CA’s subjectDomainPolicy. Also equivalent to the object ID (OID) value of 2.5.29.33.</td>
   </tr>
 </table>
@@ -9727,7 +10945,7 @@ Note that the use of the term "extensions" in this context refers to the X.509 v
 ```JSon
 {
   "type": "x509-certificate",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "x509-certificate--bf86f034-2390-54d7-8426-d08433db3fbe",
   "issuer": "C=ZA, ST=Western Cape, L=Cape Town, O=Thawte Consulting cc, OU=Certification Services Division, CN=Thawte Server CA/emailAddress=server-certs@thawte.com",
   "validity_not_before": "2016-03-12T12:00:00Z",
@@ -9742,7 +10960,7 @@ Note that the use of the term "extensions" in this context refers to the X.509 v
 ```JSon
 {
   "type":"x509-certificate",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "x509-certificate--5adb038a-160d-5d1c-826e-bde4926a0d2d",
   "issuer":"C=ZA, ST=Western Cape, L=Cape Town, O=Thawte Consulting cc, OU=Certification Services Division, CN=Thawte Server CA/emailAddress=server-certs@thawte.com",
   "validity_not_before":"2016-03-12T12:00:00Z",
@@ -9816,26 +11034,26 @@ Language Content contains two important sets of properties:
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The <strong>type</strong> property identifies the type of object. The value of this property <strong>MUST</strong> be <span class="stixliteral">language-content</span>.</td>
   </tr>
   <tr>
     <td><strong>object_ref</strong> (required)</td>
-    <td><span class="stixtype">identifier</span></td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
     <td>The <strong>object_ref</strong> property identifies the <strong>id</strong> of the object that this Language Content applies to. It <strong>MUST</strong> be the identifier for a STIX Object.</td>
   </tr>
   <tr>
     <td><strong>object_modified</strong> (optional)</td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>The <strong>object_modified</strong> property identifies the <strong>modified</strong> time of the object that this Language Content applies to. It <strong>MUST</strong> be an exact match for the <strong>modified</strong> time of the STIX Object being referenced.</td>
   </tr>
   <tr>
     <td><strong>contents</strong> (required)</td>
-    <td><span class="stixtype">dictionary</span></td>
+    <td><a class="stixtype" href="#dictionary">dictionary</a></td>
     <td>
-      The <strong>contents</strong> property contains the actual Language Content (translation).<br><br>
-      The keys in the dictionary <strong>MUST</strong> be RFC 5646 language codes for which language content is being provided [<a href="#rfc5646">RFC5646</a>]. The values each consist of a dictionary that mirrors the properties in the target object (identified by <strong>object_ref</strong> and <strong>object_modified</strong>). For example, to provide a translation of the <strong>name</strong> property on the target object the key in the dictionary would be <strong>name</strong>.<br><br>
-      For each key in the nested dictionary:<br>
+      The <strong>contents</strong> property contains the actual Language Content (translation).<br /><br />
+      The keys in the dictionary <strong>MUST</strong> be RFC 5646 language codes for which language content is being provided [<a href="#rfc5646">RFC5646</a>]. The values each consist of a dictionary that mirrors the properties in the target object (identified by <strong>object_ref</strong> and <strong>object_modified</strong>). For example, to provide a translation of the <strong>name</strong> property on the target object the key in the dictionary would be <strong>name</strong>.<br /><br />
+      For each key in the nested dictionary:<br />
       <ul>
         <li>If the original property is a string, the corresponding property in the language content object <strong>MUST</strong> contain a string with the content for that property in the language of the top-level key.</li>
         <li>If the original property is a list, the corresponding property in the translation object must also be a list. Each item in this list recursively maps to the item at the same position in the list contained in the target object. The lists <strong>MUST</strong> have the same length.</li>
@@ -9881,7 +11099,7 @@ Note that the **object_ref** relationship has a companion property, **object_mod
     "type": "campaign",
     "id": "campaign--12a111f0-b824-4baf-a224-83b80237a094",
     "lang": "en",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "created": "2017-02-08T21:31:22.007Z",
     "modified": "2017-02-08T21:31:22.007Z",
     "name": "Bank Attack",
@@ -9890,7 +11108,7 @@ Note that the **object_ref** relationship has a companion property, **object_mod
   {
     "type": "language-content",
     "id": "language-content--b86bd89f-98bb-4fa9-8cb2-9ad421da981d",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "created": "2017-02-08T21:31:22.007Z",
     "modified": "2017-02-08T21:31:22.007Z",
     "object_ref": "campaign--12a111f0-b824-4baf-a224-83b80237a094",
@@ -9915,7 +11133,7 @@ Note that the **object_ref** relationship has a companion property, **object_mod
 {
   "type": "language-content",
   "id": "language-content--0911f616-727f-48cb-a4c5-9420299562a4",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "created": "2019-06-08T21:31:22.007Z",
   "modified": "2019-07-08T21:31:22.007Z",
   "object_ref": "threat-actor--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
@@ -9950,7 +11168,7 @@ Unlike other STIX Objects, Marking Definition objects cannot be versioned becaus
 
 The JSON MTI serialization uses the JSON Object type \[[RFC8259](#rfc8259)\] when representing <span class="stixtype">marking-definition</span>.
 
-#### Properties <a id="marking-definition-properties"></a>
+#### 7.2.1.1 Properties <a id="marking-definition-properties"></a>
 
 <table border="1" cellspacing="0" cellpadding="6" width="100%">
   <tr>
@@ -9987,20 +11205,20 @@ The JSON MTI serialization uses the JSON Object type \[[RFC8259](#rfc8259)\] whe
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The <strong>type</strong> property identifies the type of object. The value of this property <strong>MUST</strong> be <span class="stixliteral">marking-definition</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name used to identify the Marking Definition.</td>
   </tr>
   <tr>
     <td><strong>definition_type</strong> (optional - deprecated)</td>
-    <td><span class="stixtype">open-vocab</span></td>
+    <td><a class="stixtype" href="#open-vocabulary">open-vocab</a></td>
     <td>
-      The <strong>definition_type</strong> property identifies the type of Marking Definition. The value of the <strong>definition_type</strong> property <strong>SHOULD</strong> be one of the types defined in the subsections below: <span class="stixliteral">statement</span> or <span class="stixliteral">tlp</span> (see <a href="#statement-marking-object-type">section 7.2.1.3</a> and <a href="#tlp-marking-object-type">section 7.2.1.4</a>).<br><br>
-      Any new marking definitions <strong>SHOULD</strong> be specified using the extension facility described in <a href="#extension-definition">section 7.3</a>.<br><br>
+      The <strong>definition_type</strong> property identifies the type of Marking Definition. The value of the <strong>definition_type</strong> property <strong>SHOULD</strong> be one of the types defined in the subsections below: <span class="stixliteral">statement</span> or <span class="stixliteral">tlp</span> (see <a href="#statement-marking-object-type">section 7.2.1.3</a> and <a href="#tlp-marking-object-type">section 7.2.1.4</a>).<br /><br />
+      Any new marking definitions <strong>SHOULD</strong> be specified using the extension facility described in <a href="#extension-definition">section 7.3</a>.<br /><br />
       If the <strong>extensions</strong> property is not present, this property <strong>MUST</strong> be present.
     </td>
   </tr>
@@ -10008,14 +11226,14 @@ The JSON MTI serialization uses the JSON Object type \[[RFC8259](#rfc8259)\] whe
     <td><strong>definition</strong> (optional - deprecated)</td>
     <td><span style="white-space: nowrap;">&lt;marking object&gt;</span></td>
     <td>
-      The <strong>definition</strong> property contains the marking object itself (e.g., the TLP marking as defined in <a href="#tlp-marking-object-type">section 7.2.1.4</a>, the Statement marking as defined in <a href="#statement-marking-object-type">section 7.2.1.3</a>).<br><br>
-      Any new marking definitions <strong>SHOULD</strong> be specified using the extension facility described in <a href="#extension-definition">section 7.3</a>.<br><br>
+      The <strong>definition</strong> property contains the marking object itself (e.g., the TLP marking as defined in <a href="#tlp-marking-object-type">section 7.2.1.4</a>, the Statement marking as defined in <a href="#statement-marking-object-type">section 7.2.1.3</a>).<br /><br />
+      Any new marking definitions <strong>SHOULD</strong> be specified using the extension facility described in <a href="#extension-definition">section 7.3</a>.<br /><br />
       If the <strong>extensions</strong> property is not present, this property <strong>MUST</strong> be present.
     </td>
   </tr>
 </table>
 
-#### Relationships <a id="marking-definition-relationships"></a>
+#### 7.2.1.2 Relationships <a id="marking-definition-relationships"></a>
 
 There are no relationships explicitly defined between the Marking Definition object and other STIX Objects, other than the embedded relationships listed below. These embedded relationships are listed by property name along with their corresponding target.
 
@@ -10033,7 +11251,7 @@ There are no relationships explicitly defined between the Marking Definition obj
   </tr>
 </table>
 
-#### Statement Marking Object Type <a id="statement-marking-object-type"></a>
+#### 7.2.1.3 Statement Marking Object Type <a id="statement-marking-object-type"></a>
 
 The Statement marking type defines the representation of a textual marking statement (e.g., copyright, terms of use, etc.) in a definition. The value of the **definition_type** property **MUST** be <span class="stixliteral">statement</span> when using this marking type. Statement markings are generally not machine-readable, and this specification does not define any behavior or actions based on their values.
 
@@ -10047,7 +11265,7 @@ Content may be marked with multiple statements of use. In other words, the same 
   </tr>
   <tr>
     <td><strong>statement</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A Statement (e.g., copyright, terms of use) applied to the content marked by this marking definition.</td>
   </tr>
 </table>
@@ -10057,7 +11275,7 @@ Content may be marked with multiple statements of use. In other words, the same 
 ```JSON
 {
   "type": "marking-definition",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "marking-definition--4a0042fe-8b88-40fe-9600-dfa128ce6fbd",
   "created": "2016-08-01T00:00:00.000Z",
   "definition_type": "statement",
@@ -10067,7 +11285,7 @@ Content may be marked with multiple statements of use. In other words, the same 
 }
 ```
 
-#### TLP Marking Object Type <a id="tlp-marking-object-type"></a>
+#### 7.2.1.4 TLP Marking Object Type <a id="tlp-marking-object-type"></a>
 
 The TLP marking type defines how you would represent a Traffic Light Protocol (TLP) marking in a definition property. The value of the **definition_type** property **MUST** be <span class="stixliteral">tlp</span> when using this marking type.
 
@@ -10079,7 +11297,7 @@ The TLP marking type defines how you would represent a Traffic Light Protocol (T
   </tr>
   <tr>
     <td><strong>tlp</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The TLP level [<a href="#tlp">TLP</a>] of the content marked by this marking definition, as defined in this section.</td>
   </tr>
 </table>
@@ -10091,7 +11309,7 @@ The following standard marking definitions **MUST** be used to reference or repr
     <td><span class="stixliteral">white</span></td>
     <td><pre class="nowrap"><code class="language-JSON">{
   "type": "marking-definition",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "marking-definition--613f2e26-407d-48c7-9eca-b8e91df99dc9",
   "created": "2017-01-20T00:00:00.000Z",
   "definition_type": "tlp",
@@ -10105,7 +11323,7 @@ The following standard marking definitions **MUST** be used to reference or repr
     <td><span class="stixliteral">green</span></td>
     <td><pre class="nowrap"><code class="language-JSON">{
   "type": "marking-definition",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
   "created": "2017-01-20T00:00:00.000Z",
   "definition_type": "tlp",
@@ -10119,7 +11337,7 @@ The following standard marking definitions **MUST** be used to reference or repr
     <td><span class="stixliteral">amber</span></td>
     <td><pre class="nowrap"><code class="language-JSON">{
   "type": "marking-definition",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "marking-definition--f88d31f6-486f-44da-b317-01333bde0b82",
   "created": "2017-01-20T00:00:00.000Z",
   "definition_type": "tlp",
@@ -10133,7 +11351,7 @@ The following standard marking definitions **MUST** be used to reference or repr
     <td><span class="stixliteral">red</span></td>
     <td><pre class="nowrap"><code class="language-JSON">{
   "type": "marking-definition",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "marking-definition--5e57c739-391a-4eb3-b6be-7d15ca92d5ed",
   "created": "2017-01-20T00:00:00.000Z",
   "definition_type": "tlp",
@@ -10156,7 +11374,7 @@ Object Markings apply data markings to an entire STIX Object and all of its cont
 ```JSON
 {
   "type": "indicator",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "indicator--b346b4b3-f4b7-4235-b659-f985f65f0009",
   ...
   "object_marking_refs": ["marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da"],
@@ -10170,7 +11388,7 @@ Whereas object markings apply to an entire STIX Object or Marking Definition and
 
 The **granular_markings** property can also be used for language markings. To support applying both data markings and language markings to an object, the <span class="stixtype">granular-marking</span> type has a choice of two properties in addition to the selector: the lang property is used to apply language markings, and the **marking_ref** property is used to apply data markings. Because each granular marking instance applies to either a language or a marking, one and only one of these properties **MUST** be present on each instance of a granular marking.
 
-#### Granular Marking Type <a id="granular-marking-type"></a>
+#### 7.2.3.1 Granular Marking Type <a id="granular-marking-type"></a>
 
 The <span class="stixtype">granular-marking</span> type defines how the <span class="stixtype">marking-definition</span> object referenced by the **marking_ref** property or a language specified by the **lang** property applies to a set of content identified by the list of selectors in the **selectors** property.
 
@@ -10182,17 +11400,17 @@ The <span class="stixtype">granular-marking</span> type defines how the <span cl
   </tr>
   <tr>
     <td><strong>lang</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>
-      The <strong>lang</strong> property identifies the language of the text identified by this marking. The value of the <strong>lang</strong> property, if present, <strong>MUST</strong> be an <a href="#rfc5646">RFC5646</a> language code.<br><br>
+      The <strong>lang</strong> property identifies the language of the text identified by this marking. The value of the <strong>lang</strong> property, if present, <strong>MUST</strong> be an <a href="#rfc5646">RFC5646</a> language code.<br /><br />
       If the <strong>marking_ref</strong> property is not present, this property <strong>MUST</strong> be present. If the <strong>marking_ref</strong> property is present, this property <strong>MUST NOT</strong> be present.
     </td>
   </tr>
   <tr>
     <td><strong>marking_ref</strong> (optional)</td>
-    <td><span class="stixtype">identifier</span></td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
     <td>
-      The <strong>marking_ref</strong> property specifies the ID of the <span class="stixtype">marking-definition</span> object that describes the marking.<br><br>
+      The <strong>marking_ref</strong> property specifies the ID of the <span class="stixtype">marking-definition</span> object that describes the marking.<br /><br />
       If the <strong>lang</strong> property is not present, this property <strong>MUST</strong> be present. If the <strong>lang</strong> property is present, this property <strong>MUST NOT</strong> be present.
     </td>
   </tr>
@@ -10200,7 +11418,7 @@ The <span class="stixtype">granular-marking</span> type defines how the <span cl
     <td><strong>selectors</strong> (required)</td>
     <td><span style="white-space: nowrap;"><span class="stixtype">list</span> of type <span class="stixtype">string</span></span></td>
     <td>
-      The <strong>selectors</strong> property specifies a list of selectors for content contained within the STIX Object in which this property appears. Selectors <strong>MUST</strong> conform to the syntax defined below.<br><br>The <span class="stixtype">marking-definition</span> referenced in the <strong>marking_ref</strong> property is applied to the content selected by the selectors in this list.<br><br>The <a href="#rfc5646">RFC5646</a> language code specified by the <strong>lang</strong> property is applied to the content selected by the selectors in this list.
+      The <strong>selectors</strong> property specifies a list of selectors for content contained within the STIX Object in which this property appears. Selectors <strong>MUST</strong> conform to the syntax defined below.<br /><br />The <span class="stixtype">marking-definition</span> referenced in the <strong>marking_ref</strong> property is applied to the content selected by the selectors in this list.<br /><br />The <a href="#rfc5646">RFC5646</a> language code specified by the <strong>lang</strong> property is applied to the content selected by the selectors in this list.
     </td>
   </tr>
 </table>
@@ -10220,7 +11438,7 @@ As an example, consider the following STIX Object:
 ```JSON
 {
   "id": "vulnerability--ee916c28-c7a4-4d0d-ad56-a8d357f89fef",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "created": "2016-02-14T00:00:00.000Z",
   "modified": "2016-02-14T00:00:00.000Z",
   "type": "vulnerability",
@@ -10275,7 +11493,7 @@ This syntax is inspired by JSONPath \[[Goessner 2007](#goessner-2007)\] and is i
 ```JSON
 {
   "type": "campaign",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "campaign--12a111f0-b824-4baf-a224-83b80237a094",
   "lang": "en",
   "created": "2017-02-08T21:31:22.007Z",
@@ -10369,44 +11587,44 @@ Producers **SHOULD NOT** use the hybrid extension mechanism if the extensions ar
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">extension-definition</span>.</td>
   </tr>
   <tr>
     <td><strong>name</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>A name used for display purposes during execution, development, or debugging.</td>
   </tr>
   <tr>
     <td><strong>description</strong> (optional)</td>
-    <td><span class="stixtype">string</span></td>
-    <td>A detailed explanation of what data the extension conveys and how it is intended to be used.<br><br>While the description property is optional this property <strong>SHOULD</strong> be populated.<br><br>Note that the <strong>schema</strong> property is the normative definition of the extension, and this property, if present, is for documentation purposes only.</td>
+    <td><a class="stixtype" href="#string">string</a></td>
+    <td>A detailed explanation of what data the extension conveys and how it is intended to be used.<br /><br />While the description property is optional this property <strong>SHOULD</strong> be populated.<br /><br />Note that the <strong>schema</strong> property is the normative definition of the extension, and this property, if present, is for documentation purposes only.</td>
   </tr>
   <tr>
     <td><strong>schema</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>
-      The normative definition of the extension, either as a URL or as plain text explaining the definition.<br><br>A URL <strong>SHOULD</strong> point to a JSON schema or a location that contains information about the schema.<br><br><strong>NOTE</strong>: It is recommended that an external reference be provided to the comprehensive documentation of the extension-definition.
+      The normative definition of the extension, either as a URL or as plain text explaining the definition.<br /><br />A URL <strong>SHOULD</strong> point to a JSON schema or a location that contains information about the schema.<br /><br /><strong>NOTE</strong>: It is recommended that an external reference be provided to the comprehensive documentation of the extension-definition.
     </td>
   </tr>
   <tr>
     <td><strong>version</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>
-      The version of this extension. Producers of STIX extensions are encouraged to follow standard semantic versioning procedures where the version number follows the pattern, MAJOR.MINOR.PATCH. This will allow consumers to distinguish between the three different levels of compatibility typically identified by such versioning strings.<br><br>As with all STIX Objects, changing a STIX extension definition could involve STIX versioning. See <a href="#new-version-or-new-object">section 3.6.2</a> for more information on versioning an object versus creating a new one.
+      The version of this extension. Producers of STIX extensions are encouraged to follow standard semantic versioning procedures where the version number follows the pattern, MAJOR.MINOR.PATCH. This will allow consumers to distinguish between the three different levels of compatibility typically identified by such versioning strings.<br /><br />As with all STIX Objects, changing a STIX extension definition could involve STIX versioning. See <a href="#new-version-or-new-object">section 3.6.2</a> for more information on versioning an object versus creating a new one.
     </td>
   </tr>
   <tr>
     <td><strong>extension_types</strong> (required)</td>
     <td><span style="white-space: nowrap">list of type enum</span></td>
-    <td>This property specifies one or more extension types contained within this extension.<br><br>The values for this property <strong>MUST</strong> come from the <a href="#extension-type-enumeration"><span class="stixvocab">extension-type-enum</span></a> enumeration.<br><br>When this property includes <span class="stixliteral">toplevel-property-extension</span> then the <strong>extension_properties</strong> property <strong>SHOULD</strong> include one or more property names.
+    <td>This property specifies one or more extension types contained within this extension.<br /><br />The values for this property <strong>MUST</strong> come from the <a href="#extension-type-enumeration"><span class="stixvocab">extension-type-enum</span></a> enumeration.<br /><br />When this property includes <span class="stixliteral">toplevel-property-extension</span> then the <strong>extension_properties</strong> property <strong>SHOULD</strong> include one or more property names.
     </td>
   </tr>
   <tr>
     <td><strong>extension_properties</strong> (optional)</td>
     <td><span style="white-space: nowrap">list of type string</span></td>
     <td>
-      This property contains the list of new property names that are added to an object by an extension.<br><br>
+      This property contains the list of new property names that are added to an object by an extension.<br /><br />
       This property <strong>MUST</strong> only be used when the <strong>extension_types</strong> property includes a value of <span class="stixliteral">toplevel-property-extension</span>. In other words, when new properties are being added at the top-level of an existing object.
     </td>
   </tr>
@@ -10416,7 +11634,7 @@ Producers **SHOULD NOT** use the hybrid extension mechanism if the extensions ar
 
 The requirements listed below apply to the extension schema referred to by the **schema** property. These requirements are not for the Extension Definition object itself.
 
-#### Requirements for Extension Properties <a id="requirements-for-extension-properties"></a>
+#### 7.3.2.1 Requirements for Extension Properties <a id="requirements-for-extension-properties"></a>
 
 - A STIX Object **MAY** have any number of Extensions containing one or more properties.
 - Extension property names **MUST** be in ASCII and **MUST** only contain the characters a–z (lowercase ASCII), 0–9, and underscore (_).
@@ -10424,7 +11642,7 @@ The requirements listed below apply to the extension schema referred to by the *
 - Extension property names **MUST** be no longer than 250 ASCII characters in length.
 - Extension properties **SHOULD** only be used when there are no existing properties defined by the STIX specification that fulfils that need.
 
-#### Requirements for Extension STIX Objects <a id="requirements-for-extension-stix-objects"></a>
+#### 7.3.2.2 Requirements for Extension STIX Objects <a id="requirements-for-extension-stix-objects"></a>
 - Producers **MAY** include any number of STIX Extensions in STIX content.
 - Extension STIX Objects **MUST** support the Common Properties as defined in [section 3.2](#common-properties).
   - Common property names **MUST NOT** be reused to represent the custom properties in the object.
@@ -10450,7 +11668,7 @@ This is an example of a new SDO object type being created with the STIX Extensio
   {
     "id": "extension-definition--9c59fd79-4215-4ba2-920d-3e4f320e1e62",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "New SDO 1",
     "description": "This schema creates a new object type called my-favorite-sdo-1",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -10462,7 +11680,7 @@ This is an example of a new SDO object type being created with the STIX Extensio
   },
   {
     "type": "my-favorite-sdo",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "my-favorite-sdo--ac97aae4-83f1-46ca-a351-7aeb76678189",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -10487,7 +11705,7 @@ This example adds the properties **rank** and **toxicity** to the <span class="s
   {
     "id": "extension-definition--d83fce45-ef58-4c6c-a3f4-1fbc32e98c6e",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 1",
     "description": "This schema adds two properties to a STIX object",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -10499,7 +11717,7 @@ This example adds the properties **rank** and **toxicity** to the <span class="s
   },
   {
     "type": "indicator",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "indicator--e97bfccf-8970-4a3c-9cd1-5b5b97ed5d0c",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -10533,7 +11751,7 @@ This example is similar to the previous example, but uses the <span class="stixt
   {
     "id": "extension-definition--71736db5-10db-43d3-b0e3-65cf81601fe1",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 1a",
     "description": "This schema adds two properties to a STIX object at the toplevel",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -10549,7 +11767,7 @@ This example is similar to the previous example, but uses the <span class="stixt
   },
   {
     "type": "indicator",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "indicator--66a63e16-92d7-4b2f-bd3d-21540d6b3fc7",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -10581,7 +11799,7 @@ In this example, the extension introduces a new SDO, SCO, and some properties to
   {
     "id": "extension-definition--c5333451-c08c-4c48-be5e-9ad4c947776a",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension My Favorite SDO and Sub-Comp",
     "description": "This schema adds a new object my-favorite-sdo and some sub-component to existing objects",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -10593,7 +11811,7 @@ In this example, the extension introduces a new SDO, SCO, and some properties to
   },
   {
     "type": "my-favorite-sdo",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "my-favorite-sdo--a5461d2e-7ba9-43ef-9b3e-11471d1ad8da",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -10607,7 +11825,7 @@ In this example, the extension introduces a new SDO, SCO, and some properties to
   },
   {
     "type": "my-favorite-sco",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "my-favorite-sco--f9dbe89c-0030-4a9d-8b78-0dcd0a0de874",
     "name": "This is the name of my favorite SCO",
     "some_network_protocol_field": "value",
@@ -10619,7 +11837,7 @@ In this example, the extension introduces a new SDO, SCO, and some properties to
   },
   {
     "type": "indicator",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "indicator--50a77dab-ccc6-439c-b142-92786c394b43",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -10662,12 +11880,12 @@ The JSON MTI serialization uses the JSON Object type \[[RFC8259](#rfc8259)\] whe
   </tr>
   <tr>
     <td><strong>type</strong> (required)</td>
-    <td><span class="stixtype">string</span></td>
+    <td><a class="stixtype" href="#string">string</a></td>
     <td>The value of this property <strong>MUST</strong> be <span class="stixliteral">bundle</span>.</td>
   </tr>
   <tr>
     <td><strong>id</strong> (required)</td>
-    <td><span class="stixtype">identifier</span></td>
+    <td><a class="stixtype" href="#identifier">identifier</a></td>
     <td>An identifier for this Bundle. The <strong>id</strong> property for the Bundle is designed to help tools that may need it for processing, however, tools are not required to store or track it. Tools that consume STIX should not rely on the ability to refer to bundles by ID.</td>
   </tr>
   <tr>
@@ -10690,7 +11908,7 @@ STIX Bundle Object is not a STIX Object and **MUST NOT** have any relationships 
   "objects": [
     {
       "type": "indicator",
-      "spec_version": "2.1",
+      "spec_version": "2.2",
       "id": "indicator--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
       "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
       "created": "2016-04-29T14:09:00.000Z",
@@ -10723,7 +11941,7 @@ The terms defined below are used throughout this document.
   </tr>
   <tr>
     <td>Observation</td>
-    <td>Observations represent data about systems or networks that is observed at a particular point in time - for example, information about a file that existed, a process that was observed running, or network traffic that was transmitted between two IPs. In STIX, Observations are represented by Observed Data SDOs, with <strong>number_observed</strong> observations occurring between their <strong>first_observed</strong> and <strong>last_observed</strong> timestamps. It is not defined when the observations occur within that time window.<br><br>For additional background, refer to the STIX Observed Data object definition in <a href="#observed-data">section 4.14</a>.</td>
+    <td>Observations represent data about systems or networks that is observed at a particular point in time - for example, information about a file that existed, a process that was observed running, or network traffic that was transmitted between two IPs. In STIX, Observations are represented by Observed Data SDOs, with <strong>number_observed</strong> observations occurring between their <strong>first_observed</strong> and <strong>last_observed</strong> timestamps. It is not defined when the observations occur within that time window.<br /><br />For additional background, refer to the STIX Observed Data object definition in <a href="#observed-data">section 4.14</a>.</td>
     <td>n/a</td>
   </tr>
   <tr>
@@ -10743,9 +11961,9 @@ The terms defined below are used throughout this document.
   </tr>
   <tr>
     <td><span style="white-space: nowrap;">Observation Expression</span></td>
-    <td>Observation Expressions consist of one or more Comparison Expressions joined with Boolean Operators and surrounded by square brackets.<br><br>An Observation Expression may consist of two Observation Expressions joined by an Observation Operator. This may be applied recursively to compose multiple Observation Expressions into a single Observation Expression.<br><br>Observation Expressions may optionally be followed by one or more Qualifiers further constraining the result set. Qualifiers may be applied to all of the Observation Expressions joined with Observation Operators; in this case, parentheses should be used to group the set of Observation Expressions, with the Qualifier following the closing parenthesis.</td>
+    <td>Observation Expressions consist of one or more Comparison Expressions joined with Boolean Operators and surrounded by square brackets.<br /><br />An Observation Expression may consist of two Observation Expressions joined by an Observation Operator. This may be applied recursively to compose multiple Observation Expressions into a single Observation Expression.<br /><br />Observation Expressions may optionally be followed by one or more Qualifiers further constraining the result set. Qualifiers may be applied to all of the Observation Expressions joined with Observation Operators; in this case, parentheses should be used to group the set of Observation Expressions, with the Qualifier following the closing parenthesis.</td>
     <td>
-      <code>[ipv4-addr:value = '203.0.113.1' OR ipv4-addr:value = '203.0.113.2']</code><br><br>or (with Observation Operator):<br><br><code>([ipv4-addr:value = '198.51.100.5'] FOLLOWEDBY [ipv4-addr:value = '198.51.100.10'])</code><br><br>or (with Observation Operator and Qualifier):<br><br><code>([ipv4-addr:value = '198.51.100.5' ] AND [ipv4-addr:value = '198.51.100.10']) WITHIN 300 SECONDS</code>
+      <code>[ipv4-addr:value = '203.0.113.1' OR ipv4-addr:value = '203.0.113.2']</code><br /><br />or (with Observation Operator):<br /><br /><code>([ipv4-addr:value = '198.51.100.5'] FOLLOWEDBY [ipv4-addr:value = '198.51.100.10'])</code><br /><br />or (with Observation Operator and Qualifier):<br /><br /><code>([ipv4-addr:value = '198.51.100.5' ] AND [ipv4-addr:value = '198.51.100.10']) WITHIN 300 SECONDS</code>
     </td>
   </tr>
   <tr>
@@ -10764,7 +11982,7 @@ The terms defined below are used throughout this document.
   </tr>
   <tr>
     <td><span style="white-space: nowrap;">Observation Operator</span></td>
-    <td>Observation Operators are used to combine two Observation Expressions operating on two different Observed Data instances into a single pattern.<br><br>Note that some Observation Operators have the same name as Boolean Operators. However, the former connects Comparison Expressions and the latter connects Observation Expressions, and therefore each has slightly different semantics.</td>
+    <td>Observation Operators are used to combine two Observation Expressions operating on two different Observed Data instances into a single pattern.<br /><br />Note that some Observation Operators have the same name as Boolean Operators. However, the former connects Comparison Expressions and the latter connects Observation Expressions, and therefore each has slightly different semantics.</td>
     <td>
       <code>[ipv4-addr:value = '198.51.100.5'] AND [ ipv4-addr:value = '198.51.100.10']</code>
     </td>
@@ -10794,61 +12012,61 @@ Each constant defined in Patterning has a limited set of STIX Data types that th
   </tr>
   <tr>
     <td><strong>boolean</strong></td>
-    <td><span class="stixtype">boolean</span></td>
+    <td><a class="stixtype" href="#boolean">boolean</a></td>
     <td>
       A constant of <span class="stixtype">boolean</span> type encodes truth or falsehood. Boolean truth is denoted by the literal <span class="stixliteral">true</span> and falsehood by the literal <span class="stixliteral">false</span>.
     </td>
   </tr>
   <tr>
     <td><strong>binary</strong></td>
-    <td><span class="stixtype">binary</span><br><span class="stixtype">hex</span><br><span class="stixtype">string</span></td>
+    <td><span class="stixtype">binary</span><br /><span class="stixtype">hex</span><br /><span class="stixtype">string</span></td>
     <td>
-      A constant of <span class="stixtype">binary</span> type is a base64 encoded array of octets (8-bit bytes) per [<a href="#rfc4648">RFC4648</a>]. The base64 string <strong>MUST</strong> be surrounded by apostrophes (<code>'</code> U+0027) and prefixed by a <code>b</code> (U+0062). Line feeds in the base64 encoded data <strong>MUST</strong> be supported and ignored but are not required to be inserted.<br><br>
-      Example:<br>
+      A constant of <span class="stixtype">binary</span> type is a base64 encoded array of octets (8-bit bytes) per [<a href="#rfc4648">RFC4648</a>]. The base64 string <strong>MUST</strong> be surrounded by apostrophes (<code>'</code> U+0027) and prefixed by a <code>b</code> (U+0062). Line feeds in the base64 encoded data <strong>MUST</strong> be supported and ignored but are not required to be inserted.<br /><br />
+      Example:<br />
       <code>b'ABI='</code>
     </td>
   </tr>
   <tr>
     <td><strong>hex</strong></td>
-    <td><span class="stixtype">binary</span><br><span class="stixtype">hex</span><br><span class="stixtype">string</span></td>
+    <td><span class="stixtype">binary</span><br /><span class="stixtype">hex</span><br /><span class="stixtype">string</span></td>
     <td>
-      A constant of <span class="stixtype">hex</span> type encodes an array of octets (8-bit bytes) as hexadecimal. The string <strong>MUST</strong> consist of an even number of hexadecimal characters, which are the digits '0' through '9' and the letters 'a' through 'f'. The hex string <strong>MUST</strong> be surrounded by apostrophes (<code>'</code> U+0027) and prefixed by an <code>h</code> (U+0068).<br><br>
-      Example:<br>
+      A constant of <span class="stixtype">hex</span> type encodes an array of octets (8-bit bytes) as hexadecimal. The string <strong>MUST</strong> consist of an even number of hexadecimal characters, which are the digits '0' through '9' and the letters 'a' through 'f'. The hex string <strong>MUST</strong> be surrounded by apostrophes (<code>'</code> U+0027) and prefixed by an <code>h</code> (U+0068).<br /><br />
+      Example:<br />
       <code>h'ffc3'</code>
     </td>
   </tr>
   <tr>
     <td><strong>integer</strong></td>
-    <td><span class="stixtype">integer</span><br><span class="stixtype">float</span></td>
+    <td><span class="stixtype">integer</span><br /><span class="stixtype">float</span></td>
     <td>
-      A constant of <span class="stixtype">integer</span> type encodes a signed decimal number in the usual fashion (e.g., 123). In the case of positive integers, the integer <strong>MUST</strong> be represented as-is, omitting the plus sign (<code>+</code> U+002b). Negative integers <strong>MUST</strong> be represented by prepending a hyphen-minus (<code>-</code> U+002d).<br><br>
-      When compared against a <span class="stixtype">float</span>, the full value must be compared and must not be truncated. For example, the result of comparing a STIX Patterning constant integer value of 1 to a <span class="stixtype">float</span> value of 1.5 is not equal.<br><br>
+      A constant of <span class="stixtype">integer</span> type encodes a signed decimal number in the usual fashion (e.g., 123). In the case of positive integers, the integer <strong>MUST</strong> be represented as-is, omitting the plus sign (<code>+</code> U+002b). Negative integers <strong>MUST</strong> be represented by prepending a hyphen-minus (<code>-</code> U+002d).<br /><br />
+      When compared against a <span class="stixtype">float</span>, the full value must be compared and must not be truncated. For example, the result of comparing a STIX Patterning constant integer value of 1 to a <span class="stixtype">float</span> value of 1.5 is not equal.<br /><br />
       The valid range of values is defined in <a href="#common-data-types">section 2</a>.
     </td>
   </tr>
   <tr>
     <td><strong>float</strong></td>
-    <td><span class="stixtype">integer</span><br><span class="stixtype">float</span></td>
+    <td><span class="stixtype">integer</span><br /><span class="stixtype">float</span></td>
     <td>
-      A constant of <span class="stixtype">float</span> type encodes a floating-point number in the usual fashion (e.g., 123.456). In the case of positive floating-point number, the floating-point number <strong>MUST</strong> be represented as-is, omitting the plus sign (<code>+</code> U+002b). Negative floating point-numbers <strong>MUST</strong> be represented by prepending a hyphen-minus (<code>-</code> U+002d).<br><br>
+      A constant of <span class="stixtype">float</span> type encodes a floating-point number in the usual fashion (e.g., 123.456). In the case of positive floating-point number, the floating-point number <strong>MUST</strong> be represented as-is, omitting the plus sign (<code>+</code> U+002b). Negative floating point-numbers <strong>MUST</strong> be represented by prepending a hyphen-minus (<code>-</code> U+002d).<br /><br />
       The valid range of values is defined in <a href="#common-data-types">section 2</a>.
     </td>
   </tr>
   <tr>
     <td><strong>string</strong></td>
-    <td><span class="stixtype">string</span><br><span class="stixtype">binary</span><br><span class="stixtype">hex</span></td>
+    <td><span class="stixtype">string</span><br /><span class="stixtype">binary</span><br /><span class="stixtype">hex</span></td>
     <td>
-      A constant of <span class="stixtype">string</span> type encodes a string as a list of Unicode code points surrounded by apostrophes (<code>'</code> U+0027).<br><br>
-      The escape character is the backslash (<code>\</code> U+005c). Only the apostrophe or the backslash may follow, and in that case, the respective character is used for the sequence.<br><br>
+      A constant of <span class="stixtype">string</span> type encodes a string as a list of Unicode code points surrounded by apostrophes (<code>'</code> U+0027).<br /><br />
+      The escape character is the backslash (<code>\</code> U+005c). Only the apostrophe or the backslash may follow, and in that case, the respective character is used for the sequence.<br /><br />
       If a string only contains codepoints less than (U+0100), then the string <strong>MAY</strong> be converted to a binary type value (if needed for comparison). The mapping is code point U+0000 to 00 through U+00ff to ff.
     </td>
   </tr>
   <tr>
     <td><strong>timestamp</strong></td>
-    <td><span class="stixtype">timestamp</span></td>
+    <td><a class="stixtype" href="#timestamp">timestamp</a></td>
     <td>
-      A constant of <span class="stixtype">timestamp</span> type encodes a STIX timestamp (as specified in <a href="#timestamp">section 2.16</a>) as a string. The timestamp string <strong>MUST</strong> be surrounded by apostrophes (<code>'</code> U+0027) and prefixed with a <code>t</code> (U+0074).<br><br>
-      Example:<br>
+      A constant of <span class="stixtype">timestamp</span> type encodes a STIX timestamp (as specified in <a href="#timestamp">section 2.16</a>) as a string. The timestamp string <strong>MUST</strong> be surrounded by apostrophes (<code>'</code> U+0027) and prefixed with a <code>t</code> (U+0074).<br /><br />
+      Example:<br />
       <code>t'2014-01-13T07:03:17Z'</code>
     </td>
   </tr>
@@ -10976,18 +12194,18 @@ Each Observation Expression **MAY** have additional temporal or repetition restr
   </tr>
   <tr>
     <td><span style="white-space: nowrap;"><em>a</em> <span class="stixliteral">REPEATS</span> <em>x</em> <span class="stixliteral">TIMES</span></span></td>
-    <td><em>a</em> <strong>MUST</strong> be an Observation Expression or a preceding Qualifier. <em>a</em> <strong>MUST</strong> match at least <em>x</em> times, where each match is a different Observation. <em>x</em> <strong>MUST</strong> be a positive integer.<br><br>This is purely a shorthand way of writing:<br>"<em>a</em>" followed by "AND <em>a</em>", x-1 times.<br><br>Example:<br><pre><code>[ b ] FOLLOWEDBY [ c ] REPEATS 5 TIMES</code></pre>In this example, the <span class="stixliteral">REPEATS</span> applies to c, and it does not apply to b. The results will be b plus 5 c's where all 5 c's were observed after the b. Note that there is only a single Qualifier in this example; more complex patterns may use more than one.
+    <td><em>a</em> <strong>MUST</strong> be an Observation Expression or a preceding Qualifier. <em>a</em> <strong>MUST</strong> match at least <em>x</em> times, where each match is a different Observation. <em>x</em> <strong>MUST</strong> be a positive integer.<br /><br />This is purely a shorthand way of writing:<br />"<em>a</em>" followed by "AND <em>a</em>", x-1 times.<br /><br />Example:<br /><pre><code>[ b ] FOLLOWEDBY [ c ] REPEATS 5 TIMES</code></pre>In this example, the <span class="stixliteral">REPEATS</span> applies to c, and it does not apply to b. The results will be b plus 5 c's where all 5 c's were observed after the b. Note that there is only a single Qualifier in this example; more complex patterns may use more than one.
   </tr>
   <tr>
     <td><span style="white-space: nowrap;"><em>a</em> <span class="stixliteral">WITHIN</span> <em>x</em> <span class="stixliteral">SECONDS</span></span></td>
     <td>
-      <em>a</em> <strong>MUST</strong> be an Observation Expression or a preceding Qualifier. All Observations matched by <em>a</em> <strong>MUST</strong> occur, or have been observed, within the specified time window. <em>x</em> <strong>MUST</strong> be a positive floating-point or integer value.<br><br>If there is a set of two or more Observations matched by <em>a</em>, the most recent Observation timestamp contained within that set <strong>MUST NOT</strong> be equal to or later than the delta of the earliest Observation timestamp within the set plus the specified time window.<br><br>Example:<br><pre><code>([file:hashes.'SHA-256' = '13987239847...'] AND [windows-registry-key:key = 'hkey']) WITHIN 120 SECONDS</code></pre>The above Pattern Expression looks for a file hash and a registry key that were observed within 120 seconds of each other. The parentheses are needed to apply the <span class="stixliteral">WITHIN</span> Qualifier to both Observation Expressions.
+      <em>a</em> <strong>MUST</strong> be an Observation Expression or a preceding Qualifier. All Observations matched by <em>a</em> <strong>MUST</strong> occur, or have been observed, within the specified time window. <em>x</em> <strong>MUST</strong> be a positive floating-point or integer value.<br /><br />If there is a set of two or more Observations matched by <em>a</em>, the most recent Observation timestamp contained within that set <strong>MUST NOT</strong> be equal to or later than the delta of the earliest Observation timestamp within the set plus the specified time window.<br /><br />Example:<br /><pre><code>([file:hashes.'SHA-256' = '13987239847...'] AND [windows-registry-key:key = 'hkey']) WITHIN 120 SECONDS</code></pre>The above Pattern Expression looks for a file hash and a registry key that were observed within 120 seconds of each other. The parentheses are needed to apply the <span class="stixliteral">WITHIN</span> Qualifier to both Observation Expressions.
     </td>
   </tr>
   <tr>
     <td><span style="white-space: nowrap;"><em>a</em> <span class="stixliteral">START</span> <em>x</em> <span class="stixliteral">STOP</span> <em>y</em></span></td>
     <td>
-      <em>a</em> <strong>MUST</strong> be an Observation Expression or a preceding Qualifier. All Observations that match <em>a</em> <strong>MUST</strong> have an observation time &gt;= <em>x</em> and &lt; <em>y</em>.<br><br><em>x</em> and <em>y</em> <strong>MUST</strong> be of type <span class="stixtype">timestamp</span>.<br><br>In the event that the Pattern Expression is being used inside a STIX Indicator <span class="stixtype">pattern</span> property (see <a href="#indicator">section 4.7</a>) <em>x</em> <strong>SHOULD</strong> be greater than or equal to the value contained in the <span class="stixtype">valid_from</span> Indicator property, and <em>y</em> <strong>SHOULD</strong> be less than or equal to the value contained in the <span class="stixtype">valid_until</span> Indicator property.
+      <em>a</em> <strong>MUST</strong> be an Observation Expression or a preceding Qualifier. All Observations that match <em>a</em> <strong>MUST</strong> have an observation time &gt;= <em>x</em> and &lt; <em>y</em>.<br /><br /><em>x</em> and <em>y</em> <strong>MUST</strong> be of type <span class="stixtype">timestamp</span>.<br /><br />In the event that the Pattern Expression is being used inside a STIX Indicator <span class="stixtype">pattern</span> property (see <a href="#indicator">section 4.7</a>) <em>x</em> <strong>SHOULD</strong> be greater than or equal to the value contained in the <span class="stixtype">valid_from</span> Indicator property, and <em>y</em> <strong>SHOULD</strong> be less than or equal to the value contained in the <span class="stixtype">valid_until</span> Indicator property.
     </td>
   </tr>
 </table>
@@ -11079,12 +12297,12 @@ A Boolean Operator joins two Comparison Expressions together. In the following t
   </tr>
   <tr>
     <td><em>a</em> <span class="stixliteral">AND</span> <em>b</em></td>
-    <td><em>a</em> and <em>b</em> <strong>MUST</strong> both be Comparison Expressions or a composite expression (which may be composed recursively) consisting of two or more Comparison Expressions joined with Boolean Operators and enclosed by parentheses.<br><br><em>a</em> and <em>b</em> <strong>MUST</strong> both evaluate to true on the same Observation.</td>
+    <td><em>a</em> and <em>b</em> <strong>MUST</strong> both be Comparison Expressions or a composite expression (which may be composed recursively) consisting of two or more Comparison Expressions joined with Boolean Operators and enclosed by parentheses.<br /><br /><em>a</em> and <em>b</em> <strong>MUST</strong> both evaluate to true on the same Observation.</td>
     <td>Left to right</td>
   </tr>
   <tr>
     <td><em>a</em> <span class="stixliteral">OR</span> <em>b</em></td>
-    <td><em>a</em> and <em>b</em> <strong>MUST</strong> both be Comparison Expressions or a composite expression (which may be composed recursively) consisting of two or more Comparison Expressions joined with Boolean Operators and enclosed by parentheses.<br><br>Either <em>a</em> or <em>b</em> <strong>MUST</strong> evaluate to true.</td>
+    <td><em>a</em> and <em>b</em> <strong>MUST</strong> both be Comparison Expressions or a composite expression (which may be composed recursively) consisting of two or more Comparison Expressions joined with Boolean Operators and enclosed by parentheses.<br /><br />Either <em>a</em> or <em>b</em> <strong>MUST</strong> evaluate to true.</td>
     <td>Left to right</td>
   </tr>
 </table>
@@ -11140,12 +12358,12 @@ A Comparison Operator **MAY** be preceded by the modifier <span class="stixliter
   </tr>
   <tr>
     <td><em>a</em> <span class="stixliteral">LIKE</span> <em>b</em></td>
-    <td><em>a</em> <strong>MUST</strong> be an Object Path and <strong>MUST</strong> match the pattern specified in <em>b</em> where any '%' is 0 or more characters and '_' is any one character.<br><br>This operator is based upon the SQL LIKE clause and makes use of the same wildcards.<br><br>The string constant <em>b</em> <strong>MUST</strong> be NFC normalized [<a href="#davis">Davis</a>] prior to evaluation.</td>
+    <td><em>a</em> <strong>MUST</strong> be an Object Path and <strong>MUST</strong> match the pattern specified in <em>b</em> where any '%' is 0 or more characters and '_' is any one character.<br /><br />This operator is based upon the SQL LIKE clause and makes use of the same wildcards.<br /><br />The string constant <em>b</em> <strong>MUST</strong> be NFC normalized [<a href="#davis">Davis</a>] prior to evaluation.</td>
     <td><pre><code>directory:path LIKE 'C:\\Windows\\%\\foo'</code></pre></td>
   </tr>
   <tr>
     <td><em>a</em> <span class="stixliteral">MATCHES</span> <em>b</em></td>
-    <td><em>a</em> <strong>MUST</strong> be an Object Path and <strong>MUST</strong> be matched by the pattern specified in <em>b</em>, where <em>b</em> is a string constant containing a PCRE compliant regular expression. <em>a</em> <strong>MUST</strong> be NFC normalized [<a href="#davis">Davis</a>] before comparison if the property is of string type.<br><br>Regular expressions <strong>MUST</strong> be conformant to the syntax defined by the Perl-compatible Regular Expression (PCRE) library [<a href="#pcre">PCRE</a>]. The search function <strong>MUST</strong> be used. The DOTALL option <strong>MUST</strong> be specified. The standard beginning and end anchors may be used in the pattern to obtain match behavior.<br><br>In the case that the property is binary (e.g., the property name ends in <strong>_bin</strong> or <strong>_hex</strong>), then the UNICODE flag <strong>MUST NOT</strong> be specified.</td>
+    <td><em>a</em> <strong>MUST</strong> be an Object Path and <strong>MUST</strong> be matched by the pattern specified in <em>b</em>, where <em>b</em> is a string constant containing a PCRE compliant regular expression. <em>a</em> <strong>MUST</strong> be NFC normalized [<a href="#davis">Davis</a>] before comparison if the property is of string type.<br /><br />Regular expressions <strong>MUST</strong> be conformant to the syntax defined by the Perl-compatible Regular Expression (PCRE) library [<a href="#pcre">PCRE</a>]. The search function <strong>MUST</strong> be used. The DOTALL option <strong>MUST</strong> be specified. The standard beginning and end anchors may be used in the pattern to obtain match behavior.<br /><br />In the case that the property is binary (e.g., the property name ends in <strong>_bin</strong> or <strong>_hex</strong>), then the UNICODE flag <strong>MUST NOT</strong> be specified.</td>
     <td><pre><code>directory:path MATCHES '^C:\\\\Windows\\w+$'</code></pre></td>
   </tr>
 </table>
@@ -11158,17 +12376,17 @@ A Comparison Operator **MAY** be preceded by the modifier <span class="stixliter
   </tr>
   <tr>
     <td><span style="white-space: nowrap;"><em>a</em> <span class="stixliteral">ISSUBSET</span> <em>b</em></span></td>
-    <td>When <em>a</em> is a set that is wholly contained by the set <em>b</em>, the Comparison Expression evaluates to true. <em>a</em> <strong>MUST</strong> be an Object Path referring to the <strong>value</strong> property of an Object of type ipv4-addr or ipv6-addr. <em>b</em> <strong>MUST</strong> be a valid string representation of the corresponding Object type (as defined in <a href="#stix-cyber-observable-objects">section 6</a>).<br><br>For example, if ipv4-addr:value was 198.51.100.0/27, ISSUBSET '198.51.100.0/24' would evaluate to true.<br><br>In the case that both <em>a</em> and <em>b</em> evaluate to an identical single IP address or an identical IP subnet, the Comparison Expression evaluates to true.</td>
+    <td>When <em>a</em> is a set that is wholly contained by the set <em>b</em>, the Comparison Expression evaluates to true. <em>a</em> <strong>MUST</strong> be an Object Path referring to the <strong>value</strong> property of an Object of type ipv4-addr or ipv6-addr. <em>b</em> <strong>MUST</strong> be a valid string representation of the corresponding Object type (as defined in <a href="#stix-cyber-observable-objects">section 6</a>).<br /><br />For example, if ipv4-addr:value was 198.51.100.0/27, ISSUBSET '198.51.100.0/24' would evaluate to true.<br /><br />In the case that both <em>a</em> and <em>b</em> evaluate to an identical single IP address or an identical IP subnet, the Comparison Expression evaluates to true.</td>
     <td><pre><code>ipv4-addr:value ISSUBSET '198.51.100.0/24'</code></pre></td>
   </tr>
   <tr>
     <td><span style="white-space: nowrap;"><em>a</em> <span class="stixliteral">ISSUPERSET</span> <em>b</em></span></td>
-    <td>When <em>a</em> is a set that wholly contains the set specified by <em>b</em>, the Comparison Expression evaluates to true. <em>a</em> <strong>MUST</strong> be an Object Path referring either an ipv4-addr or ipv6-addr Object. <em>b</em> <strong>MUST</strong> be a valid string representation of the corresponding Object type (as defined in <a href="#stix-cyber-observable-objects">section 6</a>).<br><br>For example, if ipv4-addr:value was 198.51.100.0/24, ISSUPERSET '198.51.100.0/27' would evaluate to true.<br><br>In the case that both <em>a</em> and <em>b</em> evaluate to an identical single IP address or an identical IP subnet, the Comparison Expression evaluates to true.</td>
+    <td>When <em>a</em> is a set that wholly contains the set specified by <em>b</em>, the Comparison Expression evaluates to true. <em>a</em> <strong>MUST</strong> be an Object Path referring either an ipv4-addr or ipv6-addr Object. <em>b</em> <strong>MUST</strong> be a valid string representation of the corresponding Object type (as defined in <a href="#stix-cyber-observable-objects">section 6</a>).<br /><br />For example, if ipv4-addr:value was 198.51.100.0/24, ISSUPERSET '198.51.100.0/27' would evaluate to true.<br /><br />In the case that both <em>a</em> and <em>b</em> evaluate to an identical single IP address or an identical IP subnet, the Comparison Expression evaluates to true.</td>
     <td><pre><code>ipv4-addr:value ISSUPERSET '198.51.100.0/24'</code></pre></td>
   </tr>
   <tr>
     <td><span style="white-space: nowrap;"><span class="stixliteral">EXISTS</span> <em>a</em></td>
-    <td><em>a</em> <strong>MUST</strong> be an Object Path which specifies a single property that <strong>MUST</strong> exist on the Object specified by the Observation Expression in order for the Comparison Expression to evaluate to true.<br><br>For example, EXISTS windows-registry-key:values would evaluate to true on a registry key that contains a 'values' property (regardless of its contents).</td>
+    <td><em>a</em> <strong>MUST</strong> be an Object Path which specifies a single property that <strong>MUST</strong> exist on the Object specified by the Observation Expression in order for the Comparison Expression to evaluate to true.<br /><br />For example, EXISTS windows-registry-key:values would evaluate to true on a registry key that contains a 'values' property (regardless of its contents).</td>
     <td><pre><code>EXISTS windows-registry-key:values</code></pre></td>
   </tr>
 </table>
@@ -11228,7 +12446,7 @@ Defined below is the syntax for addressing properties of SCOs within a STIX Patt
   </tr>
   <tr>
     <td>&lt;property_name&gt;</td>
-    <td>The name of a SCO property to match against. This <strong>MUST</strong> be a valid property name as specified in the definition of the SCO type referenced by the &lt;object-type&gt; notation.<br><br>If the &lt;property_name&gt; contains a hyphen-minus ('-' U+002d) or a full stop ('.' U+002e), the &lt;property_name&gt; <strong>MUST</strong> be enclosed in apostrophes (''' U+0027).<br><br>Properties that are nested (i.e., are children of other properties in a SCO) <strong>MUST</strong> be specified using the syntax &lt;property_name&gt;.&lt;property_name&gt;, where the &lt;property_name&gt; preceding the ''.' is the name of the parent property and the one following is the name of the child property.<br><br>If the property name is a reference to another SCO, the referenced Object <strong>MUST</strong> be dereferenced, so that its properties function as if they are nested in the Object that it is referenced by. For example, if the <strong>src_ref</strong> property of the Network Traffic object references an IPv4 Address object, the value of this IPv4 address would be specified by <strong>network-traffic:src_ref.value</strong>.<br><br><strong>NOTE</strong>: the STIX Patterning language currently does not support specifying and/or dereferencing top-level relationships between SCOs as part of its object syntax. Therefore, it is recommended to use the deprecated embedded relationships for this purpose, if necessary.</td>
+    <td>The name of a SCO property to match against. This <strong>MUST</strong> be a valid property name as specified in the definition of the SCO type referenced by the &lt;object-type&gt; notation.<br /><br />If the &lt;property_name&gt; contains a hyphen-minus ('-' U+002d) or a full stop ('.' U+002e), the &lt;property_name&gt; <strong>MUST</strong> be enclosed in apostrophes (''' U+0027).<br /><br />Properties that are nested (i.e., are children of other properties in a SCO) <strong>MUST</strong> be specified using the syntax &lt;property_name&gt;.&lt;property_name&gt;, where the &lt;property_name&gt; preceding the ''.' is the name of the parent property and the one following is the name of the child property.<br /><br />If the property name is a reference to another SCO, the referenced Object <strong>MUST</strong> be dereferenced, so that its properties function as if they are nested in the Object that it is referenced by. For example, if the <strong>src_ref</strong> property of the Network Traffic object references an IPv4 Address object, the value of this IPv4 address would be specified by <strong>network-traffic:src_ref.value</strong>.<br /><br /><strong>NOTE</strong>: the STIX Patterning language currently does not support specifying and/or dereferencing top-level relationships between SCOs as part of its object syntax. Therefore, it is recommended to use the deprecated embedded relationships for this purpose, if necessary.</td>
   </tr>
 </table>
 
@@ -11443,7 +12661,7 @@ AND [file:hashes.'SHA-256' = 'aec070645fe53ee3b3763059376134f058cc337247c978add1
 ([file:name = 'foo.dll'] AND [windows-registry-key:key = 'HKEY_LOCAL_MACHINE\\foo\\bar']) OR [process:image_ref.name = 'fooproc' OR process:image_ref.name = 'procfoo']
 ```
 
-# 10. STIX Vocabularies <a id=stix-vocabularies></a>
+# 10. STIX Vocabularies <a id="stix-vocabularies"></a>
 
 The following sections provide object-specific listings for each of the vocabularies referenced in the object description sections defined in [section 4](#stix-domain-objects), [section 5](#stix-relationship-objects), [section 6](#stix-cyber-observable-objects), and [section 7](#stix-meta-objects).
 
@@ -11520,8 +12738,103 @@ An open vocabulary of User Account types.
   </tr>
 </table>
 
-## 10.2 Attack Motivation Vocabulary <a id='attack-motivation-vocabulary'></a>
+## 10.2 Asset Type Vocabulary <a id='asset-type-vocabulary'></a>
 
+**Type Name:** <span class="stixtype">asset-type-ov</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">building-doors</span>, <span class="stixliteral">building-windows</span>, <span class="stixliteral">buildings</span>, <span class="stixliteral">computers-mobile</span>, <span class="stixliteral">computers-personal</span>, <span class="stixliteral">computers-server</span>, <span class="stixliteral">environment</span>, <span class="stixliteral">ics-actuator</span>, <span class="stixliteral">ics-engineering-workstation</span>, <span class="stixliteral">ics-historian</span>, <span class="stixliteral">ics-hmi</span>, <span class="stixliteral">ics-other</span>, <span class="stixliteral">ics-plc</span>, <span class="stixliteral">ics-safety-system</span>, <span class="stixliteral">ics-sensor</span>, <span class="stixliteral">inventory</span>, <span class="stixliteral">network-device</span>, <span class="stixliteral">private-infrastructure</span>, <span class="stixliteral">public-infrastructure</span>, <span class="stixliteral">security-containers</span>, <span class="stixliteral">vehicles</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">building-doors</span></td>
+    <td>Doors within buildings or structures.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">building-windows</span></td>
+    <td>The exterior or interior windows of buildings or structures.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">buildings</span></td>
+    <td>Entire buildings or structures.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">computers-mobile</span></td>
+    <td>Mobile devices such as smartphones.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">computers-personal</span></td>
+    <td>Workstations or laptops owned by an organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">computers-server</span></td>
+    <td>Servers owned by an organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">environment</span></td>
+    <td>Land, environment or the ability of either to support humans or wildlife.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-actuator</span></td>
+    <td>Actuator for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-engineering-workstation</span></td>
+    <td>Engineering workstation for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-historian</span></td>
+    <td>Historian for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-hmi</span></td>
+    <td>Human machine interfaces for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-other</span></td>
+    <td>Other Industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-plc</span></td>
+    <td>Programmable logic controller for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-safety-system</span></td>
+    <td>Safety system for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-sensor</span></td>
+    <td>Sensor for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">inventory</span></td>
+    <td>Stocks of goods to be sold or consumed.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">network-device</span></td>
+    <td>Switches, routers, and wireless communication towers.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">private-infrastructure</span></td>
+    <td>Privately owned infrastructure such as roads, plumbing, railways, pipelines and electrical infrastructure.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">public-infrastructure</span></td>
+    <td>Publicly owned infrastructure such as roads, plumbing, railways, pipelines and electrical infrastructure.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">security-containers</span></td>
+    <td>Safes or other security containers.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">vehicles</span></td>
+    <td>Vehicles of various types including cars, trains, and planes.</td>
+</tr>
+
+</table>
+
+
+## 10.3 Attack Motivation Vocabulary <a id='attack-motivation-vocabulary'></a>
 **Vocabulary Name:** <span class="stixtype">attack-motivation-ov</span>
 
 The attack motivation vocabulary is currently used in the following SDOs:
@@ -11548,47 +12861,47 @@ Motivation shapes the intensity and the persistence of an attack. Threat Actors 
   </tr>
   <tr>
     <td><span class="stixliteral">accidental</span></td>
-    <td>A non-hostile actor whose benevolent or harmless intent inadvertently causes harm.<br><br>For example, a well-meaning and dedicated employee who through distraction or poor training unintentionally causes harm to his or her organization.</td>
+    <td>A non-hostile actor whose benevolent or harmless intent inadvertently causes harm.<br /><br />For example, a well-meaning and dedicated employee who through distraction or poor training unintentionally causes harm to his or her organization.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">coercion</span></td>
-    <td>Being forced to act on someone else’s behalf.<br><br>Adversaries who are motivated by coercion are often forced through intimidation or blackmail to act illegally for someone else’s benefit. Unlike the other motivations, a coerced person does not act for personal gain, but out of fear of incurring a loss.</td>
+    <td>Being forced to act on someone else’s behalf.<br /><br />Adversaries who are motivated by coercion are often forced through intimidation or blackmail to act illegally for someone else’s benefit. Unlike the other motivations, a coerced person does not act for personal gain, but out of fear of incurring a loss.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">dominance</span></td>
-    <td>A desire to assert superiority over someone or something else.<br><br>Adversaries who are seeking dominance over a target are focused on using their power to force their target into submission or irrelevance.</td>
+    <td>A desire to assert superiority over someone or something else.<br /><br />Adversaries who are seeking dominance over a target are focused on using their power to force their target into submission or irrelevance.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">ideology</span></td>
-    <td>A passion to express a set of ideas, beliefs, and values that may shape and drive harmful and illegal acts.<br><br>Adversaries who act for ideological reasons are not usually motivated primarily by the desire for profit; they are acting on their own sense of morality, justice, or political loyalty.<br><br>For example, an activist group may sabotage a company’s equipment because they believe the company is harming the environment.</td>
+    <td>A passion to express a set of ideas, beliefs, and values that may shape and drive harmful and illegal acts.<br /><br />Adversaries who act for ideological reasons are not usually motivated primarily by the desire for profit; they are acting on their own sense of morality, justice, or political loyalty.<br /><br />For example, an activist group may sabotage a company’s equipment because they believe the company is harming the environment.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">notoriety</span></td>
-    <td>Seeking prestige or to become well known through some activity.<br><br>Adversaries motivated by notoriety are often seeking either personal validation or respect within a community and staying covert is not a priority. In fact, one of the main goals is to garner the respect of their target audience.</td>
+    <td>Seeking prestige or to become well known through some activity.<br /><br />Adversaries motivated by notoriety are often seeking either personal validation or respect within a community and staying covert is not a priority. In fact, one of the main goals is to garner the respect of their target audience.</td>
   </tr>
   <tr>
     <td><span style="white-space: nowrap;"><span class="stixliteral">organizational-gain</span></span></td>
-    <td>Seeking advantage over a competing organization.<br><br>Adversaries motivated by increased profit or other gains through an unfairly obtained competitive advantage are often seeking theft of intellectual property, business processes, or supply chain agreements and thus accelerating their position in a market or capability.</td>
+    <td>Seeking advantage over a competing organization.<br /><br />Adversaries motivated by increased profit or other gains through an unfairly obtained competitive advantage are often seeking theft of intellectual property, business processes, or supply chain agreements and thus accelerating their position in a market or capability.</td>
   </tr>
   <tr>
     <td><span style="white-space: nowrap;"><span class="stixliteral">personal-gain</span></span></td>
-    <td>The desire to improve one’s own financial status.<br><br>Adversaries motivated by a selfish desire for personal gain are often out for gains that come from financial fraud, hacking for hire, or intellectual property theft.<br><br>While a Threat Actor or Intrusion Set may be seeking personal gain, this does not mean they are acting alone. Individuals can band together solely to maximize their own personal profits.</td>
+    <td>The desire to improve one’s own financial status.<br /><br />Adversaries motivated by a selfish desire for personal gain are often out for gains that come from financial fraud, hacking for hire, or intellectual property theft.<br /><br />While a Threat Actor or Intrusion Set may be seeking personal gain, this does not mean they are acting alone. Individuals can band together solely to maximize their own personal profits.</td>
   </tr>
   <tr>
     <td><span style="white-space: nowrap;"><span class="stixliteral">personal-satisfaction</span></span></td>
-    <td>A desire to satisfy a strictly personal goal, including curiosity, thrill-seeking, amusement, etc.<br><br>Threat Actors or Intrusion Set driven by personal satisfaction may incidentally receive some other gain from their actions, such as a profit, but their primary motivation is to gratify a personal, emotional need. Individuals can band together with others toward a mutual, but not necessarily organizational, objective.</td>
+    <td>A desire to satisfy a strictly personal goal, including curiosity, thrill-seeking, amusement, etc.<br /><br />Threat Actors or Intrusion Set driven by personal satisfaction may incidentally receive some other gain from their actions, such as a profit, but their primary motivation is to gratify a personal, emotional need. Individuals can band together with others toward a mutual, but not necessarily organizational, objective.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">revenge</span></td>
-    <td>A desire to avenge perceived wrongs through harmful actions such as sabotage, violence, theft, fraud, or embarrassing certain individuals or the organization.<br><br>A disgruntled Threat Actor or Intrusion Set seeking revenge can include current or former employees, who may have extensive knowledge to leverage when conducting attacks. Individuals can band together with others if the individual believes that doing so will enable them to cause more harm.</td>
+    <td>A desire to avenge perceived wrongs through harmful actions such as sabotage, violence, theft, fraud, or embarrassing certain individuals or the organization.<br /><br />A disgruntled Threat Actor or Intrusion Set seeking revenge can include current or former employees, who may have extensive knowledge to leverage when conducting attacks. Individuals can band together with others if the individual believes that doing so will enable them to cause more harm.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">unpredictable</span></td>
-    <td>Acting without identifiable reason or purpose and creating unpredictable events.<br><br>Unpredictable is not a miscellaneous or default category. Unpredictable means a truly random and likely bizarre event, which seems to have no logical purpose to the victims.</td>
+    <td>Acting without identifiable reason or purpose and creating unpredictable events.<br /><br />Unpredictable is not a miscellaneous or default category. Unpredictable means a truly random and likely bizarre event, which seems to have no logical purpose to the victims.</td>
   </tr>
 </table>
 
-## 10.3 Attack Resource Level Vocabulary <a id="attack-resource-level-vocabulary"></a>
+## 10.4 Attack Resource Level Vocabulary <a id="attack-resource-level-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">attack-resource-level-ov</span>
 
@@ -11637,7 +12950,103 @@ Attack Resource Level is an open vocabulary that captures the general level of r
   </tr>
 </table>
 
-## 10.4 Encryption Algorithm Enumeration <a id="encryption-algorithm-enumeration"></a>
+## 10.5 Detection Method Vocabulary <a id='detection-method-vocabulary'></a>
+
+**Type Name:** <span class="stixtype">detection-method-ov</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">automated-tool</span>, <span class="stixliteral">commercial-solution</span>, <span class="stixliteral">external-notification</span>, <span class="stixliteral">human-review</span>, <span class="stixliteral">message-from-attacker</span>, <span class="stixliteral">proprietary-solution</span>, <span class="stixliteral">system-outage</span>, <span class="stixliteral">user-reporting</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">automated-tool</span></td>
+    <td>An incident is detected by an automated tool. If this option is used it is generally useful to also include a separate entry for the tool itself.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">commercial-solution</span></td>
+    <td>A commercial tool or provider detected this incident. This can be combined with other methods including automated-tool to allow greater fidelity.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">external-notification</span></td>
+    <td>An external entity detected this incident and notified the impacted organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">human-review</span></td>
+    <td>An incident is detected by human threat hunting.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">message-from-attacker</span></td>
+    <td>Notification comes from a message provided by the attacker including email, a note left of a message or popup message.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">proprietary-solution</span></td>
+    <td>An internally developed tool or process detected this incident. This can be combined with other methods including automated-tool to allow greater fidelity.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">system-outage</span></td>
+    <td>An incident is detected because a system is no longer available.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">user-reporting</span></td>
+    <td>One or more users report an incident.</td>
+</tr>
+
+</table>
+
+
+## 10.6 Economic Impact Type Vocabulary <a id='economic-impact-type-vocabulary'></a>
+
+**Type Name:** <span class="stixtype">economic-impact-type-ov</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">asset-and-fraud</span>, <span class="stixliteral">brand-damage</span>, <span class="stixliteral">business-disruption</span>, <span class="stixliteral">competitive-advantage</span>, <span class="stixliteral">legal-and-regulatory</span>, <span class="stixliteral">operating-costs</span>, <span class="stixliteral">ransom-demand</span>, <span class="stixliteral">ransom-payment</span>, <span class="stixliteral">response-and-recovery</span>, <span class="stixliteral">uncategorized</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">asset-and-fraud</span></td>
+    <td>Losses incurred due to loss of assets or fraud.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">brand-damage</span></td>
+    <td>Losses incurred due to reputational or brand damage.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">business-disruption</span></td>
+    <td>Losses incurred due to business disruptions.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">competitive-advantage</span></td>
+    <td>Losses incurred due to theft of intellectual property, techniques or other capabilities that grant an advantage in the field.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">legal-and-regulatory</span></td>
+    <td>Losses incurred due to legal or regulatory actions in response to the incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">operating-costs</span></td>
+    <td>Losses incurred due to additional operating costs that have been incurred due to the incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ransom-demand</span></td>
+    <td>The demanded amount of ransom to be paid. When this is selected the demand amount should be listed as the **max_amount** and the **min_amount** should be 0.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ransom-payment</span></td>
+    <td>An actual payment of a ransom.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">response-and-recovery</span></td>
+    <td>Losses incurred due to response and recovery efforts for the incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">uncategorized</span></td>
+    <td>Losses incurred that have not been categorized yet.</td>
+</tr>
+
+</table>
+
+
+## 10.7 Encryption Algorithm Enumeration <a id="encryption-algorithm-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">encryption-algorithm-enum</span>
 
@@ -11674,7 +13083,512 @@ An enumeration of encryption algorithms for sharing defanged and/or confidential
   </tr>
 </table>
 
-## 10.5 Extension Type Enumeration <a id="extension-type-enumeration"></a>
+## 10.8 Entity Type Vocabulary <a id="entity-type-vocabulary"></a>
+
+**Type Name:** entity-type-ov
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">computers-mobile</span>, <span class="stixliteral">computers-personal</span>, <span class="stixliteral">computers-server</span>, <span class="stixliteral">customer</span>, <span class="stixliteral">customer-individual</span>, <span class="stixliteral">customer-organization</span>, <span class="stixliteral">domain-controller</span>, <span class="stixliteral">employee</span>, <span class="stixliteral">group</span>, <span class="stixliteral">ics-actuator</span>, <span class="stixliteral">ics-engineering-workstation</span>, <span class="stixliteral">ics-historian</span>, <span class="stixliteral">ics-hmi</span>, <span class="stixliteral">ics-other</span>, <span class="stixliteral">ics-plc</span>, <span class="stixliteral">ics-safety-system</span>, <span class="stixliteral">ics-sensor</span>, <span class="stixliteral">individual</span>, <span class="stixliteral">network-device</span>, <span class="stixliteral">organization</span>, <span class="stixliteral">system</span>, <span class="stixliteral">vehicles</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">computers-mobile</span></td>
+    <td>Mobile devices such as smartphones.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">computers-personal</span></td>
+    <td>Workstations or laptops owned by an organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">computers-server</span></td>
+    <td>Servers owned by an organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">customer</span></td>
+    <td>An customer or client. This can be an individual or organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">customer-individual</span></td>
+    <td>An customer or client that represents an individual.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">customer-organization</span></td>
+    <td>An customer or client that represents a business or other organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">domain-controller</span></td>
+    <td>A windows domain controller.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">employee</span></td>
+    <td>An employee of an organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">group</span></td>
+    <td>An informal collection of people, without formal governance, such as a distributed hacker group.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-actuator</span></td>
+    <td>Actuator for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-engineering-workstation</span></td>
+    <td>Engineering workstation for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-historian</span></td>
+    <td>Historian for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-hmi</span></td>
+    <td>Human machine interfaces for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-other</span></td>
+    <td>Other Industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-plc</span></td>
+    <td>Programmable logic controller for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-safety-system</span></td>
+    <td>Safety system for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ics-sensor</span></td>
+    <td>Sensor for industrial control systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">individual</span></td>
+    <td>A single person.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">network-device</span></td>
+    <td>Switches, routers, and wireless communication towers.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">organization</span></td>
+    <td>A formal organization of people, with governance, such as a company or country.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">system</span></td>
+    <td>A computer system, such as a SIEM.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">vehicles</span></td>
+    <td>Vehicles of various types including cars, trains, and planes.</td>
+</tr>
+
+</table>
+
+
+## 10.9 Event Status Enumeration <a id="event-status-enumeration"></a>
+
+**Type Name:** event-status-enum
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">not-occurred</span>, <span class="stixliteral">occurred</span>, <span class="stixliteral">ongoing</span>, <span class="stixliteral">pending</span>, <span class="stixliteral">undetermined</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">not-occurred</span></td>
+    <td>The event did not take place, but it was previously expected to.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">occurred</span></td>
+    <td>The event took place and is no longer ongoing.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ongoing</span></td>
+    <td>The event is still occurring.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">pending</span></td>
+    <td>The event has not yet been started or observed, but it is projected or otherwise planned. Pending activity may never occur as various factors can cause it to be blocked or not attempted. As such any time or sequence values for pending activities should be treated as an estimation or projection that is subject to change.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">undetermined</span></td>
+    <td>The status of the event has not been determined or is not shareable.</td>
+</tr>
+
+</table>
+
+
+## 10.10 Event Type Vocabulary <a id="event-type-vocabulary"></a>
+
+This vocabulary draws for numerous sources including heavily from MISP taxonomies.
+
+These include:
+
+1. [FIRST DNS Abuse Techniques Matrix](https://www.misp-project.org/galaxy.html#_first_dns_abuse_techniques_matrix)
+2. [Europol type of events taxonomy](https://www.misp-project.org/taxonomies.html#_europol_event).
+3. [Europol type of incidents taxonomy](https://www.misp-project.org/taxonomies.html#_europol_incident)
+4. NIST 800-61 Rev. 2
+
+**Type Name:** event-type-ov
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">aggregation-information-phishing-schemes</span>, <span class="stixliteral">benign</span>, <span class="stixliteral">blocked</span>, <span class="stixliteral">brute-force-attempt</span>, <span class="stixliteral">c&c-server-hosting</span>, <span class="stixliteral">compromised-system</span>, <span class="stixliteral">confirmed</span>, <span class="stixliteral">connection-malware-port</span>, <span class="stixliteral">connection-malware-system</span>, <span class="stixliteral">content-forbidden-by-law</span>, <span class="stixliteral">control-system-bypass</span>, <span class="stixliteral">copyrighted-content</span>, <span class="stixliteral">data-exfiltration</span>, <span class="stixliteral">deferred</span>, <span class="stixliteral">deletion-information</span>, <span class="stixliteral">denial-of-service</span>, <span class="stixliteral">destruction</span>, <span class="stixliteral">dictionary-attack-attempt</span>, <span class="stixliteral">discarded</span>, <span class="stixliteral">disruption-data-transmission</span>, <span class="stixliteral">dissemination-malware-email</span>, <span class="stixliteral">dissemination-phishing-emails</span>, <span class="stixliteral">dns-cache-poisoning</span>, <span class="stixliteral">dns-local-resolver-hijacking</span>, <span class="stixliteral">dns-rebinding</span>, <span class="stixliteral">dns-server-compromise</span>, <span class="stixliteral">dns-spoofing-registered</span>, <span class="stixliteral">dns-spoofing-unregistered</span>, <span class="stixliteral">dns-stub-resolver-hijacking</span>, <span class="stixliteral">dns-zone-transfer</span>, <span class="stixliteral">domain-name-compromise</span>, <span class="stixliteral">duplicate</span>, <span class="stixliteral">email-flooding</span>, <span class="stixliteral">equipment-loss</span>, <span class="stixliteral">equipment-theft</span>, <span class="stixliteral">exploit</span>, <span class="stixliteral">exploit-attempt</span>, <span class="stixliteral">exploit-framework-exhausting-resources</span>, <span class="stixliteral">exploit-tool-exhausting-resources</span>, <span class="stixliteral">failed</span>, <span class="stixliteral">file-inclusion</span>, <span class="stixliteral">file-inclusion-attempt</span>, <span class="stixliteral">hosting-malware-webpage</span>, <span class="stixliteral">hosting-phishing-sites</span>, <span class="stixliteral">illegitimate-use-name</span>, <span class="stixliteral">illegitimate-use-resources</span>, <span class="stixliteral">infected-by-known-malware</span>, <span class="stixliteral">insufficient-data</span>, <span class="stixliteral">known-malware</span>, <span class="stixliteral">lame-delegations</span>, <span class="stixliteral">major</span>, <span class="stixliteral">misconfiguration</span>, <span class="stixliteral">modification-information</span>, <span class="stixliteral">natural</span>, <span class="stixliteral">negotiation</span>, <span class="stixliteral">network-scanning</span>, <span class="stixliteral">no-apt</span>, <span class="stixliteral">packet-flood</span>, <span class="stixliteral">password-cracking-attempt</span>, <span class="stixliteral">policy-violation</span>, <span class="stixliteral">ransomware</span>, <span class="stixliteral">ransomware-payment</span>, <span class="stixliteral">refuted</span>, <span class="stixliteral">scan-probe</span>, <span class="stixliteral">silently-discarded</span>, <span class="stixliteral">spam</span>, <span class="stixliteral">sql-injection</span>, <span class="stixliteral">sql-injection-attempt</span>, <span class="stixliteral">successful</span>, <span class="stixliteral">supply-chain-customer</span>, <span class="stixliteral">supply-chain-vendor</span>, <span class="stixliteral">system-probe</span>, <span class="stixliteral">theft-access-credentials</span>, <span class="stixliteral">unattributed</span>, <span class="stixliteral">unauthorized-access-information</span>, <span class="stixliteral">unauthorized-access-system</span>, <span class="stixliteral">unauthorized-equipment</span>, <span class="stixliteral">unauthorized-release</span>, <span class="stixliteral">unauthorized-use</span>, <span class="stixliteral">undetermined</span>, <span class="stixliteral">unintentional</span>, <span class="stixliteral">unknown-apt</span>, <span class="stixliteral">unspecified</span>, <span class="stixliteral">vandalism</span>, <span class="stixliteral">wiretapping</span>, <span class="stixliteral">worm-spreading</span>, <span class="stixliteral">xss</span>, <span class="stixliteral">xss-attempt</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">aggregation-information-phishing-schemes</span></td>
+    <td>Collecting data obtained through phishing attacks on web pages, email accounts, etc…​</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">benign</span></td>
+    <td>The event was neither dangerous nor malicious and was not suspected to be malicious or dangerous.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">blocked</span></td>
+    <td>The event was suspected to be malicious and was blocked.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">brute-force-attempt</span></td>
+    <td>Unsuccessful login attempt by using sequential credentials for gaining access to the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">c&c-server-hosting</span></td>
+    <td>Web page disseminating one or various types of malware.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">compromised-system</span></td>
+    <td>Attackers obtained control of a compromised system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">confirmed</span></td>
+    <td>The event was confirmed to be tied to an incident and response is underway.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">connection-malware-port</span></td>
+    <td>System attempting to gain access to a port normally linked to a specific type of malware.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">connection-malware-system</span></td>
+    <td>System attempting to gain access to an IP address or URL normally linked to a specific type of malware, e.g. C&C or a distribution page for components linked to a specific botnet.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">content-forbidden-by-law</span></td>
+    <td>Distribution or sharing of illegal content such as child pornography, racism, xenophobia, etc…​</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">control-system-bypass</span></td>
+    <td>Unauthorized access to a system or component by bypassing an access control system in place.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">copyrighted-content</span></td>
+    <td>Distribution or sharing of content protected by copyright and related rights.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">data-exfiltration</span></td>
+    <td>Unauthorized access to and sharing of a specific set of information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">deferred</span></td>
+    <td>The event is deferred due to resource constraints, information types or external reasons.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">deletion-information</span></td>
+    <td>Unauthorized deleting of a specific set of information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">denial-of-service</span></td>
+    <td>The event or incident resulted in a loss of availability for a service or system. Incidents of this type **SHOULD** have an availability impact, but organizations may choose to not share the details of these impacts.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">destruction</span></td>
+    <td>The event or incident destroyed data or systems. Incidents of this **SHOULD** have an integrity impact, but organizations may choose to not share the details of these impacts.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dictionary-attack-attempt</span></td>
+    <td>Unsuccessful login attempt by using system access credentials previously loaded into a dictionary.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">discarded</span></td>
+    <td>The event was discarded due to resource constraints, information types or external reasons.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">disruption-data-transmission</span></td>
+    <td>Logical and physical activities aimed at causing damage to information or at preventing its transmission among systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dissemination-malware-email</span></td>
+    <td>Malware attached to a message or email message containing link to malicious URL.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dissemination-phishing-emails</span></td>
+    <td>Mass emailing aimed at collecting data for phishing purposes with regard to the victims.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-cache-poisoning</span></td>
+    <td>DNS cache poisoning - also known as DNS spoofing, is a type of cyber attack in which an attacker corrupts a DNS resolver’s cache by injecting false DNS records, causing the resolver to records controlled by the attacker.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-local-resolver-hijacking</span></td>
+    <td>Consumer Premise Equipment (CPE), such as home routers, often provide DNS recursion on the local network. If the CPE device is compromised, the attacker can change the recursive resolver behavior; for example, by changing responses.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-rebinding</span></td>
+    <td>DNS rebinding - a type of attack where a malicious website directs a client to a local network address, allowing the attacker to bypass the same-origin policy and gain access to the victim’s local resources.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-server-compromise</span></td>
+    <td>Attacker gains administrative privileges on an open recursive DNS server, authoritative DNS server, organizational recursive DNS server, or ISP-operated recursive DNS server.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-spoofing-registered</span></td>
+    <td>In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is in fact controlled by or registered to a legitimate registrant.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-spoofing-unregistered</span></td>
+    <td>In a context where a domain name is expected (such as the From header in mail or a URL in a web page or message body), supplying a domain name not controlled by the attacker and that is not controlled by or registered to a legitimate registrant.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-stub-resolver-hijacking</span></td>
+    <td>The attacker compromises the Operating System of a computer or a phone with malicious code that intercepts and responds to DNS queries with rogue or malicious responses.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">dns-zone-transfer</span></td>
+    <td>Transfer of a specific DNS zone.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">domain-name-compromise</span></td>
+    <td>The wrongfully taking control of a domain name from the rightful name holder. Compromised domains can be used for different kinds of malicious activity like sending spam or phishing, for distributing malware or as botnet command and control.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">duplicate</span></td>
+    <td>This event is a duplicate of another event. A relationship should be created between this event and the event it duplicates.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">email-flooding</span></td>
+    <td>Sending an unusually large quantity of email messages.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">equipment-loss</span></td>
+    <td>A loss of control of physical equipment that is not known to be theft.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">equipment-theft</span></td>
+    <td>Theft of equipment. In general this should be paired with equipment-loss.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exploit</span></td>
+    <td>Successful use of a tool exploiting a specific vulnerability of the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exploit-attempt</span></td>
+    <td>Unsuccessful use of a tool exploiting a specific vulnerability of the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exploit-framework-exhausting-resources</span></td>
+    <td>Various sources using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exploit-tool-exhausting-resources</span></td>
+    <td>One single source using specially designed software to affect the normal functioning of a specific service, by exploiting a vulnerability.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">failed</span></td>
+    <td>The event failed its suspected goal.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">file-inclusion</span></td>
+    <td>Inclusion of files into a system under attack with the use of file inclusion techniques.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">file-inclusion-attempt</span></td>
+    <td>Unsuccessful attempt to include files in the system under attack by using file inclusion techniques.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">hosting-malware-webpage</span></td>
+    <td>Web page disseminating one or various types of malware.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">hosting-phishing-sites</span></td>
+    <td>Hosting web sites for phishing purposes.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">illegitimate-use-name</span></td>
+    <td>Using the name of an institution without permission to do so.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">illegitimate-use-resources</span></td>
+    <td>Use of institutional resources for purposes other than those intended.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">infected-by-known-malware</span></td>
+    <td>The presence of any of the types of malware was detected in a system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">insufficient-data</span></td>
+    <td>Not enough data is available to assess this event.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">known-malware</span></td>
+    <td>This incident involves a known type of malware. Events and incidents **SHOULD** be related to a Malware object, but organizations may choose not to share the details on this malware.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">lame-delegations</span></td>
+    <td>Lame delegations occur as a result of expired name server domains allowing attackers to take control of the domain resolution by re-registering this expired name server domain.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">major</span></td>
+    <td>The incident is classified as major based on the internal criteria within the organization or due to external reporting requirements.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">misconfiguration</span></td>
+    <td>A false positive where this event was triggered by a misconfiguration.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">modification-information</span></td>
+    <td>Unauthorized changes to a specific set of information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">natural</span></td>
+    <td>The event was due to natural causes such as an earthquake or hurricane.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">negotiation</span></td>
+    <td>Negotiation of a deal or payment amount.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">network-scanning</span></td>
+    <td>Scanning a network aimed at identifying systems which are active in the same network.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">no-apt</span></td>
+    <td>It is not believed that this incident involved an advanced persistent threat.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">packet-flood</span></td>
+    <td>Mass mailing of requests (network packets, emails, etc…​) from various sources to a specific service, aimed at affecting its normal functioning.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">password-cracking-attempt</span></td>
+    <td>Attempt to acquire access credentials by breaking the protective cryptographic keys.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">policy-violation</span></td>
+    <td>The event or incident was a violation of organizational or regulatory policy.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ransomware</span></td>
+    <td>This incident involved malware that encrypted data with a demand that a ransom is paid to regain access to it.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ransomware-payment</span></td>
+    <td>The event or incident associated with actually paying a ransom.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">refuted</span></td>
+    <td>The event was previously suspected to have achieved a goal, but this has since been refuted.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">scan-probe</span></td>
+    <td>Event was triggered based on scanning activity</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">silently-discarded</span></td>
+    <td>The event was silently discarded due to resource constraints, information types or external reasons.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">spam</span></td>
+    <td>Sending an email message that was unsolicited or unwanted by the recipient.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">sql-injection</span></td>
+    <td>Manipulation or reading of information contained in a database by using the SQL injection technique.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">sql-injection-attempt</span></td>
+    <td>Unsuccessful attempt to manipulate or read the information of a database by using the SQL injection technique.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">successful</span></td>
+    <td>The event is believed to have succeeded in its goal.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">supply-chain-customer</span></td>
+    <td>This incident used a vendor further up in the supply chain where the target was a customer.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">supply-chain-vendor</span></td>
+    <td>This incident targeted a system or product that is supplied to others to enable further attacks.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">system-probe</span></td>
+    <td>Single system scan searching for open ports or services using these ports for responding.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">theft-access-credentials</span></td>
+    <td>Unauthorized access to a system or component by using stolen access credentials.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unattributed</span></td>
+    <td>This event or incident has not been attributed. It is unclear if it is tied to a specific advanced persistent threat group.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unauthorized-access-information</span></td>
+    <td>Unauthorized access to a set of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unauthorized-access-system</span></td>
+    <td>Unauthorized access to a system or component.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unauthorized-equipment</span></td>
+    <td>Usage of unauthorized devices as part of the incident</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unauthorized-release</span></td>
+    <td>The unauthorized release of information. Incidents of this **SHOULD** have a confidentiality impact, but organizations may choose to not share the details of these impacts.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unauthorized-use</span></td>
+    <td>The usage of information that falls outside of official purposes</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">undetermined</span></td>
+    <td>Field aimed at the classification of unprocessed events, which have remained undetermined from the beginning.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unintentional</span></td>
+    <td>The event was due to unintentional activity.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown-apt</span></td>
+    <td>This incident is believed to involve an advanced persistent threat, but the specific APT is unknown.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unspecified</span></td>
+    <td>Other unlisted events.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">vandalism</span></td>
+    <td>Logical and physical activities which - although they are not aimed at causing damage to information or at preventing its transmission among systems - have this effect.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">wiretapping</span></td>
+    <td>Logical or physical interception of communications.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">worm-spreading</span></td>
+    <td>System infected by a worm trying to infect other systems.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">xss</span></td>
+    <td>Attacks performed with the use of cross-site scripting techniques.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">xss-attempt</span></td>
+    <td>Unsuccessful attempts to perform attacks by using cross-site scripting techniques.</td>
+</tr>
+
+</table>
+
+
+## 10.11 Extension Type Enumeration <a id="extension-type-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">extension-type-enum</span>
 
@@ -11716,7 +13630,47 @@ The Extensions Type enumeration is used in the Extension meta-object.
   </tr>
 </table>
 
-## 10.6 Grouping Context Vocabulary <a id="grouping-context-vocabulary"></a>
+## 10.12 External Impact Vocabulary <a id='external-impact-vocabulary'></a>
+
+**Type Name:** <span class="stixtype">external-impact-ov</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">economic</span>, <span class="stixliteral">emergency-services</span>, <span class="stixliteral">foreign-relations</span>, <span class="stixliteral">national-security</span>, <span class="stixliteral">public-confidence</span>, <span class="stixliteral">public-health</span>, <span class="stixliteral">public-safety</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">economic</span></td>
+    <td>This incident is expected to have national or international economic impacts.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">emergency-services</span></td>
+    <td>This incident impacts emergency services.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">foreign-relations</span></td>
+    <td>This incident impacts international politics.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">national-security</span></td>
+    <td>This incident impacts the national security of one or more nations.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">public-confidence</span></td>
+    <td>This incident impacts the confidence in public or private institutions.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">public-health</span></td>
+    <td>This incident impacts the public health of one or more nations.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">public-safety</span></td>
+    <td>This incident impacts the public safety of individuals in one or more nations.</td>
+</tr>
+
+</table>
+
+
+## 10.13 Grouping Context Vocabulary <a id="grouping-context-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">grouping-context-ov</span>
 
@@ -11753,7 +13707,7 @@ While the majority of this vocabulary is undefined (producers may use custom voc
   </tr>
 </table>
 
-## 10.7 Hashing Algorithm Vocabulary <a id="hashing-algorithm-vocabulary"></a>
+## 10.14 Hashing Algorithm Vocabulary <a id="hashing-algorithm-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">hash-algorithm-ov</span>
 
@@ -11817,7 +13771,7 @@ A vocabulary of hashing algorithms.
   </tr>
 </table>
 
-## 10.8 Identity Class Vocabulary <a id="identity-class-vocabulary"></a>
+## 10.15 Identity Class Vocabulary <a id="identity-class-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">identity-class-ov</span>
 
@@ -11866,7 +13820,7 @@ This vocabulary describes the type of entity that the Identity represents: wheth
   </tr>
 </table>
 
-## 10.9. Implementation Language Vocabulary <a id="implementation-language-vocabulary"></a>
+## 10.16 Implementation Language Vocabulary <a id="implementation-language-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">implementation-language-ov</span>
 
@@ -11979,7 +13933,99 @@ This is a non-exhaustive, open vocabulary that covers common programming languag
   </tr>
 </table>
 
-## 10.10 Indicator Type Vocabulary <a id="indicator-type-vocabulary"></a>
+## 10.17 Incident Confidentiality Loss Enumeration <a id="incident-confidentiality-loss-enumeration"></a>
+
+**Type Name:** incident-confidentiality-loss-enum
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">confirmed-loss</span>, <span class="stixliteral">contained</span>, <span class="stixliteral">exploited-loss</span>, <span class="stixliteral">none</span>, <span class="stixliteral">suspected-loss</span>, <span class="stixliteral">unknown</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">confirmed-loss</span></td>
+    <td>Information has been exfiltrated and is now available to the attacker, but it is unknown if it has been misused.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">contained</span></td>
+    <td>Information’s confidentiality was compromised, but the spill was within an environment that allowed it to be effectively contained. For example: a sensitive data spill occurred within a controlled network allowing it to be resolved before information exited the organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exploited-loss</span></td>
+    <td>Information has been exfiltrated and has been actively misused by the attacker.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">none</span></td>
+    <td>This information type was not compromised based on the investigation that was performed. This option should be used to affirmatively supply this information when necessary.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">suspected-loss</span></td>
+    <td>It is suspected but not confirmed that the attacker may have gained access to this information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown</span></td>
+    <td>It is unknown if the attacker may have gained access to this information.</td>
+</tr>
+
+</table>
+
+
+## 10.18 Incident Determination Enumeration <a id='incident-determination-enumeration'></a>
+
+**Type Name:** <span class="stixtype">incident-determination-enum</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">blocked</span>, <span class="stixliteral">confirmed</span>, <span class="stixliteral">failed-attempt</span>, <span class="stixliteral">false-positive</span>, <span class="stixliteral">suspected</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">blocked</span></td>
+    <td>The incident had no or minimal impact due to pre-emptive measures including rate limiting or spam filters.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">confirmed</span></td>
+    <td>An incident has been determined to have caused at least some harm or violated a policy.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">failed-attempt</span></td>
+    <td>The incident had no or minimal impact but not due to any affirmative defense for example a password guesser failed but was also not rate limited.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">false-positive</span></td>
+    <td>An incident was determined to have been triggered by a false alert and no action including automatically performed automated actions were needed to remediate the issue. This should not be used when an incident was flagged correctly, but is of no importance. For findings of that nature low-value should be used.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">suspected</span></td>
+    <td>An incident is suspected, but not yet confirmed.</td>
+</tr>
+
+</table>
+
+
+## 10.19 Incident Investigation Open Vocabulary <a id='incident-investigation-vocabulary'></a>
+
+**Type Name:** <span class="stixtype">incident-investigation-ov</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">closed</span>, <span class="stixliteral">new</span>, <span class="stixliteral">open</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">closed</span></td>
+    <td>All victim/defender work on this incident has been concluded. Blue teams may use a closed incident as a starting point for their work, by creating child Incidents of the closed Incident. In these cases, it is appropriate to mark an initial Incident as closed if the related child incidents that track this work are still open.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">new</span></td>
+    <td>A new incident which the victim/defender has not begun formal work on.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">open</span></td>
+    <td>Victim/Defender work is in underway for this Incident.</td>
+</tr>
+
+</table>
+
+
+## 10.20 Indicator Type Vocabulary <a id="indicator-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">indicator-type-ov</span>
 
@@ -12032,7 +14078,7 @@ Indicator type is an open vocabulary used to categorize Indicators. It is intend
   </tr>
 </table>
 
-## 10.11 Industry Sector Vocabulary <a id="industry-sector-vocabulary"></a>
+## 10.21 Industry Sector Vocabulary <a id="industry-sector-vocabulary"></a><a id='industry-sector-ov'></a>
 
 **Vocabulary Name:** <span class="stixtype">industry-sector-ov</span>
 
@@ -12197,7 +14243,63 @@ Industry sector is an open vocabulary that describes industrial and commercial s
   </tr>
 </table>
 
-## 10.12 Infrastructure Type Vocabulary <a id="infrastructure-type-vocabulary"></a>
+## 10.22 Information Type Vocabulary <a id='information-type-vocabulary'></a><a id='information-type-ov'></a>
+
+**Type Name:** <span class="stixtype">information-type-ov</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">classified-material</span>, <span class="stixliteral">communication</span>, <span class="stixliteral">credentials-admin</span>, <span class="stixliteral">credentials-user</span>, <span class="stixliteral">financial</span>, <span class="stixliteral">legal</span>, <span class="stixliteral">payment</span>, <span class="stixliteral">phi</span>, <span class="stixliteral">pii</span>, <span class="stixliteral">proprietary</span>, <span class="stixliteral">system</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">classified-material</span></td>
+    <td>Data classified based on relevant government authorities.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">communication</span></td>
+    <td>Communication records including emails, chats and instant messages.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">credentials-admin</span></td>
+    <td>Administrative credential data.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">credentials-user</span></td>
+    <td>User credential data.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">financial</span></td>
+    <td>Financial records including purchasing activity and planned activities.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">legal</span></td>
+    <td>Legal records that are not yet public including contracts under negotiation and documents protected under legal privilege.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">payment</span></td>
+    <td>Payment information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">phi</span></td>
+    <td>Protected Health Information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">pii</span></td>
+    <td>Personally Identifiable Information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">proprietary</span></td>
+    <td>Proprietary information e.g., intellectual property.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">system</span></td>
+    <td>Information necessary to keep a system operational. The destruction or encryption of this data can cause availability impacts.</td>
+</tr>
+
+</table>
+
+
+## 10.23 Infrastructure Type Vocabulary <a id="infrastructure-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">infrastructure-type-ov</span>
 
@@ -12282,7 +14384,51 @@ A non-exhaustive enumeration of infrastructure types.
   </tr>
 </table>
 
-## 10.13 Malware Capabilities Vocabulary <a id="malware-capabilities-vocabulary"></a>
+## 10.24 Integrity Alteration Enumeration <a id='integrity-alteration-enumeration'></a>
+
+**Type Name:** integrity-alteration-enum
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">full-destruction</span>, <span class="stixliteral">full-modification</span>, <span class="stixliteral">none</span>, <span class="stixliteral">partial-destruction</span>, <span class="stixliteral">partial-modification</span>, <span class="stixliteral">potential-destruction</span>, <span class="stixliteral">potential-modification</span>, <span class="stixliteral">unknown</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">full-destruction</span></td>
+    <td>Sufficient data of this type was destroyed to render the system inoperable until recovery can be completed.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">full-modification</span></td>
+    <td>Sufficient data of this type was modified to render the system inoperable until recovery can be completed.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">none</span></td>
+    <td>There is no evidence of destruction or modification of this data type in the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">partial-destruction</span></td>
+    <td>Some data of this type has been destroyed, but sufficient data remains to allow partial functionality.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">partial-modification</span></td>
+    <td>Some data in the system has been modified, but the remaining data is of an acceptable level of integrity for operations to continue.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">potential-destruction</span></td>
+    <td>Information may have been destroyed within the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">potential-modification</span></td>
+    <td>Information may have been modified within the system.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown</span></td>
+    <td>It is unknown if destruction or modification of this data type in the system has occurred.</td>
+</tr>
+
+</table>
+
+
+## 10.25 Malware Capabilities Vocabulary <a id="malware-capabilities-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">malware-capabilities-ov</span>
 
@@ -12460,7 +14606,7 @@ This is an open vocabulary that covers common capabilities that may be exhibited
   </tr>
 </table>
 
-## 10.14 Malware Result Vocabulary <a id="malware-result-vocabulary"></a>
+## 10.26 Malware Result Vocabulary <a id="malware-result-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">malware-result-ov</span>
 
@@ -12501,7 +14647,7 @@ This is a non-exhaustive, open vocabulary that captures common types of scanner 
   </tr>
 </table>
 
-## 10.15 Malware Type Vocabulary <a id="malware-type-vocabulary"></a>
+## 10.27 Malware Type Vocabulary <a id="malware-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">malware-type-ov</span>
 
@@ -12614,7 +14760,7 @@ Malware type is an open vocabulary that represents different types and functions
   </tr>
 </table>
 
-## 10.16 Network Socket Address Family Enumeration <a id=network-socket-address-family-enumeration></a>
+## 10.28 Network Socket Address Family Enumeration <a id="network-socket-address-family-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">network-socket-address-family-enum</span>
 
@@ -12671,7 +14817,7 @@ An enumeration of network socket address family types.
   </tr>
 </table>
 
-## 10.17 Network Socket Type Enumeration <a id="network-socket-type-enumeration"></a>
+## 10.29 Network Socket Type Enumeration <a id="network-socket-type-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">network-socket-type-enum</span>
 
@@ -12716,7 +14862,7 @@ An enumeration of network socket types.
   </tr>
 </table>
 
-## 10.18 Opinion Enumeration <a id="opinion-enumeration"></a>
+## 10.30 Opinion Enumeration <a id="opinion-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">opinion-enum</span>
 
@@ -12741,27 +14887,27 @@ This enumeration captures a degree of agreement with the information in a STIX O
   </tr>
   <tr>
     <td><span class="stixliteral">strongly-disagree</span></td>
-    <td>The creator strongly disagrees with the information and believes it is inaccurate or incorrect.<br><br>This <strong>MAY</strong> be considered equivalent to a 1 in a numeric scale.</td>
+    <td>The creator strongly disagrees with the information and believes it is inaccurate or incorrect.<br /><br />This <strong>MAY</strong> be considered equivalent to a 1 in a numeric scale.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">disagree</span></td>
-    <td>The creator disagrees with the information and believes it is inaccurate or incorrect.<br><br>This <strong>MAY</strong> be considered equivalent to a 2 in a numeric scale.</td>
+    <td>The creator disagrees with the information and believes it is inaccurate or incorrect.<br /><br />This <strong>MAY</strong> be considered equivalent to a 2 in a numeric scale.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">neutral</span></td>
-    <td>The creator is neutral about the accuracy or correctness of the information.<br><br>This <strong>MAY</strong> be considered equivalent to a 3 in a numeric scale.</td>
+    <td>The creator is neutral about the accuracy or correctness of the information.<br /><br />This <strong>MAY</strong> be considered equivalent to a 3 in a numeric scale.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">agree</span></td>
-    <td>The creator agrees with the information and believes that it is accurate and correct.<br><br>This <strong>MAY</strong> be considered equivalent to a 4 in a numeric scale.</td>
+    <td>The creator agrees with the information and believes that it is accurate and correct.<br /><br />This <strong>MAY</strong> be considered equivalent to a 4 in a numeric scale.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">strongly-agree</span></td>
-    <td>The creator strongly agrees with the information and believes that it is accurate and correct.<br><br>This <strong>MAY</strong> be considered equivalent to a 5 in a numeric scale.</td>
+    <td>The creator strongly agrees with the information and believes that it is accurate and correct.<br /><br />This <strong>MAY</strong> be considered equivalent to a 5 in a numeric scale.</td>
   </tr>
 </table>
 
-## 10.19 Pattern Type Vocabulary <a id="pattern-type-vocabulary"></a>
+## 10.31 Pattern Type Vocabulary <a id="pattern-type-vocabulary"></a><a id='pattern-type-ov'></a>
 
 **Vocabulary Name:** <span class="stixtype">pattern-type-ov</span>
 
@@ -12810,7 +14956,39 @@ This is a non-exhaustive, open vocabulary that covers common pattern languages a
   </tr>
 </table>
 
-## 10.20. Processor Architecture Vocabulary <a id="processor-architecture-vocabulary"></a>
+## 10.32 Physical Impact Enumeration <a id='physical-impact-enumeration'></a><a id='physical-impact-enum'></a>
+
+**Type Name:** <span class="stixtype">physical-impact-enum</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">damaged-functional</span>, <span class="stixliteral">damaged-nonfunctional</span>, <span class="stixliteral">destruction</span>, <span class="stixliteral">none</span>, <span class="stixliteral">unknown</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">damaged-functional</span></td>
+    <td>The property, asset or system was damaged but still remains functional and repair may be possible.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">damaged-nonfunctional</span></td>
+    <td>The property, asset or system was damaged and does not remain functional, but repair may be possible.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">destruction</span></td>
+    <td>The property, asset or system was destroyed, cannot be repaired and no longer functions. In some cases destroyed assets can be rebuilt, but doing so involves a similar amount of effort as the original construction.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">none</span></td>
+    <td>No damage or destruction has occurred.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown</span></td>
+    <td>The degree of damage has not been determined yet.</td>
+</tr>
+
+</table>
+
+
+## 10.33 Processor Architecture Vocabulary <a id="processor-architecture-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">processor-architecture-ov</span>
 
@@ -12867,7 +15045,39 @@ This is a non-exhaustive, open vocabulary that covers common processor architect
   </tr>
 </table>
 
-## 10.21. Region Vocabulary <a id="region-vocabulary"></a>
+## 10.34 Recoverability Enumeration <a id='recoverability-enumeration'></a><a id='recoverability-enum'></a>
+
+**Type Name:** <span class="stixtype">recoverability-enum</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">extended</span>, <span class="stixliteral">not-applicable</span>, <span class="stixliteral">not-recoverable</span>, <span class="stixliteral">regular</span>, <span class="stixliteral">supplemented</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">extended</span></td>
+    <td>Time to recovery is unpredictable; additional resources and outside help are necessary.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">not-applicable</span></td>
+    <td>No recovery is necessary.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">not-recoverable</span></td>
+    <td>Recovery from the incident is not possible.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">regular</span></td>
+    <td>Time to recovery is predictable with existing resources.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">supplemented</span></td>
+    <td>Time to recovery is predictable with additional resources.</td>
+</tr>
+
+</table>
+
+
+## 10.35 Region Vocabulary <a id="region-vocabulary"></a><a id='region-ov'></a>
 
 **Vocabulary Name:** <span class="stixtype">region-ov</span>
 
@@ -13008,7 +15218,7 @@ A list of world regions based on the United Nations geoscheme [UNSD M49].
   </tr>
 </table>
 
-## 10.22. Report Type Vocabulary <a id="report-type-vocabulary"></a>
+## 10.36 Report Type Vocabulary <a id="report-type-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">report-type-ov</span>
 
@@ -13081,84 +15291,175 @@ Report type is an open vocabulary to describe the primary purpose or subject of 
   </tr>
 </table>
 
-## 10.23. Threat Actor Type Vocabulary <a id="threat-actor-type-vocabulary"></a>
+## 10.37 State Change Type Vocabulary <a id='state-change-type-vocabulary'></a>
 
-**Vocabulary Name:** <span class="stixtype">threat-actor-type-ov</span>
+**Type Name:** <span class="stixtype">state-change-type-ov</span>
 
-The threat actor type vocabulary is currently used in the following SDO(s):
-- Threat Actor
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">caused</span>, <span class="stixliteral">contributed-to</span>, <span class="stixliteral">input</span>, <span class="stixliteral">mitigated</span>, <span class="stixliteral">output</span>, <span class="stixliteral">resolved</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">caused</span></td>
+    <td>This task or event is the primary cause of the resulting object.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">contributed-to</span></td>
+    <td>This task or event is a contributing factor to the result occurring.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">input</span></td>
+    <td>This task or event took in a group as an input for automated or playbook activities. If this is selected the **initial_ref** property **MUST** be populated.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">mitigated</span></td>
+    <td>This task or event lessened the severity of the initial object.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">output</span></td>
+    <td>This task or event produced a group as an output as part of automated or playbook activities. If this is selected the **result_ref** property **MUST** be populated..</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">resolved</span></td>
+    <td>This task or event resolved the initial object.</td>
+</tr>
 
-Threat actor type is an open vocabulary used to describe what type of threat actor the individual or group is. For example, some threat actors are competitors who try to steal information, while others are activists who act in support of a social or political cause. Actor types are not mutually exclusive: a threat actor can be both a disgruntled insider and a sensationalist.
-
-<table border="1" cellspacing="0" cellpadding="6" width="100%">
-  <tr>
-    <th><span class='stixtr'>Vocabulary Summary</span></th>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">activist</span>, <span class="stixliteral">competitor</span>, <span class="stixliteral">crime-syndicate</span>, <span class="stixliteral">criminal</span>, <span class="stixliteral">hacker</span>, <span class="stixliteral">insider-accidental</span>, <span class="stixliteral">insider-disgruntled</span>, <span class="stixliteral">nation-state</span>, <span class="stixliteral">private-sector</span>, <span class="stixliteral">sensationalist</span>, <span class="stixliteral">spy</span>, <span class="stixliteral">terrorist</span>, <span class="stixliteral">unknown</span></td>
-  </tr>
 </table>
 
-<table border="1" cellspacing="0" cellpadding="6" width="100%">
-  <tr>
-    <th><span class="stixtr">Vocabulary Value</span></th>
-    <th><span class="stixtr">Description</span></th>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">activist</span></td>
-    <td>Highly motivated, potentially destructive supporter of a social or political cause (e.g., trade, labor, environment, etc.) that attempts to disrupt an organization’s business model or damage their image.<br><br>This category includes actors sometimes referred to as anarchists, cyber vandals, extremists, and hacktivists.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">competitor</span></td>
-    <td>An organization that competes in the same economic marketplace.<br><br>The goal of a competitor is to gain an advantage in business with respect to the rival organization it targets. It usually does this by copying intellectual property, trade secrets, acquisition strategies, or other technical or business data from a rival organization with the intention of using the data to bolster its own assets and market position.</td>
-  </tr>
-  <tr>
-    <td><span style="white-space: nowrap;"><span class="stixliteral">crime-syndicate</span></span></td>
-    <td>An enterprise organized to conduct significant, large-scale criminal activity for profit.<br><br>Crime syndicates, also known as organized crime, are generally large, well-resourced groups that operate to create profit from all types of crime.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">criminal</span></td>
-    <td>Individual who commits computer crimes, often for personal financial gain and often involves the theft of something valuable.<br><br>Extortion via ransomware and physical destruction are common examples. A criminal as described here refers to those acting individually or in very small or informal groups.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">hacker</span></td>
-    <td>An individual that tends to break into networks for the thrill or the challenge of doing so.<br><br>Hackers may use advanced skills or simple attack scripts they have downloaded.</td>
-  </tr>
-  <tr>
-    <td><span style="white-space: nowrap;"><span class="stixliteral">insider-accidental</span></span></td>
-    <td>A non-hostile insider who unintentionally exposes the organization to harm.<br><br>"Insider" in this context includes any person extended internal trust, such as regular employees, contractors, consultants, and temporary workers.</td>
-  </tr>
-  <tr>
-    <td><span style="white-space: nowrap;"><span class="stixliteral">insider-disgruntled</span></span></td>
-    <td>Current or former insiders who seek revengeful and harmful retaliation for perceived wrongs.<br><br>"Insider" in this context includes any person extended internal trust, such as regular employees, contractors, consultants, and temporary workers.<br><br>Disgruntled threat actors may have extensive knowledge that can be leveraged when conducting attacks and can take any number of actions including sabotage, violence, theft, fraud, espionage, or embarrassing individuals or the organization.</td>
-  </tr>
-  <tr>
-    <td><span style="white-space: nowrap;"><span class="stixliteral">nation-state</span></span></td>
-    <td>Entities who work for the government of a nation state or who work at their direction.<br><br>These actors typically have access to significant support, resources, training, and tools and are capable of designing and executing very sophisticated and effective Intrusion Sets and Campaigns.</td>
-  </tr>
-  <tr>
-    <td><span style="white-space: nowrap;"><span class="stixliteral">private-sector</span></span></td>
-    <td>Entities who develop and sell attack tools and services for commercial gain.<br><br>These actors often do not choose the targets themselves but work for other threat actors who direct the attacks. These entities are alternatively known as private-sector offensive actors (PSOA), Mercenary APTs, hackers-for-hire, and Cyber Mercenaries.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">sensationalist</span></td>
-    <td>Seeks to cause embarrassment and brand damage by exposing sensitive information in a manner designed to cause a public relations crisis.<br><br>A sensationalist may be an individual or small group of people motivated primarily by a need for notoriety. Unlike the activist, the sensationalist generally has no political goal, and is not using bad PR to influence the target to change its behavior or business practices.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">spy</span></td>
-    <td>Secretly collects sensitive information for use, dissemination, or sale.<br><br>Traditional spies (governmental and industrial) are part of a well-resourced intelligence organization and are capable of very sophisticated clandestine operations. However, insiders such as employees or consultants acting as spies can be just as effective and damaging, even when their activities are largely opportunistic and not part of an overall campaign.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">terrorist</span></td>
-    <td>Uses extreme violence to advance a social or political agenda as well as monetary crimes to support its activities.<br><br>In this context a terrorist refers to individuals who target noncombatants with violence to send a message of fear far beyond the actual events. They may act independently or as part of a terrorist organization.<br><br>Terrorist organizations must typically raise much of their operating budget through criminal activity, which often occurs online. Terrorists are also often adept at using and covertly manipulating social media for both recruitment and impact.</td>
-  </tr>
-  <tr>
+
+## 10.38 Task Outcome Enumeration <a id='task-outcome-enumeration'></a>
+
+**Type Name:** <span class="stixtype">task-outcome-enum</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">cancelled</span>, <span class="stixliteral">failed</span>, <span class="stixliteral">ongoing</span>, <span class="stixliteral">pending</span>, <span class="stixliteral">successful</span>, <span class="stixliteral">unknown</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">cancelled</span></td>
+    <td>The task was planned or started, but later cancelled or discarded.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">failed</span></td>
+    <td>The task has been completed, but failed.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ongoing</span></td>
+    <td>The task is still taking place.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">pending</span></td>
+    <td>The task has not yet been started, but is currently planned.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">successful</span></td>
+    <td>The task was completed successfully.</td>
+</tr>
+<tr>
     <td><span class="stixliteral">unknown</span></td>
-    <td>There is not enough information available to determine the type of threat actor.</td>
-  </tr>
+    <td>The status of this task is currently unknown.</td>
+</tr>
+
 </table>
 
-## 10.24. Threat Actor Role Vocabulary <a id="threat-actor-role-vocabulary"></a>
+
+## 10.39 Task Type Vocabulary <a id='task-type-vocabulary'></a><a id='task-type-ov'></a>
+
+**Type Name:** <span class="stixtype">task-type-ov</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">administrative</span>, <span class="stixliteral">attribution</span>, <span class="stixliteral">containment</span>, <span class="stixliteral">declared</span>, <span class="stixliteral">detected</span>, <span class="stixliteral">eradication</span>, <span class="stixliteral">escalated</span>, <span class="stixliteral">exercised-control</span>, <span class="stixliteral">external-intelligence</span>, <span class="stixliteral">external-outreach</span>, <span class="stixliteral">external-support</span>, <span class="stixliteral">implemented-control</span>, <span class="stixliteral">investigation</span>, <span class="stixliteral">negotiation</span>, <span class="stixliteral">playbook-execution</span>, <span class="stixliteral">playbook-step-execution</span>, <span class="stixliteral">ransom-payment</span>, <span class="stixliteral">recovery</span>, <span class="stixliteral">reported</span>, <span class="stixliteral">routine-updates</span>, <span class="stixliteral">victim-notification</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">administrative</span></td>
+    <td>Perform an administrative action such as the introduction or change of a policy.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">attribution</span></td>
+    <td>Perform an administrative action such as the introduction or change of a policy.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">containment</span></td>
+    <td>The containment phase of incident response</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">declared</span></td>
+    <td>When this was officially declared an incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">detected</span></td>
+    <td>When the incident was detected.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">eradication</span></td>
+    <td>The eradication phase of incident response.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">escalated</span></td>
+    <td>When the incident was escalated to a major incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">exercised-control</span></td>
+    <td>Attempted to use a security control that was already in place within the environment.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">external-intelligence</span></td>
+    <td>Used external intelligence information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">external-outreach</span></td>
+    <td>Reaching out to an external organization to gain support or information.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">external-support</span></td>
+    <td>Acquire support from an external organization.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">implemented-control</span></td>
+    <td>Implemented a security control within the environment.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">investigation</span></td>
+    <td>Performed an investigation into an event or incident.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">negotiation</span></td>
+    <td>Negotiation of a deal or payment amount.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">playbook-execution</span></td>
+    <td>Executing an automated playbook. If the playbook is stored outside of STIX it should be included as an [external-reference](#external-reference).</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">playbook-step-execution</span></td>
+    <td>Executing a step in an automated playbook. If the playbook is stored outside of STIX both the playbook and step stored in separate [external-reference](#external-reference) objects. If playbook steps feed each other information that is designed to be passed as STIX it **SHOULD** be referenced as a [grouping](#grouping) as either the **initial_ref** or **result_ref** of a [state-change](#state-change).</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">ransom-payment</span></td>
+    <td>An actual payment of a ransom.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">recovery</span></td>
+    <td>The recovery phase of incident response.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">reported</span></td>
+    <td>When the incident was reported externally.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">routine-updates</span></td>
+    <td>Performed a routine update in the environment including patching.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">victim-notification</span></td>
+    <td>Notified victims, potentially impacted individuals or organizations about the incident.</td>
+</tr>
+
+</table>
+
+
+## 10.40 Threat Actor Role Vocabulary <a id="threat-actor-role-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">threat-actor-role-ov</span>
 
@@ -13212,7 +15513,7 @@ Threat actor roles are not mutually exclusive. For example, an actor can be both
   </tr>
 </table>
 
-## 10.25. Threat Actor Sophistication Vocabulary <a id="threat-actor-sophistication-vocabulary"></a>
+## 10.41 Threat Actor Sophistication Vocabulary <a id="threat-actor-sophistication-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">threat-actor-sophistication-ov</span>
 
@@ -13237,35 +15538,148 @@ Threat actor sophistication vocabulary captures the skill level of a threat acto
   </tr>
   <tr>
     <td><span class="stixliteral">none</span></td>
-    <td>Can carry out random acts of disruption or destruction by running tools they do not understand. Actors in this category have average computer skills.<br><br>Example Roles: Average User <br><br>These actors: <br>- can not launch targeted attacks</td>
+    <td>Can carry out random acts of disruption or destruction by running tools they do not understand. Actors in this category have average computer skills.<br /><br />Example Roles: Average User <br /><br />These actors: <br />- can not launch targeted attacks</td>
   </tr>
   <tr>
     <td><span class="stixliteral">minimal</span></td>
-    <td>Can minimally use existing and frequently well known and easy-to-find techniques and programs or scripts to search for and exploit weaknesses in other computers. Commonly referred to as a script-kiddie.<br><br>These actors rely on others to develop the malicious tools, delivery mechanisms, and execution strategy and often do not fully understand the tool they are using or how they work. They also lack the ability to conduct their own reconnaissance and targeting research.<br><br>Example Roles: Script-Kiddie<br><br>These actors:<br>- attack known weaknesses;<br>- use well known scripts and tools; and<br>- have minimal knowledge of the tools.</td>
+    <td>Can minimally use existing and frequently well known and easy-to-find techniques and programs or scripts to search for and exploit weaknesses in other computers. Commonly referred to as a script-kiddie.<br /><br />These actors rely on others to develop the malicious tools, delivery mechanisms, and execution strategy and often do not fully understand the tool they are using or how they work. They also lack the ability to conduct their own reconnaissance and targeting research.<br /><br />Example Roles: Script-Kiddie<br /><br />These actors:<br />- attack known weaknesses;<br />- use well known scripts and tools; and<br />- have minimal knowledge of the tools.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">intermediate</span></td>
-    <td>Can proficiently use existing attack frameworks and toolkits to search for and exploit vulnerabilities in computers or systems. Actors in this category have computer skills equivalent to an IT professional and typically have a working knowledge of networks, operating systems, and possibly even defensive techniques and will typically exhibit some operational security.<br><br>These actors rely others to develop the malicious tools and delivery mechanisms but are able to plan their own execution strategy. They are proficient in the tools they are using and how they work and can even make minimal modifications as needed.<br><br>Example Roles: Toolkit User<br><br>These actors:<br>- attack known vulnerabilities;<br>- use attack frameworks and toolkits; and<br>- have proficient knowledge of the tools.</td>
+    <td>Can proficiently use existing attack frameworks and toolkits to search for and exploit vulnerabilities in computers or systems. Actors in this category have computer skills equivalent to an IT professional and typically have a working knowledge of networks, operating systems, and possibly even defensive techniques and will typically exhibit some operational security.<br /><br />These actors rely others to develop the malicious tools and delivery mechanisms but are able to plan their own execution strategy. They are proficient in the tools they are using and how they work and can even make minimal modifications as needed.<br /><br />Example Roles: Toolkit User<br /><br />These actors:<br />- attack known vulnerabilities;<br />- use attack frameworks and toolkits; and<br />- have proficient knowledge of the tools.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">advanced</span></td>
-    <td>Can develop their own tools or scripts from publicly known vulnerabilities to target systems and users. Actors in this category are very adept at IT systems and have a background in software development along with a solid understanding of defensive techniques and operational security.<br><br>These actors rely on others to find and identify weaknesses and vulnerabilities in systems, but are able to create their own tools, delivery mechanisms, and execution strategies.<br><br>Example Roles: Toolkit Developer<br><br>These actors:<br>- attack known vulnerabilities;<br>- can create their own tools; and<br>- have proficient knowledge of the tools.</td>
+    <td>Can develop their own tools or scripts from publicly known vulnerabilities to target systems and users. Actors in this category are very adept at IT systems and have a background in software development along with a solid understanding of defensive techniques and operational security.<br /><br />These actors rely on others to find and identify weaknesses and vulnerabilities in systems, but are able to create their own tools, delivery mechanisms, and execution strategies.<br /><br />Example Roles: Toolkit Developer<br /><br />These actors:<br />- attack known vulnerabilities;<br />- can create their own tools; and<br />- have proficient knowledge of the tools.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">expert</span></td>
-    <td>Can focus on the discovery and use of unknown malicious code, are is adept at installing user and kernel mode rootkits, frequently use data mining tools, target corporate executives and key users (government and industry) for the purpose of stealing personal and corporate data. Actors in this category are very adept at IT systems and software development and are experts with security systems, defensive techniques, attack methods, and operational security.<br><br>Example Roles: Vulnerability Researcher, Reverse Engineer, Threat Researcher, Malware Creator<br><br>These actors:<br>- attack unknown and known vulnerabilities;<br>- can create their own tools from scratch; and<br>- have proficient knowledge of the tools.</td>
+    <td>Can focus on the discovery and use of unknown malicious code, are is adept at installing user and kernel mode rootkits, frequently use data mining tools, target corporate executives and key users (government and industry) for the purpose of stealing personal and corporate data. Actors in this category are very adept at IT systems and software development and are experts with security systems, defensive techniques, attack methods, and operational security.<br /><br />Example Roles: Vulnerability Researcher, Reverse Engineer, Threat Researcher, Malware Creator<br /><br />These actors:<br />- attack unknown and known vulnerabilities;<br />- can create their own tools from scratch; and<br />- have proficient knowledge of the tools.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">innovator</span></td>
-    <td>Typically, organized, highly technical, proficient, well-funded professionals working in teams to discover new vulnerabilities and develop exploits.<br><br>Demonstrates sophisticated capability. An innovator has the ability to create and script unique programs and codes targeting virtually any form of technology. At this level, this actor has a deep knowledge of networks, operating systems, programming languages, firmware, and infrastructure topologies and will demonstrate operational security when conducting his activities. Innovators are largely responsible for the discovery of 0-day vulnerabilities and the development of new attack techniques.<br><br>Example Roles: Toolkit Innovator, 0-Day Exploit Author<br><br>These actors:<br>- attack unknown and known vulnerabilities;<br>- create attacks against 0-Day exploits from scratch; and<br>- create new and innovative attacks and toolkits.</td>
+    <td>Typically, organized, highly technical, proficient, well-funded professionals working in teams to discover new vulnerabilities and develop exploits.<br /><br />Demonstrates sophisticated capability. An innovator has the ability to create and script unique programs and codes targeting virtually any form of technology. At this level, this actor has a deep knowledge of networks, operating systems, programming languages, firmware, and infrastructure topologies and will demonstrate operational security when conducting his activities. Innovators are largely responsible for the discovery of 0-day vulnerabilities and the development of new attack techniques.<br /><br />Example Roles: Toolkit Innovator, 0-Day Exploit Author<br /><br />These actors:<br />- attack unknown and known vulnerabilities;<br />- create attacks against 0-Day exploits from scratch; and<br />- create new and innovative attacks and toolkits.</td>
   </tr>
   <tr>
     <td><span class="stixliteral">strategic</span></td>
-    <td>State actors who create vulnerabilities through an active program to "influence" commercial products and services during design, development or manufacturing, or with the ability to impact products while in the supply chain to enable exploitation of networks and systems of interest.<br><br>These actors:<br>- can create or use entire supply chains to launch an attack;<br>- can create and design attacks for any systems, software package, or device; and<br>- are responsible for APT-level attacks.</td>
+    <td>State actors who create vulnerabilities through an active program to "influence" commercial products and services during design, development or manufacturing, or with the ability to impact products while in the supply chain to enable exploitation of networks and systems of interest.<br /><br />These actors:<br />- can create or use entire supply chains to launch an attack;<br />- can create and design attacks for any systems, software package, or device; and<br />- are responsible for APT-level attacks.</td>
   </tr>
 </table>
 
-## 10.26. Tool Type Vocabulary <a id="tool-type-vocabulary"></a>
+## 10.42 Threat Actor Type Vocabulary <a id="threat-actor-type-vocabulary"></a>
+
+**Vocabulary Name:** <span class="stixtype">threat-actor-type-ov</span>
+
+The threat actor type vocabulary is currently used in the following SDO(s):
+- Threat Actor
+
+Threat actor type is an open vocabulary used to describe what type of threat actor the individual or group is. For example, some threat actors are competitors who try to steal information, while others are activists who act in support of a social or political cause. Actor types are not mutually exclusive: a threat actor can be both a disgruntled insider and a sensationalist.
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class='stixtr'>Vocabulary Summary</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">activist</span>, <span class="stixliteral">competitor</span>, <span class="stixliteral">crime-syndicate</span>, <span class="stixliteral">criminal</span>, <span class="stixliteral">hacker</span>, <span class="stixliteral">insider-accidental</span>, <span class="stixliteral">insider-disgruntled</span>, <span class="stixliteral">nation-state</span>, <span class="stixliteral">private-sector</span>, <span class="stixliteral">sensationalist</span>, <span class="stixliteral">spy</span>, <span class="stixliteral">terrorist</span>, <span class="stixliteral">unknown</span></td>
+  </tr>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Vocabulary Value</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">activist</span></td>
+    <td>Highly motivated, potentially destructive supporter of a social or political cause (e.g., trade, labor, environment, etc.) that attempts to disrupt an organization’s business model or damage their image.<br /><br />This category includes actors sometimes referred to as anarchists, cyber vandals, extremists, and hacktivists.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">competitor</span></td>
+    <td>An organization that competes in the same economic marketplace.<br /><br />The goal of a competitor is to gain an advantage in business with respect to the rival organization it targets. It usually does this by copying intellectual property, trade secrets, acquisition strategies, or other technical or business data from a rival organization with the intention of using the data to bolster its own assets and market position.</td>
+  </tr>
+  <tr>
+    <td><span style="white-space: nowrap;"><span class="stixliteral">crime-syndicate</span></span></td>
+    <td>An enterprise organized to conduct significant, large-scale criminal activity for profit.<br /><br />Crime syndicates, also known as organized crime, are generally large, well-resourced groups that operate to create profit from all types of crime.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">criminal</span></td>
+    <td>Individual who commits computer crimes, often for personal financial gain and often involves the theft of something valuable.<br /><br />Extortion via ransomware and physical destruction are common examples. A criminal as described here refers to those acting individually or in very small or informal groups.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">hacker</span></td>
+    <td>An individual that tends to break into networks for the thrill or the challenge of doing so.<br /><br />Hackers may use advanced skills or simple attack scripts they have downloaded.</td>
+  </tr>
+  <tr>
+    <td><span style="white-space: nowrap;"><span class="stixliteral">insider-accidental</span></span></td>
+    <td>A non-hostile insider who unintentionally exposes the organization to harm.<br /><br />"Insider" in this context includes any person extended internal trust, such as regular employees, contractors, consultants, and temporary workers.</td>
+  </tr>
+  <tr>
+    <td><span style="white-space: nowrap;"><span class="stixliteral">insider-disgruntled</span></span></td>
+    <td>Current or former insiders who seek revengeful and harmful retaliation for perceived wrongs.<br /><br />"Insider" in this context includes any person extended internal trust, such as regular employees, contractors, consultants, and temporary workers.<br /><br />Disgruntled threat actors may have extensive knowledge that can be leveraged when conducting attacks and can take any number of actions including sabotage, violence, theft, fraud, espionage, or embarrassing individuals or the organization.</td>
+  </tr>
+  <tr>
+    <td><span style="white-space: nowrap;"><span class="stixliteral">nation-state</span></span></td>
+    <td>Entities who work for the government of a nation state or who work at their direction.<br /><br />These actors typically have access to significant support, resources, training, and tools and are capable of designing and executing very sophisticated and effective Intrusion Sets and Campaigns.</td>
+  </tr>
+  <tr>
+    <td><span style="white-space: nowrap;"><span class="stixliteral">private-sector</span></span></td>
+    <td>Entities who develop and sell attack tools and services for commercial gain.<br /><br />These actors often do not choose the targets themselves but work for other threat actors who direct the attacks. These entities are alternatively known as private-sector offensive actors (PSOA), Mercenary APTs, hackers-for-hire, and Cyber Mercenaries.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">sensationalist</span></td>
+    <td>Seeks to cause embarrassment and brand damage by exposing sensitive information in a manner designed to cause a public relations crisis.<br /><br />A sensationalist may be an individual or small group of people motivated primarily by a need for notoriety. Unlike the activist, the sensationalist generally has no political goal, and is not using bad PR to influence the target to change its behavior or business practices.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">spy</span></td>
+    <td>Secretly collects sensitive information for use, dissemination, or sale.<br /><br />Traditional spies (governmental and industrial) are part of a well-resourced intelligence organization and are capable of very sophisticated clandestine operations. However, insiders such as employees or consultants acting as spies can be just as effective and damaging, even when their activities are largely opportunistic and not part of an overall campaign.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">terrorist</span></td>
+    <td>Uses extreme violence to advance a social or political agenda as well as monetary crimes to support its activities.<br /><br />In this context a terrorist refers to individuals who target noncombatants with violence to send a message of fear far beyond the actual events. They may act independently or as part of a terrorist organization.<br /><br />Terrorist organizations must typically raise much of their operating budget through criminal activity, which often occurs online. Terrorists are also often adept at using and covertly manipulating social media for both recruitment and impact.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">unknown</span></td>
+    <td>There is not enough information available to determine the type of threat actor.</td>
+  </tr>
+</table>
+
+## 10.43 Timestamp Fidelity Enumeration <a id='timestamp-fidelity-enumeration'></a>
+
+**Type Name:** <span class="stixtype">timestamp-fidelity-enum</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">day</span>, <span class="stixliteral">hour</span>, <span class="stixliteral">minute</span>, <span class="stixliteral">month</span>, <span class="stixliteral">second</span>, <span class="stixliteral">year</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">day</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one day period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for this activity.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">hour</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one hour period starting with the provided timestamp.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">minute</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one minute period starting with the provided timestamp.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">month</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one month period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for the activity. The day should always be listed as the first or the last day of the previous month if in a timezone that is offset before UTC.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">second</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one second period starting with the provided timestamp.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">year</span></td>
+    <td>The associated timestamp should be considered to represent a time within the one year period starting with the provided timestamp. Hours and minutes should be understood to establish the timezone for the activity.</td>
+</tr>
+
+</table>
+
+
+## 10.44 Tool Type Vocabulary <a id="tool-type-vocabulary"></a><a id='tool-type-ov'></a>
 
 **Vocabulary Name:** <span class="stixtype">tool-type-ov</span>
 
@@ -13322,7 +15736,35 @@ Tool types describe the categories of tools that can be used to perform attacks.
   </tr>
 </table>
 
-## 10.27. Windows™ Integrity Level Enumeration <a id="windows-integrity-level-enumeration"></a>
+## 10.45 Traceability Enumeration <a id='traceability-enumeration'></a>
+
+**Type Name:** <span class="stixtype">traceability-enum</span>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Summary</span></th></tr><tr>
+    <td><span class="stixliteral">accountability-lost</span>, <span class="stixliteral">partial-accountability</span>, <span class="stixliteral">provable-accountability</span>, <span class="stixliteral">unknown-accountability</span></td>
+</tr></table>
+<table border="1" cellspacing="0" cellpadding="6" width="100%"><tr>    <th><span class="stixtr">Vocabulary Value</span></th>    <th><span class="stixtr">Description</span></th></tr>
+<tr>
+    <td><span class="stixliteral">accountability-lost</span></td>
+    <td>Traces used to retrieve accountability are lost or do not exist.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">partial-accountability</span></td>
+    <td>Traces are present, but insufficient to have provable accountability.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">provable-accountability</span></td>
+    <td>Accountability can be ensured from the traces that are present.</td>
+</tr>
+<tr>
+    <td><span class="stixliteral">unknown-accountability</span></td>
+    <td>Accountability is unknown.</td>
+</tr>
+
+</table>
+
+
+## 10.46 Windows™ Integrity Level Enumeration <a id="windows-integrity-level-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">windows-integrity-level-enum</span>
 
@@ -13363,7 +15805,7 @@ Windows integrity levels are a security feature and represent the trustworthines
   </tr>
 </table>
 
-## 10.28. Windows™ PE Binary Vocabulary <a id="windows-pe-binary-vocabulary"></a>
+## 10.47 Windows™ PE Binary Vocabulary <a id="windows-pe-binary-vocabulary"></a>
 
 **Vocabulary Name:** <span class="stixtype">windows-pebinary-type-ov</span>
 
@@ -13400,7 +15842,7 @@ An open vocabulary of Windows PE binary types.
   </tr>
 </table>
 
-## 10.29. Windows™ Registry Datatype Enumeration <a id="windows-registry-datatype-enumeration"></a>
+## 10.48 Windows™ Registry Datatype Enumeration <a id="windows-registry-datatype-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">windows-registry-datatype-enum</span>
 
@@ -13481,7 +15923,7 @@ An enumeration of Windows registry data types.
   </tr>
 </table>
 
-## 10.30. Windows™ Service Start Type Enumeration <a id="windows-service-start-type-enumeration"></a>
+## 10.49 Windows™ Service Start Type Enumeration <a id="windows-service-start-type-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">windows-service-start-type-enum</span>
 
@@ -13526,48 +15968,7 @@ An enumeration of Windows service start types.
   </tr>
 </table>
 
-## 10.31. Windows™ Service Type Enumeration <a id="windows-service-type-enumeration"></a>
-
-**Enumeration Name:** <span class="stixtype">windows-service-type-enum</span>
-
-The Windows service type vocabulary is currently used in the following SCO(s):
-- Process (Windows Service extension)
-
-An enumeration of Windows service types.
-
-<table border="1" cellspacing="0" cellpadding="6" width="100%">
-  <tr>
-    <th><span class='stixtr'>Enumeration Summary</span></th>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">SERVICE_KERNEL_DRIVER</span>, <span class="stixliteral">SERVICE_FILE_SYSTEM_DRIVER</span>, <span class="stixliteral">SERVICE_WIN32_OWN_PROCESS</span>, <span class="stixliteral">SERVICE_WIN32_SHARE_PROCESS</span></td>
-  </tr>
-</table>
-
-<table border="1" cellspacing="0" cellpadding="6" width="100%">
-  <tr>
-    <th><span class="stixtr">Enumeration Value</span></th>
-    <th><span class="stixtr">Description</span></th>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">SERVICE_KERNEL_DRIVER</span></td>
-    <td>The service is a device driver.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">SERVICE_FILE_SYSTEM_DRIVER</span></td>
-    <td>The service is a file system driver.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">SERVICE_WIN32_OWN_PROCESS</span></td>
-    <td>The service runs in its own process.</td>
-  </tr>
-  <tr>
-    <td><span class="stixliteral">SERVICE_WIN32_SHARE_PROCESS</span></td>
-    <td>The service shares a process with other services.</td>
-  </tr>
-</table>
-
-## 10.32. Windows™ Service Status Enumeration <a id="windows-service-status-enumeration"></a>
+## 10.50 Windows™ Service Status Enumeration <a id="windows-service-status-enumeration"></a>
 
 **Enumeration Name:** <span class="stixtype">windows-service-status-enum</span>
 
@@ -13617,6 +16018,47 @@ An enumeration of Windows service statuses.
   <tr>
     <td><span class="stixliteral">SERVICE_STOPPED</span></td>
     <td>The service is not running.</td>
+  </tr>
+</table>
+
+## 10.51 Windows™ Service Type Enumeration <a id="windows-service-type-enumeration"></a>
+
+**Enumeration Name:** <span class="stixtype">windows-service-type-enum</span>
+
+The Windows service type vocabulary is currently used in the following SCO(s):
+- Process (Windows Service extension)
+
+An enumeration of Windows service types.
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class='stixtr'>Enumeration Summary</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">SERVICE_KERNEL_DRIVER</span>, <span class="stixliteral">SERVICE_FILE_SYSTEM_DRIVER</span>, <span class="stixliteral">SERVICE_WIN32_OWN_PROCESS</span>, <span class="stixliteral">SERVICE_WIN32_SHARE_PROCESS</span></td>
+  </tr>
+</table>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+  <tr>
+    <th><span class="stixtr">Enumeration Value</span></th>
+    <th><span class="stixtr">Description</span></th>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">SERVICE_KERNEL_DRIVER</span></td>
+    <td>The service is a device driver.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">SERVICE_FILE_SYSTEM_DRIVER</span></td>
+    <td>The service is a file system driver.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">SERVICE_WIN32_OWN_PROCESS</span></td>
+    <td>The service runs in its own process.</td>
+  </tr>
+  <tr>
+    <td><span class="stixliteral">SERVICE_WIN32_SHARE_PROCESS</span></td>
+    <td>The service shares a process with other services.</td>
   </tr>
 </table>
 
@@ -14081,7 +16523,7 @@ The use of these confidence scales is defined in [section 3.2](#common-propertie
 
 *DNI Scale ([ICD203](#icd-203))
 
-# Appendix B: Relationship Summary Table <a id=relationship-summary-table></a>
+# Appendix B: Relationship Summary Table <a id="relationship-summary-table"></a>
 
 This following relationship summary table is provided as a convenience. If there is a discrepancy between this table and the relationships defined with each of the SDOs, then the relationships defined with the SDOs **MUST** be viewed as authoritative.
 
@@ -14092,299 +16534,299 @@ This following relationship summary table is provided as a convenience. If there
     <th><span class="stixtr">Target</span></th>
   </tr>
   <tr>
-    <td><span class="stixtype">attack-pattern</span></td>
+    <td><a class="stixtype" href="#attack-pattern">attack-pattern</a></td>
     <td><span class="stixliteral">delivers</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">attack-pattern</span></td>
+    <td><a class="stixtype" href="#attack-pattern">attack-pattern</a></td>
     <td><span class="stixliteral">targets</span></td>
     <td><span class="stixtype">identity</span>, <span class="stixtype">location</span>, <span class="stixtype">vulnerability</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">attack-pattern</span></td>
+    <td><a class="stixtype" href="#attack-pattern">attack-pattern</a></td>
     <td><span class="stixliteral">uses</span></td>
     <td><span class="stixtype">malware</span>, <span class="stixtype">tool</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">campaign</span></td>
+    <td><a class="stixtype" href="#campaign">campaign</a></td>
     <td><span class="stixliteral">attributed-to</span></td>
     <td><span class="stixtype">intrusion-set</span>, <span class="stixtype">threat-actor</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">campaign</span></td>
+    <td><a class="stixtype" href="#campaign">campaign</a></td>
     <td><span class="stixliteral">compromises</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">campaign</span></td>
+    <td><a class="stixtype" href="#campaign">campaign</a></td>
     <td><span class="stixliteral">originates-from</span></td>
-    <td><span class="stixtype">location</span></td>
+    <td><a class="stixtype" href="#location">location</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">campaign</span></td>
+    <td><a class="stixtype" href="#campaign">campaign</a></td>
     <td><span class="stixliteral">targets</span></td>
     <td><span class="stixtype">identity</span>, <span class="stixtype">location</span>, <span class="stixtype">vulnerability</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">campaign</span></td>
+    <td><a class="stixtype" href="#campaign">campaign</a></td>
     <td><span class="stixliteral">uses</span></td>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">malware</span>, <span class="stixtype">tool</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">course-of-action</span></td>
+    <td><a class="stixtype" href="#course-of-action">course-of-action</a></td>
     <td><span class="stixliteral">investigates</span></td>
-    <td><span class="stixtype">indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">course-of-action</span></td>
+    <td><a class="stixtype" href="#course-of-action">course-of-action</a></td>
     <td><span class="stixliteral">mitigates</span></td>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">indicator</span>, <span class="stixtype">malware</span>, <span class="stixtype">tool</span>, <span class="stixtype">vulnerability</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">course-of-action</span></td>
+    <td><a class="stixtype" href="#course-of-action">course-of-action</a></td>
     <td><span class="stixliteral">remediates</span></td>
     <td><span class="stixtype">malware</span>, <span class="stixtype">vulnerability</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">domain-name</span></td>
+    <td><a class="stixtype" href="#domain-name-object">domain-name</a></td>
     <td><span class="stixliteral">resolves-to</span></td>
     <td><span class="stixtype">domain-name</span>, <span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">identity</span></td>
+    <td><a class="stixtype" href="#identity">identity</a></td>
     <td><span class="stixliteral">located-at</span></td>
-    <td><span class="stixtype">location</span></td>
+    <td><a class="stixtype" href="#location">location</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
     <td><span class="stixliteral">indicates</span></td>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">campaign</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">intrusion-set</span>, <span class="stixtype">malware</span>, <span class="stixtype">threat-actor</span>, <span class="stixtype">tool</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">indicator</span></td>
+    <td><a class="stixtype" href="#indicator">indicator</a></td>
     <td><span class="stixliteral">based-on</span></td>
-    <td><span class="stixtype">observed-data</span></td>
+    <td><a class="stixtype" href="#observed-data">observed-data</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">communicates-with</span></td>
     <td><span class="stixtype">infrastructure</span>, <span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span>, <span class="stixtype">domain-name</span>, <span class="stixtype">url</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">consists-of</span></td>
     <td><span class="stixtype">infrastructure</span>, <span class="stixtype">observed-data</span>, <span class="stixtype">&lt;All STIX Cyber-observable Objects&gt;</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">controls</span></td>
     <td><span class="stixtype">infrastructure</span>, <span class="stixtype">malware</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">delivers</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">has</span></td>
-    <td><span class="stixtype">vulnerability</span></td>
+    <td><a class="stixtype" href="#vulnerability">vulnerability</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">hosts</span></td>
     <td><span class="stixtype">tool</span>, <span class="stixtype">malware</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">located-at</span></td>
-    <td><span class="stixtype">location</span></td>
+    <td><a class="stixtype" href="#location">location</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
     <td><span class="stixliteral">uses</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">attributed-to</span></td>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">compromises</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">hosts</span>, <span class="stixliteral">owns</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">originates-from</span></td>
-    <td><span class="stixtype">location</span></td>
+    <td><a class="stixtype" href="#location">location</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">targets</span></td>
     <td><span class="stixtype">identity</span>, <span class="stixtype">location</span>, <span class="stixtype">vulnerability</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">intrusion-set</span></td>
+    <td><a class="stixtype" href="#intrusion-set">intrusion-set</a></td>
     <td><span class="stixliteral">uses</span></td>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">malware</span>, <span class="stixtype">tool</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">ipv4-addr</span></td>
+    <td><a class="stixtype" href="#ipv4-address-object">ipv4-addr</a></td>
     <td><span class="stixliteral">belongs-to</span></td>
-    <td><span class="stixtype">autonomous-system</span></td>
+    <td><a class="stixtype" href="#autonomous-system-as-object">autonomous-system</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">ipv4-addr</span></td>
+    <td><a class="stixtype" href="#ipv4-address-object">ipv4-addr</a></td>
     <td><span class="stixliteral">resolves-to</span></td>
-    <td><span class="stixtype">mac-addr</span></td>
+    <td><a class="stixtype" href="#mac-address-object">mac-addr</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">ipv6-addr</span></td>
+    <td><a class="stixtype" href="#ipv6-address-object">ipv6-addr</a></td>
     <td><span class="stixliteral">belongs-to</span></td>
-    <td><span class="stixtype">autonomous-system</span></td>
+    <td><a class="stixtype" href="#autonomous-system-as-object">autonomous-system</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">ipv6-addr</span></td>
+    <td><a class="stixtype" href="#ipv6-address-object">ipv6-addr</a></td>
     <td><span class="stixliteral">resolves-to</span></td>
-    <td><span class="stixtype">mac-addr</span></td>
+    <td><a class="stixtype" href="#mac-address-object">mac-addr</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">authored-by</span></td>
     <td><span class="stixtype">threat-actor</span>, <span class="stixtype">intrusion-set</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">beacons-to</span>, <span class="stixliteral">exfiltrates-to</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">communicates-with</span></td>
     <td><span class="stixtype">ipv4-addr</span>, <span class="stixtype">ipv6-addr</span>, <span class="stixtype">domain-name</span>, <span class="stixtype">url</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">controls</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">downloads</span>, <span class="stixliteral">drops</span></td>
     <td><span class="stixtype">malware</span>, <span class="stixtype">tool</span>, <span class="stixtype">file</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">exploits</span></td>
-    <td><span class="stixtype">vulnerability</span></td>
+    <td><a class="stixtype" href="#vulnerability">vulnerability</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">originates-from</span></td>
-    <td><span class="stixtype">location</span></td>
+    <td><a class="stixtype" href="#location">location</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">targets</span></td>
     <td><span class="stixtype">identity</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">location</span>, <span class="stixtype">vulnerability</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">uses</span></td>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">malware</span>, <span class="stixtype">tool</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
     <td><span class="stixliteral">variant-of</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware-analysis</span></td>
+    <td><a class="stixtype" href="#malware-analysis">malware-analysis</a></td>
     <td><span class="stixliteral">characterizes</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware-analysis</span></td>
+    <td><a class="stixtype" href="#malware-analysis">malware-analysis</a></td>
     <td><span class="stixliteral">av-analysis-of</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware-analysis</span></td>
+    <td><a class="stixtype" href="#malware-analysis">malware-analysis</a></td>
     <td><span class="stixliteral">static-analysis-of</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">malware-analysis</span></td>
+    <td><a class="stixtype" href="#malware-analysis">malware-analysis</a></td>
     <td><span class="stixliteral">dynamic-analysis-of</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">attributed-to</span></td>
-    <td><span class="stixtype">identity</span></td>
+    <td><a class="stixtype" href="#identity">identity</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">compromises</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">hosts</span>, <span class="stixliteral">owns</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">impersonates</span></td>
-    <td><span class="stixtype">identity</span></td>
+    <td><a class="stixtype" href="#identity">identity</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">located-at</span></td>
-    <td><span class="stixtype">location</span></td>
+    <td><a class="stixtype" href="#location">location</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">targets</span></td>
     <td><span class="stixtype">identity</span>, <span class="stixtype">location</span>, <span class="stixtype">vulnerability</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">threat-actor</span></td>
+    <td><a class="stixtype" href="#threat-actor">threat-actor</a></td>
     <td><span class="stixliteral">uses</span></td>
     <td><span class="stixtype">attack-pattern</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">malware</span>, <span class="stixtype">tool</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">delivers</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">drops</span></td>
-    <td><span class="stixtype">malware</span></td>
+    <td><a class="stixtype" href="#malware">malware</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">has</span></td>
-    <td><span class="stixtype">vulnerability</span></td>
+    <td><a class="stixtype" href="#vulnerability">vulnerability</a></td>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">targets</span></td>
     <td><span class="stixtype">identity</span>, <span class="stixtype">infrastructure</span>, <span class="stixtype">location</span>, <span class="stixtype">vulnerability</span></td>
   </tr>
   <tr>
-    <td><span class="stixtype">tool</span></td>
+    <td><a class="stixtype" href="#tool">tool</a></td>
     <td><span class="stixliteral">uses</span></td>
-    <td><span class="stixtype">infrastructure</span></td>
+    <td><a class="stixtype" href="#infrastructure">infrastructure</a></td>
   </tr>
 </table>
 
@@ -14400,7 +16842,7 @@ This following relationship summary table is provided as a convenience. If there
 [
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--d09c50cf-5bab-465e-9e2d-543912148b73",
     "created": "2016-11-22T09:22:30.000Z",
     "modified": "2016-11-22T09:22:30.000Z",
@@ -14409,7 +16851,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--37ac0c8d-f86d-4e56-aee9-914343959a4c",
     "created": "2016-11-23T08:17:27.000Z",
     "modified": "2016-11-23T08:17:27.000Z",
@@ -14419,7 +16861,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--3a41e552-999b-4ad3-bedc-332b6d9ff80c",
     "created": "2016-11-12T14:31:09.000Z",
     "modified": "2016-11-12T14:31:09.000Z",
@@ -14431,7 +16873,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--81f12913-1372-4c96-85ec-E9034ac98aba",
     "created": "2016-11-23T10:42:39.000Z",
     "modified": "2016-11-23T10:42:39.000Z",
@@ -14455,7 +16897,7 @@ This following relationship summary table is provided as a convenience. If there
 [
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--78cc7b4b-c6ab-40d1-82eb-95a3059641da",
     "created": "2017-03-15T04:22:30.000Z",
     "modified": "2017-03-15T04:22:30.000Z",
@@ -14464,7 +16906,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--edce6fe8-2ac7-49d6-bd57-3973a4f819b8",
     "created": "2017-03-16T22:17:27.000Z",
     "modified": "2017-03-16T22:17:27.000Z",
@@ -14474,7 +16916,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--496cac0a-77ea-4da0-b913-88e553483c8d",
     "created": "2017-03-10T07:31:09.000Z",
     "modified": "2017-03-10T07:31:09.000Z",
@@ -14486,7 +16928,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--7aebe2f0-28d6-48a2-9c3e-b0aaa60266ef",
     "created": "2017-03-16T10:19:23.000Z",
     "modified": "2017-03-16T10:19:23.000Z",
@@ -14501,7 +16943,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--2168b17d-f0ba-4c2e-920b-276ad803c5f3",
     "created": "2017-03-16T10:29:55.000Z",
     "modified": "2017-03-16T10:29:55.000Z",
@@ -14516,7 +16958,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--2e48e1aa-469d-4473-a110-a128280db964",
     "created": "2017-03-16T10:33:14.000Z",
     "modified": "2017-03-16T10:33:14.000Z",
@@ -14540,7 +16982,7 @@ This following relationship summary table is provided as a convenience. If there
 [
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--767ed805-f00a-4603-9bd8-5b5a006b56fa",
     "created": "2016-11-21T09:22:30.000Z",
     "modified": "2016-11-21T09:22:30.000Z",
@@ -14549,7 +16991,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--81f12913-1372-4c96-85ec-E9034ac98aba",
     "created": "2016-11-23T10:42:39.000Z",
     "modified": "2016-11-23T10:42:39.000Z",
@@ -14564,7 +17006,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--e4ed271e-e023-45db-99e6-1f912e79bd06",
     "created": "2016-11-22T11:04:18.000Z",
     "modified": "2016-11-22T11:04:18.000Z",
@@ -14573,7 +17015,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--2f340a76-edef-443d-a203-bede067c0bb0",
     "created": "2016-11-25T09:46:09.000Z",
     "modified": "2016-11-25T09:46:09.000Z",
@@ -14588,7 +17030,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--a3536537-456a-47b5-84dc-fb7c340959e8",
     "created": "2016-11-18T04:22:30.000Z",
     "modified": "2016-11-18T04:22:30.000Z",
@@ -14597,7 +17039,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--3263dfe0-6bf4-42eb-bab9-5fc9edc6e443",
     "created": "2016-11-18T08:27:37.000Z",
     "modified": "2016-11-18T08:27:37.000Z",
@@ -14612,7 +17054,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--80d9ba7d-893b-4286-96f9-32225060a730",
     "created": "2016-11-18T06:22:31.000Z",
     "modified": "2016-11-18T06:22:31.000Z",
@@ -14627,7 +17069,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--43f753d8-61e2-472e-918e-d7c58e2463e7",
     "created": "2016-11-25T13:37:27.000Z",
     "modified": "2017-11-25T13:37:27.000Z",
@@ -14637,7 +17079,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--8386f241-b583-4c59-9056-a3b0db596d93",
     "created": "2016-11-25T13:37:27.000Z",
     "modified": "2017-11-25T13:37:27.000Z",
@@ -14656,7 +17098,7 @@ This following relationship summary table is provided as a convenience. If there
 [
   {
     "type": "infrastructure",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "infrastructure--33588e0e-2bab-430e-9073-cacf704ea1e7",
     "created": "2017-04-04T13:01:21.000Z",
     "modified": "2017-04-04T13:01:21.000Z",
@@ -14665,7 +17107,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--409244ac-01cd-4465-ad30-3f92a226f59f",
     "created": "2016-11-25T09:46:09.000Z",
     "modified": "2016-11-25T09:46:09.000Z",
@@ -14680,7 +17122,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "relationship",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "relationship--b3ab5ba1-e6d6-46b0-8ebe-91fc91978c85",
     "created": "2017-04-05T13:37:27.000Z",
     "modified": "2017-04-05T13:37:27.000Z",
@@ -14690,7 +17132,7 @@ This following relationship summary table is provided as a convenience. If there
   },
   {
     "type": "malware",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "malware--0c7b5b88-8ff7-4a4d-aa9d-feb398cd0061",
     "created": "2016-05-12T08:17:27.000Z",
     "modified": "2016-05-12T08:17:27.000Z",
@@ -14713,7 +17155,7 @@ In this example one can see a new SDO object type being created with the STIX ex
 [
   {
     "type": "marking-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "marking-definition--34098fce-860f-48ae-8e50-ebd3cc5e41da",
     "created": "2016-08-01T00:00:00.000Z",
     "definition_type": "statement",
@@ -14724,7 +17166,7 @@ In this example one can see a new SDO object type being created with the STIX ex
   {
     "id": "extension-definition--04b2d3ef-d061-4912-ab77-6bbe807a5bd5",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
     "created_by_ref": "identity--11b76a96-5d2b-45e0-8a5a-f6994f370731",
@@ -14737,7 +17179,7 @@ In this example one can see a new SDO object type being created with the STIX ex
   },
   {
     "type": "my-favorite-sdo",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "my-favorite-sdo--64b8f076-a336-4d08-a0a3-fa6bd4ccc7c6",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -14762,7 +17204,7 @@ This example adds the properties **rank** and **toxicity** to the <span class="s
   {
     "id": "extension-definition--d83fce45-ef58-4c6c-a3f4-1fbc32e98c6e",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 1",
     "description": "This schema adds two properties to a STIX object",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -14774,7 +17216,7 @@ This example adds the properties **rank** and **toxicity** to the <span class="s
   },
   {
     "type": "indicator",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "indicator--e97bfccf-8970-4a3c-9cd1-5b5b97ed5d0c",
     "created": "2014-02-20T09:16:08.989000Z",
     "modified": "2014-02-20T09:16:08.989000Z",
@@ -14802,7 +17244,7 @@ This example shows how one can also add the same extension (properties **rank** 
 ```JSON
 {
   "type": "artifact",
-  "spec_version": "2.1",
+  "spec_version": "2.2",
   "id": "artifact--6be1fbcb-fd03-5ec3-b05f-4329746e9d2b",
   "mime_type": "application/zip",
   "payload_bin": "ZX7HIBWPQA99NSUhEUgAAADI== ...",
@@ -14827,7 +17269,7 @@ This example adds the property **mysightingprop** to the <span class="stixtype">
   {
     "id": "extension-definition--a19a6f0a-93dc-4f34-ac9f-83a0141261de",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 2",
     "description": "This schema adds a property to the sighting object",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -14839,7 +17281,7 @@ This example adds the property **mysightingprop** to the <span class="stixtype">
   },
   {
     "type": "sighting",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "sighting--ee20065d-2555-424f-ad9e-0f8428623c75",
     "created_by_ref": "identity--f431f809-377b-45e0-aa1c-6a4751cae5ff",
     "created": "2016-04-06T20:08:31.000Z",
@@ -14855,7 +17297,7 @@ This example adds the property **mysightingprop** to the <span class="stixtype">
 ]
 ```
 
-### C.2.4 Adding properties to an existing STIX marking definition object instance <a id=adding-properties-to-an-existing-stix-marking-definition-object-instance></a>
+### C.2.4 Adding properties to an existing STIX marking definition object instance <a id="adding-properties-to-an-existing-stix-marking-definition-object-instance"></a>
 
 This example adds the properties **additional_marking_prop** and **required_data_storage_hash** to the <span class="stixtype">marking-definition</span> object.
 
@@ -14864,7 +17306,7 @@ This example adds the properties **additional_marking_prop** and **required_data
   {
     "id": "extension-definition--9ef47f81-1443-4632-8497-8b2878f8ac21",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 3",
     "description": "This schema adds properties to the marking definition object",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -14876,7 +17318,7 @@ This example adds the properties **additional_marking_prop** and **required_data
   },
   {
     "type": "marking-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "id": "marking-definition--7adc34dc-f5c7-4b7c-a7da-28fc4dd716cc",
     "created": "2016-08-01T00:00:00.000Z",
     "extensions": {
@@ -14890,7 +17332,7 @@ This example adds the properties **additional_marking_prop** and **required_data
 ]
 ```
 
-### C.2.5 Adding properties to an existing STIX language content object instance <a id=adding-properties-to-an-existing-stix-language-content-object-instance></a>
+### C.2.5 Adding properties to an existing STIX language content object instance <a id="adding-properties-to-an-existing-stix-language-content-object-instance"></a>
 
 This example adds the property **translation_engine** to the <span class="stixtype">language-content</span> object.
 
@@ -14899,7 +17341,7 @@ This example adds the property **translation_engine** to the <span class="stixty
   {
     "id": "extension-definition--b63766f9-b39e-4a4f-9396-e5e753722df0",
     "type": "extension-definition",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "name": "Extension Foo 4",
     "description": "This schema adds translation engines to the language content object",
     "created": "2014-02-20T09:16:08.989000Z",
@@ -14912,7 +17354,7 @@ This example adds the property **translation_engine** to the <span class="stixty
   {
     "type": "language-content",
     "id": "language-content--0911f616-727f-48cb-a4c5-9420299562a4",
-    "spec_version": "2.1",
+    "spec_version": "2.2",
     "created": "2019-06-08T21:31:22.007Z",
     "modified": "2019-07-08T21:31:22.007Z",
     "object_ref": "threat-actor--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
@@ -14934,7 +17376,107 @@ This example adds the property **translation_engine** to the <span class="stixty
 ]
 ```
 
-# Appendix D: IANA Considerations <a id="iana-considerations"></a>
+# Appendix D: Incident Availability Impact Mapping <a id="availability-impact-mapping"></a>
+
+This appendix defines mappings for availability and functional scales to be used by the availability impact property. A value of "Not Specified" in the table below means that the criticality property is not present.
+
+| **US-CERT** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| No Impact | 0 | 0 |
+| No Impact to Services | 5 | 1-9 |
+| Minimal Impact to Non-Critical Services | 15 | 10-19 |
+| Minimal Impact to Critical Services | 30 | 20-39 |
+| Significant Impact to Non-Critical Services | 50 | 40-59 |
+| Denial of Non-Critical Services | 65 | 60-69 |
+| Significant Impact to Critical Services | 75 | 70-79 |
+| Denial of Critical Services / Loss of Control | 90 | 80-100 |
+
+| **Simple Qualitative** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| None | 0 | 0 |
+| Minimal | 20 | 1-39 |
+| Significant | 50 | 40-59 |
+| Denial | 75 | 60-89 |
+| Loss of Control | 95 | 90-100 |
+
+| **0 to 10** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| 0 | 0 | 0-4 |
+| 1 | 10 | 5-14 |
+| 2 | 20 | 15-24 |
+| 3 | 30 | 25-34 |
+| 4 | 40 | 35-44 |
+| 5 | 50 | 45-54 |
+| 6 | 60 | 55-64 |
+| 7 | 70 | 65-74 |
+| 8 | 80 | 75-84 |
+| 9 | 90 | 85-94 |
+| 10 | 100 | 95-100 |
+
+## Appendix E. Criticality Mapping <a id="criticality-mapping"></a>
+
+This appendix defines mappings for criticality scales to be used by the criticality property. A value of "Not Specified" in the table below means that the criticality property is not present.
+
+| **5 Qualitative** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| False Positive | 0 | 0 |
+| Low | 15 | 1-29 |
+| Moderate | 40 | 30-49 |
+| High | 70 | 50-89 |
+| Extreme | 95 | 90-100 |
+
+| **Major / Minor** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| None | 0 | 0 |
+| Minor | 25 | 1-49 |
+| Major | 75 | 50-100 |
+
+| **Major / Minor / Critical** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| None | 0 | 0 |
+| Minor | 25 | 1-49 |
+| Major | 70 | 50-89 |
+| Critical | 95 | 90-100 |
+
+| **None, Low, High, Extreme** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| None | 0 | 0 |
+| Low | 20 | 1-39 |
+| High | 65 | 40-89 |
+| Extreme | 95 | 90-100 |
+
+| **VERIS** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Unknown | Not Specified | N/A |
+| Insignificant | 10 | 0-19 |
+| Distracting | 35 | 20-49 |
+| Painful | 60 | 50-69 |
+| Damaging | 80 | 70-90 |
+| Catastrophic | 95 | 90-100 |
+
+| **0 to 10** | **STIX Criticality Value** | **Range of Values** |
+| --- | --- | --- |
+| Not Specified | Not Specified | N/A |
+| 0 | 0 | 0-4 |
+| 1 | 10 | 5-14 |
+| 2 | 20 | 15-24 |
+| 3 | 30 | 25-34 |
+| 4 | 40 | 35-44 |
+| 5 | 50 | 45-54 |
+| 6 | 60 | 55-64 |
+| 7 | 70 | 65-74 |
+| 8 | 80 | 75-84 |
+| 9 | 90 | 85-94 |
+| 10 | 100 | 95-100 |
+
+# Appendix F: IANA Considerations <a id="iana-considerations"></a>
 
 This appendix contains the required information to register the STIX media type with IANA. While some of the information here is only for IANA, implementers of STIX should pay close attention to the security considerations and privacy considerations outlined in this appendix.
 
@@ -14988,7 +17530,7 @@ Interoperability considerations:
 
 Published specification:
 
-<div style="margin-left:2em;"><p>STIX Version 2.1 OASIS Committee Specification 01<br>http://docs.oasis-open.org/cti/stix/v2.1/cs01/stix-v2.1-cs01.html<br>Cited in the "OASIS Standards" document:<br>https://www.oasis-open.org/standards#oasiscommiteespecs, from<br>https://www.oasis-open.org/standards#stix2.1</p></div>
+<div style="margin-left:2em;"><p>STIX Version 2.1 OASIS Committee Specification 01<br />http://docs.oasis-open.org/cti/stix/v2.1/cs01/stix-v2.1-cs01.html<br />Cited in the "OASIS Standards" document:<br />https://www.oasis-open.org/standards#oasiscommiteespecs, from<br />https://www.oasis-open.org/standards#stix2.1</p></div>
 
 Applications which use this media:
 
@@ -15024,11 +17566,11 @@ Change controller: OASIS
 
 Provisional registration: No
 
-# Appendix E: References <a id="references"></a>
+# Appendix G: References <a id="references"></a>
 
 This appendix contains the normative and informative references that are used in this document. Normative references are specific (identified by date of publication and/or edition number or version number) and Informative references are either specific or non-specific. For specific references, only the cited version applies. For non-specific references, the latest version of the reference document (including any amendments) applies. While any hyperlinks included in this appendix were valid at the time of publication, OASIS cannot guarantee their long term validity.
 
-## E.1. Normative References <a id="normative-references"></a>
+## G.1. Normative References <a id="normative-references"></a>
 
 The following documents are referenced in such a way that some or all of their content constitutes requirements of this document.
 
@@ -15143,7 +17685,7 @@ National Imagery and Mapping Agency (NIMA), Department of Defense World Geodetic
 **[X.509]** <a id="x509"></a>  
 X.509 : Information technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks, ITU, October 2016. [Online]. Available: https://www.itu.int/rec/T-REC-X.509/.
 
-## E.2. Informative References <a id="informative-references"></a>
+## G.2. Informative References <a id="informative-references"></a>
 
 The following referenced documents are not required for the application of this document but may assist the reader with regard to a particular subject area.
 
@@ -15198,7 +17740,7 @@ VERIS Community Database. (n.d.). [Online]. Available: http://veriscommunity.net
 **[YARA]** <a id="yara"></a>  
 YARA: The pattern matching swiss knife for malware researchers (and everyone else), Virus Total [Online]. Available: http://virustotal.github.io/yara/.
 
-# Appendix F: Acknowledgments <a id="acknowledgments"></a>
+# Appendix H: Acknowledgments <a id="acknowledgments"></a>
 
 **STIX Subcommitee Chairs**:
 
@@ -15490,7 +18032,7 @@ Preston Werntz, US DHS Cybersecurity and Infrastructure Security Agency (CISA)
 
 Stephen Banghart, US NIST
 
-# Appendix G: Revision History <a id="revision-history"></a>
+# Appendix I: Revision History <a id="revision-history"></a>
 
 <table border="1" cellspacing="0" cellpadding="6">
   <tr>
@@ -15503,89 +18045,89 @@ Stephen Banghart, US NIST
     <td>01</td>
     <td>2018-07-20</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">John Wunder</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Ivan Kirillov</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Initial Version<br><br>Github Issues: 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 17, 18, 19, 20, 21, 22, 25, 26, 27, 31, 33, 35, 36, 37, 38, 39, 40, 41, 42, 54, 55, 57, 68, 71, 78, 88, 89, 91, 98, 99, 121</td>
+    <td>Initial Version<br /><br />Github Issues: 2, 3, 4, 5, 6, 7, 9, 11, 13, 15, 16, 17, 18, 19, 20, 21, 22, 25, 26, 27, 31, 33, 35, 36, 37, 38, 39, 40, 41, 42, 54, 55, 57, 68, 71, 78, 88, 89, 91, 98, 99, 121</td>
   </tr>
   <tr>
     <td>02</td>
     <td>2018-08-10</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">John Wunder</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Ivan Kirillov</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Multiple editorial, style, and grammar fixes.<br><br>Added normative text to ensure that the various ending timestamp properties are before the first timestamp.<br><br>Updates to the "labels" property description to better describe potential overlap with the specific classification properties.<br><br>Fixed relevant common properties to the definition for Language Content.<br><br>Language Content object: Fixed relevant common property definitions, expanded the definition of "contents" property to include handling of lists when not all list items have language content in that language.<br><br>Added a "roles" property to Identity.<br><br>Observed Data object: expanded description to broaden its usage, made "first_observed", "last_observed", and "number_observed" properties optional, added normative statements to "first_observed" and "last_observed" properties to address consistency between the properties.<br><br>Option object: renamed "description" property to "explanation".<br><br>Sighting object: updated normative text for the "where_sighted_refs" property to allow for using Location objects in addition to Identity objects.<br><br>Artifact object: updated normative text for "encryption_algorithm" from a SHOULD to a MUST use values from the defined enumeration.<br><br>Network Traffic object: added text to indicate that values for byte and packet counts are positive integers.<br><br>Patterning Observation Expression: updated normative text to clarify the behavior of Observation Expression comparisons with OR is a short-circuit.<br><br>Github Issues: n/a</td>
+    <td>Multiple editorial, style, and grammar fixes.<br /><br />Added normative text to ensure that the various ending timestamp properties are before the first timestamp.<br /><br />Updates to the "labels" property description to better describe potential overlap with the specific classification properties.<br /><br />Fixed relevant common properties to the definition for Language Content.<br /><br />Language Content object: Fixed relevant common property definitions, expanded the definition of "contents" property to include handling of lists when not all list items have language content in that language.<br /><br />Added a "roles" property to Identity.<br /><br />Observed Data object: expanded description to broaden its usage, made "first_observed", "last_observed", and "number_observed" properties optional, added normative statements to "first_observed" and "last_observed" properties to address consistency between the properties.<br /><br />Option object: renamed "description" property to "explanation".<br /><br />Sighting object: updated normative text for the "where_sighted_refs" property to allow for using Location objects in addition to Identity objects.<br /><br />Artifact object: updated normative text for "encryption_algorithm" from a SHOULD to a MUST use values from the defined enumeration.<br /><br />Network Traffic object: added text to indicate that values for byte and packet counts are positive integers.<br /><br />Patterning Observation Expression: updated normative text to clarify the behavior of Observation Expression comparisons with OR is a short-circuit.<br /><br />Github Issues: n/a</td>
   </tr>
   <tr>
     <td>03</td>
     <td>2018-09-05</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">John Wunder</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Ivan Kirillov</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Reverted Observed Data properties back to required.<br><br>Github Issues: 90<br><br>This version became CSD 01.</td>
+    <td>Reverted Observed Data properties back to required.<br /><br />Github Issues: 90<br /><br />This version became CSD 01.</td>
   </tr>
   <tr>
     <td>04</td>
     <td>2019-05-29</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Updated the entire introduction. Merged content down into a single document.<br><br>Merged down the following content sections into the master document: Introductions, Vocabularies, Customization, Conformance.<br><br>Added the following objects and their respective vocabularies: Infrastructure, Grouping, Malware Analysis.<br><br>Updated the following objects: COA, Malware.<br><br>Github Issues: 8, 10, 12, 14, 24, 32, 64, 72, 76, 79, 81, 87, 92, 93, 94, 101, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113, 114, 116, 117, 118, 120, 122, 124, 127, 128, 129, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 147, 148, 152, 154</td>
+    <td>Updated the entire introduction. Merged content down into a single document.<br /><br />Merged down the following content sections into the master document: Introductions, Vocabularies, Customization, Conformance.<br /><br />Added the following objects and their respective vocabularies: Infrastructure, Grouping, Malware Analysis.<br /><br />Updated the following objects: COA, Malware.<br /><br />Github Issues: 8, 10, 12, 14, 24, 32, 64, 72, 76, 79, 81, 87, 92, 93, 94, 101, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113, 114, 116, 117, 118, 120, 122, 124, 127, 128, 129, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 147, 148, 152, 154</td>
   </tr>
   <tr>
     <td>05</td>
     <td>2019-07-12</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Some basic formatting cleanup. Renamed conflicting properties on Directory Object, File Object, Process Object, and Windows Registry Key Object. Changed Language Content property that allowed version pinning to be optional. Added relationship from Indicator to Observed Data called "based-on". Added a description to Sighting. Added a name to Location. Made some SCO relationships external on Domain-Name, IPv4-Addr, and IPv6-Addr. Added some text to 3.4 and 3.6.<br><br>Relaxed requirements that prevented relationships pointing to Language Content, Marking Definitions, and Relationships themselves.<br><br>Github Issues: 28, 47, 52, 77, 86, 95, 96, 102, 115, 130, 146, 150, 151, 156, 158<br><br>This version became CSD02.</td>
+    <td>Some basic formatting cleanup. Renamed conflicting properties on Directory Object, File Object, Process Object, and Windows Registry Key Object. Changed Language Content property that allowed version pinning to be optional. Added relationship from Indicator to Observed Data called "based-on". Added a description to Sighting. Added a name to Location. Made some SCO relationships external on Domain-Name, IPv4-Addr, and IPv6-Addr. Added some text to 3.4 and 3.6.<br /><br />Relaxed requirements that prevented relationships pointing to Language Content, Marking Definitions, and Relationships themselves.<br /><br />Github Issues: 28, 47, 52, 77, 86, 95, 96, 102, 115, 130, 146, 150, 151, 156, 158<br /><br />This version became CSD02.</td>
   </tr>
   <tr>
     <td>06</td>
     <td>2019-11-19</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Fix broken references / links. Moved indicator type inline vocab too vocabulary section. Added clause in patterning to address public comment. Added clause to fall back to UUIDv4 with no properties are included for UUIDv5 SCOs. Added clarification to Network Socket Extension.<br><br>Github Issues: 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191,193<br><br>This version became CSD03.</td>
+    <td>Fix broken references / links. Moved indicator type inline vocab too vocabulary section. Added clause in patterning to address public comment. Added clause to fall back to UUIDv4 with no properties are included for UUIDv5 SCOs. Added clarification to Network Socket Extension.<br /><br />Github Issues: 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191,193<br /><br />This version became CSD03.</td>
   </tr>
   <tr>
     <td>07</td>
     <td>2020-02-19</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Github Issues: 23, 30, 34, 119, 126, 131, 153, 157, 159, 160, 161, 165, 192, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 215, 216, 217, 218, 219, 220, 221<br><br>This became CSD04.</td>
+    <td>Github Issues: 23, 30, 34, 119, 126, 131, 153, 157, 159, 160, 161, 165, 192, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 215, 216, 217, 218, 219, 220, 221<br /><br />This became CSD04.</td>
   </tr>
   <tr>
     <td>08</td>
     <td>2020-03-11</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Fixed formatting issues found by the TC admin during publication of CSPRD03. Fixed a typo in section 10.7. Fixed some stale links and some basic formatting problems that occurred during document export.<br><br>Github Issues: n/a<br><br>This version was not released as a working draft or CSD but published as Committee Specification 01 with non-material changes.</td>
+    <td>Fixed formatting issues found by the TC admin during publication of CSPRD03. Fixed a typo in section 10.7. Fixed some stale links and some basic formatting problems that occurred during document export.<br /><br />Github Issues: n/a<br /><br />This version was not released as a working draft or CSD but published as Committee Specification 01 with non-material changes.</td>
   </tr>
   <tr>
     <td>09</td>
     <td>2020-11-16</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Added a new STIX Extension mechanism in section 7. Deprecated customization section 11. Updated common property extensions so that all object types can use extensions.<br><br>Github Issues: n/a</td>
+    <td>Added a new STIX Extension mechanism in section 7. Deprecated customization section 11. Updated common property extensions so that all object types can use extensions.<br /><br />Github Issues: n/a</td>
   </tr>
   <tr>
     <td>10</td>
     <td>2020-12-09</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Replaced the prose text for extensions. Stubbed in the incident object.<br><br>Github Issues: n/a<br><br>This became CSD05.</td>
+    <td>Replaced the prose text for extensions. Stubbed in the incident object.<br /><br />Github Issues: n/a<br /><br />This became CSD05.</td>
   </tr>
   <tr>
     <td>11</td>
     <td>2021-01-15</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Address two comments from public review.<br><br>Github Issues: n/a<br><br>This version became CSD06, CS02, and COS.</td>
+    <td>Address two comments from public review.<br /><br />Github Issues: n/a<br /><br />This version became CSD06, CS02, and COS.</td>
   </tr>
   <tr>
     <td>12</td>
     <td>2021-05-11</td>
     <td><span style="white-space: nowrap">Bret Jordan</span>, <span style="white-space: nowrap">Rich Piazza</span>, <span style="white-space: nowrap">Trey Darley</span></td>
-    <td>Addressed comments from public review.<br><br>Github Issues: 226, 227, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 258, 260, 261, 266, 267, 268, 269<br><br>This version was not submitted to become a new CSD as it only contained non-material changes. So it became CS03 and was submitted to become an OASIS Standard.</td>
+    <td>Addressed comments from public review.<br /><br />Github Issues: 226, 227, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 258, 260, 261, 266, 267, 268, 269<br /><br />This version was not submitted to become a new CSD as it only contained non-material changes. So it became CS03 and was submitted to become an OASIS Standard.</td>
   </tr>
   <tr>
     <td>13</td>
     <td>2024-04-12</td>
     <td><span style="white-space: nowrap">Emily Ratliff</span>, <span style="white-space: nowrap">Rich Piazza</span></td>
-    <td>Converted to asciidoc format to improve transparency and collaborative editing.<br><br>Github Issues: 325, 322, 319, 270, 274, 275, 277, 278, 281, 289, 290, 291, 292, 294, 297, 299, 301, 307, 309, 312, 314, 318</td>
+    <td>Converted to asciidoc format to improve transparency and collaborative editing.<br /><br />Github Issues: 325, 322, 319, 270, 274, 275, 277, 278, 281, 289, 290, 291, 292, 294, 297, 299, 301, 307, 309, 312, 314, 318</td>
   </tr>
   <tr>
     <td>14</td>
     <td>2025-03-12</td>
     <td><span style="white-space: nowrap">Christian Studer</span>, <span style="white-space: nowrap">Stephan Relitz</span>, <span style="white-space: nowrap">Emily Ratliff</span></td>
-    <td>Updated document based on the remaining GitHub issues.<br><br>Github Issues: 278, 294, 299, 313, 315, 318, 337</td>
+    <td>Updated document based on the remaining GitHub issues.<br /><br />Github Issues: 278, 294, 299, 313, 315, 318, 337</td>
   </tr>
 </table>
 
-# Appendix H: Notices <a id="notices"></a>
+# Appendix J: Notices <a id="notices"></a>
 
 Copyright © OASIS Open 2025. All Rights Reserved.
 
