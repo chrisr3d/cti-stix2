@@ -6007,7 +6007,7 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
     <th><span class='stixtr'>Artifact Object Specific Properties</span></th>
   </tr>
   <tr>
-    <td><strong>mime_type</strong>, <strong>payload_bin</strong>, <strong>url</strong>, <strong>hashes</strong>, <strong>entropy</strong>, <strong>encryption_algorithm</strong>, <strong>decryption_key</strong></td>
+    <td><strong>mime_type</strong>, <strong>payload_bin</strong>, <strong>url</strong>, <strong>hashes</strong>, <strong>encryption_algorithm</strong>, <strong>decryption_key</strong></td>
   </tr>
   <tr>
     <th><span class='stixtr'>ID Contributing Properties</span></th>
@@ -6047,11 +6047,6 @@ One of **payload_bin** or **url** **MUST** be provided. It is incumbent on shari
     <td><strong>hashes</strong> (optional)</td>
     <td><span class="stixtype">hashes</span></td>
     <td>Specifies a dictionary of hashes for the contents of the <strong>url</strong> or the <strong>payload_bin</strong>.<br><br>This property <strong>MUST</strong> be present when the <strong>url</strong> property is present.<br><br>Dictionary keys <strong>MUST</strong> come from the <a href="#hashing-algorithm-vocabulary"><span class="stixvocab">hash-algorithm-ov</span></a> open vocabulary.</td>
-  </tr>
-  <tr>
-    <td><strong>entropy</strong> (optional)</td>
-    <td><span class="stixtype">float</span></td>
-    <td>Specifies the calculated entropy for the contents of the <strong>url</strong> or the <strong>payload_bin</strong>, as calculated using the Shannon algorithm [<a href="#shannon-entropy">Shannon Entropy</a>]. The size of each input character is defined as a byte, resulting in a possible range of 0 through 8.</td>
   </tr>
   <tr>
     <td><strong>encryption_algorithm</strong> (optional)</td>
