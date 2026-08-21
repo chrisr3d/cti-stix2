@@ -26,7 +26,7 @@ HTML follows the exact format of the **sections** row):
 |---|---|---|
 | **imports** (optional) | `list` of type `windows-pe-import-type` | Specifies metadata about the libraries and functions imported by the PE binary. |
 
-### 2. New sub-object type (new section 6.7.6.4, plus TOC entry)
+### 2. New sub-object type (new section 6.7.6.2 per alphabetical ordering, plus TOC entry)
 
 > #### Windows™ PE Import Type
 >
@@ -124,3 +124,85 @@ No patterning-section changes are needed - section 9.7.2 already defines the
 3. **Exports symmetry.** No upstream issue requests an `exports` counterpart;
    scoped out here, but one may want the symmetric addition while the type
    design is on the table.
+
+## Fallback shape: per-function objects with ordinal support
+
+If ordinal-only imports (question 1) or per-function granularity (question 2)
+are wanted, the following shape answers both at once and is proposed as the
+fallback to the simple form:
+
+- `windows-pe-import-type` keeps **dll_name** (required); **function_names**
+  is replaced by **functions** (optional, `list` of a new
+  `windows-pe-import-function-type`).
+- Both properties are optional, with the constraint stated once in the type's
+  intro, mirroring the `email-addr` / File precedent ("an Email Address
+  object **MUST** contain at least one of the **value** or **display_name**
+  properties"): an object using the Windows PE Import Function Type **MUST**
+  contain at least one of the **name** or **ordinal** properties.
+
+| Property Name | Type | Description |
+|---|---|---|
+| **name** (optional) | `string` | Specifies the name of the imported function. |
+| **ordinal** (optional) | `integer` | Specifies the ordinal of the imported function, for functions imported by ordinal rather than by name. |
+
+Because the **ordinal** description scopes it to by-ordinal imports, the
+three valid combinations are unambiguous:
+
+- **name** only: the function is imported by name (the common case; the
+  import table entry carries hint + name, and the hint is dropped as noted
+  below).
+- **ordinal** only: the function is imported by ordinal and the name was not
+  resolved — the packed-malware case the shape exists for.
+- both: the function is imported by ordinal and the producer resolved the
+  name against the DLL's export table (e.g. `WS2_32.dll` ordinal 23 =
+  `socket`). Note for producers: resolved names are analysis-derived rather
+  than read from the binary bytes, so two producers observing the same
+  binary may serialize different `extensions` values and derive different
+  deterministic ids; producers prioritizing id stability **SHOULD** record
+  only what the import table carries.
+
+Fragment of the example under this shape (a packed sample importing Winsock
+by ordinal):
+
+```json
+"imports": [
+  {
+    "dll_name": "WS2_32.dll",
+    "functions": [
+      { "ordinal": 23 },
+      { "ordinal": 4, "name": "connect" }
+    ]
+  }
+]
+```
+
+The patterning form becomes heavier but stays expressive:
+
+```
+[file:extensions.'windows-pebinary-ext'.imports[*].functions[*].name = 'CreateRemoteThread']
+[file:extensions.'windows-pebinary-ext'.imports[*].functions[*].ordinal = 123]
+```
+
+One further case worth a decision while the type design is open:
+**delay-loaded imports** (the PE delay-load import directory, used both
+legitimately and for evasion). CybOX's `PEImportType` carried a
+`delay_load` boolean, and the fact is intrinsic to the binary bytes, so an
+optional **delay_loaded** (`boolean`) on `windows-pe-import-type` would be a
+safe addition under either shape - proposed as take-or-leave.
+
+Fields considered and rejected for either shape:
+
+- **hint** (the PE import hint): a lookup optimization with no analysis
+  value - imphash ignores it, most tools do not record it, and it is exactly
+  the level of detail STIX 2.x flattened when adapting CybOX types.
+- **address** (IAT / resolved address): ambiguous between static file layout
+  and runtime resolution; a resolved address is per-process and
+  ASLR-randomized, so it characterizes a Process observation, not the static
+  File. Worse, `extensions` is an ID Contributing Property of File, so any
+  per-observation-volatile value inside `imports` would give the same binary
+  different deterministic ids and defeat the deduplication goal of section
+  2.9. Every property carried by `imports` must be intrinsic to the binary
+  bytes.
+
+Note: adopting the fallback shape changes the serialization of the example's
+`extensions` value, so the example id would need to be recomputed.
